@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+      <!--
+      Product Tax Code
+    -->
+
+    <record id="view_product_tax_code_tree" model="ir.ui.view">
+            <field name="name">product.tax.code.tree</field>
+            <field name="model">product.tax.code</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Tax Code">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="type"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_product_tax_code_form" model="ir.ui.view">
+            <field name="name">product.tax.code.form</field>
+            <field name="model">product.tax.code</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Product Tax Code" version="7.0">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name"/>
+		                    <field name="company_id" groups="base.group_multi_company"/>
+		                    <field name="description"/>
+		                    <field name="type"/>
+                        </group>                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    <record id="action_product_tax_code" model="ir.actions.act_window">
+            <field name="name">Product Tax Codes</field>
+            <field name="res_model">product.tax.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem action="action_product_tax_code" id="menu_product_tax_code" name="Product Tax Codes" parent="menu_avatax" sequence="29"/>
+
+    <!--
+    Product
+    -->
+
+    <record id="view_product_normal_form_avatax_inherit" model="ir.ui.view">
+            <field name="name">product.normal.form.avatax.inherit</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority">30</field>
+            <field name="arch" type="xml">
+		        <xpath expr="/form/sheet/notebook/page[@string='Accounting']/group[@name='properties']" position="inside">
+		          <separator string="AvaTax Properties" colspan="4"/>
+		          <group colspan="2" col="2">
+		            <field name="tax_apply"/>
+                   	<newline/>
+		            <field name="tax_code_id" attrs="{'required': [('tax_apply','=',True)]}"/>
+		          </group>
+		        </xpath>
+		        <field name="description" position="replace">
+		            <group colspan="2" col="2" string="Product Description" >
+		                <field name="description" placeholder="describe the product characteristics..." nolabel="1"/>
+		            </group>
+		        </field>
+		        
+		        <field name="default_code" position="replace"/>
+		        
+		        <div name="options" groups="base.group_user" position="before">
+		            <label for="default_code" class="oe_edit_only"/>
+                    <h2><field name="default_code"  placeholder="Product Code"/></h2>
+		        </div>
+		        
+            </field>
+        </record>
+
+   
+    <!--
+    Product Category
+    -->
+
+        <record id="view_product_category_form_avatax_inherit" model="ir.ui.view">
+            <field name="name">product.category.form.avatax.inherit</field>
+            <field name="model">product.category</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+              <xpath expr="/form/sheet" position="inside">
+                <group col="2" colspan="2" string="AvaTax Properties">
+                    <field name="tax_code_id"/>
+                </group>
+              </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
