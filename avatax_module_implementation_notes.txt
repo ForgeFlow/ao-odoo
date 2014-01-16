@@ -1,0 +1,32 @@
+AvaTax Implementation Notes
+
+a. Install module avalara_sales_tax
+b. Configure the AvaTax API from Accounting/Configuration
+
+Define Company Code as "AO"
+
+Account Number: 1100132561
+License Key: D4166D6A45A35DCF
+Service URL: https://avatax.avalara.net
+
+Test Connection --> Proceed after this is Successful!
+Set Line-level calls
+Save record
+
+c. Go to Accounting/Configuration/Taxes/Taxes and select AVATAX record
+
+Set Invoice Tax Account -> 23000 Sales Tax Payable
+Set Refund Tax Account -> 23000 Sales Tax Payable
+Set Account Base Code to "Base of Taxable Sales"
+Set Account Tax Code to "Tax Received"
+Set Refund Base Code to "Base of Taxable Sales"
+Set Refund Tax Code to "Tax Received"
+
+d. Validate Company Address
+
+Go to Settings/Companies/Companies and open the company record
+Open the partner record from the company record
+Define the Company Code "AO" on this partner record
+Go to Avatax Tab and hit Validate.
+Save partner record.
+
