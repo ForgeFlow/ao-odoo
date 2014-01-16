@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_vendor_payment_check_form">
+            <field name="name">account.voucher.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Voucher Payment" version="7.0">
+                <header>
+                    <button name="proforma_voucher" string="Validate" states="draft" invisible="context.get('line_type', False)" class="oe_highlight"/>
+                    <button name="cancel_voucher" string="Cancel" states="draft,proforma"  invisible="context.get('line_type', False)"/>
+                    <button name="print_check" string="Print Check" type="object" attrs="{'invisible':['|',('allow_check','!=',True),('state','!=','posted')]}" class="oe_highlight"/>
+                    <button name="action_cancel_draft" type="object" states="cancel" string="Set to Draft" invisible="context.get('line_type', False)"/>
+                    <button name="cancel_voucher" string="Void" type="object" states="posted" invattrs="{'invisible':[('allow_check','!=',True)]}" confirm="Are you sure to unreconcile and cancel this record ?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted" statusbar_colors='{"proforma":"blue"}'/>
+                </header>
+                <sheet>
+                    <field name="account_id" invisible="True"/>
+                    <field name="pre_line" invisible="True"/>
+                    <field name="type" invisible="True"/>
+                    <field name="allow_check" invisible="True"/>
+                    <field name="currency_id" invisible="True"/>
+                    <group col="10" colspan="4">
+                        <group colspan="6"/>
+                        <group colspan="2">
+                                <field name="check_number" attrs="{'invisible':[('allow_check','!=',True)]}"/>
+                                <field name="date" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)"/>
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <field name="partner_id" required="1" on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)" context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'invoice_currency': currency_id}" string="Pay to the order of:"/>
+                    </group>
+                   <group col="10" colspan="4">
+                        <field name="amount_in_word"  attrs="{'invisible':[('allow_check','!=',True)]}" nolabel="1" colspan="8"/>
+                        <h2>
+                             <field name="amount" invisible="context.get('line_type', False)" on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, context)" class="oe_inline" widget='monetary' options='{"currency_field": "currency_id"}' nolabel="1" colspan="2"/>
+                        </h2>
+                    </group>
+                   <group col="10" colspan="4">
+                        <group colspan="6">
+                            <field name="name" colspan="2" invisible="context.get('line_type', False)" placeholder="e.g. Invoice SAJ/0042"/>
+                            <field name="journal_id"
+                                domain="[('type','in',['bank', 'cash'])]"
+                                widget="selection"
+                                on_change="onchange_journal(journal_id, line_dr_ids, False, partner_id, date, amount, type, company_id, context)"
+                                invisible="context.get('line_type', False)"
+                                string="Payment Method"/>
+                        </group>
+                        <group colspan="2">
+                            <field name="reference" invisible="context.get('line_type', False)" string="Payment Ref" placeholder="e.g. 003/10"/>
+                            <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payment Information">
+                            <label for="line_dr_ids"/>
+                            <field name="line_dr_ids" context="{'journal_id':journal_id, 'type':type, 'partner_id':partner_id}" on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, type, context)">
+                                <tree string="Supplier Invoices and Outstanding transactions" editable="bottom" colors="gray:amount==0">
+                                    <field name="move_line_id" context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id}"
+                                        on_change="onchange_move_line_id(move_line_id)"
+                                        domain="[('account_id.type','=','payable'), ('reconcile_id','=', False), ('partner_id','=',parent.partner_id)]"
+                                        required="1"/>
+                                    <field name="account_id" groups="base.group_no_one" domain="[('type','=','payable')]"/>
+                                    <field name="date_original" readonly="1"/>
+                                    <field name="date_due" readonly="1"/>
+                                    <field name="amount_original" readonly="1"/>
+                                    <field name="amount_unreconciled" readonly="1" groups="account.group_account_user"/>
+                                    <field name="reconcile" on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)" groups="account.group_account_user"/>
+                                    <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)"/>
+                                </tree>
+                            </field>
+                            <label for="line_cr_ids" attrs="{'invisible': [('pre_line','=',False)]}"/>
+                            <field name="line_cr_ids" attrs="{'invisible': [('pre_line','=',False)]}" context="{'journal_id':journal_id, 'partner_id':partner_id}" on_change="onchange_line_ids(line_dr_ids, line_cr_ids, amount, currency_id, type, context)">
+                                <tree string="Credits" editable="bottom" colors="gray:amount==0">
+                                    <field name="move_line_id" context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id}"
+                                        on_change="onchange_move_line_id(move_line_id)"
+                                        domain="[('account_id.type','=','payable'), ('reconcile_id','=', False), ('partner_id','=',parent.partner_id)]"
+                                        required="1"/>
+                                    <field name="account_id" groups="base.group_no_one" domain="[('type','=','payable')]"/>
+                                    <field name="date_original" readonly="1"/>
+                                    <field name="date_due" readonly="1"/>
+                                    <field name="amount_original" readonly="1"/>
+                                    <field name="amount_unreconciled" readonly="1" groups="account.group_account_user"/>
+                                    <field name="reconcile" on_change="onchange_reconcile(reconcile, amount, amount_unreconciled, context)" groups="account.group_account_user"/>
+                                    <field name="amount" sum="Total Allocation" on_change="onchange_amount(amount, amount_unreconciled, context)"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <group string="Internal Notes">
+                                    <field name="narration" colspan="2" nolabel="1"/>
+                                </group>
+                                <group>
+                                    <field name="is_multi_currency" invisible="True"/>
+                                    <group col="2" attrs="{'invisible':[('is_multi_currency','=',False)]}">
+                                        <separator string="Currency Options" colspan="2"/>
+                                        <label for="payment_rate" colspan="1"/>
+                                        <div>
+                                            <field name="payment_rate" required="1" class="oe_inline" on_change="onchange_amount(amount, payment_rate, partner_id, journal_id, currency_id, type, date, payment_rate_currency_id, company_id, context)"/>
+                                            <field name="payment_rate_currency_id" class="oe_inline" on_change="onchange_payment_rate_currency(currency_id, payment_rate, payment_rate_currency_id, date, amount, company_id, context)" groups="base.group_multi_currency"/>
+                                        </div>
+                                        <field name="currency_help_label" colspan="2" nolabel="1" class="oe_grey"/>
+                                        <field name="paid_amount_in_company_currency" colspan="2" invisible="1"/>
+                                    </group>
+                                    <group col="2">
+                                        <separator string="Payment Options" colspan="2"/>
+                                        <field name="writeoff_amount" widget='monetary' options='{"currency_field": "currency_id"}'/>
+                                        <field name="payment_option" required="1"/>
+                                        <field name="writeoff_acc_id"
+                                               attrs="{'invisible':[('payment_option','!=','with_writeoff')], 'required':[('payment_option','=','with_writeoff')]}"
+                                               domain="[('type','=','other')]"/>
+                                        <field name="comment"
+                                               attrs="{'invisible':[('payment_option','!=','with_writeoff')]}"/>
+                                        <field name="analytic_id"
+                                               groups="analytic.group_analytic_accounting"/>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">
+                            <group col="4">
+                                <field name="period_id"/>
+                                <field name="audit"/>
+                                <field name="number"/>
+                            </group>
+                            <field name="move_ids" readonly="1">
+                               <tree string="Journal Items">
+                                   <field name="move_id"/>
+                                   <field name="ref"/>
+                                   <field name="date"/>
+                                   <field name="statement_id"/>
+                                   <field name="partner_id"/>
+                                   <field name="account_id"/>
+                                   <field name="name"/>
+                                   <field name="debit"/>
+                                   <field name="credit"/>
+                                   <field name="state"/>
+                                   <field name="reconcile_id"/>
+                                   <field name="amount_currency" groups="base.group_multi_currency"/>
+                                   <field name="currency_id" groups="base.group_multi_currency"/>
+                               </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_voucher_tree_inheirt">
+            <field name="name">account.voucher.tree.inherit</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+                <field name="number" position="replace">
+                    <field name="number" invisible="context.get('write_check', False)"/>
+                    <field name="check_number" invisible="not context.get('write_check', False)"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_write_check" model="ir.actions.act_window">
+            <field name="name">Checks</field>
+            <field name="res_model">account.voucher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[('journal_id.type', '=', 'bank'), ('type','=','payment'), ('journal_id.allow_check_writing','=',True)]</field>
+            <field name="context">{'type':'payment','write_check':True}</field>
+            <field name="search_view_id" ref="account_voucher.view_voucher_filter"/>
+            <field name="target">current</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new check. 
+              </p><p>
+                The check payment form allows you to track the payment you do
+                to your suppliers using checks. When you select a supplier, the
+                payment method and an amount for the payment, OpenERP will
+                propose to reconcile your payment with the open supplier
+                invoices or bills.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_write_check_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_vendor_payment_check_form"/>
+            <field name="act_window_id" ref="action_write_check"/>
+        </record>
+
+        <record id="action_write_check_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="action_write_check"/>
+        </record>
+
+        <menuitem action="action_write_check" icon="STOCK_JUSTIFY_FILL" sequence="12"
+            id="menu_action_write_check"  parent="account.menu_finance_payables"/>
+    </data>
+</openerp>
