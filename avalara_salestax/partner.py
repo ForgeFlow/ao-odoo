@@ -26,6 +26,7 @@ import decimal_precision as dp
 
 from avalara_api import AvaTaxService, BaseAddress
 
+
 class res_partner(osv.osv):
     """Update partner information by adding new fields according to avalara partner configuration"""
     _inherit = 'res.partner'
@@ -64,11 +65,11 @@ class res_partner(osv.osv):
         else:
             return {}
 
-    def get_state_id(self, cr, uid, code, context=None):
+    def get_state_id(self, cr, uid, code, c_code, context=None):
         """ Returns the id of the state from the code. """
-
         state_obj = self.pool.get('res.country.state')
-        s_id = state_obj.search(cr, uid, [('code', '=', code)], context=context)
+        c_id = self.pool.get('res.country').search(cr, uid, [('code', '=', c_code)], context=context)[0]
+        s_id = state_obj.search(cr, uid, [('code', '=', code),('country_id', '=',c_id)], context=context)
         if s_id: return s_id[0]
         return False
 
@@ -117,11 +118,10 @@ class res_partner(osv.osv):
     def update_address(self, cr, uid, ids, vals, from_write=False, context=None):
         """ Updates the vals dictionary with the valid address as returned from the Avalara Address Validation. """
         address = vals        
-        if vals:
+        if vals and ids:
             if (vals.get('street') or vals.get('street2') or vals.get('zip') or vals.get('city') or \
                 vals.get('country_id') or vals.get('state_id')):
     
-    #            address_obj = self.pool.get('res.partner.address')
                 address_obj = self.pool.get('res.partner')
                 avatax_config_obj= self.pool.get('avalara.salestax')
                 avatax_config = avatax_config_obj._get_avatax_config_company(cr, uid, context=context)
@@ -130,18 +130,16 @@ class res_partner(osv.osv):
                     self.check_avatax_support(cr, uid, avatax_config, address.get('country_id'), context=context)
     
                     if from_write:
-                        fields_to_read = filter(lambda x: x not in vals, ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'])
-                        address = fields_to_read and address_obj.read(cr, uid, ids, fields_to_read, context=context) or {}
+                        address = address_obj.read(cr, uid, ids[0], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
                         address['state_id'] = address.get('state_id') and address['state_id'][0]
                         address['country_id'] = address.get('country_id') and address['country_id'][0]
-                        address.update(vals)
-    
+                    
                     valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
                     vals.update({
                         'street': valid_address.Line1,
                         'street2': valid_address.Line2,
                         'city': valid_address.City,
-                        'state_id': self.get_state_id(cr, uid, valid_address.Region, context=context),
+                        'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
                         'zip': valid_address.PostalCode,
                         'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
                         'latitude': valid_address.Latitude,
@@ -186,7 +184,7 @@ class res_partner(osv.osv):
                         'street': valid_address.Line1,
                         'street2': valid_address.Line2,
                         'city': valid_address.City,
-                        'state_id': self.get_state_id(cr, uid, valid_address.Region, context=context),
+                        'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
                         'zip': valid_address.PostalCode,
                         'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
                         'latitude': valid_address.Latitude,
@@ -208,8 +206,8 @@ class res_partner(osv.osv):
         # Follow the normal write process if it's a write operation from the wizard
         if context.get('from_validate_button', False):
             return super(res_partner, self).write(cr, uid, ids, vals, context)
-        if context.get('active_id', False):
-            vals = self.update_address(cr, uid, ids, vals, True, context=context)
+#        if context.get('active_id', False):
+        vals = self.update_address(cr, uid, ids, vals, True, context=context)
         return super(res_partner, self).write(cr, uid, ids, vals, context)
     
 

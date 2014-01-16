@@ -21,8 +21,9 @@
 
 {
     "name" : "OpenERP Avalara connector for Sales tax calculation",
-    "version" : "1.0",
-    "author" : 'Kranbery Technologies / Pragmatic ',
+    "version" : "1.0.1",
+    "author" : 'Kranbery Technologies / Pragmatic',
+    'summary': 'Quotations, Sales Orders, Invoicing',
     "description": """ 
 This module helps to calculate sale tax from Avalara while creating Sale Orders or Customer Invoices. 
 Sale tax calculated is based on customer address which needs to be get validated from Avalara before 
@@ -47,8 +48,18 @@ Some important points.
 
 4. Configure Company Address and Validate it from Avalara. (Use customer link for finding res.partner for company and validate it from partner record use Sales/Sales/Customers and remove Customer filter on this tree view) 
 
-5. Make sure you validate customer address.    
- 
+5. Make sure you validate customer address.
+
+Improvement for version 1.0.1
+
+Following improvements are made after first review:
+
+1. Country wise state code validation on address form.
+
+2. Updated rights for users.
+
+3. Resolve invoice creation issues from delivery order.
+     
 Note: Make sure you have proper internet connection.
 """,
     "category" : "Generic Modules/Accounting",

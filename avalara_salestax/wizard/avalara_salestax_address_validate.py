@@ -75,7 +75,6 @@ class avalara_salestax_address_validate(osv.osv_memory):
             address = address_obj.read(cr, uid, context['active_id'], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
             address['state_id'] = address.get('state_id') and address['state_id'][0]
             address['country_id'] = address.get('country_id') and address['country_id'][0]
-
             # Get the valid result from the AvaTax Address Validation Service
             valid_address = address_obj._validate_address(cr, uid, address, context=context)
 
@@ -119,7 +118,7 @@ class avalara_salestax_address_validate(osv.osv_memory):
                 'street': valid_address['street'],
                 'street2': valid_address['street2'],
                 'city': valid_address['city'],
-                'state_id': address_obj.get_state_id(cr, uid, valid_address['state'], context=context),
+                'state_id': address_obj.get_state_id(cr, uid, valid_address['state'], valid_address['country'], context=context),
                 'zip': valid_address['zip'],
                 'country_id': address_obj.get_country_id(cr, uid, valid_address['country'], context=context),
                 'latitude': valid_address['latitude'] or 'unavailable',

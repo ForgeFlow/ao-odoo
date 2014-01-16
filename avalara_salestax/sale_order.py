@@ -113,13 +113,14 @@ class sale_order(osv.osv):
         avatax_config = avatax_config_obj._get_avatax_config_company(cr, uid)
         for order in self.browse(cr, uid, ids, context=context):
             res[order.id] = {
-                    'amount_untaxed': 0.0,
-                    'amount_tax': 0.0,
-                    'amount_total': 0.0,
-                    'amount_shipping': 0.0,
-                }
-                
+                             'amount_shipping': 0.0,
+                        }
             if avatax_config and not avatax_config.disable_tax_calculation:
+                res[order.id] = {
+                        'amount_untaxed': 0.0,
+                        'amount_tax': 0.0,
+                        'amount_total': 0.0,
+                        }
                 for line in order.order_line:
                   res[order.id]['amount_untaxed'] += line.price_subtotal
                   val += self._amount_line_tax(cr, uid, line, context=context)
