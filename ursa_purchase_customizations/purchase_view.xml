@@ -11,6 +11,9 @@
             <field name="origin" position="attributes">
                 <attribute name="attrs" >{'invisible': False}</attribute>                
             </field>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="editable"/>
+            </xpath>
         </field>
     </record>
 
