@@ -1,0 +1,7 @@
+id,name,model_id/id,active,perm_read,perm_write,perm_create,perm_unlink,group_id/id
+ursa_tracking.whmanager,ursa_tracking.whmanager,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,stock.group_stock_manager
+ursa_tracking.whuser,ursa_tracking.whuser,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,stock.group_stock_user
+ursa_tracking.salemanager,ursa_tracking.salemanager,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,base.group_sale_manager
+ursa_tracking.saleuser,ursa_tracking.saleuser,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,base.group_sale_salesman
+ursa_tracking.acmanager,ursa_tracking.acmanager,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,account.group_account_user
+ursa_tracking.acuser,ursa_tracking.acuser,ursa_tracking.model_delivery_tracking_numbers,TRUE,TRUE,TRUE,TRUE,TRUE,account.group_account_manager
