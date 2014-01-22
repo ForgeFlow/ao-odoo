@@ -28,9 +28,10 @@
     'complexity': "normal",
     "description": """
     Purchase customizations: Origin field exposed in the form as Source Document
+    Department added to purchase order and pushed to supplier invoice from PO/Incoming Shipment.
     """,
     'website': 'http://www.ursainfosystems.com',
-    "depends" : ['base', 'purchase'],
+    "depends" : ['base', 'purchase', 'account', 'stock'],
     "data" : [],
     'init_xml': [],
     'update_xml': ['purchase_view.xml'],
