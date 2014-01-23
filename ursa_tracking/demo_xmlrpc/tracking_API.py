@@ -70,20 +70,19 @@ def fedex_put_tracking_nums(sock, uid, ids, tracking_nums):
 def main():
     #Connect to OpenERP
     sock, uid = connect_oerp()
-    do_names = [('name', '=', 'OUT/6919')] 
+    do_names = [('name', '=', 'OUT/06919')] 
     do_ids = search_outgoing(sock, uid, do_names)
 
     print do_ids
     
     # test input
-    tracking_nums={'delivery_id':do_ids[0], 'tracking_no':'asdfasw3423', 'tracking_desc':'asdfasdgasdg253267235'}
-
-    print tracking_nums
+    tracking_nums={'delivery_id':do_ids[0], 'tracking_no':'abc', 'tracking_desc':'desc1'}
     
     msg = fedex_put_tracking_nums(sock, uid, do_ids, tracking_nums)
     print msg
     
 if __name__ == '__main__':
-    print 'Starting'
+
+    print 'Starting.....'
     main()
-    print 'Sleeping'
+    print 'Finished'
