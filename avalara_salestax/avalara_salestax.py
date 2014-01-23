@@ -168,7 +168,7 @@ class avalara_salestax(osv.osv):
     
     #constraints on uniq records creation with account_number and company_id
     _sql_constraints = [
-        ('code_company_uniq', 'unique (company_code)', 'The code of the company must be unique!'),
+        ('code_company_uniq', 'unique (company_code)', 'Avalara setting is already available for this company code'),
         ('account_number_company_uniq', 'unique (account_number, company_id)', 'The account number must be unique per company!'),
     ]
 

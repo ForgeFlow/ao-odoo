@@ -98,6 +98,9 @@
 	           <field name="ref_tax_code_id" ref="tax_code_input_X"/> -->
 	           <field name="type_tax_use">sale</field>
 	       </record>
+	       
+        
+        
         
         
 

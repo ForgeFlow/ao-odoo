@@ -244,6 +244,8 @@
     <menuitem action="action_exemption_code_details" id="menu_action_exemption_code_details" name="Exemption Code" parent="menu_avatax" sequence="25"/>
     
 	       
+    
+      
 
     </data>
 </openerp>

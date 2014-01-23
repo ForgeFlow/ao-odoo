@@ -43,6 +43,9 @@ class account_tax(osv.osv):
 
         currency_code = self._get_currency(cr, uid, context)
         
+        if not partner.customer_code:
+            raise osv.except_osv(_('Warning !'), _('Customer Code for customer %s not define'% (partner.name)))
+        
         if not shipping_address_id:
             raise osv.except_osv(_('No Shipping Address Defined !'), _('There is no shipping address defined for the partner.'))        
         #it's show destination address

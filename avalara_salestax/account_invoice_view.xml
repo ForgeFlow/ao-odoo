@@ -67,6 +67,9 @@
                 </xpath>
             </field>
         </record>
+        
+   		
+   		<!-- Inherit supplier invoice view to update -->
    		<record id="invoice_supplier_form_inherit_1" model="ir.ui.view">
             <field name="name">account.invoice.supplier.form.inherit</field>
             <field name="model">account.invoice</field>
@@ -75,10 +78,10 @@
             <field name="arch" type="xml">
                 <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}" position="replace">
                     <field name="amount_untaxed" string="Net Total"/>
-                    <field name="shipping_amt"/>
+                    <!-- <field name="shipping_amt"/> -->
                 </field>
                 
-                <field name="invoice_line" position="after">
+                <!-- <field name="invoice_line" position="after">
                     <h2><label for="shipping_lines"/></h2>
                     <field name="shipping_lines">
                         <tree string="Shipping Order Lines" editable="bottom">
@@ -88,7 +91,7 @@
                               <field name="shipping_cost"/>
                         </tree>
                     </field>
-                </field>
+                </field> -->
                 
 				<button name="button_reset_taxes" states="draft,proforma2"
                                         string="(update)" class="oe_link oe_edit_only"

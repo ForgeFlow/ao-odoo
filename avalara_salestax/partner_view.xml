@@ -45,6 +45,33 @@
 	        	</xpath>
       </field>
     </record>
+    
+   <record id="view_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+				<field name="name" position="after">
+				   <field name="date_validation"/>
+                   <field name="validation_method"/>
+				</field>
+			</field>
+	</record>    
+   
+   <record id="action_call_address_validation_method" model="ir.actions.server">
+            <field name="name">Address Validation</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">action = obj.multi_address_validation()</field>
+        </record>
+        
+    <record id="action_call_address_validation" model="ir.values">
+            <field name="name">Address Validation Call</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">res.partner</field>
+            <field name="value" eval="'ir.actions.server,%d'%action_call_address_validation_method" />
+            <field name="object" eval="True" />
+        </record>
 
     </data>
 </openerp>
