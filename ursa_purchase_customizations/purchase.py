@@ -62,17 +62,6 @@ account_invoice_line()
 class stock_picking(osv.osv):
     _inherit = "stock.picking"
 
-    _columns = {
-        'partner_delivery_id': fields.many2one('res.partner', 'Delivery Address', readonly=True, 
-            states={'draft': [('readonly', False)]}, help="Delivery address"),
-        'partner_invoice_id': fields.many2one('res.partner', 'Invoice Address', readonly=True, 
-            states={'draft': [('readonly', False)]}, help="Invoice address"),
-        'ship_contact': fields.char('Address Information', size=64, help='Address Information Line'),
-        'ship_name': fields.char('Ship Attention', size=64, help="Attention to name"),
-        'ship_tag': fields.char('Ship Tag', size=64, help="Shipping Tag information"),
-        'ship_note': fields.text('Ship Note', help="Shipping Note"),                
-        }    
-
     # update the information on the invoice  line  
     def _prepare_invoice_line(self, cr, uid, group, picking, move_line, invoice_id,
         invoice_vals, context=None):
