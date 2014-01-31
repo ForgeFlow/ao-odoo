@@ -31,7 +31,40 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FO
 
 class sale_order(osv.osv):
     _inherit = "sale.order"
+    
+    def onchange_partner_id(self, cr, uid, ids, part, context=None):
 
+        result = super(sale_order,self).onchange_partner_id(cr, uid, ids, part, context=context)
+        
+        part = self.pool.get('res.partner').browse(cr, uid, part, context=context)
+        addr = self.pool.get('res.partner').address_get(cr, uid, [part.id], ['delivery', 'invoice', 'contact'])
+
+        if addr['delivery'] <> part.id:
+            ship_part = self.pool.get('res.partner').browse(cr, uid, addr['delivery'], context=context)
+            country = ship_part.country_id and ship_part.country_id.name or False
+        else:
+            country = part.country_id and part.country_id.name or False
+        
+        if country and country <> 'United States':
+            result['value'].update({'foreign_sale': True})
+            result['value'].update({'order_policy': 'manual'})
+            result['value'].update({'incoterm': 15})
+        else:
+            result['value'].update({'foreign_sale': False})
+            result['value'].update({'order_policy': 'picking'})
+            result['value'].update({'incoterm': 14})
+            
+        return result
+    
+    _columns = {
+        'foreign_sale': fields.boolean('Non-US Address', help='Set if delivery address is non-US address'),
+        'incoterm': fields.many2one('stock.incoterms', 'Incoterm', help="International Commercial Terms are a series of predefined commercial terms used in international transactions."),
+        'order_policy': fields.selection([('manual', 'On Demand'),('picking', 'On Delivery Order'),('prepaid', 'Before Delivery'),], 
+                'Create Invoice', required=True, readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
+                help="""On demand: A draft invoice can be created from the sales order when needed. \n
+                On delivery order: A draft invoice can be created from the delivery order when the products have been delivered. \n
+                Before delivery: A draft invoice is created from the sales order and must be paid before the products can be delivered."""),    
+    }        
     def _prepare_order_line_move(self, cr, uid, order, line, picking_id, date_planned, context=None):
         
         location_id = order.shop_id.warehouse_id.lot_stock_id.id

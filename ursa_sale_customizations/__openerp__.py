@@ -31,7 +31,7 @@
     pushed to stock move.
     """,
     'website': 'http://www.ursainfosystems.com',
-    "depends" : ['base', 'sale', 'stock'],
+    "depends" : ['base', 'sale', 'stock', 'sale_stock'],
     "data" : [],
     'init_xml': [],
     'update_xml': ['sale_view.xml'],
