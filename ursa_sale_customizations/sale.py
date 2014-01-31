@@ -64,7 +64,8 @@ class sale_order(osv.osv):
                 help="""On demand: A draft invoice can be created from the sales order when needed. \n
                 On delivery order: A draft invoice can be created from the delivery order when the products have been delivered. \n
                 Before delivery: A draft invoice is created from the sales order and must be paid before the products can be delivered."""),    
-    }        
+    } 
+    
     def _prepare_order_line_move(self, cr, uid, order, line, picking_id, date_planned, context=None):
         
         location_id = order.shop_id.warehouse_id.lot_stock_id.id
@@ -73,7 +74,20 @@ class sale_order(osv.osv):
         res['location_id'] = (line.location_src_id and line.location_src_id.id) or location_id
         
         return res
+        
+    def _make_invoice(self, cr, uid, order, lines, context=None):    
     
+        inv_id = super(sale_order, self)._make_invoice(cr, uid, order, lines, context=context)
+        
+        country = (order.partner_shipping_id and order.partner_shipping_id.country_id and order.partner_shipping_id.country_id.name) or (order.partner_id.country_id and order.partner_id.country_id.name) or 'United States'
+        
+        if country <> 'United States':
+            invoice_obj = self.pool.get('account.invoice')
+            invoice = invoice_obj.browse(cr, uid, [inv_id], context=context)[0]
+            invoice.write({'state': 'proforma'})
+        
+        return inv_id
+                
 sale_order()
 
 class sale_order_line(osv.osv):
