@@ -14,6 +14,9 @@
             <xpath expr="//field[@name='order_line']/tree" position="attributes">
                 <attribute name="editable"/>
             </xpath>
+            <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='date_planned']" position="after">
+                <field name="location_dest_id" />
+            </xpath>
             <xpath expr="/form/sheet/notebook/page/field/tree/field[@name='product_qty']" position="before">
                 <field name="dept" />
             </xpath>            
@@ -37,11 +40,14 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_planned']" position="after">
+                <field name="location_dest_id" />
+            </xpath>            
             <xpath expr="//field[@name='price_unit']" position="after">
                 <field name="dept" />
             </xpath>            
         </field>
-    </record>
+    </record>    
     
 </data>
 </openerp>

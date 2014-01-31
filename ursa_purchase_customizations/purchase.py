@@ -39,6 +39,14 @@ class purchase_order(osv.osv):
         res['dept'] = order_line.dept
         
         return res
+
+    def _prepare_order_line_move(self, cr, uid, order, order_line, picking_id, context=None):
+    
+        res = super(purchase_order, self)._prepare_order_line_move(cr, uid, order, order_line, picking_id, context=context)
+        
+        res['location_dest_id'] = (order_line.location_dest_id and order_line.location_dest_id.id) or order.location_id.id
+        
+        return res
     
 purchase_order()
 
@@ -47,6 +55,7 @@ class purchase_order_line(osv.osv):
 
     _columns = {
         'dept': fields.selection([('product', 'Product'),('ga','G&A'),('rd', 'R&D'),('sales','Sales'),('service','Service'),('mktg','Marketing')], 'Department', required=False, size=32, help="Department for which the item is required"),
+        'location_dest_id': fields.many2one('stock.location', 'Dest. Location', help="Location where the system will stock the finished products.", select=True),
 	} 
 
 class account_invoice_line(osv.osv):

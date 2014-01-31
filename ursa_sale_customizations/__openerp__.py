@@ -3,7 +3,7 @@
 #
 #    Ursa Information Systems
 #    Author: Balaji Kannan
-#    Copyright (C) 2013 (<http://www.ursainfosystems.com>).
+#    Copyright (C) 2014 (<http://www.ursainfosystems.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,18 +21,20 @@
 ############################################################################################################################################################
 
 {
-    "name" : "Stock Picking Customizations",
+    "name" : "Sale Customizations",
     "version" : "1.0",
-    "author" : "Ursa Information Systems, USA",
-    "category": 'Stock',
+    "author" : ["Ursa Information Systems, USA"],
+    "category": 'Purchase',
     'complexity': "normal",
     "description": """
-    Added aisle, rack, shelf and source location to move lines in incoming shipment and delivery order form.
+    Sale customizations: Source location for the item identified in the sale order line,
+    pushed to stock move.
     """,
     'website': 'http://www.ursainfosystems.com',
-    "depends" : ['base', 'sale','stock', 'product'],
+    "depends" : ['base', 'sale', 'stock'],
+    "data" : [],
     'init_xml': [],
-    'update_xml': ['stock_picking_view.xml'],
+    'update_xml': ['sale_view.xml'],
     'demo_xml': [],
     'installable': True,
     'auto_install': False,

@@ -23,7 +23,7 @@
 from osv import fields, osv
 from tools.translate import _
 
-class ursa_stock_move(osv.osv):
+class stock_move(osv.osv):
     """Add Product location fields - aisle, rack, shelf to stock move"""
 
     _inherit = "stock.move"
@@ -34,4 +34,4 @@ class ursa_stock_move(osv.osv):
         'shelf': fields.related('product_id', 'loc_case', type="char", size=64, store=False, string="Shelf", help="Warehouse Shelf in Rack"),
         }    
 
-ursa_stock_move()
+stock_move()
