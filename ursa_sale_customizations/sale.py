@@ -84,7 +84,7 @@ class sale_order(osv.osv):
         if country <> 'United States':
             invoice_obj = self.pool.get('account.invoice')
             invoice = invoice_obj.browse(cr, uid, [inv_id], context=context)[0]
-            invoice.write({'state': 'proforma'})
+            #invoice.write({'state': 'proforma'})
         
         return inv_id
                 
