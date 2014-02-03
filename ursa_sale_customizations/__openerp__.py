@@ -27,8 +27,11 @@
     "category": 'Purchase',
     'complexity': "normal",
     "description": """
-    Sale customizations: Source location for the item identified in the sale order line,
+    Sale customizations:
+    1. Source location for the item identified in the sale order line,
     pushed to stock move.
+    2. For sales shipped to foreign addresses, set Incoterms to DTP and invoice method to manual.
+    3. Auto progress the invoice state to "Proforma" for international orders if the user default is set.
     """,
     'website': 'http://www.ursainfosystems.com',
     "depends" : ['base', 'sale', 'stock', 'sale_stock'],

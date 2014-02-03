@@ -19,5 +19,10 @@
             </xpath>            
         </field>
     </record>
+    <function model="ir.values" name="set_default">
+        <value>account.invoice</value>
+        <value>auto_proforma2</value>
+        <value>False</value>
+    </function>    
 </data>
 </openerp>

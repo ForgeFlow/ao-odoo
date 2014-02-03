@@ -39,16 +39,20 @@ class sale_order(osv.osv):
         part = self.pool.get('res.partner').browse(cr, uid, part, context=context)
         addr = self.pool.get('res.partner').address_get(cr, uid, [part.id], ['delivery', 'invoice', 'contact'])
 
+        # get country
         if addr['delivery'] <> part.id:
             ship_part = self.pool.get('res.partner').browse(cr, uid, addr['delivery'], context=context)
             country = ship_part.country_id and ship_part.country_id.name or False
         else:
             country = part.country_id and part.country_id.name or False
         
+        # if it is a foreign sale
         if country and country <> 'United States':
             result['value'].update({'foreign_sale': True})
             result['value'].update({'order_policy': 'manual'})
             result['value'].update({'incoterm': 15})
+            
+        # US sale
         else:
             result['value'].update({'foreign_sale': False})
             result['value'].update({'order_policy': 'picking'})
@@ -70,7 +74,8 @@ class sale_order(osv.osv):
         
         location_id = order.shop_id.warehouse_id.lot_stock_id.id
         res = super(sale_order, self)._prepare_order_line_move(cr, uid, order, line, picking_id, date_planned, context=context)
-        
+       
+        # set source location in move if the sale order line has a location set       
         res['location_id'] = (line.location_src_id and line.location_src_id.id) or location_id
         
         return res
@@ -79,12 +84,21 @@ class sale_order(osv.osv):
     
         inv_id = super(sale_order, self)._make_invoice(cr, uid, order, lines, context=context)
         
-        country = (order.partner_shipping_id and order.partner_shipping_id.country_id and order.partner_shipping_id.country_id.name) or (order.partner_id.country_id and order.partner_id.country_id.name) or 'United States'
+        # check to see if the invoice must be auto-progressed to proforma state
+        ir_values = self.pool.get('ir.values')
+        auto_proforma2 = ir_values.get_default(cr, uid, 'account.invoice', 'auto_proforma2')
         
-        if country <> 'United States':
-            invoice_obj = self.pool.get('account.invoice')
-            invoice = invoice_obj.browse(cr, uid, [inv_id], context=context)[0]
-            #invoice.write({'state': 'proforma'})
+        # proceed if state transition is required
+        if auto_proforma2 == 'True':
+        
+            # country where the product is shipped to
+            country = (order.partner_shipping_id and order.partner_shipping_id.country_id and order.partner_shipping_id.country_id.name) or (order.partner_id.country_id and order.partner_id.country_id.name) or 'United States'
+        
+            if country <> 'United States':
+                invoice_obj = self.pool.get('account.invoice')
+                invoice = invoice_obj.browse(cr, uid, [inv_id], context=context)[0]
+            
+                invoice.write({'state': 'proforma2'})
         
         return inv_id
                 
