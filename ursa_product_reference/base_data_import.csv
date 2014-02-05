@@ -1,0 +1,105 @@
+id,code,name,parent_id/id
+AP,AP,Aleph Printers,
+AP-PR,AP-PR,Prusa,AP
+AP-MM,AP-MM,MendelMax,AP
+DC,DC,Documents,
+DC-LB,DC-LB,Labels,DC
+DC-MN,DC-MN,Manuals,DC
+DC-MS,DC-MS,Misc,DC
+EL,EL,Electronics,
+EL-CA,EL-CA,Cables,EL
+EL-FA,EL-FA,Fans,EL
+EL-HB,EL-HB,Heatbed,EL
+EL-HR,EL-HR,Harness,EL
+EL-MS,EL-MS,Misc,EL
+EL-MT,EL-MT,Motors,EL
+EL-PS,EL-PS,Power Supplies,EL
+EL-SD,EL-SD,"Solder, flux",EL
+EL-SW,EL-SW,Switches,EL
+EL-TH,EL-TH,Thermistor,EL
+EL-WR,EL-WR,Wire,EL
+EX,EX,Extruders,
+FR,FR,Furniture,
+FR-BH,FR-BH,Building Hardware,FR
+FR-BN,FR-BN,Bench,FR
+FR-CH,FR-CH,Chair,FR
+FR-DK,FR-DK,Desk,FR
+FR-FU,FR-FU,Furnishings,FR
+FR-ST,FR-ST,Storage,FR
+FR-TB,FR-TB,Table,FR
+HE,HE,Hot Ends,
+HE-SH,HE-SH,All assembled hot ends,HE
+KT,KT,Kits,
+KT-CP,KT-CP,Components/Sub-assemblies,KT
+KT-EL,KT-EL,Electronics Kits,KT
+KT-MK,KT-MK,Makerbot Kits,KT
+KT-PP,KT-PP,Plastic Parts Kits,KT
+KT-PR,KT-PR,Full Printers,KT
+KT-SC,KT-SC,Shapercube Kits,KT
+KT-UL,KT-UL,Ultimaker Kits,KT
+HD,HD,Hardware,
+HD-BL,HD-BL,Belts,HD
+HD-BT,HD-BT,Bolts,HD
+HD-BU,HD-BU,Bushings,HD
+HD-CA,HD-CA,Casting Materials,HD
+HD-EX,HD-EX,Extrusions,HD
+HD-MS,HD-MS,Misc,HD
+HD-NT,HD-NT,Nuts,HD
+HD-RD,HD-RD,Rods,HD
+HD-TB,HD-TB,Tubing,HD
+HD-WA,HD-WA,Washers,HD
+MK,MK,Marketing,
+MK-AP,MK-AP,Apparel,MK
+MK-DM,MK-DM,Display Materials,MK
+MK-MS,MK-MS,Misc,MK
+MK-ST,MK-ST,Stickers,MK
+OF,OF,Office Supplies,
+OF-BK,OF-BK,Books/Media,OF
+OF-CP,OF-CP,Computers/Hardware,OF
+OF-CS,OF-CS,Consumable,OF
+OF-MS,OF-MS,Misc,OF
+OF-PA,OF-PA,Paper/Notepads,OF
+OF-PR,OF-PR,Printers,OF
+OF-WU,OF-WU,Writing Utensils ,OF
+PC,PC,PCBs & Components,
+PC-AS,PC-AS,Assembled,PC
+PC-BD,PC-BD,Boards,PC
+PC-CA,PC-CA,Capacitor,PC
+PC-CN,PC-CN,Connectors,PC
+PC-DD,PC-DD,Diodes,PC
+PC-KT,PC-KT,Kits,PC
+PC-LE,PC-LE,LED/lights,PC
+PC-MS,PC-MS,Misc,PC
+PC-RE,PC-RE,Resistors,PC
+PP,PP,Parts,
+PP-CP,PP-CP,Cast Parts,PP
+PP-GP,PP-GP,Grown Parts,PP
+PP-MP,PP-MP,Machined Parts,PP
+PP-FP,PP-FP,Fabricated Parts,PP
+PP-IM,PP-IM,Injection Molded Parts,PP
+PP-IS,PP-IS,Grown Parts with Inserts,PP
+RM,RM,Raw Materials,
+RM-AB,RM-AB,ABS Filament,RM
+RM-AL,RM-AL,Aluminum,RM
+RM-HI,RM-HI,High Impact Polystyrene Filament,RM
+RM-LB,RM-LB,Laybrick Filament,RM
+RM-NY,RM-NY,Nylon Filament,RM
+RM-PB,RM-PB,Print Board Surface,RM
+RM-PE,RM-PE,PET & PET blends Filament,RM
+RM-PL,RM-PL,PLA Filament,RM
+RM-PV,RM-PV,PVA filament,RM
+RM-PY,RM-PY,Polycarbonate Filament,RM
+RM-WD,RM-WD,Wood Filament,RM
+RM-WO,RM-WO,Wood Materials,RM
+SH,SH,Shipping,
+SH-BX,SH-BX,Boxes/tubes,SH
+SH-PA,SH-PA,Packing Material,SH
+SH-MS,SH-MS,Misc,SH
+SH-SE,SH-SE,Service,SH
+SH-PG,SH-PG,Packaging Material,SH
+TL,TL,Tools,
+TL-CS,TL-CS,Consumable,TL
+TL-EL,TL-EL,Electronics Tools,TL
+TL-HD,TL-HD,Hand Tools,TL
+TL-PW,TL-PW,Power Tools,TL
+TL-MS,TL-MS,Misc,TL
