@@ -22,6 +22,7 @@
 
 from osv import fields, osv
 from tools.translate import _
+import json
 	
 # associate tracking numbers to delivery orders
 class delivery_tracking_numbers(osv.osv):
@@ -41,14 +42,19 @@ class do_tracking_add(osv.osv):
 
     _inherit = "delivery.tracking.numbers"
 
-    def add_tracking_num(self, cr, uid, values, context=None):
+    def add_tracking_num(self, cr, uid, ids, no, desc, context=None):
         """  set delivery order id in the tracking number db table records on create
         """
+        
+        if type(ids) is str:
+            ids = json.loads(id)
+        
+        values={}         
+        values['delivery_id']=ids[0]
+        values['tracking_no']=no
+        values['tracking_desc']=desc
+        
         res = super(do_tracking_add, self).create(cr, uid, values, context=context)
-        if 'tracking_nums' in values:
-            for tracking_num in values['delivery_id']:
-                track_id = super(do_tracking_add, self).write(cr, uid, res, values)
-                #self.pool.get('stock.picking').write(cr, uid, values['delivery_id'], {'delivery_id':track_id})
         return res	
 
 # Modified to include multiple tracking numbers associated to one delivery
