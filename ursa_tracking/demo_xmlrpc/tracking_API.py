@@ -50,9 +50,9 @@ def search_outgoing(sock, uid, do_names):
         pass
     return os_ids
 
-def fedex_put_tracking_nums(sock, uid, ids, tracking_nums):
+def fedex_put_tracking_nums(sock, uid, ids, no, desc):
 
-    result = sock.execute(DBNAME, uid, PWD, 'delivery.tracking.numbers', 'add_tracking_num', tracking_nums)
+    result = sock.execute(DBNAME, uid, PWD, 'delivery.tracking.numbers', 'add_tracking_num', ids, no, desc)
     try:
         os_ids = ids
     except Exception:
@@ -73,12 +73,10 @@ def main():
     do_names = [('name', '=', 'OUT/06919')] 
     do_ids = search_outgoing(sock, uid, do_names)
 
-    print do_ids
+    no="Z90456789123"
+    desc="To St. Louis"
     
-    # test input
-    tracking_nums={'delivery_id':do_ids[0], 'tracking_no':'abc', 'tracking_desc':'desc1'}
-    
-    msg = fedex_put_tracking_nums(sock, uid, do_ids, tracking_nums)
+    msg = fedex_put_tracking_nums(sock, uid, do_ids, no, desc)
     print msg
     
 if __name__ == '__main__':
