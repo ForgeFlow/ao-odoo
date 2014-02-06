@@ -29,7 +29,7 @@
     </table>
 </body>]]></field>
             <field name="orientation">Portrait</field>
-            <field name="format">A4</field>
+            <field name="format">Letter</field>
             <field name="html"><![CDATA[
 <html>
     <head>
@@ -228,7 +228,7 @@ tr.line {
     </table>
 </body>]]></field>
             <field name="orientation">Portrait</field>
-            <field name="format">A4</field>
+            <field name="format">Letter</field>
             <field name="html"><![CDATA[
 <html>
 <body>
@@ -389,7 +389,7 @@ tr.line {
     </body>
 </html>]]></field>
             <field name="orientation">Landscape</field>
-            <field name="format">A4</field>
+            <field name="format">Letter</field>
             <field name="html"><![CDATA[
 <html>
     <head>
@@ -573,7 +573,7 @@ act_as_colgroup {
     </body>
 </html>]]></field>
             <field name="orientation">Portrait</field>
-            <field name="format">A4</field>
+            <field name="format">Letter</field>
             <field name="html"><![CDATA[
 <html>
     <head>
