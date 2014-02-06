@@ -39,7 +39,7 @@ class fedex_ipd(osv.osv):
         uid = 1
 
         if type(ids) is str:
-            ids = json.load(ids)
+            ids = json.loads(ids)
             
         #get the delivery order based on the id that is passed in
         for delivery_order in self.browse(cr, uid, ids, context=context):
