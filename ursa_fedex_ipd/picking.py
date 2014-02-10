@@ -100,7 +100,7 @@ class fedex_ipd(osv.osv):
                     line_prod_upc.append(str(product.upc))
                     line_prod_desc.append(str(product.name_template))
                     line_prod_schedb.append(product.scheduleb)
-                    line_prod_manf_country.append(str(product.manf_country.name))                
+                    line_prod_manf_country.append(str(product.manf_country.code))                
                     
                     line_prod_code.append(str(move_lines[0]['product_id'][1]))
                     line_weight.append(str(move_lines[0]['weight']))
