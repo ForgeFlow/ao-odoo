@@ -62,7 +62,7 @@ class fedex_ipd(osv.osv):
             res['contact'] = delivery[0]['partner_id'][1]
             res['company'] = partner.name
             res['address1'] = partner.street
-            res['address2'] = partner.street2
+            res['address2'] = partner.street2 or ''
             res['city'] = partner.city
             res['zip'] = partner.zip
             res['phone'] = partner.phone
@@ -71,7 +71,7 @@ class fedex_ipd(osv.osv):
                 res['state'] = partner.state_id.name
 
             if partner.country_id:
-                res['country'] = partner.country_id.name
+                res['country'] = partner.country_id.code
 
             res['sale_num'] = delivery[0]['sale_id'][1]
             res['total_weight'] = delivery[0]['weight']
