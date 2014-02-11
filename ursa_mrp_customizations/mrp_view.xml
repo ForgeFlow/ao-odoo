@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+        
+    <record id="ursa_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">ursa_mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group[2]/field[@name='origin']" position="after">
+                <field name="batch_no" placeholder="Manufacturing Batch No."/>
+            </xpath>
+        </field>
+    </record>    
+    <record id="ursa_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">ursa_mrp.productiontree</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='routing_id']" position="before">
+                <field name="batch_no" />
+            </xpath>            
+        </field>
+    </record>       
+</data>
+</openerp>
