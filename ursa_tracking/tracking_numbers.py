@@ -47,7 +47,7 @@ class do_tracking_add(osv.osv):
         """
         
         if type(ids) is str:
-            ids = json.loads(id)
+            ids = json.loads(ids)
         
         values={}         
         values['delivery_id']=ids[0]
