@@ -32,15 +32,16 @@ import json
 class fedex_ipd(osv.osv):
     _inherit = "stock.picking.out"
 
-    def fedex_get(self, cr, uid, ids):
+    def fedex_get(self, cr, uid, idstring):
         res = {}
+        ids=[]
         context={}
         context['uid']=1
         uid = 1
 
-        if type(ids) is str:
-            ids = json.loads(ids)
-            
+        picking = self.pool.get('stock.picking.out')
+        ids = picking.search(cr, uid, [('name', '=', idstring)], context=context)
+        
         #get the delivery order based on the id that is passed in
         for delivery_order in self.browse(cr, uid, ids, context=context):
             picking_fields =['auto_picking','backorder_id','carrier_id','carrier_tracking_ref','company_id','date','date_done','invoice_state','invoice_type_id','location_dest_id','location_id','max_date','message_follower_ids','message_ids','message_is_follower','message_summary','message_unread','min_date','move_lines','move_type','name','note','number_of_packages','origin','partner_id','product_id','sale_id','state','stock_journal_id','type','volume','weight','weight_net']
