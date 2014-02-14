@@ -70,13 +70,14 @@ def fedex_put_tracking_nums(sock, uid, ids, no, desc):
 def main():
     #Connect to OpenERP
     sock, uid = connect_oerp()
-    do_names = [('name', '=', 'OUT/06919')] 
-    do_ids = search_outgoing(sock, uid, do_names)
+    #do_names = [('name', '=', 'OUT/06919')] 
+    #do_ids = search_outgoing(sock, uid, do_names)
 
+    idstring = 'OUT/06919'
     no="Z90456789123"
     desc="To St. Louis"
     
-    msg = fedex_put_tracking_nums(sock, uid, do_ids, no, desc)
+    msg = fedex_put_tracking_nums(sock, uid, idstring, no, desc)
     print msg
     
 if __name__ == '__main__':

@@ -42,12 +42,12 @@ class do_tracking_add(osv.osv):
 
     _inherit = "delivery.tracking.numbers"
 
-    def add_tracking_num(self, cr, uid, ids, no, desc, context=None):
+    def add_tracking_num(self, cr, uid, idstring, no, desc, context=None):
         """  set delivery order id in the tracking number db table records on create
         """
         
-        if type(ids) is str:
-            ids = json.loads(ids)
+        picking = self.pool.get('stock.picking.out')
+        ids = picking.search(cr, uid, [('name', '=', idstring)], context=context)
         
         values={}         
         values['delivery_id']=ids[0]
