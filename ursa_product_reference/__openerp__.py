@@ -31,6 +31,7 @@
     """,
     'website': 'http://www.ursainfosystems.com',
     "depends" : ['base', 'stock', 'product'],
+    "data" : ['security/ir.model.access.csv',],
     'init_xml': [],
     'update_xml': ['productclass_view.xml'],
     'demo_xml': [],

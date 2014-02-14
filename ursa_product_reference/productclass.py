@@ -57,24 +57,23 @@ class product_product(osv.osv):
         
         if product_class:
         
-            if ids:
-                product = self.browse(cr, uid, ids[0], context=context)
+            product = ids and self.browse(cr, uid, ids[0], context=context) or False
                 
-                if not (default_code and len(default_code)) and product_class:
+            if not (default_code and len(default_code)) and product_class:
+            
+                class_obj = self.pool.get('product.class')
+                class_ins = class_obj.browse(cr, uid, product_class, context=context)
                 
-                    class_obj = self.pool.get('product.class')
-                    class_ins = class_obj.browse(cr, uid, product_class, context=context)
-                    
-                    seq = class_ins.sequence_no
-                    code = (class_ins.code + seq_no(seq, 4))
-                    
-                    result['value'] = {'default_code': code}
-                    
-                    class_ins.write({'sequence_no':seq+1})
-                else:
-                    result['value'] = {'product_class': product.product_class.id}
-                    result['warning'] = {'title': _('Warning'),
-                                         'message': _('Already has a default code.')}
+                seq = class_ins.sequence_no
+                code = (class_ins.code + seq_no(seq, 4))
+                
+                result['value'] = {'default_code': code}
+                
+                class_ins.write({'sequence_no':seq+1})
+            else:
+                result['value'] = {'product_class': product and product.product_class.id or False}
+                result['warning'] = {'title': _('Warning'),
+                                     'message': _('Already has a default code.')}
         return result
     
     _columns = {
