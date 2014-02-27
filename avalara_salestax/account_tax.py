@@ -20,7 +20,6 @@
 ##############################################################################
 import time
 import string
-
 from osv import osv, fields
 from tools.translate import _
 
