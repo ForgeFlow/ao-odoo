@@ -20,7 +20,7 @@ from random import randint
 USERNAME = 'fedexapi'
 PWD = 'fedexapi'
 DBNAME = 'ao_1213'
-ERP_WWW = 'http://develerp.alephobjects.com:8069'
+ERP_WWW = 'http://develerp.alephobjects.com:9069'
 
 
 def connect_oerp():
@@ -60,6 +60,15 @@ def fedex_put_tracking_nums(sock, uid, ids, no, desc):
         pass
     return result
       
+def fedex_del_tracking_nums(sock, uid, ids, no):
+
+    result = sock.execute(DBNAME, uid, PWD, 'delivery.tracking.numbers', 'del_tracking_num', ids, no)
+    try:
+        os_ids = ids
+    except Exception:
+        "There are no outgoing shipments to process"
+        pass
+    return result
 
 
     #except Exception:
@@ -76,8 +85,13 @@ def main():
     idstring = 'OUT/06919'
     no="Z90456789123"
     desc="To St. Louis"
-    
+
+    print 'Adding Tracking number...'
     msg = fedex_put_tracking_nums(sock, uid, idstring, no, desc)
+    print msg
+
+    print 'Deleting Tracking number...'
+    msg = fedex_del_tracking_nums(sock, uid, idstring, no)
     print msg
     
 if __name__ == '__main__':

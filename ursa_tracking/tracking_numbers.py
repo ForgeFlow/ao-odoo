@@ -27,7 +27,7 @@ import json
 # associate tracking numbers to delivery orders
 class delivery_tracking_numbers(osv.osv):
     
-    _name = "delivery.tracking.numbers"
+    _name = ""
     _description = "Delivery Tracking Numbers"
     _columns = {
         'delivery_id':fields.many2one('stock.picking.out', 'Delivery Order', required=False, ondelete='cascade', help=''),
@@ -58,6 +58,24 @@ class do_tracking_add(osv.osv):
         values['tracking_desc']=desc
         
         res = super(do_tracking_add, self).create(cr, uid, values, context=context)
+        return res	
+        
+    def del_tracking_num(self, cr, uid, idstring, no, context=None):
+        """  set delivery order id in the tracking number db table records on create
+        """
+        context={}
+        context['uid']=1
+        uid = 1
+
+        picking = self.pool.get('stock.picking.out')
+        pid = picking.search(cr, uid, [('name', '=', idstring)], context=context)
+        
+        tracking_nos = self.pool.get('delivery.tracking.numbers')
+        ids = tracking_nos.search(cr, uid, [('delivery_id', 'in', pid), ('tracking_no', '=', no)], context=context)
+        
+        for tracking_obj in tracking_nos.browse(cr,uid,ids,context=context):
+            res = tracking_obj.unlink()
+        
         return res	
 
 # Modified to include multiple tracking numbers associated to one delivery
