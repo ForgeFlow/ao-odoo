@@ -45,7 +45,10 @@ class do_tracking_add(osv.osv):
     def add_tracking_num(self, cr, uid, idstring, no, desc, context=None):
         """  set delivery order id in the tracking number db table records on create
         """
-        
+        context={}
+        context['uid']=1
+        uid = 1
+
         picking = self.pool.get('stock.picking.out')
         ids = picking.search(cr, uid, [('name', '=', idstring)], context=context)
         
