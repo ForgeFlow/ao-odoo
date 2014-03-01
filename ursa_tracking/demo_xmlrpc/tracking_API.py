@@ -20,7 +20,7 @@ from random import randint
 USERNAME = 'fedexapi'
 PWD = 'fedexapi'
 DBNAME = 'ao_1213'
-ERP_WWW = 'http://develerp.alephobjects.com:9069'
+ERP_WWW = 'http://develerp.alephobjects.com:8069'
 
 
 def connect_oerp():
