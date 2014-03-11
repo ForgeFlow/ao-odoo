@@ -44,8 +44,30 @@ product_tax_code()
 
 class product_template(osv.osv):
     _inherit = "product.template"
+    
+    def create(self, cr, uid, vals, context=None):
+        p_temp = self.pool.get('product.template')
+        p_id = super(product_template, self).create(cr, uid, vals, context)
+        p_brw = p_temp.browse(cr, uid, p_id)
+        if p_brw.categ_id and p_brw.categ_id.tax_code_id:
+            p_temp.write(cr, uid, [p_id], {'tax_apply': True})
+        else:
+            p_temp.write(cr, uid, [p_id], {'tax_apply': False})
+        return p_id
+    
+    def write(self, cr, uid, ids, vals, context=None):
+        if 'categ_id' in vals:
+            p_brw = self.pool.get('product.category').browse(cr, uid, vals['categ_id'])
+            if p_brw.tax_code_id:
+                vals['tax_apply'] = True
+            else:
+                vals['tax_apply'] = False
+        return super(product_template, self).write(cr, uid, ids, vals, context)
+            
+    
     _columns = {
-        'tax_code_id': fields.many2one('product.tax.code', 'Tax Code', help="AvaTax Tax Code"),
+#        'tax_code_id': fields.many2one('product.tax.code', 'Tax Code', help="AvaTax Tax Code"),
+        'tax_code_id': fields.related('categ_id', 'tax_code_id', type="many2one", relation="product.tax.code", string="Tax Code", store=True, help="AvaTax Tax Code"),
         'tax_apply': fields.boolean('Tax Calculation',help="Use Following Tax code for this Product"),
     }
 

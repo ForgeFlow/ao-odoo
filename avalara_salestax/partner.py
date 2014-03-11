@@ -54,9 +54,9 @@ class res_partner(osv.osv):
         """ Checks if address validation pre-condition meets. """
 
         if avatax_config.address_validation:
-            raise osv.except_osv(_('Address Validation is Disabled'), _("The AvaTax Address Validation Service is disabled by the administrator. Please make sure it's enabled for the address validation"))
+            raise osv.except_osv(_('Avatax: Address Validation is Disabled'), _("The AvaTax Address Validation Service is disabled by the administrator. Please make sure it's enabled for the address validation"))
         if country_id and country_id not in [x.id for x in avatax_config.country_ids]:
-            raise osv.except_osv(_('Address Validation not Supported for this country'), _("The AvaTax Address Validation Service does not support this country in the configuration, please continue with your normal process."))
+            raise osv.except_osv(_('Avatax: Address Validation not Supported for this country'), _("The AvaTax Address Validation Service does not support this country in the configuration, please continue with your normal process."))
         return True
     
     
@@ -166,19 +166,20 @@ class res_partner(osv.osv):
         if vals and ids:
             if (vals.get('street') or vals.get('street2') or vals.get('zip') or vals.get('city') or \
                 vals.get('country_id') or vals.get('state_id')):
-    
                 address_obj = self.pool.get('res.partner')
                 avatax_config_obj= self.pool.get('avalara.salestax')
                 avatax_config = avatax_config_obj._get_avatax_config_company(cr, uid, context=context)
     
                 if avatax_config and avatax_config.validation_on_save:
-                    self.check_avatax_support(cr, uid, avatax_config, address.get('country_id'), context=context)
-    
+                    brw_address = address_obj.read(cr, uid, ids[0], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
+                    address['country_id'] = 'country_id' in vals and vals['country_id'] or brw_address.get('country_id') and brw_address['country_id'][0]
+                    self.check_avatax_support(cr, uid, avatax_config, address['country_id'], context=context)
                     if from_write:
-                        address = address_obj.read(cr, uid, ids[0], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
-                        address['state_id'] = address.get('state_id') and address['state_id'][0]
-                        address['country_id'] = address.get('country_id') and address['country_id'][0]
-                    
+                        address['street'] = 'street' in vals and vals['street'] or ''
+                        address['street2'] = 'street2' in vals and vals['street2'] or ''
+                        address['city'] = 'city' in vals and vals['city'] or ''
+                        address['zip'] = 'zip' in vals and vals['zip'] or ''
+                        address['state_id'] = 'state_id' in vals and vals['state_id'] or brw_address.get('state_id') and brw_address['state_id'][0] or False
                     valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
                     vals.update({
                         'street': valid_address.Line1,
@@ -211,7 +212,7 @@ class res_partner(osv.osv):
                 
                 if vals.get('tax_exempt'):
                     if not vals.get('exemption_number') and vals.get('exemption_code_id') == False :
-                        raise osv.except_osv("Warning !", "Please enter either Exemption Number or Exemption Code for marking customer as Exempt.") 
+                        raise osv.except_osv("Avatax: Warning !", "Please enter either Exemption Number or Exemption Code for marking customer as Exempt.") 
                 
                 
                 #It will work when user want to validate address at customer creation, check option in avalara api form
@@ -247,13 +248,13 @@ class res_partner(osv.osv):
         #when tax exempt check then atleast exemption number or exemption code should be filled            
         if vals.get('tax_exempt'):
             if not vals.get('exemption_number') and not vals.get('exemption_code_id'):
-                raise osv.except_osv("Warning !", "Please enter either Exemption Number or Exemption Code for marking customer as Exempt.")
+                raise osv.except_osv("Avatax: Warning !", "Please enter either Exemption Number or Exemption Code for marking customer as Exempt.")
         # Follow the normal write process if it's a write operation from the wizard
         if context.get('from_validate_button', False):
             return super(res_partner, self).write(cr, uid, ids, vals, context)
 #        if context.get('active_id', False):
-        vals = self.update_address(cr, uid, ids, vals, True, context=context)
-        return super(res_partner, self).write(cr, uid, ids, vals, context)
+        vals1 = self.update_address(cr, uid, ids, vals, True, context=context)
+        return super(res_partner, self).write(cr, uid, ids, vals1, context)
     
 
 res_partner()

@@ -20,6 +20,7 @@
 ##############################################################################
 import time
 import string
+
 from osv import osv, fields
 from tools.translate import _
 
@@ -37,34 +38,33 @@ class account_tax(osv.osv):
         return comp.currency_id.name
 
     def _get_compute_tax(self, cr, uid, avatax_config, doc_date, doc_code, doc_type, partner, ship_from_address_id, shipping_address_id,
-                          lines, user=None, commit=False, invoice_date=False, reference_code=False, context=None):
+                          lines, user=None, exemption_number=None, exemption_code_name=None, commit=False, invoice_date=False, reference_code=False, location_code=False, context=None):
         address_obj = self.pool.get('res.partner')
-
         currency_code = self._get_currency(cr, uid, context)
         
         if not partner.customer_code:
-            raise osv.except_osv(_('Warning !'), _('Customer Code for customer %s not define'% (partner.name)))
+            raise osv.except_osv(_('Avatax: Warning !'), _('Customer Code for customer %s not define'% (partner.name)))
         
         if not shipping_address_id:
-            raise osv.except_osv(_('No Shipping Address Defined !'), _('There is no shipping address defined for the partner.'))        
+            raise osv.except_osv(_('Avatax: No Shipping Address Defined !'), _('There is no shipping address defined for the partner.'))        
         #it's show destination address
         shipping_address = address_obj.browse(cr, uid, shipping_address_id, context=context)
         if not lines:
-            raise osv.except_osv(_('Error !'), _('AvaTax needs atleast one sale order line defined for tax calculation.'))
+            raise osv.except_osv(_('Avatax: Error !'), _('AvaTax needs atleast one sale order line defined for tax calculation.'))
         
         if avatax_config.force_address_validation:
             if not shipping_address.date_validation:
-                raise osv.except_osv(_('Address Not Validated !'), _('Please validate the shipping address for the partner %s.'
+                raise osv.except_osv(_('Avatax: Address Not Validated !'), _('Please validate the shipping address for the partner %s.'
                             % (partner.name)))
         if not ship_from_address_id:
-            raise osv.except_osv(_('No Ship from Address Defined !'), _('There is no company address defined.'))
+            raise osv.except_osv(_('Avatax: No Ship from Address Defined !'), _('There is no company address defined.'))
 
         #it's show source address
         ship_from_address = address_obj.browse(cr, uid, ship_from_address_id, context=context)
         
         
         if not ship_from_address.date_validation:
-            raise osv.except_osv(_('Address Not Validated !'), _('Please validate the company address.'))
+            raise osv.except_osv(_('Avatax: Address Not Validated !'), _('Please validate the company address.'))
 
         #For check credential
         avalara_obj = AvaTaxService(avatax_config.account_number, avatax_config.license_key,
@@ -85,9 +85,9 @@ class account_tax(osv.osv):
         #using get_tax method to calculate tax based on address                          
         result = avalara_obj.get_tax(avatax_config.company_code, doc_date, doc_type,
                                  partner.customer_code, doc_code, origin, destination,
-                                 lines, partner.exemption_number or None,
-                                 partner.exemption_code_id and partner.exemption_code_id.code or None,
-                                 user and user.name or None, commit, invoice_date, reference_code, currency_code, partner.vat_id or None)
+                                 lines, exemption_number,
+                                 exemption_code_name,
+                                 user and user.name or None, commit, invoice_date, reference_code, location_code, currency_code, partner.vat_id or None)
         
         return result
 

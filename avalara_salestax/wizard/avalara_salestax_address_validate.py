@@ -58,10 +58,10 @@ class avalara_salestax_address_validate(osv.osv_memory):
         if context.get('active_id', False) and context.get('active_model', False) == 'res.partner':
             avatax_config = avatax_config_obj._get_avatax_config_company(cr, uid, context=context)
             if not avatax_config:
-                raise osv.except_osv(_('Service Not Setup'), _("The AvaTax Tax Service is not active."))
+                raise osv.except_osv(_('Avatax: Service Not Setup'), _("The AvaTax Tax Service is not active."))
             address = address_obj.browse(cr, uid, context['active_id'], context=context)
-            if address.validated_on_save and avatax_config.validation_on_save:
-                raise osv.except_osv(_('Address Already Validated'), _("Address Validation on Save is already active in the AvaTax Configuration."))
+            if avatax_config.validation_on_save:
+                raise osv.except_osv(_('Avatax: Address Already Validated'), _("Address Validation on Save is already active in the AvaTax Configuration."))
             address_obj.check_avatax_support(cr, uid, avatax_config, address.country_id and address.country_id.id or False, context=context)
         return True
 
@@ -72,6 +72,14 @@ class avalara_salestax_address_validate(osv.osv_memory):
 
         if context.get('active_id', False) and context.get('active_model', False) == 'res.partner':
             address_obj = self.pool.get('res.partner')
+            address_obj.write(cr, uid, [context['active_id']], {
+                                                        'latitude': '',
+                                                        'longitude': '',
+                                                        'date_validation': False,
+                                                        'validation_method': '',
+                                                        })
+            cr.commit()     #Need to forcefully commit data when address not validate after changes in validate address
+            
             address = address_obj.read(cr, uid, context['active_id'], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
             address['state_id'] = address.get('state_id') and address['state_id'][0]
             address['country_id'] = address.get('country_id') and address['country_id'][0]

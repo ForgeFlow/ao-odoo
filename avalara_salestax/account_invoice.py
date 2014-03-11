@@ -46,13 +46,26 @@ def get_address_for_tax(self, cr, uid, ids, context=None):
                 elif order.tax_add_default:
                     return order.partner_id.id
                 else:
-                    raise osv.except_osv(_('Warning !'), _('Please select address for avalara tax'))
+                    raise osv.except_osv(_('Avatax: Warning !'), _('Please select address for avalara tax'))
         else:
             return inv_obj.partner_id.id
 
 class account_invoice(osv.osv):
     """Inherit to implement the tax calculation using avatax API"""
     _inherit = "account.invoice"
+    
+    def onchange_partner_id(self, cr, uid, ids, type, partner_id,\
+            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
+        res = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id,\
+            date_invoice, payment_term, partner_bank_id, company_id)
+        
+        res_obj = self.pool.get('res.partner').browse(cr, uid, partner_id)
+        res['value']['exemption_code'] = res_obj.exemption_number or ''
+        res['value']['exemption_code_id'] = res_obj.exemption_code_id.id or None
+        if res_obj.validation_method:res['value']['is_add_validate'] = True
+        else:res['value']['is_add_validate'] = False
+        return res
+        
     
     
     def _amount_all(self, cr, uid, ids, name, args, context=None):
@@ -97,26 +110,43 @@ class account_invoice(osv.osv):
     def create(self, cr, uid, vals, context=None):
         if vals['partner_id']:
             res_obj = self.pool.get('res.partner').browse(cr, uid, vals['partner_id'], context=context)
-            vals['exemption_code'] = res_obj.exemption_number or ''
-            vals['exemption_code_id'] = res_obj.exemption_code_id.id or None
+            if 'exemption_code' in vals:
+                vals['exemption_code'] = vals['exemption_code']
+            else:
+                vals['exemption_code'] = res_obj.exemption_number or ''
+            if 'exemption_code_id' in vals:
+                vals['exemption_code_id'] = vals['exemption_code_id']
+            else:
+                vals['exemption_code_id'] = res_obj.exemption_code_id and res_obj.exemption_code_id.id or False
+#            vals['exemption_code'] = res_obj.exemption_number or ''
+#            vals['exemption_code_id'] = res_obj.exemption_code_id.id or None
             if res_obj.validation_method:vals['is_add_validate'] = True
-            vals['shipping_add_id'] = vals['partner_id']
+#            vals['shipping_add_id'] = vals['partner_id']
+            addr = self.pool.get('res.partner').browse(cr, uid, 'partner_invoice_id' in vals and vals['partner_invoice_id'] or vals['partner_id'], context=context)
+            vals['shipping_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
         
         return super(account_invoice, self).create(cr, uid, vals, context=context)
 #    
     def write(self, cr, uid, ids, vals, context=None):
         if 'partner_id' in vals:
             res_obj = self.pool.get('res.partner').browse(cr, uid, vals['partner_id'], context=context)
-            vals['exemption_code'] = res_obj.exemption_number or ''
-            vals['exemption_code_id'] = res_obj.exemption_code_id.id or None
+            if 'exemption_code' in vals:
+                vals['exemption_code'] = vals['exemption_code']
+            else:
+                vals['exemption_code'] = res_obj.exemption_number or ''
+            if 'exemption_code_id' in vals:
+                vals['exemption_code_id'] = vals['exemption_code_id']
+            else:
+                vals['exemption_code_id'] = res_obj.exemption_code_id and res_obj.exemption_code_id.id or False
             if res_obj.validation_method:
                 vals['is_add_validate'] = True
             else:
                 vals['is_add_validate'] = False
+                
         if 'tax_add_default' in vals: vals['tax_add_default'] = vals['tax_add_default']
         if 'tax_add_invoice' in vals: vals['tax_add_invoice'] = vals['tax_add_invoice']
         if 'tax_add_shipping' in vals: vals['tax_add_shipping'] = vals['tax_add_shipping']
-        if 'shipping_add_id' in vals: vals['shipping_add_id'] = vals['shipping_add_id']
+        if 'shipping_address' in vals: vals['shipping_address'] = vals['shipping_address']
         
         return super(account_invoice, self).write(cr, uid, ids, vals, context=context)
     
@@ -153,25 +183,18 @@ class account_invoice(osv.osv):
         ),
         'exemption_code': fields.char('Exemption Number', help="It show the customer exemption number"),
         'exemption_code_id': fields.many2one('exemption.code', 'Exemption Code', help="It show the customer exemption code"),
-        'shipping_lines': fields.one2many('shipping.order.line','invoice_ship_id', 'Shipping Lines', readonly=True, states={'draft':[('readonly',False)]}),
+        'shipping_lines': fields.one2many('shipping.order.line','invoice_ship_id', 'Avatax Shipping Lines', readonly=True, states={'draft':[('readonly',False)]}),
         'tax_add_default': fields.boolean('Default Address', readonly=True, states={'draft':[('readonly',False)]}),
         'tax_add_invoice': fields.boolean('Invoice Address', readonly=True, states={'draft':[('readonly',False)]}),
         'tax_add_shipping': fields.boolean('Delivery Address', readonly=True, states={'draft':[('readonly',False)]}),
-        'shipping_add_id': fields.many2one('res.partner', 'Tax Address', change_default=True, track_visibility='always'),  
+#        'shipping_add_id': fields.many2one('res.partner', 'Tax Address', change_default=True, track_visibility='always'),
+        'shipping_address': fields.text('Tax Address'),
+        'location_code': fields.char('Location code', size=128, readonly=True, states={'draft':[('readonly',False)]}),  
     }
     
     _defaults = {
-        'tax_add_default': True,
+        'tax_add_invoice': True,
         }
-    
-
-#    def _amount_shipment_tax(self, cr, uid, shipment_taxes, shipment_charge):
-#        val = 0.0
-#        for c in self.pool.get('account.tax').compute_all(cr, uid, shipment_taxes, shipment_charge, 1)['taxes']:
-#            val += c.get('amount', 0.0)
-#        return val
-#    
-    
     
     def finalize_invoice_move_lines(self, cr, uid, invoice_browse, move_lines):
         """After validate invoice create finalize invoice move lines with shipping amount
@@ -267,9 +290,9 @@ class account_invoice(osv.osv):
                 account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice,
                                                    invoice.internal_number, not invoice.invoice_doc_no and 'SalesInvoice' or 'ReturnInvoice',
                                                    invoice.partner_id, invoice.company_id.partner_id.id,
-                                                   shipping_add_id, lines1, invoice.user_id,
+                                                   shipping_add_id, lines1, invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None, 
                                                    True, invoice.invoice_date,
-                                                   invoice.invoice_doc_no, context=context)
+                                                   invoice.invoice_doc_no, invoice.location_code or '', context=context)
             
         self.write(cr, uid, ids, {'state':'paid'}, context=context)
         return True
@@ -323,7 +346,7 @@ class account_invoice(osv.osv):
                         ol_tax_amt =  account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice,
                                                                    invoice.internal_number, 'SalesOrder',
                                                                    invoice.partner_id, invoice.company_id.partner_id.id,
-                                                                   shipping_add_id, [line1], invoice.user_id,
+                                                                   shipping_add_id, [line1], invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                                    context=context).TotalTax
                         o_tax_amt += ol_tax_amt  #tax amount based on total order line total   
                         invoice_obj.write(cr, uid, [o_line.id], {'tax_amt': ol_tax_amt,})
@@ -333,7 +356,7 @@ class account_invoice(osv.osv):
                         sl_tax_amt = account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice,
                                                                    invoice.internal_number, 'SalesOrder',
                                                                    invoice.partner_id, invoice.company_id.partner_id.id,
-                                                                   shipping_add_id, [line2], invoice.user_id,
+                                                                   shipping_add_id, [line2], invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                                    context=context).TotalTax
                         s_tax_amt += sl_tax_amt #tax amount based on total shipping line total
                         ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': sl_tax_amt,})
@@ -344,7 +367,7 @@ class account_invoice(osv.osv):
                     for s_line in invoice.shipping_lines:
                         ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': 0.0,})
                 else:
-                    raise osv.except_osv(_('Warning !'), _('Please select system calls in API Configuration'))
+                    raise osv.except_osv(_('Avatax: Warning !'), _('Please select system calls in API Configuration'))
                     
                        
                 
@@ -353,9 +376,9 @@ class account_invoice(osv.osv):
                 account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice,
                                                    invoice.internal_number, not invoice.invoice_doc_no and 'SalesInvoice' or 'ReturnInvoice',
                                                    invoice.partner_id, invoice.company_id.partner_id.id,
-                                                   shipping_add_id, lines1, invoice.user_id,
+                                                   shipping_add_id, lines1, invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                    False, invoice.invoice_date,
-                                                   invoice.invoice_doc_no, context=context)
+                                                   invoice.invoice_doc_no, invoice.location_code or '', context=context)
             else:
                 for o_line in invoice.invoice_line:
                     invoice_obj.write(cr, uid, [o_line.id], {'tax_amt': 0.0,})
@@ -445,7 +468,7 @@ class account_invoice(osv.osv):
 
         for invoice in self.browse(cr, uid, ids, *args):
             res_obj = partner_obj.browse(cr, uid, invoice.partner_id.id)
-            if avatax_config and not avatax_config.disable_tax_calculation and invoice.internal_number:
+            if avatax_config and not avatax_config.disable_tax_calculation and invoice.type in ['out_invoice','out_refund']:
                 doc_type = invoice.type == 'out_invoice' and 'SalesInvoice' or 'ReturnInvoice'
                 account_tax_obj.cancel_tax(cr, uid, avatax_config, invoice.internal_number, doc_type, 'DocVoided')
         self.write(cr, uid, ids, {'number': '', 'internal_number':''})
@@ -486,6 +509,7 @@ class account_invoice(osv.osv):
                         raise osv.except_osv(_('Warning !'), _('Tax amount different !\nClick on compute to update tax base'))
         else:
             super(account_invoice, self).check_tax_lines(cr, uid, inv, compute_taxes, ait_obj)
+        return True
             
 account_invoice()
 
@@ -554,7 +578,7 @@ class account_invoice_tax(osv.osv):
                         ol_tax_amt =  account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice or time.strftime('%Y-%m-%d'),
                                                                    invoice.internal_number, 'SalesOrder',
                                                                    invoice.partner_id, invoice.company_id.partner_id.id,
-                                                                   shipping_add_id, [line1], invoice.user_id,
+                                                                   shipping_add_id, [line1], invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                                    context=context).TotalTax
                         o_tax_amt += ol_tax_amt
                         invoice_line_obj.write(cr, uid, [o_line.id], {'tax_amt': ol_tax_amt,})
@@ -565,7 +589,7 @@ class account_invoice_tax(osv.osv):
                             sl_tax_amt = account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice or time.strftime('%Y-%m-%d'),
                                                                        invoice.internal_number, 'SalesOrder',
                                                                        invoice.partner_id, invoice.company_id.partner_id.id,
-                                                                       shipping_add_id, [line2], invoice.user_id,
+                                                                       shipping_add_id, [line2], invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                                        context=context).TotalTax
                             s_tax_amt += sl_tax_amt #tax amount based on total shipping line total
                             ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': sl_tax_amt,})
@@ -576,12 +600,12 @@ class account_invoice_tax(osv.osv):
                     for s_line in invoice.shipping_lines:
                         ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': 0.0,})
                 else:
-                    raise osv.except_osv(_('Warning !'), _('Please select system calls in API Configuration'))    
+                    raise osv.except_osv(_('Avatax: Warning !'), _('Please select system calls in API Configuration'))    
                 
                 lines1.extend(lines2)
                 tax_amount = account_tax_obj._get_compute_tax(cr, uid, avatax_config, invoice.date_invoice or time.strftime('%Y-%m-%d'),
                                                             invoice.internal_number, 'SalesOrder', invoice.partner_id, invoice.company_id.partner_id.id,
-                                                            shipping_add_id, lines1, invoice.user_id,
+                                                            shipping_add_id, lines1, invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
                                                             context=context).TotalTax
                 
                 for line in invoice.invoice_line:
@@ -589,7 +613,7 @@ class account_invoice_tax(osv.osv):
                     tax_brw = account_tax_obj.browse(cr, uid, tax_id[0])
                     taxes= account_tax_obj.browse(cr, uid, tax_id)
                     if not tax_brw.account_collected_id or not tax_brw.account_paid_id or not tax_brw.base_code_id or not tax_brw.tax_code_id or not tax_brw.ref_base_code_id or not tax_brw.ref_tax_code_id:
-                        raise osv.except_osv(_('Warning !'), _('Please configure all account related AVATAX tax code in Accounting->Configuration->Taxes->Taxes'))
+                        raise osv.except_osv(_('Avatax: Warning !'), _('Please configure all account related AVATAX tax code in Accounting->Configuration->Taxes->Taxes'))
                     
                     if tax_id:                                            
                         for tax in account_tax_obj.compute_all(cr, uid, taxes, (line.price_unit* (1-(line.discount or 0.0)/100.0)), line.quantity, line.product_id, invoice.partner_id)['taxes']:

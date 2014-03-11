@@ -33,10 +33,11 @@ class sale_order(osv.osv):
         
         res = super(sale_order, self).onchange_partner_id(cr, uid, ids, part, context=None)
         res_obj = self.pool.get('res.partner').browse(cr, uid, part, context=context)
-        
+        addr = self.pool.get('res.partner').browse(cr, uid, res['value'] and res['value']['partner_shipping_id'] or part)
         res['value']['exemption_code'] = res_obj.exemption_number or ''
         res['value']['exemption_code_id'] = res_obj.exemption_code_id.id or None
-        
+        res['value']['tax_add_shipping'] = True
+        res['value']['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
         if res_obj.validation_method:res['value']['is_add_validate'] = True
         else:res['value']['is_add_validate'] = False
         return res
@@ -45,16 +46,51 @@ class sale_order(osv.osv):
     def create(self, cr, uid, vals, context=None):
         if vals['partner_id']:
             res_obj = self.pool.get('res.partner').browse(cr, uid, vals['partner_id'], context=context)
-            vals['exemption_code'] = res_obj.exemption_number or ''
-            vals['exemption_code_id'] = res_obj.exemption_code_id.id or None
+            if 'exemption_code' in vals:
+                vals['exemption_code'] = vals['exemption_code']
+            else:
+                vals['exemption_code'] = res_obj.exemption_number or ''
+            if 'exemption_code_id' in vals:
+                vals['exemption_code_id'] = vals['exemption_code_id']
+            else:
+                vals['exemption_code_id'] = res_obj.exemption_code_id and res_obj.exemption_code_id.id or False
+            vals['tax_add_id'] = vals['partner_id']
             if res_obj.validation_method:vals['is_add_validate'] = True
+            ship_add_id = False
+            if 'tax_add_default' in vals and vals['tax_add_default']:
+                ship_add_id = vals['partner_id']
+            if 'tax_add_invoice' in vals and vals['tax_add_invoice']:
+                ship_add_id = vals['partner_invoice_id']
+            if 'tax_add_shipping' in vals and vals['tax_add_shipping']:
+                ship_add_id = vals['partner_shipping_id']
+            if ship_add_id:
+                addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id, context=context)
+                vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
         return super(sale_order, self).create(cr, uid, vals, context=context)
 #    
     def write(self, cr, uid, ids, vals, context=None):
+        for self_obj in self.browse(cr, uid, ids):
+            ship_add_id = False
+            if 'tax_add_default' in vals and vals['tax_add_default']:
+                ship_add_id = self_obj.partner_id.id
+            if 'tax_add_invoice' in vals and vals['tax_add_invoice']:
+                ship_add_id = self_obj.partner_invoice_id.id
+            if 'tax_add_shipping' in vals and vals['tax_add_shipping']:
+                ship_add_id = self_obj.partner_shipping_id.id
+            if ship_add_id:    
+                addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id, context=context)
+                vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+                 
         if 'partner_id' in vals:
             res_obj = self.pool.get('res.partner').browse(cr, uid, vals['partner_id'], context=context)
-            vals['exemption_code'] = res_obj.exemption_number or ''
-            vals['exemption_code_id'] = res_obj.exemption_code_id.id or None
+            if 'exemption_code' in vals:
+                vals['exemption_code'] = vals['exemption_code']
+            else:
+                vals['exemption_code'] = res_obj.exemption_number or ''
+            if 'exemption_code_id' in vals:
+                vals['exemption_code_id'] = vals['exemption_code_id']
+            else:
+                vals['exemption_code_id'] = res_obj.exemption_code_id and res_obj.exemption_code_id.id or False
             if res_obj.validation_method:
                 vals['is_add_validate'] = True
             else:
@@ -80,13 +116,15 @@ class sale_order(osv.osv):
                             }))
             self.pool.get('account.invoice').write(cr,uid,[inv_id],{
                                                          'shipping_lines': ship_data or False,
-                                                         'exemption_code': order.exemption_code or None,
+                                                         'exemption_code': order.exemption_code or '',
                                                          'exemption_code_id': order.exemption_code_id.id or False,
                                                          'shipping_amt': order.amount_shipping,
                                                          'tax_add_default': order.tax_add_default,
                                                          'tax_add_invoice': order.tax_add_invoice,
                                                          'tax_add_shipping': order.tax_add_shipping,
-                                                         'shipping_add_id': order.tax_add_invoice and order.partner_invoice_id.id or order.tax_add_shipping and order.partner_shipping_id.id or order.partner_id.id,
+#                                                         'shipping_add_id': order.tax_add_invoice and order.partner_invoice_id.id or order.tax_add_shipping and order.partner_shipping_id.id or order.partner_id.id,
+                                                          'shipping_address': order.tax_address,
+                                                          'location_code': order.location_code or '',  
                                                         })
             
             
@@ -94,13 +132,6 @@ class sale_order(osv.osv):
                     
         return inv_id
     
-#    def _amount_shipment_tax(self, cr, uid, shipment_taxes, shipment_charge):
-#        val = 0.0
-#        for c in self.pool.get('account.tax').compute_all(cr, uid, shipment_taxes, shipment_charge, 1)['taxes']:
-#            val += c.get('amount', 0.0)
-#        return val
-    
-
     def _amount_all(self, cr, uid, ids, field_name, arg, context=None):
         """Method override to add shipping charges, taxes and update sale order total
         @param shipping_line: if shipping line present then it will send shipping charge, tax
@@ -139,19 +170,25 @@ class sale_order(osv.osv):
             result[ship_line.sale_ship_id.id] = True
         return result.keys()
     
-    def default_tax_address(self, cr, uid, ids, ship_id, context=None):
-        if ship_id:
-            return {'value':{'tax_add_default':True, 'tax_add_invoice':False, 'tax_add_shipping':False}}
+    def default_tax_address(self, cr, uid, ids, ship_id, tax_add_id, context=None):
+        if ship_id and tax_add_id:
+            addr = self.pool.get('res.partner').browse(cr, uid, tax_add_id, context=context)
+            tax_address = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+            return {'value':{'tax_add_default':True, 'tax_add_invoice':False, 'tax_add_shipping':False, 'tax_address':tax_address}}
         return {}
     
-    def invoice_tax_address(self, cr, uid, ids, inv_id, context=None):
-        if inv_id:
-            return {'value':{'tax_add_default':False, 'tax_add_invoice':True, 'tax_add_shipping':False}}
+    def invoice_tax_address(self, cr, uid, ids, inv_id, tax_add_id, part_id, context=None):
+        if inv_id and tax_add_id or inv_id and part_id:
+            addr = self.pool.get('res.partner').browse(cr, uid, tax_add_id or part_id, context=context)
+            tax_address = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+            return {'value':{'tax_add_default':False, 'tax_add_invoice':True, 'tax_add_shipping':False, 'tax_address':tax_address}}
         return {}
     
-    def delivery_tax_address(self, cr, uid, ids, del_id, context=None):
-        if del_id:
-            return {'value':{'tax_add_default':False, 'tax_add_invoice':False, 'tax_add_shipping':True}}
+    def delivery_tax_address(self, cr, uid, ids, del_id, tax_add_id, part_id, context=None):
+        if del_id and tax_add_id or del_id and part_id:
+            addr = self.pool.get('res.partner').browse(cr, uid, tax_add_id or part_id, context=context)
+            tax_address = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+            return {'value':{'tax_add_default':False, 'tax_add_invoice':False, 'tax_add_shipping':True, 'tax_address':tax_address}}
         return {}
     
     def get_address_for_tax(self, cr, uid, ids, context=None):
@@ -164,15 +201,15 @@ class sale_order(osv.osv):
             elif order.tax_add_default:
                 return order.partner_id.id
             else:
-                raise osv.except_osv(_('Warning !'), _('Please select address for avalara tax'))
+                raise osv.except_osv(_('Avatax: Warning !'), _('Please select address for avalara tax'))
     
     
 
     _columns = {
-        'exemption_code': fields.char('Exemption Number', help="It show the customer exemption number"),
+        'exemption_code': fields.char('Exemption Number', help="It show the customer exemption number", ),
         'is_add_validate': fields.boolean('Address validated',),
-        'exemption_code_id': fields.many2one('exemption.code', 'Exemption Code', help="It show the customer exemption code"),
-        'shipping_lines': fields.one2many('shipping.order.line','sale_ship_id', 'Shipping Lines', readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}),       
+        'exemption_code_id': fields.many2one('exemption.code', 'Exemption Code', help="It show the customer exemption code",),
+        'shipping_lines': fields.one2many('shipping.order.line','sale_ship_id', 'Avatax Shipping Lines', readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}),       
         'amount_shipping': fields.function(_amount_all, method=True, digits_compute= dp.get_precision('Sale Price'), string='Shipping Cost',
             store = {
                 'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
@@ -200,10 +237,13 @@ class sale_order(osv.osv):
           'tax_amount': fields.float('Tax Code Amount', digits_compute=dp.get_precision('Sale Price')),
           'tax_add_default': fields.boolean('Default Address', readonly=True, states={'draft': [('readonly', False)]}),
           'tax_add_invoice': fields.boolean('Invoice Address', readonly=True, states={'draft': [('readonly', False)]}),
-          'tax_add_shipping': fields.boolean('Delivery Address', readonly=True, states={'draft': [('readonly', False)]}),  
+          'tax_add_shipping': fields.boolean('Delivery Address', readonly=True, states={'draft': [('readonly', False)]}),
+#          'tax_add_id': fields.many2one('res.partner', 'Tax Address', readonly=True, states={'draft': [('readonly', False)]}),
+          'tax_address': fields.text('Tax Address'),  
+          'location_code': fields.related('shop_id', 'location_code', type="char", string="Location Code", store=True, readonly=True, help="Origin address location code"),
     }
     _defaults = {
-        'tax_add_default': True,
+        'tax_add_shipping': True,
         }
 
     def create_lines(self, cr, uid, order_lines):
@@ -261,7 +301,7 @@ class sale_order(osv.osv):
                     for line1, o_line in zip(lines1, order.order_line):
                         ol_tax_amt =  account_tax_obj._get_compute_tax(cr, uid, avatax_config, order.date_confirm or order.date_order,
                                                                     order.name, 'SalesOrder', order.partner_id, order.company_id.partner_id.id,
-                                                                    shipping_add_id, [line1], order.user_id,
+                                                                    shipping_add_id, [line1], order.user_id, order.exemption_code or None, order.exemption_code_id.code or None, 
                                                                     context=context).TotalTax
                         o_tax_amt += ol_tax_amt  #tax amount based on total order line total   
                         order_line.write(cr, uid, [o_line.id], {'tax_amt': ol_tax_amt,})
@@ -270,7 +310,7 @@ class sale_order(osv.osv):
                     for line2, s_line in zip(lines2, order.shipping_lines):
                         sl_tax_amt = account_tax_obj._get_compute_tax(cr, uid, avatax_config, order.date_confirm or order.date_order,
                                                                     order.name, 'SalesOrder', order.partner_id, order.company_id.partner_id.id,
-                                                                    shipping_add_id, [line2], order.user_id,
+                                                                    shipping_add_id, [line2], order.user_id, order.exemption_code or None, order.exemption_code_id.code or None,
                                                                     context=context).TotalTax
                         s_tax_amt += sl_tax_amt #tax amount based on total shipping line total
                         ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': sl_tax_amt,})
@@ -282,7 +322,7 @@ class sale_order(osv.osv):
                    
                     tax_amount = account_tax_obj._get_compute_tax(cr, uid, avatax_config, order.date_confirm or order.date_order,
                                                                     order.name, 'SalesOrder', order.partner_id, order.company_id.partner_id.id,
-                                                                    shipping_add_id, lines1, order.user_id,
+                                                                    shipping_add_id, lines1, order.user_id, order.exemption_code or None, order.exemption_code_id.code or None,
                                                                     context=context).TotalTax
                                                                     
                     for o_line in order.order_line:
@@ -290,7 +330,7 @@ class sale_order(osv.osv):
                     for s_line in order.shipping_lines:
                        ship_order_line.write(cr, uid, [s_line.id], {'tax_amt': 0.0,}) 
                 else:
-                    raise osv.except_osv(_('Warning !'), _('Please select system calls in API Configuration'))
+                    raise osv.except_osv(_('Avatax: Warning !'), _('Please select system calls in API Configuration'))
             else:
                 for o_line in order.order_line:
                     order_line.write(cr, uid, [o_line.id], {'tax_amt': 0.0,})
@@ -314,13 +354,9 @@ sale_order()
 
 class sale_order_line(osv.osv):
     _inherit = "sale.order.line"
-    
-    
     _columns = {
             'tax_amt': fields.float('Avalara Tax', help="tax calculate by avalara"),
             }
-    
-
 sale_order_line()
 
 """
@@ -387,6 +423,14 @@ class shipping_rate_config(osv.osv):
             }
 
 shipping_rate_config()
+
+class sale_shop(osv.osv):
+    _inherit = "sale.shop"
+    _columns = {
+            'location_code': fields.char('Location Code', size=128),
+            }
+sale_shop()
+    
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -52,7 +52,7 @@ class AvaTaxService:
         try:
              svc = suds.client.Client(url=wsdl_url)
         except urllib2.URLError, details:
-            raise osv.except_osv(_('Server Failed to Response'), _(details))
+            raise osv.except_osv(_('Avatax: Server Failed to Response'), _(details))
         else:
             svc.set_options(service='%sSvc' % nameCap)
             svc.set_options(port='%sSvcSoap' % nameCap)
@@ -94,15 +94,15 @@ class AvaTaxService:
         try:
             result = operation(request)
         except suds.WebFault, e:
-            raise osv.except_osv(_('Error'), _(e.fault.faultstring))
+            raise osv.except_osv(_('Avatax: Error'), _(e.fault.faultstring))
         except urllib2.HTTPError, e:
-            raise osv.except_osv(_('Server Failed to Response'), _(e.code))
+            raise osv.except_osv(_('Avatax: Server Failed to Response'), _(e.code))
         except urllib2.URLError, details:
             # We could also print the SOAP request here:
             raise osv.except_osv(_('Failed to reach the server'), _(details.reason))
         else:
             if (result.ResultCode != 'Success'):
-                raise osv.except_osv(('Error'), _(AvaTaxError(result.ResultCode, result.Messages)))
+                raise osv.except_osv(('Avatax: Error'), _(AvaTaxError(result.ResultCode, result.Messages)))
             else:
                 return result
             
@@ -127,7 +127,7 @@ class AvaTaxService:
 
     def get_tax(self, company_code, doc_date, doc_type, partner_code, doc_code, origin, destination,
                received_lines, exemption_no=None, customer_usage_type=None, salesman_code=None, commit=False, invoice_date=None, reference_code=None, 
-               currency_code='USD', vat_id=None):
+               location_code=None, currency_code='USD', vat_id=None):
         """ Create tax request and get tax amount by customer address
             @currency_code : 'USD' is the default currency code for avalara, if user not specify in the own company
             @request.DetailLevel = 'Document': Document (GetTaxResult) level details; TaxLines will not be returned.
@@ -145,6 +145,7 @@ class AvaTaxService:
         request.ExchangeRate = 45
         request.ExchangeRateEffDate = '2011-07-07'
         request.HashCode = 0
+        request.LocationCode = location_code
         request.ReferenceCode = reference_code
         if invoice_date:
             taxoverride = self.taxSvc.factory.create('TaxOverride')

@@ -59,13 +59,15 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="priority">30</field>
             <field name="arch" type="xml">
-		        <xpath expr="/form/sheet/notebook/page[@string='Accounting']/group[@name='properties']" position="inside">
-		          <separator string="AvaTax Properties" colspan="4"/>
-		          <group colspan="2" col="2">
-		            <field name="tax_apply"/>
-                   	<newline/>
-		            <field name="tax_code_id" attrs="{'required': [('tax_apply','=',True)]}"/>
-		          </group>
+		        <xpath expr="/form/sheet/notebook/page[@string='Accounting']" position="after">
+		          <page string="Avatax">
+		              <separator string="AvaTax Properties" colspan="4"/>
+			          <group colspan="2" col="2">
+			            <field name="tax_apply"/>
+	                   	<newline/>
+			            <field name="tax_code_id" attrs="{'required': [('tax_apply','=',True)]}" readonly="1"/>
+			          </group>
+		          </page>
 		        </xpath>
 		        <field name="description" position="replace">
 		            <group colspan="2" col="2" string="Product Description" >
