@@ -188,6 +188,17 @@ class AvaTaxService:
         # And we're ready to make the call
         result = self.get_result(self.taxSvc, self.taxSvc.service.GetTax, request)
         return result
+    
+    def get_tax_history(self, company_code, doc_code, doc_type):
+        request = self.taxSvc.factory.create('GetTaxHistoryRequest')
+        request.DetailLevel = 'Document'
+        request.CompanyCode = company_code
+        request.DocCode = doc_code
+        request.DocType = doc_type
+#        request.CancelCode = cancel_code
+        result = self.get_result(self.taxSvc, self.taxSvc.service.GetTaxHistory, request)
+        return result
+        
 
     def cancel_tax(self, company_code, doc_code, doc_type, cancel_code):
         request = self.taxSvc.factory.create('CancelTaxRequest')

@@ -97,6 +97,11 @@ class account_tax(osv.osv):
                                   avatax_config.service_url, avatax_config.request_timeout,
                                   avatax_config.logging)
          avalara_obj.create_tax_service()
+         try:
+             result = avalara_obj.get_tax_history(avatax_config.company_code, doc_code, doc_type)
+         except:
+             return True
+        
          result = avalara_obj.cancel_tax(avatax_config.company_code, doc_code, doc_type, cancel_code)
          return result
 
