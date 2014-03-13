@@ -61,8 +61,7 @@ class do_tracking_add(osv.osv):
         return res	
         
     def del_tracking_num(self, cr, uid, idstring, no, context=None):
-        """  set delivery order id in the tracking number db table records on create
-        """
+    
         context={}
         context['uid']=1
         uid = 1
@@ -73,6 +72,7 @@ class do_tracking_add(osv.osv):
         tracking_nos = self.pool.get('delivery.tracking.numbers')
         ids = tracking_nos.search(cr, uid, [('delivery_id', 'in', pid), ('tracking_no', '=', no)], context=context)
         
+        res={}
         for tracking_obj in tracking_nos.browse(cr,uid,ids,context=context):
             res = tracking_obj.unlink()
         
