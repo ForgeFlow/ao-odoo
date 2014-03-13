@@ -140,7 +140,7 @@ class AvaTaxService:
         request.DetailLevel = 'Diagnostic'
 #        request.DetailLevel = 'Document'
         request.Discount = 0.0
-        request.ServiceMode = 'Automatic' 
+        request.ServiceMode = 'Automatic'   ##service mode = Automatic/Local/Remote
         request.PaymentDate = doc_date
         request.ExchangeRate = 45
         request.ExchangeRateEffDate = '2011-07-07'

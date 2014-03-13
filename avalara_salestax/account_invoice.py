@@ -291,7 +291,7 @@ class account_invoice(osv.osv):
                                                    invoice.internal_number, not invoice.invoice_doc_no and 'SalesInvoice' or 'ReturnInvoice',
                                                    invoice.partner_id, invoice.company_id.partner_id.id,
                                                    shipping_add_id, lines1, invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None, 
-                                                   True, invoice.invoice_date,
+                                                   True, invoice.date_invoice,
                                                    invoice.invoice_doc_no, invoice.location_code or '', context=context)
             
         self.write(cr, uid, ids, {'state':'paid'}, context=context)
@@ -377,7 +377,7 @@ class account_invoice(osv.osv):
                                                    invoice.internal_number, not invoice.invoice_doc_no and 'SalesInvoice' or 'ReturnInvoice',
                                                    invoice.partner_id, invoice.company_id.partner_id.id,
                                                    shipping_add_id, lines1, invoice.user_id, invoice.exemption_code or None, invoice.exemption_code_id.code or None,
-                                                   False, invoice.invoice_date,
+                                                   False, invoice.date_invoice,
                                                    invoice.invoice_doc_no, invoice.location_code or '', context=context)
             else:
                 for o_line in invoice.invoice_line:

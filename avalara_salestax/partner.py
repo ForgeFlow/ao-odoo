@@ -55,8 +55,9 @@ class res_partner(osv.osv):
 
         if avatax_config.address_validation:
             raise osv.except_osv(_('Avatax: Address Validation is Disabled'), _("The AvaTax Address Validation Service is disabled by the administrator. Please make sure it's enabled for the address validation"))
-        if country_id and country_id not in [x.id for x in avatax_config.country_ids]:
-            raise osv.except_osv(_('Avatax: Address Validation not Supported for this country'), _("The AvaTax Address Validation Service does not support this country in the configuration, please continue with your normal process."))
+        if country_id and country_id not in [x.id for x in avatax_config.country_ids] or not country_id:
+            return False
+#            raise osv.except_osv(_('Avatax: Address Validation not Supported for this country'), _("The AvaTax Address Validation Service does not support this country in the configuration, please continue with your normal process."))
         return True
     
     
@@ -173,27 +174,27 @@ class res_partner(osv.osv):
                 if avatax_config and avatax_config.validation_on_save:
                     brw_address = address_obj.read(cr, uid, ids[0], ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'], context=context)
                     address['country_id'] = 'country_id' in vals and vals['country_id'] or brw_address.get('country_id') and brw_address['country_id'][0]
-                    self.check_avatax_support(cr, uid, avatax_config, address['country_id'], context=context)
-                    if from_write:
-                        address['street'] = 'street' in vals and vals['street'] or ''
-                        address['street2'] = 'street2' in vals and vals['street2'] or ''
-                        address['city'] = 'city' in vals and vals['city'] or ''
-                        address['zip'] = 'zip' in vals and vals['zip'] or ''
-                        address['state_id'] = 'state_id' in vals and vals['state_id'] or brw_address.get('state_id') and brw_address['state_id'][0] or False
-                    valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
-                    vals.update({
-                        'street': valid_address.Line1,
-                        'street2': valid_address.Line2,
-                        'city': valid_address.City,
-                        'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
-                        'zip': valid_address.PostalCode,
-                        'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
-                        'latitude': valid_address.Latitude,
-                        'longitude': valid_address.Longitude,
-                        'date_validation': time.strftime('%Y-%m-%d'),
-                        'validation_method': 'avatax',
-                        'validated_on_save': True
-                    })
+                    if self.check_avatax_support(cr, uid, avatax_config, address['country_id'], context=context):
+                        if from_write:
+                            address['street'] = 'street' in vals and vals['street'] or ''
+                            address['street2'] = 'street2' in vals and vals['street2'] or ''
+                            address['city'] = 'city' in vals and vals['city'] or ''
+                            address['zip'] = 'zip' in vals and vals['zip'] or ''
+                            address['state_id'] = 'state_id' in vals and vals['state_id'] or brw_address.get('state_id') and brw_address['state_id'][0] or False
+                        valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
+                        vals.update({
+                            'street': valid_address.Line1,
+                            'street2': valid_address.Line2,
+                            'city': valid_address.City,
+                            'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
+                            'zip': valid_address.PostalCode,
+                            'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
+                            'latitude': valid_address.Latitude,
+                            'longitude': valid_address.Longitude,
+                            'date_validation': time.strftime('%Y-%m-%d'),
+                            'validation_method': 'avatax',
+                            'validated_on_save': True
+                        })
         return vals
 
     def create(self, cr, uid, vals, context=None):
@@ -217,31 +218,38 @@ class res_partner(osv.osv):
                 
                 #It will work when user want to validate address at customer creation, check option in avalara api form
                 if avatax_config and avatax_config.validation_on_save:
-                    self.check_avatax_support(cr, uid, avatax_config, address.get('country_id'), context=context)
+                    if self.check_avatax_support(cr, uid, avatax_config, address.get('country_id'), context=context):
+                        fields_to_read = filter(lambda x: x not in vals, ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'])
+                        address = fields_to_read and address_obj.read(cr, uid, ids, fields_to_read, context=context)[0] or {}
+                        address['state_id'] = address.get('state_id') and address['state_id'][0]
+                        address['country_id'] = address.get('country_id') and address['country_id'][0]
+                        address.update(vals)
     
-                    fields_to_read = filter(lambda x: x not in vals, ['street', 'street2', 'city', 'state_id', 'zip', 'country_id'])
-                    address = fields_to_read and address_obj.read(cr, uid, ids, fields_to_read, context=context)[0] or {}
-                    address['state_id'] = address.get('state_id') and address['state_id'][0]
-                    address['country_id'] = address.get('country_id') and address['country_id'][0]
-                    address.update(vals)
-
-                    valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
-                    vals.update({
-                        'street': valid_address.Line1,
-                        'street2': valid_address.Line2,
-                        'city': valid_address.City,
-                        'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
-                        'zip': valid_address.PostalCode,
-                        'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
-                        'latitude': valid_address.Latitude,
-                        'longitude': valid_address.Longitude,
-                        'date_validation': time.strftime('%Y-%m-%d'),
-                        'validation_method': 'avatax',
-                        'validated_on_save': True
-                    })
+                        valid_address = self._validate_address(cr, uid, address, avatax_config, context=context)
+                        vals.update({
+                            'street': valid_address.Line1,
+                            'street2': valid_address.Line2,
+                            'city': valid_address.City,
+                            'state_id': self.get_state_id(cr, uid, valid_address.Region, valid_address.Country, context=context),
+                            'zip': valid_address.PostalCode,
+                            'country_id': self.get_country_id(cr, uid, valid_address.Country, context=context),
+                            'latitude': valid_address.Latitude,
+                            'longitude': valid_address.Longitude,
+                            'date_validation': time.strftime('%Y-%m-%d'),
+                            'validation_method': 'avatax',
+                            'validated_on_save': True
+                        })
         return super(res_partner, self).create(cr, uid, vals, context)
 
     def write(self, cr, uid, ids, vals, context=None):
+        vals.update({
+            'latitude': '',
+            'longitude': '',
+            'date_validation': False,
+            'validation_method': '',
+            'validated_on_save': False,
+        })
+
         if context is None:
             context = {}
 

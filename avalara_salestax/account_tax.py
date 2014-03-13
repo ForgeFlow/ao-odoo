@@ -41,7 +41,6 @@ class account_tax(osv.osv):
                           lines, user=None, exemption_number=None, exemption_code_name=None, commit=False, invoice_date=False, reference_code=False, location_code=False, context=None):
         address_obj = self.pool.get('res.partner')
         currency_code = self._get_currency(cr, uid, context)
-        
         if not partner.customer_code:
             raise osv.except_osv(_('Avatax: Warning !'), _('Customer Code for customer %s not define'% (partner.name)))
         

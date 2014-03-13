@@ -56,6 +56,7 @@ class sale_order(osv.osv):
                 vals['exemption_code_id'] = res_obj.exemption_code_id and res_obj.exemption_code_id.id or False
             vals['tax_add_id'] = vals['partner_id']
             if res_obj.validation_method:vals['is_add_validate'] = True
+            
             ship_add_id = False
             if 'tax_add_default' in vals and vals['tax_add_default']:
                 ship_add_id = vals['partner_id']
@@ -63,9 +64,9 @@ class sale_order(osv.osv):
                 ship_add_id = vals['partner_invoice_id']
             if 'tax_add_shipping' in vals and vals['tax_add_shipping']:
                 ship_add_id = vals['partner_shipping_id']
-            if ship_add_id:
-                addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id, context=context)
-                vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+                
+            addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id or vals['partner_id'])
+            vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
         return super(sale_order, self).create(cr, uid, vals, context=context)
 #    
     def write(self, cr, uid, ids, vals, context=None):
@@ -74,12 +75,16 @@ class sale_order(osv.osv):
             if 'tax_add_default' in vals and vals['tax_add_default']:
                 ship_add_id = self_obj.partner_id.id
             if 'tax_add_invoice' in vals and vals['tax_add_invoice']:
-                ship_add_id = self_obj.partner_invoice_id.id
+                ship_add_id = self_obj.partner_invoice_id and self_obj.partner_invoice_id.id or self_obj.partner_id.id
             if 'tax_add_shipping' in vals and vals['tax_add_shipping']:
-                ship_add_id = self_obj.partner_shipping_id.id
-            if ship_add_id:    
-                addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id, context=context)
-                vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))
+                ship_add_id = self_obj.partner_shipping_id and self_obj.partner_shipping_id.id or self_obj.partner_id.id
+            if 'partner_id' in vals:
+                addr = self.pool.get('res.partner').address_get(cr, uid, [vals['partner_id']], ['delivery', 'invoice', 'contact'])
+                ship_add_id = addr['delivery'] or vals['partner_id']
+        if ship_add_id:
+            addr = self.pool.get('res.partner').browse(cr, uid, ship_add_id, context=context)
+            vals['tax_address'] = str(addr.name+ '\n'+(addr.street or '')+ '\n'+(addr.city and addr.city+', ' or ' ')+(addr.state_id and addr.state_id.name or '')+ ' '+(addr.zip or '')+'\n'+(addr.country_id and addr.country_id.name or ''))   
+                
                  
         if 'partner_id' in vals:
             res_obj = self.pool.get('res.partner').browse(cr, uid, vals['partner_id'], context=context)
@@ -348,7 +353,7 @@ class sale_order(osv.osv):
     def action_wait(self, cr, uid, ids, context=None):
         res = super(sale_order, self).action_wait(cr, uid, ids, context=context)
         self.compute_tax(cr, uid, ids, context=context)
-        return True
+        return res
 
 sale_order()
 
