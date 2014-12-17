@@ -16,7 +16,7 @@
         <function model="ir.values" name="set_default">
             <value>crm.helpdesk</value>
             <value>helpdesk_reply_to</value>
-            <value>shop@lulzbot.com</value>
+            <value>support@lulzbot.com</value>
         </function>
         
         <function model="ir.values" name="set_default">

@@ -30,7 +30,7 @@ class ursa_helpdesk(osv.osv):
 	}
     
     _defaults = {
-        'reply_to': lambda *a: 'shop@lulzbot.com',
+        'reply_to': lambda *a: 'support@lulzbot.com',
     }
  
     def message_update(self, cr, uid, ids, msg, update_vals=None, context=None):
