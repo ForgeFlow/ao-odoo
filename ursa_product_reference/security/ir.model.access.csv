@@ -1,3 +1,0 @@
-id,name,model_id/id,active,perm_read,perm_write,perm_create,perm_unlink,group_id/id
-ursa_product_reference.whmanager,ursa_product_reference.whmanager,ursa_product_reference.model_product_class,TRUE,TRUE,TRUE,TRUE,TRUE,stock.group_stock_manager
-ursa_product_reference.whuser,ursa_product_reference.whuser,ursa_product_reference.model_product_class,TRUE,TRUE,TRUE,TRUE,FALSE,stock.group_stock_user
