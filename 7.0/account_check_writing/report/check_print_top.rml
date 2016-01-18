@@ -148,7 +148,7 @@
                 <para style="P12">[[ page['partner'] ]]</para>
               </td>
               <td>
-                <para style="P13">[[ 'chk_amount' in page and formatLang(page['chk_amount']) or 'VOID' ]]</para>
+                <para style="P13">[[ 'chk_amount' in page and formatLang(page['chk_amount'], digits=2) or 'VOID' ]]</para>
               </td>
             </tr>
           </blockTable>
