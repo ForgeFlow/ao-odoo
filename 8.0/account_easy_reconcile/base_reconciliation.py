@@ -231,7 +231,7 @@ class EasyReconcileBase(models.AbstractModel):
             if self.analytic_account_id:
                 rec_ctx['analytic_id'] = self.analytic_account_id.id
             line_rs = ml_obj.browse(line_ids)
-            line_rs.with_context(rec_ctx).reconcile(
+            line_rs.with_context(rec_ctx).reconcile_partial(
                 type='manual',
                 writeoff_acc_id=writeoff_account_id,
                 writeoff_period_id=period_id.id,
