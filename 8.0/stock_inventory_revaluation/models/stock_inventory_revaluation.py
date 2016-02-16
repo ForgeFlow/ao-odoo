@@ -323,16 +323,8 @@ class StockInventoryRevaluationLine(models.Model):
 
             if self.revaluation_id.revaluation_type == 'price_change':
                 diff = self.current_cost - self.new_cost
-                if not diff:
-                    raise UserError(_("No difference between standard price "
-                                      "and new price for product %s."
-                                      % self.product_template_id.name))
             else:
                 diff = self.current_value - self.new_value
-                if not diff:
-                    raise UserError(_("No difference between current and new "
-                                      "valuation for product %s."
-                                      % self.product_template_id.name))
                 if self.new_value < 0:
                     raise UserError(_("The new value for product %s cannot be "
                                       "negative"
