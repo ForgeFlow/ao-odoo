@@ -355,7 +355,7 @@ class StockInventoryRevaluationLine(models.Model):
                     self.current_value - self.new_value / self.qty_available
                 self.product_template_id.write({'standard_price': new_cost})
 
-            if self.product_id.product_tmpl_id.valuation == 'real_time':
+            if self.product_template_id.valuation == 'real_time':
                 self._create_accounting_entry(amount_diff)
 
 
