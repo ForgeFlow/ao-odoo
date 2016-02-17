@@ -19,41 +19,43 @@
 #
 ##############################################################################
 
-from openerp import models, tools, fields, api, _
-import openerp.pooler
+from openerp import api, fields, models, registry, tools
 
 
 class DecimalPrecision(models.Model):
     _inherit = 'decimal.precision'
 
-    display_digits =  fields.Integer(string = 'Display Digits', required=True, default = 2)
+    display_digits = fields.Integer('Display Digits', required=True, default=2)
 
     @tools.ormcache(skiparg=3)
-    def display_precision_get(self, application):
+    def display_precision_get(self, cr, uid, application):
         cr.execute('select display_digits from decimal_precision where name=%s', (application,))
         res = cr.fetchone()
         return res[0] if res else 2
-    
+
     @api.model
+    @api.returns('self', lambda value: value.id)
     def create(self, vals):
-        res = super(DecimalPrecision, self).create(vals)
+        record = super(DecimalPrecision, self).create(vals)
         self.display_precision_get.clear_cache(self)
-        return res
-    
+        return record
+
     @api.multi
     def write(self, vals):
-        res = super(DecimalPrecision, self).write(vals)
+        result = super(DecimalPrecision, self).write(vals)
         self.display_precision_get.clear_cache(self)
-        return res
-    
+        return result
+
     @api.multi
     def unlink(self):
-        res = super(DecimalPrecision, self).unlink()
+        result = super(DecimalPrecision, self).unlink()
         self.display_precision_get.clear_cache(self)
-        return res
+        return result
 
     @staticmethod
-    def get_display_precision(cr, application):
-        res = pooler.get_pool(cr.dbname).get('decimal.precision').display_precision_get(application)
-        return (16, res)
-    
+    def get_display_precision(cr, uid, application):
+        res = 2
+        dp_obj = registry(cr.dbname)['decimal.precision']
+        if hasattr(dp_obj, 'display_precision_get'):
+            res = dp_obj.display_precision_get(cr, uid, application)
+        return 16, res

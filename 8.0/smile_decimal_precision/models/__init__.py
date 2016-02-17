@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import models
-import report
+from decimal_precision import DecimalPrecision
+import fields

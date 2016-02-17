@@ -19,19 +19,27 @@
 #
 ##############################################################################
 
-from openerp import models, tools, fields, api, _
-from openerp.addons.smile_decimal_precision import DecimalPrecision as dp
- 
- 
-# native_field_to_dict = fields.field_to_dict
-#  
-# @api.model
-# def new_field_to_dict(model, field ):
-#     res = native_field_to_dict(model, field)
-#     if getattr(field, 'digits_compute', None) and field.digits_compute.func_closure:
-#         application = field.digits_compute.func_closure[0].cell_contents
-#         res['digits'] = dp.get_display_precision(cr, user, application)
-#     return res
-#  
-#  
-# fields.field_to_dict = new_field_to_dict
+from openerp.osv.fields import float as float_field, function as function_field
+from openerp.report.report_sxw import rml_parse
+
+
+def get_digits(self, obj=None, f=None, dp=None):
+    d = DEFAULT_DIGITS = 2
+    if dp:
+        decimal_precision_obj = self.pool.get('decimal.precision')
+        ids = decimal_precision_obj.search(self.cr, self.uid, [('name', '=', dp)])
+        if ids:
+            d = decimal_precision_obj.browse(self.cr, self.uid, ids)[0].display_digits
+    elif obj and f:
+        res_digits = getattr(obj._columns[f], 'digits', lambda x: 16, DEFAULT_DIGITS)
+        if isinstance(res_digits, tuple):
+            d = res_digits[1]
+        else:
+            d = res_digits(self.cr)[1]
+    elif (hasattr(obj, '_field') and
+            isinstance(obj._field, (float_field, function_field)) and
+            obj._field.digits):
+        d = obj._field.digits[1] or DEFAULT_DIGITS
+    return d
+
+rml_parse.get_digits = get_digits
