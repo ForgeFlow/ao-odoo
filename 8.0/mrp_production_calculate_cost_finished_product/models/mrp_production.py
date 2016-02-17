@@ -17,11 +17,12 @@ class MrpProduction(models.Model):
             for produce_product in production.move_created_ids:
                 if produce_product.product_id.id == production.product_id.id:
                     main_production_move = produce_product
-            total_cost = 0.0
+
+            total_value = 0.0
             for move in production.move_lines:
                 for quant in move.reserved_quant_ids:
-                    total_cost += quant.cost
-            unit_cost = total_cost / production.product_qty
+                    total_value += quant.cost * quant.qty
+            unit_cost = total_value / production.product_qty
             if main_production_move:
                 main_production_move.write({'price_unit': unit_cost})
         return super(MrpProduction, self).action_produce(
