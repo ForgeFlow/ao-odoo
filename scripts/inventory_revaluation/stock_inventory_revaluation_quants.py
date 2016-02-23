@@ -52,42 +52,32 @@ with open('transform_files/product.stockable.latest.price.csv') \
         as extracted_csv:
     reader = csv.DictReader(extracted_csv)
 
-    sir_lines = []
-
-    sir_data = {
-        'journal_id': False,
-        'revaluation_type': 'price_change',
-        'line_ids': sir_lines
-    }
-    sir_id = sock.execute(dbname, uid, pwd, 'stock.inventory.revaluation',
-                          'create', sir_data)
-    print sir_id
-
     for row in reader:
         product_id = int(row['product_id'])
         if not product_id in product_quants.keys():
             continue
-        sir_line_data = {
+        sir_data = {
+            'journal_id': False,
+            'revaluation_type': 'price_change',
             'decrease_account_id': account_id,
             'increase_account_id': account_id,
-            'product_template_id': int(row['product_tmpl_id']),
-            'revaluation_id': sir_id
+            'product_template_id': int(row['product_tmpl_id'])
         }
-        sir_line_id = sock.execute(dbname, uid, pwd,
-                                   'stock.inventory.revaluation.line',
-                                   'create', sir_line_data)
-        print 'Line %s' % sir_line_id
+        sir_id = sock.execute(dbname, uid, pwd,
+                                   'stock.inventory.revaluation',
+                                   'create', sir_data)
+        print 'Revaluation %s' % sir_id
 
         for quant_id in product_quants[product_id]:
-            quant_line_data = {
-                'line_id': sir_line_id,
+            reval_quant_data = {
+                'revaluation_id': sir_id,
                 'quant_id': quant_id,
                 'new_cost': row['standard_price']
             }
-            sir_quant_line_id = sock.execute(
-                dbname, uid, pwd, 'stock.inventory.revaluation.line.quant',
-                'create', quant_line_data)
-            print 'Line %s - Quant %s' % (sir_line_id, sir_quant_line_id)
+            sir_reval_quant_id = sock.execute(
+                dbname, uid, pwd, 'stock.inventory.revaluation.quant',
+                'create', reval_quant_data)
+            print 'Revaluation %s - Quant %s' % (sir_id, sir_reval_quant_id)
         
     extracted_csv.close()
 

@@ -37,26 +37,18 @@ with open('transform_files/product.stockable.latest.price.csv') \
 
     sir_lines = []
 
-    sir_data = {
-        'journal_id': False,
-        'revaluation_type': 'price_change',
-        'line_ids': sir_lines
-    }
-    sir_id = sock.execute(dbname, uid, pwd, 'stock.inventory.revaluation',
-                          'create', sir_data)
-    print sir_id
-
     for row in reader:
-        sir_line_data = {
+        sir_data = {
+            'journal_id': False,
+            'revaluation_type': 'price_change',
             'decrease_account_id': account_id,
             'increase_account_id': account_id,
             'new_cost': 0.0,
             'product_template_id': int(row['product_tmpl_id']),
-            'revaluation_id': sir_id
         }
         sir_line_id = sock.execute(dbname, uid, pwd,
-                                   'stock.inventory.revaluation.line',
-                                   'create', sir_line_data)
+                                   'stock.inventory.revaluation',
+                                   'create', sir_data)
         print sir_line_id
 
     extracted_csv.close()

@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 # © 2015 Eficent Business and IT Consulting Services S.L. <contact@eficent.com>
+"""
+Description
+-----------
+This script resets the cost of the internal quants to 0
+
+Dependencies
+------------
+None
+
+"""
 
 import csv
 import xmlrpclib
