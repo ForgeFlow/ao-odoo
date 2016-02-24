@@ -20,6 +20,12 @@ uid = sock_common.login(dbname, username, pwd)
 # replace localhost with the address of the server
 sock = xmlrpclib.ServerProxy(server_xmlrpc_object)
 
+# Journal
+args = [('name', '=', 'General Journal')]
+journal_ids = sock.execute(dbname, uid, pwd, 'account.journal', 'search', args)
+if not journal_ids:
+    raise Exception('No Journal found with name General Journal')
+journal_id = journal_ids[0]
 
 # Inventory valuation account
 prod = {}
@@ -39,7 +45,7 @@ with open('transform_files/product.stockable.latest.price.csv') \
 
     for row in reader:
         sir_data = {
-            'journal_id': False,
+            'journal_id': journal_id,
             'revaluation_type': 'price_change',
             'decrease_account_id': account_id,
             'increase_account_id': account_id,

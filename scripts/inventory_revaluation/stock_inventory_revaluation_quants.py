@@ -31,6 +31,13 @@ if not account_ids:
 
 account_id = account_ids[0]
 
+# Journal
+args = [('name', '=', 'General Journal')]
+journal_ids = sock.execute(dbname, uid, pwd, 'account.journal', 'search', args)
+if not journal_ids:
+    raise Exception('No Journal found with name General Journal')
+journal_id = journal_ids[0]
+
 # Internal locations
 args = [('usage', '=', 'internal')]
 location_ids = sock.execute(dbname, uid, pwd, 'stock.location', 'search', args)
@@ -57,7 +64,7 @@ with open('transform_files/product.stockable.latest.price.csv') \
         if not product_id in product_quants.keys():
             continue
         sir_data = {
-            'journal_id': False,
+            'journal_id': journal_id,
             'revaluation_type': 'price_change',
             'decrease_account_id': account_id,
             'increase_account_id': account_id,

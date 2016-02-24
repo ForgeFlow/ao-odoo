@@ -35,16 +35,21 @@ args = [('type', '=', 'consu'),
 product_ids = sock.execute(dbname, uid, pwd, 'product.template', 'search',
                            args)
 
-# Select ir.property records
-args = [('name', '=', 'cost method'),
-        ('res_id', 'in', ['product.template,%s' % product_id for product_id
-                          in product_ids])]
-
-ir_property_ids = sock.execute(dbname, uid, pwd, 'ir.property', 'search',
-                           args)
-
-
-sock.execute(dbname, uid, pwd, 'ir.property', 'write',
-             product_ids, {'value_text': 'manual_periodic'})
+sock.execute(dbname, uid, pwd, 'product.template', 'write',
+             product_ids, {'valuation': 'manual_periodic',
+                           'type': 'consu'})
 
 print '%s Consumables reclassified to periodic valuation' % len(product_ids)
+
+if product_ids:
+    # Identify consumable products that have real-time inventory valuation
+    args = [('type', '=', 'consu'),
+            ('valuation', '=', 'real_time')]
+    updated_product_ids = sock.execute(dbname, uid, pwd, 'product.template',
+                                       'search', args)
+
+    if updated_product_ids:
+        raise Exception('Still consumables exist with real time valuation')
+    else:
+        print 'All consumables reclassified successfully to periodical ' \
+              'inventory valuation'
