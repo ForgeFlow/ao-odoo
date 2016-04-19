@@ -19,11 +19,13 @@
 #
 ##############################################################################
 
-import amount_to_text_en
-import res_company
-import account
-import account_voucher
-import wizard
-import report
+from openerp import models, fields
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+class res_company(models.Model):
+    _inherit = 'res.company'
+
+    credit_section = fields.Boolean(string='Display Credits Separately', help="Invoices and credits will be displayed in their respective section on the check stubs.")
+    suppress_unpaid = fields.Boolean(string='Suppress Unpaid Items', help="Do not print unpaid items on the check stubs.")
+    multi_stub = fields.Boolean(string='Multi-Pages Check Stub', help="This option allows you to print check details (stub) on multiple pages.")
+

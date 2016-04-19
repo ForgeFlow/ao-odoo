@@ -71,7 +71,8 @@ class report_print_check(report_sxw.rml_parse):
         Wrapper function for special case where customisation may require
         getting check number elsewhere in child parser
         '''
-        return voucher.journal_id.use_preprint_check and '' or voucher.check_number
+        return voucher.journal_id.use_preprint_check and '' \
+               or voucher.check_number
 
     def _prepare_first_page(self, voucher, stars):
         '''
@@ -80,7 +81,8 @@ class report_print_check(report_sxw.rml_parse):
         return {
             'chk_amount': voucher.amount,
             'amount_words': voucher.amount_in_word and
-                voucher.amount_in_word.ljust(stars, '*') or ''.ljust(stars, '*')
+            voucher.amount_in_word.ljust(stars, '*') or
+            ''.ljust(stars, '*')
         }
 
     def get_vouchers(self, objects, n=N, stars=STARS):
@@ -163,7 +165,7 @@ class report_print_check(report_sxw.rml_parse):
 report_sxw.report_sxw(
      'report.account.print.check.top',
      'account.voucher',
-     'addons/account_check_writing/report/check_print_top.rml',
+     'addons/ao_account_check_writing/report/check_print_top.rml',
      parser=report_print_check,
      header=False
 )
@@ -171,7 +173,7 @@ report_sxw.report_sxw(
 report_sxw.report_sxw(
     'report.account.print.check.middle',
     'account.voucher',
-    'addons/account_check_writing/report/check_print_middle.rml',
+    'addons/ao_account_check_writing/report/check_print_middle.rml',
     parser=report_print_check,
     header=False
 )
@@ -179,7 +181,7 @@ report_sxw.report_sxw(
 report_sxw.report_sxw(
     'report.account.print.check.bottom',
     'account.voucher',
-    'addons/account_check_writing/report/check_print_bottom.rml',
+    'addons/ao_account_check_writing/report/check_print_bottom.rml',
     parser=report_print_check,
     header=False
 )
