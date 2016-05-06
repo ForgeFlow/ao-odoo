@@ -21,17 +21,16 @@
 
 from openerp import models, fields, api, _
 
-class ursa_leads(models.Model):
+
+class UrsaLeads(models.Model):
     _inherit = 'crm.lead'
 
-    reply_to = fields.Char(string = 'Reply-To', invisible=True, readonly=True, help="Reply", default = 'sales@lulzbot.com')
+    reply_to = fields.Char(string='Reply-To', invisible=True,
+                           readonly=True, help="Reply",
+                           default='sales@lulzbot.com')
     
     @api.multi
     def message_get_reply_to(self,):
         ir_values = self.env['ir.values']
-        leademail = ir_values.get_default( 'crm', 'lead_reply_to')
+        leademail = ir_values.get_default('crm', 'lead_reply_to')
         return [leademail]
-        
-        #lead_ins  = self.browse(cr, uid, ids, context=context)[0]
-        #return [lead_ins.reply_to]
-    

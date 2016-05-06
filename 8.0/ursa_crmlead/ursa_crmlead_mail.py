@@ -21,26 +21,16 @@
 
 from openerp import models, fields, api, _
 
-class ursa_leads_mail(models.Model):
+
+class UrsaLeadsMail(models.Model):
     _inherit = 'mail.mail'
 
-    #def create(self, cr, uid, values, context=None):
-
-    #    ir_values = self.pool.get('ir.values')
-        
-    #    replacefrom = ir_values.get_default(cr, uid, 'crm', 'replace_leads_email_from')
-    #    leademail = ir_values.get_default(cr, uid, 'crm', 'lead_reply_to')
-        
-    #    if replacefrom:
-    #        values['email_from'] = 'Sales<'+leademail+'>'  
-    
-    #    return super(ursa_leads_mail, self).create(cr, uid, values, context)
-    
     @api.model
-    def send_get_email_dict(mail, partner=None):
+    def send_get_email_dict(self, mail, partner=None):
         ir_values = self.env['ir.values']
         replacefrom = ir_values.get_default('crm', 'replace_leads_email_from')
         leademail = ir_values.get_default('crm', 'lead_reply_to')
         if replacefrom and 'helpdesk' not in mail.model:
             mail.email_from = 'Sales<'+leademail+'>'  
-        return  super(ursa_leads_mail, self).send_get_email_dict(mail, partner=partner)
+        return super(UrsaLeadsMail, self).send_get_email_dict(mail,
+                                                              partner=partner)
