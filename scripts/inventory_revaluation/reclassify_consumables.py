@@ -30,26 +30,25 @@ uid = sock_common.login(dbname, username, pwd)
 sock = xmlrpclib.ServerProxy(server_xmlrpc_object)
 
 # Identify consumable products that have real-time inventory valuation
-args = [('type', '=', 'consu'),
-        ('valuation', '=', 'real_time')]
+args = [('type', '=', 'consu')]
 product_ids = sock.execute(dbname, uid, pwd, 'product.template', 'search',
                            args)
 
 sock.execute(dbname, uid, pwd, 'product.template', 'write',
-             product_ids, {'valuation': 'manual_periodic',
-                           'type': 'consu'})
+             product_ids, {'valuation': 'real_time',
+                           'type': 'product'})
 
-print '%s Consumables reclassified to periodic valuation' % len(product_ids)
+print '%s Consumables reclassified to stockables with real time inventory ' \
+      'valuation' % len(product_ids)
 
 if product_ids:
     # Identify consumable products that have real-time inventory valuation
-    args = [('type', '=', 'consu'),
-            ('valuation', '=', 'real_time')]
+    args = [('type', '=', 'consu')]
     updated_product_ids = sock.execute(dbname, uid, pwd, 'product.template',
                                        'search', args)
 
     if updated_product_ids:
-        raise Exception('Still consumables exist with real time valuation')
+        raise Exception('Still consumables exist.')
     else:
-        print 'All consumables reclassified successfully to periodical ' \
-              'inventory valuation'
+        print 'All consumables reclassified successfully stockable with ' \
+              'real time inventory valuation'
