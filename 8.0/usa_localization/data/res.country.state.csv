@@ -1,0 +1,7 @@
+"id","country_id:id","name","code"
+state_us_100,base.us,"American Samoa","AS"
+state_us_101,base.us,"Guam","GU"
+state_us_102,base.us,"Northern Mariana Islands","MP"
+state_us_103,base.us,"Puerto Rico","PR"	 
+state_us_104,base.us,"United States Minor Outlying Islands","UM"
+state_us_105,base.us,"U.S. Virgin Islands","VI"
