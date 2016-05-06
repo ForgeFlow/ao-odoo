@@ -21,28 +21,25 @@
 
 from openerp import models, fields, api, _
 
-class ursa_helpdesk(models.Model):
+
+class UrsaHelpdesk(models.Model):
     _inherit = 'crm.helpdesk'
 
-    reply_to = fields.Char(string = 'Reply-To', invisible=True, readonly=True, help="Reply", default = 'sales@lulzbot.com')
+    reply_to = fields.Char(string='Reply-To', invisible=True,
+                           readonly=True, help="Reply",
+                           default='sales@lulzbot.com')
     
     @api.model 
     def message_update(self, msg, update_vals=None):
         for ticket in self:
             if ticket.state == 'done':
-                self.write({'state':'open'})
-        return super(ursa_helpdesk,self).message_update(msg, update_vals=update_vals, context=context)
+                self.write({'state': 'open'})
+        return super(UrsaHelpdesk, self).message_update(
+            msg, update_vals=update_vals)
 
     @api.multi
     def message_get_reply_to(self):
         ir_values = self.pool.get('ir.values')
-        helpdeskemail = ir_values.get_default('crm.helpdesk', 'helpdesk_reply_to')
+        helpdeskemail = ir_values.get_default(
+            'crm.helpdesk', 'helpdesk_reply_to')
         return [helpdeskemail]
-        
-        #helpdesk_ins  = self.browse(cr, uid, ids, context=context)[0]
-        #return [helpdesk_ins.reply_to]
-    
-ursa_helpdesk()
-    
-
-
