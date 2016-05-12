@@ -128,3 +128,12 @@ class res_partner(models.Model):
             raise Warning(_('Invalid UPC Code Number'))
         
     _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'), ('ean13', 'UNIQUE(ean13)','Cannot have duplicate EAN Code')]
+
+
+class ProductTemplate(models.Model):
+
+    _inherit = 'product.template'
+
+    # related to display product product information if is_product_variant
+    upc = fields.Char(related='product_variant_ids.upc', readonly=True,
+                      help='Barcode number for UPC')
