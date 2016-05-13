@@ -24,7 +24,7 @@ import time
 from operator import itemgetter
 from openerp.report import report_sxw
 
-N = 9
+N = 6
 STARS = 70
 
 
