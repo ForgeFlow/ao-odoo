@@ -60,13 +60,6 @@ class sale_order(models.Model):
             Before delivery: A draft invoice is created from the sales order and must be paid before the products can be delivered.""")
 
     @api.model
-    def _prepare_order_line_procurement(self, order, line, group_id=False):
-        location_id = order.partner_shipping_id.property_stock_customer.id
-        res = super(sale_order, self)._prepare_order_line_procurement(order, line, group_id=group_id)
-        res['location_id'] = (line.location_src_id and line.location_src_id.id) or location_id
-        return res
-
-    @api.model
     def _make_invoice(self, order, lines):    
         inv_id = super(sale_order, self)._make_invoice(order, lines)
         # check to see if the invoice must be auto-progressed to proforma state
@@ -81,8 +74,3 @@ class sale_order(models.Model):
                 invoice = invoice_obj.browse([inv_id])[0]
                 invoice.write({'state': 'proforma2'})
         return inv_id
-
-class sale_order_line(models.Model):
-    _inherit = "sale.order.line"
-
-    location_src_id = fields.Many2one('stock.location', string='Source Location', help="Location from where the system will deliver the finished products.", select=True)
