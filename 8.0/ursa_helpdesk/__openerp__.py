@@ -32,7 +32,7 @@ This allows a standard reply-to address to be set when chatter is used to respon
 
     """,
     'website': 'http://www.ursainfosystems.com',
-    "depends" : ["crm_helpdesk","fetchmail"],
+    "depends" : ["mail", "crm_helpdesk","fetchmail"],
     'data': ['ursa_helpdesk.xml'],
     'demo': [],
     'installable': True,

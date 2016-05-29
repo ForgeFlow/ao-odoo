@@ -37,9 +37,19 @@ class UrsaHelpdesk(models.Model):
         return super(UrsaHelpdesk, self).message_update(
             msg, update_vals=update_vals)
 
-    @api.multi
-    def message_get_reply_to(self):
-        ir_values = self.pool.get('ir.values')
-        helpdeskemail = ir_values.get_default(
-            'crm.helpdesk', 'helpdesk_reply_to')
-        return [helpdeskemail]
+
+class MailThread(models.AbstractModel):
+    _inherit = 'mail.thread'
+
+    @api.cr_uid_context
+    def message_get_reply_to(self, cr, uid, ids, default=None, context=None):
+        model_name = context.get('thread_model') or self._name
+        if model_name == 'crm.helpdesk':
+            ir_values = self.pool.get('ir.values')
+            helpdeskemail = ir_values.get_default(cr, uid, 'crm.helpdesk',
+                                                  'helpdesk_reply_to')
+            res = dict.fromkeys(ids, helpdeskemail)
+            return res
+        else:
+            return super(MailThread, self).message_get_reply_to(
+                cr, uid, ids, default=default, context=context)

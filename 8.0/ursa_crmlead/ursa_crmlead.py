@@ -28,9 +28,21 @@ class UrsaLeads(models.Model):
     reply_to = fields.Char(string='Reply-To', invisible=True,
                            readonly=True, help="Reply",
                            default='sales@lulzbot.com')
-    
-    @api.multi
-    def message_get_reply_to(self,):
-        ir_values = self.env['ir.values']
-        leademail = ir_values.get_default('crm', 'lead_reply_to')
-        return [leademail]
+
+
+class MailThread(models.AbstractModel):
+    _inherit = 'mail.thread'
+
+    @api.cr_uid_context
+    def message_get_reply_to(self, cr, uid, ids, default=None, context=None):
+        model_name = context.get('thread_model') or self._name
+        if model_name == 'crm.lead':
+            ir_values = self.pool.get('ir.values')
+            lead_reply_to = ir_values.get_default(cr, uid, 'crm',
+                                                  'lead_reply_to')
+            res = dict.fromkeys(ids, lead_reply_to)
+            return res
+        else:
+            super(MailThread, self).message_get_reply_to(cr, uid, ids,
+                                                         default=default,
+                                                         context=context)
