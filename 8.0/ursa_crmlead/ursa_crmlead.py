@@ -43,6 +43,5 @@ class MailThread(models.AbstractModel):
             res = dict.fromkeys(ids, lead_reply_to)
             return res
         else:
-            super(MailThread, self).message_get_reply_to(cr, uid, ids,
-                                                         default=default,
-                                                         context=context)
+            return super(MailThread, self).message_get_reply_to(
+                cr, uid, ids, default=default, context=context)
