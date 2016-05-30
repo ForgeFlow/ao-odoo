@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+
+    <template id="ao_login_rename.login" inherit_id="web.login"
+              name="Login window">
+      <xpath expr="//label[@for='login']" position="replace">
+        <label for="login" class="control-label">Username</label>
+      </xpath>
+    </template>
+
+  </data>
+</openerp>
