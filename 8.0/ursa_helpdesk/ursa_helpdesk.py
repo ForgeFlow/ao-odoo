@@ -28,8 +28,8 @@ class UrsaHelpdesk(models.Model):
     reply_to = fields.Char(string='Reply-To', invisible=True,
                            readonly=True, help="Reply",
                            default='sales@lulzbot.com')
-    
-    @api.model 
+
+    @api.multi
     def message_update(self, msg, update_vals=None):
         for ticket in self:
             if ticket.state == 'done':
