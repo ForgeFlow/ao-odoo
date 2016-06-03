@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
-# - Jordi Ballester Alomar
+# © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
@@ -12,7 +11,10 @@
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
     "category": "Purchase Management",
-    "depends": ["purchase"],
+    "depends": [
+        "purchase",
+        "purchase_delivery_split_date"
+    ],
     "license": "AGPL-3",
     "data": [
         "views/purchase_view.xml"
