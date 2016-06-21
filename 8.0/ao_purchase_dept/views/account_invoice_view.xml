@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="invoice_supplier_form">
+        <field name="name">invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page[@string='Invoice']/field[@name='invoice_line']/tree/field[@name='account_id']" position="after">
+                <field name="dept" groups="base.group_user" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</openerp>
