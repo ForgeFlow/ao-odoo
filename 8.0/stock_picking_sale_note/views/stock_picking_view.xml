@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="note" position="after">
+                    <field name="sale_order_origin" invisible="True"/>
+                    <div attrs="{'invisible': [('sale_order_origin','=',False)]}">
+                        <label for="sale_note"/>
+                        <div>
+                            <field name="sale_note"/>
+                        </div>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
