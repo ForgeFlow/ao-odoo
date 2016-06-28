@@ -11,22 +11,24 @@ class StockPicking(models.Model):
     @api.multi
     @api.depends('origin')
     def _compute_sale_order_origin(self):
-        if self.origin:
-            sale_obj = self.env['sale.order']
-            sale = sale_obj.search([('name', '=', self.origin)],
-                                   limit=1)
-            if sale:
-                self.sale_order_origin = True
+        for picking in self:
+            if picking.origin:
+                sale_obj = self.env['sale.order']
+                sale = sale_obj.search([('name', '=', picking.origin)],
+                                       limit=1)
+                if sale:
+                    picking.sale_order_origin = True
 
     @api.multi
     @api.depends('origin')
     def _compute_sale_note(self):
-        if self.origin:
-            sale_obj = self.env['sale.order']
-            sale = sale_obj.search([('name', '=', self.origin)],
-                                   limit=1)
-            if sale:
-                self.sale_note = sale.note
+        for picking in self:
+            if picking.origin:
+                sale_obj = self.env['sale.order']
+                sale = sale_obj.search([('name', '=', picking.origin)],
+                                       limit=1)
+                if sale:
+                    picking.sale_note = sale.note
 
     sale_order_origin = fields.Boolean(
         string='Has sales order',
