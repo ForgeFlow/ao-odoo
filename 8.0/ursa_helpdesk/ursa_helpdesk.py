@@ -33,7 +33,7 @@ class UrsaHelpdesk(models.Model):
     def message_update(self, msg, update_vals=None):
         for ticket in self:
             if ticket.state == 'done':
-                self.write({'state': 'open'})
+                self.sudo().write({'state': 'open'})
         return super(UrsaHelpdesk, self).message_update(
             msg, update_vals=update_vals)
 
