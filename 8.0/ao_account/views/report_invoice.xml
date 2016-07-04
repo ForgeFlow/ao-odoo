@@ -12,6 +12,14 @@
                 </tr>
             </div>
         </xpath>
+
+        <xpath expr="//div[@t-if='o.partner_id.ref']" position="attributes">
+            <attribute name="invisible">True</attribute>
+        </xpath>
+        <xpath expr="//div[@t-if='o.reference']" position="attributes">
+            <attribute name="invisible">True</attribute>
+        </xpath>
+
     </template>
 
 </data>
