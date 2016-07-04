@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="timesheet_user_rule" model="ir.rule">
+            <field name="name">Employee Timesheet</field>
+            <field name="model_id" search="[('model','=','hr_timesheet_sheet.sheet')]" model="ir.model"/>
+            <field name="domain_force">['|', '|',
+                ('employee_id.user_id','=', user.id),
+                ('employee_id.parent_id.user_id','=', user.id),
+                ('department_id.manager_id.user_id', '=', user.id)]</field>
+            <field eval="False" name="global"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="timesheet_hr_user_rule" model="ir.rule">
+            <field name="name">Employee Timesheet - HR</field>
+            <field name="model_id" search="[('model','=','hr_timesheet_sheet.sheet')]" model="ir.model"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field eval="False" name="global"/>
+            <field name="groups" eval="[(4, ref('base.group_hr_user'))]"/>
+        </record>
+
+    </data>
+</openerp>
