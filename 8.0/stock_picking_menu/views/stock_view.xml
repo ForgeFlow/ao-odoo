@@ -11,19 +11,6 @@
                     <field name="picking_type_id"/>
                     <field name="location_id"/>
                 </field>
-                <tree colors="blue:state == 'draft';grey:state == 'cancel';red:state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list">
-                    <field name="name"/>
-                    <field name="location_dest_id"/>
-                    <field name="partner_id"/>
-                    <field name="date"/>
-                    <field name="min_date" invisible="1"/>
-                    <field name="origin"/>
-                    <field name="group_id" invisible="1"/>
-                    <field name="backorder_id"/>
-                    <field name="state"/>
-                    <field name="priority" invisible="1"/>
-                    <field name="picking_type_id" invisible="1"/>
-                </tree>
             </field>
         </record>
 
@@ -41,6 +28,7 @@
             </field>
             <field name="search_view_id"
                    ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
         </record>
 
         <record id="action_outgoing_picking_tree_all"
@@ -57,6 +45,7 @@
             </field>
             <field name="search_view_id"
                    ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
         </record>
 
         <record id="action_internal_picking_tree_all"
@@ -74,6 +63,7 @@
             </field>
             <field name="search_view_id"
                    ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
         </record>
 
         <menuitem id="menu_stock_incoming_pickings" name="Receptions"
