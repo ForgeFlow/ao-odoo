@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="vpicktree" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="location_dest_id" position="before">
+                    <field name="picking_type_id"/>
+                    <field name="location_id"/>
+                </field>
+                <tree colors="blue:state == 'draft';grey:state == 'cancel';red:state not in ('cancel', 'done') and min_date &lt; current_date" string="Picking list">
+                    <field name="name"/>
+                    <field name="location_dest_id"/>
+                    <field name="partner_id"/>
+                    <field name="date"/>
+                    <field name="min_date" invisible="1"/>
+                    <field name="origin"/>
+                    <field name="group_id" invisible="1"/>
+                    <field name="backorder_id"/>
+                    <field name="state"/>
+                    <field name="priority" invisible="1"/>
+                    <field name="picking_type_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_incoming_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Supplier pickings</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'incoming')]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_outgoing_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Customer pickings</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'outgoing')]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <record id="action_internal_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Internal pickings</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'internal')
+                ]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+        </record>
+
+        <menuitem id="menu_stock_incoming_pickings" name="Supplier Pickings"
+                  action="action_incoming_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+        <menuitem id="menu_stock_outgoing_pickings" name="Customer Pickings"
+                  action="action_outgoing_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+        <menuitem id="menu_stock_internal_pickings" name="Internal Pickings"
+                  action="action_internal_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+
+    </data>
+</openerp>
