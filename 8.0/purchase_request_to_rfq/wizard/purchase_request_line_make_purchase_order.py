@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import api, fields, models, _, exceptions
 import openerp.addons.decimal_precision as dp
+from openerp import _, api, exceptions, fields, models
 
 
 class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
@@ -46,7 +46,6 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             'name': line.name or line.product_id.name,
             'product_qty': line.product_qty,
             'product_uom_id': line.product_uom_id.id,
-            'analytic_account_id': line.analytic_account_id.id,
         }
 
     @api.model
@@ -64,7 +63,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
 
         items = []
         for line in request_line_obj.browse(request_line_ids):
-                items.append([0, 0, self._prepare_item(line)])
+            items.append([0, 0, self._prepare_item(line)])
         res['item_ids'] = items
         return res
 
@@ -112,6 +111,9 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             'account_analytic_id': item.line_id.analytic_account_id.id,
             'taxes_id': [(6, 0, vals.get('taxes_id', []))],
             'purchase_request_lines': [(4, item.line_id.id)],
+            'date_planned':
+                vals.get('date_planned', False) or item.line_id.date_required,
+
         })
         if item.line_id.procurement_id:
             vals['procurement_ids'] = [(4, item.line_id.procurement_id.id)]
@@ -131,8 +133,9 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             order_line_data.append(('name', '=', item.name))
         if not item.line_id.procurement_id and \
                 item.line_id.procurement_id.location_id:
-            order_line_data['location_id'] = \
-                item.line_id.procurement_id.location_id.id
+            order_line_data.append(
+                ('location_id', '=',
+                 item.line_id.procurement_id.location_id.id))
         return order_line_data
 
     @api.multi
@@ -207,9 +210,9 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                 new_qty, new_price = pr_line_obj._calc_new_qty_price(
                     line, po_line=po_line)
                 if new_qty > po_line.product_qty:
-                        po_line.product_qty = new_qty
-                        po_line.price_unit = new_price
-                        po_line.purchase_request_lines = [(4, line.id)]
+                    po_line.product_qty = new_qty
+                    po_line.price_unit = new_price
+                    po_line.purchase_request_lines = [(4, line.id)]
             else:
                 po_line_data = self._prepare_purchase_order_line(purchase,
                                                                  item)
