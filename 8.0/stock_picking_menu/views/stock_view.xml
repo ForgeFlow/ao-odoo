@@ -76,14 +76,15 @@
                    ref="stock.view_picking_internal_search"/>
         </record>
 
-        <menuitem id="menu_stock_incoming_pickings" name="Supplier Pickings"
+        <menuitem id="menu_stock_incoming_pickings" name="All Receptions"
                   action="action_incoming_picking_tree_all"
                   parent="stock.menu_stock_warehouse_mgmt"/>
-        <menuitem id="menu_stock_outgoing_pickings" name="Customer Pickings"
-                  action="action_outgoing_picking_tree_all"
-                  parent="stock.menu_stock_warehouse_mgmt"/>
-        <menuitem id="menu_stock_internal_pickings" name="Internal Pickings"
+        <menuitem id="menu_stock_internal_pickings"
+                  name="All Internal Transfers"
                   action="action_internal_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+        <menuitem id="menu_stock_outgoing_pickings" name="All Delivery Orders"
+                  action="action_outgoing_picking_tree_all"
                   parent="stock.menu_stock_warehouse_mgmt"/>
 
     </data>
