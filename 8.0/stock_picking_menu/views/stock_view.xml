@@ -16,7 +16,7 @@
 
         <record id="action_incoming_picking_tree_all"
                 model="ir.actions.act_window">
-            <field name="name">Supplier pickings</field>
+            <field name="name">Receptions</field>
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
@@ -33,7 +33,7 @@
 
         <record id="action_outgoing_picking_tree_all"
                 model="ir.actions.act_window">
-            <field name="name">Customer pickings</field>
+            <field name="name">Delivery Orders</field>
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
@@ -50,7 +50,7 @@
 
         <record id="action_internal_picking_tree_all"
                 model="ir.actions.act_window">
-            <field name="name">Internal pickings</field>
+            <field name="name">Internal Transfers</field>
             <field name="res_model">stock.picking</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_type">form</field>
