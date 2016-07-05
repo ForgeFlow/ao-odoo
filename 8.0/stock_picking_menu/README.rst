@@ -8,9 +8,9 @@ Stock Picking Menu
 
 This module adds new menu entries in the Warehouse menu:
 
-* Supplier Pickings
-* Customer Pickings
-* Internal Pickings
+* Receptions
+* Internal Transfers
+* Delivery Orders
 
 
 Credits
