@@ -43,12 +43,8 @@ class AccountMoveLine(models.Model):
         comodel_name='account.invoice', compute='_compute_invoice',
         string='Invoice', store=True)
     maturity_residual = fields.Float(
-        compute='_maturity_residual', string="Residual Amount", store=True,
+        compute='_maturity_residual', string="Residual Amount",
         help="The residual amount on a receivable or payable of a journal "
-             "entry expressed in the company currency.")
-    due_amount = fields.Float(
-        compute='_compute_due_amount', string="Due Amount",
-        help="The due amount on a receivable or payable of a journal "
              "entry expressed in the company currency.")
     day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
     days_overdue = fields.Integer(compute='_compute_days_overdue',
@@ -56,24 +52,8 @@ class AccountMoveLine(models.Model):
                                   string='Days overdue')
 
     @api.multi
-    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
-                 'reconcile_partial_id', 'account_id.reconcile',
-                 'amount_currency', 'reconcile_partial_id.line_partial_ids',
-                 'currency_id', 'company_id.currency_id')
+    @api.depends('date_maturity', 'debit', 'credit')
     def _maturity_residual(self):
-        """
-            inspired by amount_residual
-        """
-        for move_line in self:
-            sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
-            move_line.maturity_residual = move_line.amount_residual * sign
-
-    @api.multi
-    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
-                 'reconcile_partial_id', 'account_id.reconcile',
-                 'amount_currency', 'reconcile_partial_id.line_partial_ids',
-                 'currency_id', 'company_id.currency_id')
-    def _compute_due_amount(self):
         """
             inspired by amount_residual
         """
