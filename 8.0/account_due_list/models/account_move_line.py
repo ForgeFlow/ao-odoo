@@ -101,7 +101,7 @@ class AccountMoveLine(models.Model):
     def _compute_days_overdue(self):
         today_date = fields.Date.from_string(fields.Date.today())
         for line in self:
-            if line.date_maturity:
+            if line.date_maturity and line.amount_residual:
                 date_maturity = fields.Date.from_string(
                     line.date_maturity)
                 days_overdue = (today_date - date_maturity).days
