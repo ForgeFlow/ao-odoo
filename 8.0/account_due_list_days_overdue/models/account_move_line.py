@@ -57,6 +57,12 @@ class AccountMoveLine(models.Model):
         today_date = fields.Date.from_string(fields.Date.today())
         company = self.env.user.company_id
         for line in self:
+            line.overdue_term_1 = 0.0
+            line.overdue_term_2 = 0.0
+            line.overdue_term_3 = 0.0
+            line.overdue_term_4 = 0.0
+            line.overdue_term_5 = 0.0
+
             if line.date_maturity and line.amount_residual:
                 date_maturity = fields.Date.from_string(
                     line.date_maturity)
@@ -64,6 +70,7 @@ class AccountMoveLine(models.Model):
                 t2 = company.overdue_term_2
                 t3 = company.overdue_term_3
                 t4 = company.overdue_term_4
+
 
                 days_overdue = (today_date - date_maturity).days
 
