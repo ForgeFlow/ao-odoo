@@ -13,12 +13,28 @@
             </div>
         </xpath>
 
+        <xpath expr="//div[@t-if='o.name']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
+        <xpath expr="//div[@t-if='o.date_invoice']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
+        <xpath expr="//div[@t-if='o.origin']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
         <xpath expr="//div[@t-if='o.partner_id.ref']" position="attributes">
             <attribute name="invisible">True</attribute>
         </xpath>
         <xpath expr="//div[@t-if='o.reference']" position="attributes">
             <attribute name="invisible">True</attribute>
         </xpath>
+        <xpath expr="//div[@t-if='o.reference']" position="after">
+            <div class="col-xs-5">
+                <strong>Payment Terms:</strong>
+                <p t-field="o.payment_term and o.payment_term.name"/>
+            </div>
+        </xpath>
+
 
     </template>
 
