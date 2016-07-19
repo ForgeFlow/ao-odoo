@@ -8,7 +8,7 @@
             <div t-if="o.type == 'out_invoice'">
                 <tr>
                     <td>All Payments to be made in US Dollars.<br/></td>
-                    <td>$25.00 Wire Fee Charge added to all International Wire Transactions.<br/></td>
+                    <td>$25.00 Wire Fee Charge added to all Domestic &amp; International Wire Transactions.<br/></td>
                 </tr>
             </div>
         </xpath>
