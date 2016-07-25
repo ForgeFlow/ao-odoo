@@ -82,7 +82,8 @@ class AccountMoveLine(models.Model):
                             'string': overdue_term.name,
                             'readonly': True,
                             'context': {},
-                            'type': 'float'
+                            'type': 'float',
+                            'sum': 'Total'
                         }
                     })
                 result['arch'] = etree.tostring(doc)
