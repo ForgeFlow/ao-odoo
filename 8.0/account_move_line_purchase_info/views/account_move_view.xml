@@ -9,7 +9,9 @@
             <field name="inherit_id" ref="account.view_move_line_form"/>
             <field name="arch" type="xml">
                 <field name="quantity" position="before">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" 
+                           groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </field>
             </field>
         </record>
@@ -20,7 +22,8 @@
             <field name="inherit_id" ref="account.view_move_line_form2"/>
             <field name="arch" type="xml">
                 <field name="quantity" position="before">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </field>
             </field>
         </record>
@@ -31,7 +34,8 @@
             <field name="inherit_id" ref="account.view_move_line_tree"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </field>
             </field>
         </record>
@@ -42,7 +46,8 @@
             <field name="inherit_id" ref="account.view_account_move_line_filter"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </field>
             </field>
         </record>
@@ -52,7 +57,8 @@
             <field name="inherit_id" ref="account.view_move_line_tree_reconcile"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </field>
             </field>
         </record>
@@ -64,11 +70,13 @@
             <field name="arch" type="xml">
                 <xpath
                         expr="//field[@name='line_id']/form//field[@name='quantity']" position="before">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </xpath>
                 <xpath
                         expr="//field[@name='line_id']/tree//field[@name='partner_id']" position="after">
-                    <field name="purchase_line_id"/>
+                    <field name="purchase_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
+                    <field name="purchase_line_id" groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
                 </xpath>
             </field>
         </record>

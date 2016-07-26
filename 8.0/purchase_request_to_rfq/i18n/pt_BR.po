@@ -1,19 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* purchase_request_to_rfq
-#
+# * purchase_request_to_rfq
+# 
+# Translators:
+# Paulo Ricardo <ti@shoppingescritorio.com.br>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-15 15:20+0000\n"
-"PO-Revision-Date: 2016-07-15 15:20+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-07-01 10:08+0000\n"
+"PO-Revision-Date: 2016-07-01 10:08+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: purchase_request_to_rfq
 #: code:addons/purchase_request_to_rfq/models/purchase_order.py:24
@@ -45,7 +49,7 @@ msgstr ""
 #. module: purchase_request_to_rfq
 #: view:purchase.request.line.make.purchase.order:purchase_request_to_rfq.view_purchase_request_line_make_purchase_order
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: purchase_request_to_rfq
 #: selection:purchase.request.line,purchase_state:0
@@ -60,20 +64,20 @@ msgstr ""
 #. module: purchase_request_to_rfq
 #: model:ir.actions.act_window,name:purchase_request_to_rfq.action_purchase_request_line_make_purchase_order
 #: view:purchase.request.line.make.purchase.order:purchase_request_to_rfq.view_purchase_request_line_make_purchase_order
-msgid "Create RFQ"
+msgid "Create Purchase Order"
 msgstr ""
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,create_uid:0
 #: field:purchase.request.line.make.purchase.order.item,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,create_date:0
 #: field:purchase.request.line.make.purchase.order.item,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order.item,name:0
@@ -89,7 +93,7 @@ msgstr ""
 #: field:purchase.request.line.make.purchase.order,display_name:0
 #: field:purchase.request.line.make.purchase.order.item,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nome"
 
 #. module: purchase_request_to_rfq
 #: selection:purchase.request.line,purchase_state:0
@@ -110,7 +114,7 @@ msgstr ""
 
 #. module: purchase_request_to_rfq
 #: view:purchase.request.line.make.purchase.order:purchase_request_to_rfq.view_purchase_request_line_make_purchase_order
-msgid "Existing RFQ to update:"
+msgid "Existing draft PO to update:"
 msgstr ""
 
 #. module: purchase_request_to_rfq
@@ -122,7 +126,7 @@ msgstr ""
 #: field:purchase.request.line.make.purchase.order,id:0
 #: field:purchase.request.line.make.purchase.order.item,id:0
 msgid "ID"
-msgstr ""
+msgstr "Identificação"
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,item_ids:0
@@ -133,19 +137,19 @@ msgstr ""
 #: field:purchase.request.line.make.purchase.order,__last_update:0
 #: field:purchase.request.line.make.purchase.order.item,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação em"
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,write_uid:0
 #: field:purchase.request.line.make.purchase.order.item,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Atualização por"
 
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,write_date:0
 #: field:purchase.request.line.make.purchase.order.item,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Atualização em"
 
 #. module: purchase_request_to_rfq
 #: view:purchase.request.line.make.purchase.order:purchase_request_to_rfq.view_purchase_request_line_make_purchase_order
@@ -176,7 +180,7 @@ msgstr ""
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order.item,product_id:0
 msgid "Product"
-msgstr ""
+msgstr "Produto"
 
 #. module: purchase_request_to_rfq
 #: view:purchase.request.line:purchase_request_to_rfq.purchase_request_line_search
@@ -192,12 +196,12 @@ msgstr ""
 #: model:ir.model,name:purchase_request_to_rfq.model_purchase_order
 #: field:purchase.request.line.make.purchase.order,purchase_order_id:0
 msgid "Purchase Order"
-msgstr ""
+msgstr "Ordem de Compra"
 
 #. module: purchase_request_to_rfq
 #: model:ir.model,name:purchase_request_to_rfq.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr ""
+msgstr "Linha da Ordem de Compra"
 
 #. module: purchase_request_to_rfq
 #: view:purchase.request:purchase_request_to_rfq.view_purchase_request_form
@@ -255,6 +259,12 @@ msgid "Purchase Status"
 msgstr ""
 
 #. module: purchase_request_to_rfq
+#: code:addons/purchase_request_to_rfq/wizard/purchase_request_line_make_purchase_order.py:224
+#, python-format
+msgid "Purchase order"
+msgstr ""
+
+#. module: purchase_request_to_rfq
 #: view:purchase.request.line:purchase_request_to_rfq.purchase_request_line_search
 msgid "Purchasing not started"
 msgstr ""
@@ -270,9 +280,7 @@ msgid "Quantity to purchase"
 msgstr ""
 
 #. module: purchase_request_to_rfq
-#: code:addons/purchase_request_to_rfq/wizard/purchase_request_line_make_purchase_order.py:224
 #: selection:purchase.request.line,purchase_state:0
-#, python-format
 msgid "RFQ"
 msgstr ""
 
@@ -295,18 +303,22 @@ msgstr ""
 #. module: purchase_request_to_rfq
 #: field:purchase.request.line.make.purchase.order,supplier_id:0
 msgid "Supplier"
-msgstr ""
+msgstr "Fornecedor"
 
 #. module: purchase_request_to_rfq
 #: code:addons/purchase_request_to_rfq/models/purchase_order.py:19
 #, python-format
-msgid "The following requested items from Purchase Request %s have now been confirmed in Purchase Order %s:"
+msgid ""
+"The following requested items from Purchase Request %s have now been "
+"confirmed in Purchase Order %s:"
 msgstr ""
 
 #. module: purchase_request_to_rfq
 #: code:addons/purchase_request_to_rfq/models/stock.py:20
 #, python-format
-msgid "The following requested items from Purchase Request %s have now been received in Incoming Shipment %s:"
+msgid ""
+"The following requested items from Purchase Request %s have now been "
+"received in Incoming Shipment %s:"
 msgstr ""
 
 #. module: purchase_request_to_rfq
@@ -354,4 +366,3 @@ msgstr ""
 #, python-format
 msgid "You have to select lines from the same procurement location."
 msgstr ""
-

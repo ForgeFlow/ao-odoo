@@ -13,6 +13,7 @@
     "depends": ["account", "purchase"],
     "license": "AGPL-3",
     "data": [
+        "security/account_security.xml",
         "views/account_move_view.xml",
         "views/account_invoice_view.xml",
     ],

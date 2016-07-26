@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2014 Eficent (<http://www.eficent.com/>)
-#              <contact@eficent.com>
+#    OpenERP, Open Source Management Solution
+#    Copyright (c) 2010-2011 Elico Corp. All Rights Reserved.
+#    Author: Ian Li <ian.li@elico-corp.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,25 +21,20 @@
 ##############################################################################
 
 {
-    "name": "Purchase Request to RFQ",
-    "author": "Eficent,"
-              "Odoo Community Association (OCA)",
-    "version": "8.0.1.0.0",
-    "contributors": [
-        'Jordi Ballester Alomar',
+    'name': 'Account Invoice Merge Wizard',
+    'version': '8.0.1.1.1',
+    'category': 'Finance',
+    'author': "Elico Corp,Odoo Community Association (OCA)",
+    'website': 'http://www.openerp.net.cn',
+    'license': 'AGPL-3',
+    'depends': ['account'],
+    'data': [
+        'wizard/invoice_merge_view.xml',
     ],
-    "website": "www.eficent.com",
-    "category": "Purchase Management",
-    "depends": [
-        "purchase_request",
-        "purchase"],
-    "data": [
-        "security/ir.model.access.csv",
-        "wizard/purchase_request_line_make_purchase_order_view.xml",
-        "views/purchase_request_view.xml",
-        "views/purchase_order_view.xml",
+    'test': [
     ],
     'demo': [],
-    "license": 'AGPL-3',
-    "installable": True
+    'installable': True,
+    'active': False,
+    'certificate': False,
 }

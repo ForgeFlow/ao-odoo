@@ -6,14 +6,10 @@
 Stock Account Purchase Line
 ===========================
 
-This module will add the purchase order line to invoice lines and to account
+This module adds the purchase order line to invoice lines and to account
  move lines. The ultimate goal is to establish the purchase order line as
  one of the key fields to reconcile the Goods Received Not Invoiced accrual
  account.
-
-
-Usage
-=====
 
 The purchase order line will be automatically copied to invoice lines and
 account move lines.
@@ -26,6 +22,14 @@ the stock move to the invoice, and to the account move line upon validation.
 
 * When a stock move is validated and generates an account move, the PO line
 is copied to the account move line.
+
+Usage
+=====
+
+In order to display the purchase links in journal entries and journal items
+the users should be assigned to the group "Purchase info in account moves".
+
+
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
