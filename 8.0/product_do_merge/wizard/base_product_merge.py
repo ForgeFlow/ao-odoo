@@ -54,10 +54,10 @@ class MergeProductLine(models.TransientModel):
 class MergeProductAutomatic(models.TransientModel):
     _name = 'base.product.merge.automatic.wizard'
 
-    group_by_name_template = fields.Boolean('Nombre')
-    group_by_default_code = fields.Boolean('Referencia')
-    group_by_categ_id = fields.Boolean('Categoria')
-    group_by_uom_id = fields.Boolean('Unidad de medida')
+    group_by_name_template = fields.Boolean('Name')
+    group_by_default_code = fields.Boolean('Reference')
+    group_by_categ_id = fields.Boolean('Category')
+    group_by_uom_id = fields.Boolean('Unit of Measure')
     state = fields.Selection([('option', 'Option'),
                               ('selection', 'Selection'),
                               ('finished', 'Finished')],
@@ -78,11 +78,11 @@ class MergeProductAutomatic(models.TransientModel):
     line_ids = fields.One2many('base.product.merge.line',
                                'wizard_id', 'Lines')
     dst_product_id = fields.Many2one('product.product',
-                                     string='Destination Contact')
+                                     string='Destination Product')
     product_ids = fields.Many2many(
         'product.product', 'product_rel', 'product_merge_id',
         'product_id', string="Products to merge")
-    maximum_group = fields.Integer("Maximum of Group of Contacts")
+    maximum_group = fields.Integer("Maximum of Group of Products")
 
     def get_fk_on(self, cr, table, tables=None):
         tables = tables and tuple(tables) or []
