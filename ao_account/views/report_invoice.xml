@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+        <template id="report_invoice_document"
+                  inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@t-if='o.fiscal_position.note']" position="after">
+            <div t-if="o.type == 'out_invoice'">
+                <tr>
+                    <td>All Payments to be made in US Dollars.<br/></td>
+                    <td>$25.00 Wire Fee Charge added to all Domestic &amp; International Wire Transactions.<br/></td>
+                </tr>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@t-if='o.name']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
+        <xpath expr="//div[@t-if='o.date_invoice']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
+        <xpath expr="//div[@t-if='o.origin']" position="attributes">
+            <attribute name="t-if"/>
+        </xpath>
+        <xpath expr="//div[@t-if='o.partner_id.ref']" position="replace"/>
+        <xpath expr="//div[@t-if='o.reference']" position="after">
+            <div class="col-xs-5">
+                <strong>Payment Terms:</strong>
+                <p t-field="o.payment_term and o.payment_term.name"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-if='o.reference']" position="replace"/>
+
+
+
+    </template>
+
+</data>
+</openerp>
