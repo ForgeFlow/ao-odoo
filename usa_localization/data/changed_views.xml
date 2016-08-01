@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="ursa_view_company_form" model="ir.ui.view">
+            <field name="name">res.company.form.ursa</field>
+            <field name="model">res.company</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+           	    <field name="city" position="attributes">
+                    <attribute name="style">width: 40%%</attribute>
+                </field>
+                <field name="state_id" position="attributes">
+                    <attribute name="style">width: 24%%</attribute>
+                </field>
+                <field name="zip" position="attributes">
+                    <attribute name="style">width: 20%%</attribute>
+                </field>
+            </field>
+</record>
+
+<record id="ursa_res_partner_kanban" model="ir.ui.view">
+            <field name="name">res.partner.kanban.ursa</field>
+            <field name="model">res.partner</field>
+            <field name="type">kanban</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+    <div class="oe_kanban_details" position="replace">
+    <h4 class="oe_partner_heading"><a type="open"><field name="name"/></a></h4>
+    <div class="oe_kanban_partner_categories"/>
+    <div class="oe_kanban_partner_links"/>
+    <ul>
+    <li t-if="record.is_company == TRUE">MAIN COMPANY RECORD</li>
+    <li t-if="record.parent_id.raw_value and !record.function.raw_value"><field name="parent_id"/> (<field name="type"/>)</li>
+    <li t-if="!record.parent_id.raw_value and record.function.raw_value"><field name="function"/></li>
+    <li t-if="record.parent_id.raw_value and record.function.raw_value"><field name="function"/> at <field name="parent_id"/></li>
+    <li t-if="record.city.raw_value and !record.state_id.raw_value"><field name="city"/></li>
+    <li t-if="!record.city.raw_value and record.state_id.raw_value"><field name="state_id"/></li>
+    <li t-if="record.city.raw_value and record.state_id.raw_value"><field name="city"/>, <field name="state_id"/></li>
+    <li t-if="record.phone.raw_value">Tel: <field name="phone"/></li>
+    <li t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></li>
+    <li t-if="record.email.raw_value"><a t-attf-href="mailto:#{record.email.raw_value}"><field name="email"/></a></li>
+    </ul>
+            </div >
+            </field>
+</record>
+
+</data>
+</openerp>
