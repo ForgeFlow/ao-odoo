@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--
+            check format option in company
+        -->
+
+        <record id="check_format_company" model="ir.ui.view">
+            <field name="name">res.company.check.format</field>
+            <field name="model">res.company</field>
+            <field name="priority">17</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='account_grp']" position="after">
+                    <group name="write_check" string="Checks">
+                        <field name="check_layout"/>
+                        <field name="multi_stub"/>
+                        <field name="credit_section" />
+                        <field name="suppress_unpaid" />
+                    </group>
+                </xpath>
+            </field>
+       </record>
+       
+    </data>
+</openerp>
