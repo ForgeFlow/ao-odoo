@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="vpicktree" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="location_dest_id" position="before">
+                    <field name="picking_type_id"/>
+                    <field name="location_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="action_incoming_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Receptions</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'incoming')]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
+        </record>
+
+        <record id="action_outgoing_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Delivery Orders</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'outgoing')]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
+        </record>
+
+        <record id="action_internal_picking_tree_all"
+                model="ir.actions.act_window">
+            <field name="name">Internal Transfers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('picking_type_id.code', '=', 'internal')
+                ]</field>
+            <field name="context">{
+                    'contact_display': 'partner_address',
+            }
+            </field>
+            <field name="search_view_id"
+                   ref="stock.view_picking_internal_search"/>
+            <field name="view_id" ref="vpicktree"/>
+        </record>
+
+        <menuitem id="menu_stock_incoming_pickings" name="Receptions"
+                  action="action_incoming_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+        <menuitem id="menu_stock_internal_pickings"
+                  name="Internal Transfers"
+                  action="action_internal_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+        <menuitem id="menu_stock_outgoing_pickings" name="Delivery Orders"
+                  action="action_outgoing_picking_tree_all"
+                  parent="stock.menu_stock_warehouse_mgmt"/>
+
+    </data>
+</openerp>

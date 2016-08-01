@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> <openerp>
+<data noupdate="1">
+
+        <record id="group_relax_credit_limit" model="res.groups">
+            <field name="name">Relax Customer Credit Limit</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="comment">Members of this group can confirm orders that take Customers over their Credit Limit, or check a box on the Accounting tab of a Customer record to ignore credit limit checking for all future orders. </field> 
+        </record>
+
+</data>
+</openerp>

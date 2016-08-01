@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_account_check_write" model="ir.ui.view">
+            <field name="name">account.check.form</field>
+            <field name="model">account.check.write</field>
+            <field name="arch" type="xml">
+                <form string="Check" version="7.0">
+                    <group colspan="4" col="4">
+                        <field name="check_number" colspan="4"/>
+                        <field name="force_number" colspan="4"/>
+                        <field name="force_overwrite" colspan="4"/>
+                    </group>
+                    <footer>
+                        <button name="print_check_write" string="Print Check(s)" type="object" class="oe_highlight"/> or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_account_check_write" model="ir.actions.act_window">
+            <field name="name">Print Check(s) in Batch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.check.write</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_account_check_write"/>
+            <field name="context">{"print_single":True}</field>
+            <field name="target">new</field>
+        </record>
+
+        <act_window id="action_account_check_write"
+                    name="Print Check(s) in Batch"
+                    res_model="account.check.write" 
+                    src_model="account.voucher"
+                    view_mode="form" 
+                    target="new" 
+                    view_type="form" 
+                    key2="client_print_multi"/> 
+
+    </data>
+</openerp>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    <record id="base.user_root" model="res.users" >
+        <field name="name">Administrator</field>
+        <field name="partner_id" ref="base.partner_root"/>
+        <field name="in_group_6" eval="True"/>
+    </record>
+        
+    <record id="base.lang_en" model="res.lang">
+        <field name="name">English</field>
+        <field name="code">en_US</field>
+        <field name="grouping">[3,3,3]</field>
+        <field name="time_format">%I:%M %p</field>
+    </record>
+        
+    <record id="base.main_company" model="res.company">
+        <field name="currency_id" ref="base.USD"/>
+        <field name="paper_format">us_letter</field>
+    </record>
+    
+        
+    </data>
+</openerp>    

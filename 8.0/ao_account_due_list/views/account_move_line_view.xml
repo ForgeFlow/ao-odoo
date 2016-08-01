@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payments_tree" model="ir.ui.view">
+            <field name="name">Payments</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="partner_ref" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="payment_term_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="account_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="debit" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="credit" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="move_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="reconcile_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+                <field name="reconcile_partial_id" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payments_filter" model="ir.ui.view">
+            <field name="name">Payments Select</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_filter"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <search position="inside">
+                    <filter string="Overdue 1-30 days"
+                            domain="[('days_overdue','>',0), ('days_overdue','&lt;',31)]"/>
+                    <filter string="Overdue 31-60 days"
+                            domain="[('days_overdue','>',30), ('days_overdue','&lt;',61)]"/>
+                    <filter string="Overdue 61-90 days"
+                            domain="[('days_overdue','>',60), ('days_overdue','&lt;',91)]"/>
+                    <filter string="Overdue 91-120 days"
+                            domain="[('days_overdue','>',90), ('days_overdue','&lt;',121)]"/>
+                    <filter string="Overdue + 121 days"
+                            domain="[('days_overdue','>',120)]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>

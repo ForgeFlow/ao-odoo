@@ -1,0 +1,14 @@
+<templates>
+    <!-- Templates modified at the web start, before loading of a database. -->
+
+    <!-- Remove the Manage database link, but keep the Powered by OpenERP-->
+    <t t-extend="Login">
+		<t t-jquery="div.oe_login_logo" t-operation="replace">
+			<div class="oe_login_logo">
+				<img src='/ursa_web_style/static/src/img/clogo.png'/>
+			</div>
+		</t>
+		<!--<t t-jquery="div.oe_login_footer" t-operation="replace"></t>-->
+    </t>
+
+</templates>

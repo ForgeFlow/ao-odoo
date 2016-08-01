@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--
+        AvaTax API Configuration in OpenERP
+        -->
+
+        <record id="view_avalara_salestax_form" model="ir.ui.view">
+            <field name="name">avalara.salestax.form</field>
+            <field name="model">avalara.salestax</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="AvaTax API" version="7.0">
+                <sheet>
+                    <group col="6" colspan="4">
+	                    <field name="company_code"/>
+	                    <field name="company_id" groups="base.group_multi_company"/>
+                  	</group>
+		            <notebook>
+		                <page string="Configuration">
+		                    <group colspan="4" col="4" string="Connection">
+			                      <field name="account_number"/>
+			                      <field name="license_key" password="True"/>
+			                      <field name="service_url"/>
+			                </group>
+		                    <group colspan="4" col="4">
+		                        <field name="date_expiration"/>
+		                        <button name="%(action_avalara_salestax_ping)d" string="Test Connection" type="action" icon="gtk-go-forward"/>
+		                    </group>
+		                  	<group colspan="4" col="4" string="Adaptor">
+			                    <field name="request_timeout"/>
+			                    <field name="logging"/>
+		                  	</group>
+		                  	<group colspan="4" col="4">
+		                  	<group colspan="2" col="2" expand="1" string="Address Validation">
+                              <field name="address_validation" on_change="onchange_address_validation(address_validation)"/>
+                              <field name="validation_on_save" attrs="{'readonly': [('address_validation','!=', False)]}"/>
+                              <field name="force_address_validation" attrs="{'readonly': [('address_validation','!=', False)]}"/>
+                              <field name="result_in_uppercase" attrs="{'readonly': [('address_validation','!=', False)]}"/>
+                            </group>
+                            <group colspan="2" col="2" expand="1" string="System Calls">
+                                <field name="on_order" on_change="onchange_system_call1(on_order)"/>
+                                <field name="on_line" on_change="onchange_system_call2(on_line)"/>
+                            </group>
+                            </group>
+                            <group>
+                              <separator string="Countries" colspan="4"/><label string="(Countries where Avalara address validation is enabled)" colspan="2"/>
+                              <field name="country_ids" colspan="4" nolabel="1"/>
+		                  	</group>
+		                  	<group colspan="4" col="4" string="Tax Calculation">
+		                    	<field name="disable_tax_calculation"/>
+		                     </group>
+		                 </page>
+		                 <page string="About AvaTax">
+		                        <label string="Use the following for technical support:"/>
+		                        <br/>
+		                        <label string="Publisher: Avalara.Inc"/>
+		                        <br/><br/>
+		                        <label string="For Technical Support - "/>
+		                        <a href="mailto:customerservice@kranbery.com">mailto:customerservice@kranbery.com</a>
+		                        <br/><br/>
+		                        <a href="http://www.avalara.com/Contact-Us" target="_blank">Support Information</a>
+		                        <br/><br/>
+		                        <label string="Support Telephone: 877-780-4848"/>
+		                        <br/><br/>
+		                        <label string="Go to"/>
+		                        <a href="https://admin-avatax.avalara.net/login.aspx" target="_blank">AvaTax Admin Console</a>
+		                   </page>
+		                </notebook>
+		             </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_avalara_salestax_tree" model="ir.ui.view">
+            <field name="name">avalara.salestax.tree</field>
+            <field name="model">avalara.salestax</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="AvaTax API">
+                  	<field name="company_id" groups="base.group_multi_company"/>
+                  	<field name="company_code"/>
+                    <field name="account_number"/>
+                    <field name="service_url"/>
+                    <field name="date_expiration"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_avalara_salestax" model="ir.actions.act_window">
+            <field name="name">AvaTax API</field>
+            <field name="res_model">avalara.salestax</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Configuration of AvaTax in OpenERP</field>
+        </record>
+
+    <menuitem id="menu_avatax" name="AvaTax" parent="account.menu_finance_configuration" sequence="2"/>
+
+    <menuitem action="action_avalara_salestax" id="menu_avatax_api" name="AvaTax API" parent="menu_avatax" sequence="30"/>
+
+    <!--
+    Jurisdiction Code
+    -->
+
+    <record id="view_jurisdiction_code_form" model="ir.ui.view">
+            <field name="name">jurisdiction.code.form</field>
+            <field name="model">jurisdiction.code</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Tax Jurisdiction Code" version="7.0">
+                    <sheet>
+                        <group col="6" colspan="4">
+				            <field name="name"/>
+				            <field name="code"/>		
+				            <field name="type"/>
+				            <field name="state_id" domain="[('country_id','=',country_id)]"/>
+				        </group>
+				        <separator colspan="4" string="Accounting Information"/>
+				        <field name="account_collected_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+				        <field name="account_paid_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+				        <separator colspan="4" string="Tax Declaration: Invoices"/>
+	                    <field name="base_code_id"/>
+	                    <field name="base_sign"/>
+	                    <field name="tax_code_id"/>
+	                    <field name="tax_sign"/>
+	                    <separator colspan="4" string="Tax Declaration: Credit Notes"/>
+	                    <field name="ref_base_code_id"/>
+	                    <field name="ref_base_sign"/>
+	                    <field name="ref_tax_code_id"/>
+	                    <field name="ref_tax_sign"/>
+                 	</sheet>
+        	</form>
+      	</field>
+    </record>
+
+    <record id="view_jurisdiction_code_tree" model="ir.ui.view">
+            <field name="name">jurisdiction.code.tree</field>
+            <field name="model">jurisdiction.code</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tax Jurisdiction Code">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="state_id"/>
+                </tree>
+            </field>
+        </record>
+
+      <!--
+      Tax Schedule
+      -->
+
+      <record id="view_tax_schedule_tree" model="ir.ui.view">
+            <field name="name">tax.schedule.tree</field>
+            <field name="model">tax.schedule</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tax Schedule">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="country_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="view_tax_schedule_form" model="ir.ui.view">
+            <field name="name">tax.schedule.form</field>
+            <field name="model">tax.schedule</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Tax Schedule">
+            <group col="6" colspan="4">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </group>
+          <field name="jurisdiction_code_ids" nolabel="1">
+            <form string="Tax Jurisdiction Codes">
+              <group col="6" colspan="4">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="type"/>
+                <field name="state_id" domain="[('country_id','=',parent.country_id)]"/>
+              </group>
+              <separator colspan="4" string="Accounting Information"/>
+              <field name="account_collected_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+              <field name="account_paid_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+              <separator colspan="4" string="Tax Declaration: Invoices"/>
+              <field name="base_code_id"/>
+              <field name="base_sign"/>
+              <field name="tax_code_id"/>
+              <field name="tax_sign"/>
+              <separator colspan="4" string="Tax Declaration: Credit Notes"/>
+              <field name="ref_base_code_id"/>
+              <field name="ref_base_sign"/>
+              <field name="ref_tax_code_id"/>
+              <field name="ref_tax_sign"/>
+            </form>
+            <tree string="Tax Jurisdiction Codes">
+                 <field name="code"/>
+                 <field name="name"/>
+                 <field name="state_id"/>
+                 <field name="type"/>
+             </tree>
+          </field>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_tax_schedule" model="ir.actions.act_window">
+            <field name="name">Tax Schedules</field>
+            <field name="res_model">tax.schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <!-- <menuitem action="action_tax_schedule" id="menu_tax_schedule" name="Tax Schedules" parent="menu_avatax" sequence="29"/> -->
+    
+    
+    
+    <record id="exemption_code_form_view" model="ir.ui.view">
+            <field name="name">exemption.code.form.view</field>
+            <field name="model">exemption.code</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+	            <tree string="Exemption Code">
+	                <field name="name"/>
+	                <field name="code"/>
+		        </tree>
+			</field>
+	</record>
+    
+    <record id="action_exemption_code_details" model="ir.actions.act_window">
+            <field name="name">Exemption Code</field>
+            <field name="res_model">exemption.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem action="action_exemption_code_details" id="menu_action_exemption_code_details" name="Exemption Code" parent="menu_avatax" sequence="25"/>
+    
+	       
+    
+      
+
+    </data>
+</openerp>

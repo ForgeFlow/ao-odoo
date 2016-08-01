@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        
+        
+        <record id="group_avatax_view" model="res.groups">
+            <field name="name">Avalara_Order_Line_view</field>
+        </record>
+        
+        <record id="sale_order_update_form_view" model="ir.ui.view">
+            <field name="name">sale.order.update.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name='name' position="after">
+                    <div class="oe_right oe_button_box">
+                        <button name="button_dummy" states="draft" string="Compute" type="object" icon="gtk-execute" class="oe_highlight"/>
+                    </div>
+                </field>
+                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total" position="replace">
+             		<group class="oe_subtotal_footer oe_right" name="sale_total" col="2" colspan="2">
+                        <field name="amount_untaxed" sum="Net Total" string="Net Total"/>
+	  					<field name="amount_shipping" help="The shipping charge on this order."/>
+                        <field name="amount_tax"/>
+                        <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    </group>
+               </group>
+                <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                    <field name="tax_amt" readonly="1" groups="avalara_salestax.group_avatax_view"/>
+                </xpath>
+                
+                
+                <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                    <field name="tax_amt" readonly="1"/>
+                </xpath>
+                
+                <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[@name='order_line']" position="after">
+                    <h3><label style="color: #7c7bad;" for="shipping_lines"/></h3>
+                    <field name="shipping_lines">
+                        <tree string="Shipping Order Lines" editable="bottom">
+                              <field name="ship_method_id" on_change="onchange_select(ship_method_id)"/>
+                              <field name="ship_code_id" domain="[('type', '=', 'freight')]" context="{'search_default_type': 'freight', 'default_type': 'freight'}"/>
+                              <field name="tax_amt" readonly="1" groups="avalara_salestax.group_avatax_view"/>
+                              <field name="shipping_cost"/>
+                              <field name="sale_account_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </xpath>
+                
+                <field name="client_order_ref" position="after">
+                    <field name="exemption_code" readonly="1"/>
+                    <field name="exemption_code_id" readonly="1"/>
+                    <field name="location_code"/>
+                    <field name="is_add_validate" readonly="1" invisible="1"/>
+                </field>
+                
+                <xpath expr="/form/sheet/group" position="after">
+                    <group colspan="4" col="4" string="Avalara Tax on...">
+                    <group colspan="2" col="2">
+                        <field name="tax_add_default" on_change="default_tax_address(tax_add_default, partner_id)"/>
+                        <field name="tax_add_invoice" on_change="invoice_tax_address(tax_add_invoice, partner_invoice_id, partner_id)"/>
+                        <field name="tax_add_shipping" on_change="delivery_tax_address(tax_add_shipping, partner_shipping_id, partner_id)"/>
+                    </group>
+                    <group colspan="2" col="2">
+                        <!-- <field name="tax_add_id" readonly="1"/> -->
+                        <field name="tax_address" readonly="1"/>
+                    </group>
+                    </group>
+                </xpath>
+           </field>
+        </record>
+        
+        
+        
+        
+        <!--SHIPPING RATE CONFIGURATION-->
+    <!-- Shipping Rate Configuration List View-->
+    <record id="tree_view_shipping_rate_config" model="ir.ui.view">
+            <field name="name">tree.shipping.rate.config</field>
+            <field name="model">shipping.rate.config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Shipping Rate">
+					<field name="name"/>
+                    <field name="active"/>
+					<field name="account_id"  required="1"/>
+                </tree>
+            </field>
+        </record>
+
+    	<!-- Shipping Rate Configuration Form View-->
+
+	<record id="form_view_shipping_rate_config" model="ir.ui.view">
+            <field name="name">form.shipping.rate.config</field>
+            <field name="model">shipping.rate.config</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Config Shipping Rate" version="7.0">
+                    <sheet>
+                        <group colspan="4" col="4">
+	                        <field name="name"  select="1"  colspan="2"/>
+		                    <field name="active"  select="1" colspan="2"/>
+							<field name="account_id"  select="1" colspan="2" required="1"/>
+							<field name="shipping_cost"/>
+						</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+		<!--Action Record for Shipping Rate Configuration and Menu-->
+
+		<record id="action_shipping_rate_config" model="ir.actions.act_window">
+	            <field name="name">Shipping Rate Configuration</field>
+	            <field name="res_model">shipping.rate.config</field>
+	            <field name="view_type">form</field>
+	            <field name="view_mode">tree,form</field>
+	            <field name="view_id" ref="tree_view_shipping_rate_config"/>
+	         </record>
+	         
+	    <menuitem id="shipping_rate_config" name="Shipping Rate Configuration"  parent="menu_avatax" sequence="75" action="action_shipping_rate_config"  groups="base.group_erp_manager,base.group_sale_manager,base.group_system"/>
+        
+                
+       	<!-- Add avalara tax code in sale.shop objects -->
+       	<record id="view_shop_form_inherit" model="ir.ui.view">
+            <field name="name">sale.shop.inherit</field>
+            <field name="model">sale.shop</field>
+            <field name="inherit_id" ref="sale.view_shop_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="location_code"/>
+                </field>
+            </field>
+        </record>
+        
+		
+		<record id="sale_order_form_view_editable_field" model="ir.ui.view">
+		    <field name="name">sale.order.form.view.editable</field>
+		    <field name="model">sale.order</field>
+		    <field name="inherit_id" ref="sale_order_update_form_view"/>
+		    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager') ])]"/>
+		    <field name="arch" type="xml">
+		        <field name='exemption_code' position="attributes">
+		            <attribute name="readonly">0</attribute>
+		        </field>
+		        <field name='exemption_code_id' position="attributes">
+		            <attribute name="readonly">0</attribute>
+		        </field>
+		    </field>
+		</record>
+                 
+       
+        
+        
+        
+    </data>
+</openerp>

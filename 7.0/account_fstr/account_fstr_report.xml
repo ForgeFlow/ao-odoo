@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report
+            id="report_account_fstr"
+            string="Aged reval report"
+            model="account_fstr.category"
+            name="account_fstr.report"
+            rml="account_fstr/reports/account_fstr_report.rml"
+            header="True"
+            multi="True"
+            /> 
+
+    </data>
+</openerp>

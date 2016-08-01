@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+<document filename="Check (Bottom).pdf">
+  <template pageSize="(612.0,792.0)" title="Check (Bottom)" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="13.0" y1="0.0" width="567" height="785"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table6">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table10">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table11">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table4">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table5">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table7">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table13">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table8">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table9">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" rightIndent="0.0" leftIndent="0.0" fontName="Helvetica"/>
+    <paraStyle name="P2" fontName="Helvetica"/>
+    <paraStyle name="P3" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P4" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P5" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P6" fontName="Helvetica" fontSize="8.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P7" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P8" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT"/>
+    <paraStyle name="P9" rightIndent="-1.0" leftIndent="0.0" fontName="Helvetica" fontSize="6.0" leading="8"/>
+    <paraStyle name="P10" fontName="Helvetica"/>
+    <paraStyle name="P11" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P12" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P13" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P14" fontName="Helvetica-Bold" fontSize="10.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P15" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P16" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P17" fontName="Helvetica-Bold" fontSize="10.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P18" fontName="Helvetica-Bold" fontSize="8.0" leading="10"/>
+    <paraStyle name="P19" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P20" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P21" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P22" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P23" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P24" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P25" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P26" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT"/>
+    <paraStyle name="P27" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT"/>
+    <paraStyle name="P28" fontName="Helvetica-Bold" fontSize="10.0" leading="11" alignment="RIGHT"/>
+    <paraStyle name="P29" fontName="Helvetica-Bold" fontSize="10.0" leading="13"/>
+    <paraStyle name="P30" fontName="Helvetica" fontSize="7.0" leading="9"/>
+    <paraStyle name="P31" fontName="Helvetica" fontSize="9.0" leading="11" alignment="RIGHT"/>
+    <paraStyle name="P32" fontName="Helvetica" fontSize="10.0" leading="11" alignment="RIGHT"/>
+    <paraStyle name="P33" fontName="Helvetica" fontSize="9.0" leading="11"/>
+    <paraStyle name="P34" fontName="Helvetica" fontSize="9.0" leading="11"/>
+    <paraStyle name="P35" fontName="Helvetica" fontSize="11.0" leading="14"/>
+    <paraStyle name="P36" fontName="Helvetica" fontSize="9.0" leading="11" alignment="RIGHT"/>
+    <paraStyle name="P38" fontName="Helvetica" fontSize="11.0" leading="10"/>
+    <paraStyle name="Standard" fontName="Helvetica"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Caption" fontName="Helvetica" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Helvetica"/>
+    <paraStyle name="Table Contents" fontName="Helvetica"/>
+    <paraStyle name="Table Heading" fontName="Helvetica" alignment="CENTER"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <para style="P14">[[repeatIn(get_data(objects),'page')]]</para>
+    <blockTable colWidths="568.0" style="Table1">
+      <tr>
+        <td>
+          <para style="P2">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P2">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <blockTable colWidths="568.0" style="Table2">
+      <tr>
+        <td>
+          <blockTable colWidths="369.0,97.0,97.0" style="Table6">
+            <tr>
+              <td>
+                <para style="P3">[[ page['partner'] ]]</para>
+              </td>
+              <td>
+                <para style="P3">[[ formatLang(page['date'], date=True) or '' ]]</para>
+              </td>
+              <td>
+                <para style="P3">[[ not page['use_preprint_check'] and page['number'] or '' ]]</para>
+              </td>
+            </tr>
+          </blockTable>
+          <blockTable colWidths="81.0,186.0,83.0,81.0,54.0,78.0" style="Table10">
+            <tr>
+              <td>
+                <para style="P9">Due Date</para>
+              </td>
+              <td>
+                <para style="P9">Description</para>
+              </td>
+              <td>
+                <para style="P9">Original Amount</para>
+              </td>
+              <td>
+                <para style="P9">Balance Due</para>
+              </td>
+              <td>
+                <para style="P9">Discount</para>
+              </td>
+              <td>
+                <para style="P9">Payment</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P7">
+                  <font face="Helvetica" size="2.0">[[ repeatIn(page['lines'],'l') ]]</font>
+                  <font face="Helvetica"> [[ formatLang(l['date_original'] ,date=True) or '' ]]</font>
+                </para>
+              </td>
+              <td>
+                <para style="P7">[[ l['name'] ]]</para>
+              </td>
+              <td>
+                <para style="P7">[[formatLang(l['amount_original']) ]]</para>
+              </td>
+              <td>
+                <para style="P7">[[ formatLang(l['amount_due']) ]]</para>
+              </td>
+              <td>
+                <para style="P7">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P5">[[ formatLang(l['amount']) ]]</para>
+              </td>
+            </tr>
+          </blockTable>
+          <blockTable colWidths="485.0,77.0" style="Table11">
+            <tr>
+              <td>
+                <para style="P4">Check Amount</para>
+              </td>
+              <td>
+                <para style="P3">[[ formatLang(page['amount']) or 'VOID' ]]</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P4">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P4">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P4">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+          </blockTable>
+          <para style="P2">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <blockTable colWidths="568.0" style="Table3">
+      <tr>
+        <td>
+          <blockTable colWidths="370.0,96.0,96.0" style="Table4">
+            <tr>
+              <td>
+                <para style="P3">[[ page['partner'] ]]</para>
+              </td>
+              <td>
+                <para style="P3">[[ formatLang(page['date'], date=True) or '' ]]</para>
+              </td>
+              <td>
+                <para style="P3">[[ not page['use_preprint_check'] and page['number'] or '' ]]</para>
+              </td>
+            </tr>
+          </blockTable>
+          <blockTable colWidths="82.0,185.0,89.0,76.0,52.0,78.0" style="Table5">
+            <tr>
+              <td>
+                <para style="P9">Due Date</para>
+              </td>
+              <td>
+                <para style="P9">Description</para>
+              </td>
+              <td>
+                <para style="P9">Original Amount</para>
+              </td>
+              <td>
+                <para style="P9">Balance Due</para>
+              </td>
+              <td>
+                <para style="P9">Discount</para>
+              </td>
+              <td>
+                <para style="P9">Payment</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P7">
+                  <font face="Helvetica" size="2.0">[[ repeatIn(page['lines'],'l') ]]</font>
+                  <font face="Helvetica"> [[ formatLang(l['date_original'] ,date=True) or '' ]]</font>
+                </para>
+              </td>
+              <td>
+                <para style="P7">[[ l['name'] ]]</para>
+              </td>
+              <td>
+                <para style="P7">[[formatLang(l['amount_original']) ]]</para>
+              </td>
+              <td>
+                <para style="P7">[[ formatLang(l['amount_due']) ]]</para>
+              </td>
+              <td>
+                <para style="P7">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P5">[[ formatLang(l['amount']) ]]</para>
+              </td>
+            </tr>
+          </blockTable>
+          <blockTable colWidths="485.0,77.0" style="Table7">
+            <tr>
+              <td>
+                <para style="P4">Check Amount</para>
+              </td>
+              <td>
+                <para style="P3">[[ formatLang(page['amount']) or 'VOID' ]]</para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P8">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P6">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P8">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P6">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P8">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P6">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P8">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P6">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+          </blockTable>
+
+          <blockTable colWidths="56.0,420.0,86.0" style="Table4">
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P28">
+                  <font face="Helvetica">[[ not page['use_preprint_check'] and page['number'] or '' ]]</font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P38">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P38">
+                  <font color="white"></font>
+                </para>
+              </td>
+              <td>
+                <para style="P38">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P29">
+                  <font face="Helvetica">[[ page['amount_words'] or 'VOID'.ljust(70, '*') ]]</font>
+                </para>
+              </td>
+              <td>
+                <para style="P28">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P2">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P35">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P36">
+                  <font face="Helvetica">[[ formatLang(page['date'] , date=True) or '' ]]</font>
+                </para>
+              </td>
+              <td>
+                <para style="P32">
+                  <font face="Helvetica">[[ 'chk_amount' in page and formatLang(page['chk_amount']) or 'VOID' ]]</font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"></font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font face="Helvetica" size="9.0">[[ page['partner'] ]]</font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"></font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"></font>
+                </para>
+              </td>
+              <td>
+                <para style="P3">
+                  <font color="white"> </font>
+                </para>
+              </td>
+            </tr>
+          </blockTable>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P1">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
