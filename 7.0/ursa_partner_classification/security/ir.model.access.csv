@@ -1,5 +1,0 @@
-id,name,model_id/id,active,perm_read,perm_write,perm_create,perm_unlink,group_id/id
-ursa_partner_classification.salesmanager,Product Customer Info Manager,ursa_partner_classification.model_res_partner_classification,TRUE,TRUE,TRUE,TRUE,TRUE,base.group_sale_manager
-ursa_partner_classification.salesuser,Product Customer Info User,ursa_partner_classification.model_res_partner_classification,TRUE,TRUE,FALSE,FALSE,FALSE,base.group_sale_salesman
-ursa_partner_classification.purchasemanager,Product Customer Info Manager,ursa_partner_classification.model_res_partner_classification,TRUE,TRUE,TRUE,TRUE,TRUE,purchase.group_purchase_manager
-ursa_partner_classification.purchaseuser,Product Customer Info User,ursa_partner_classification.model_res_partner_classification,TRUE,TRUE,FALSE,FALSE,FALSE,purchase.group_purchase_user
