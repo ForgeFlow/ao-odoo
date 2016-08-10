@@ -14,5 +14,5 @@
         "views/account_move_line_view.xml"
     ],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }
