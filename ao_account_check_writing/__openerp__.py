@@ -18,6 +18,6 @@
         'views/res_company_view.xml',
         'views/account_voucher_view.xml'
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
