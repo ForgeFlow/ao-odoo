@@ -35,7 +35,7 @@
     "depends" : ['base', 'product', 'decimal_precision', 'mail'],
     'data': ['product_view.xml'],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
 
