@@ -19,6 +19,6 @@
     "data": [
         "wizards/account_move_line_get_purchase_line_view.xml"
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

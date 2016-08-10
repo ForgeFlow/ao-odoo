@@ -20,5 +20,5 @@
         "test/purchase_request_from_procurement.yml",
     ],
     "license": 'AGPL-3',
-    "installable": True
+    "installable": False
 }

@@ -10,7 +10,7 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "depends": [
         "mail_debrand",
     ],

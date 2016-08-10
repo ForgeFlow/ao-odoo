@@ -15,5 +15,5 @@
     "category": "Manufacture",
     "depends": ["mrp", "stock_account"],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }

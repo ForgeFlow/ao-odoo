@@ -11,5 +11,5 @@
     "category": "Product",
     "depends": ["hr_payroll"],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }

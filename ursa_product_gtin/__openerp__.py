@@ -18,5 +18,5 @@
         """,
 	"data" : ["ursa_product_gtin_view.xml"],
 	"active": False,
-	"installable": True
+	"installable": False
 }

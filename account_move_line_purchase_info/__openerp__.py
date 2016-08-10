@@ -17,5 +17,5 @@
         "views/account_move_view.xml",
         "views/account_invoice_view.xml",
     ],
-    'installable': True,
+    'installable': False,
 }

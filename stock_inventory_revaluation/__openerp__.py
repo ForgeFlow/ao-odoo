@@ -23,5 +23,5 @@
         "data/stock_inventory_revaluation_data.xml",
         "wizards/stock_inventory_revaluation_mass_post_view.xml",
     ],
-    'installable': True,
+    'installable': False,
 }

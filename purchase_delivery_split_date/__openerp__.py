@@ -11,5 +11,6 @@
     'depends': [
         'purchase',
     ],
+    'installable': False,
     'images': [],
 }

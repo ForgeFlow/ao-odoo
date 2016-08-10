@@ -15,5 +15,5 @@
     "data": [
         'views/payment_view.xml',
     ],
-    "installable": True,
+    "installable": False,
 }

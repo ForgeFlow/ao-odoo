@@ -33,6 +33,6 @@
         "views/decimal_precision_view.xml",
     ],
     "auto_install": True,
-    "installable": True,
+    "installable": False,
     "application": False,
 }

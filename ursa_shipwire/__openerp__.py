@@ -33,7 +33,7 @@
     'website': 'http://www.ursainfosystems.com',
     "depends" : ['product', 'stock', 'ursa_product_gtin'],
     'data': ['ursa_shipwire_view.xml'],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
 

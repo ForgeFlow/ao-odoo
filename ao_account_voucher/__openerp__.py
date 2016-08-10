@@ -14,5 +14,5 @@
         "views/voucher_payment_receipt_view.xml"
     ],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }

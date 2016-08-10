@@ -17,5 +17,5 @@
     "data": [
         "views/easy_reconcile_view.xml",
     ],
-    'installable': True,
+    'installable': False,
 }

@@ -45,5 +45,5 @@
         "demo/purchase_request_demo.xml",
     ],
     "license": 'AGPL-3',
-    "installable": True
+    "installable": False
 }

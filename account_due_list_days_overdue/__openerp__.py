@@ -22,5 +22,5 @@
     "demo": [
         'demo/account_overdue_term_demo.xml'
     ],
-    "installable": True,
+    "installable": False,
 }

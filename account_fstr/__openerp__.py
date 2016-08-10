@@ -43,7 +43,7 @@ Compatible with OpenERP v. 7.0
         'account_fstr_menu.xml',
     ],
     'images': ['images/fstr_form.png', ],
-    'installable': True,
+    'installable': False,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -25,7 +25,7 @@
 	'category': 'MISC',
 	'depends': ['web'],
 	'auto_install': True,
-	'installable': True,
+	'installable': False,
     'application':True,
 	'qweb' : [
 		"static/src/xml/base.xml",

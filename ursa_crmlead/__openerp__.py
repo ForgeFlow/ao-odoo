@@ -35,7 +35,7 @@ This allows a standard reply-to address to be set when chatter is used to respon
     "depends" : ["mail", "crm", "fetchmail"],
     'data': ['ursa_crmlead_view.xml'],
     'demo': [],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }
 

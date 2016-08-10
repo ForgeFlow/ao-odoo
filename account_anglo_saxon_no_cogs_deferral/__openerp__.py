@@ -14,5 +14,5 @@
     "category": "Accounting & Finance",
     "depends": ["account_anglo_saxon"],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }

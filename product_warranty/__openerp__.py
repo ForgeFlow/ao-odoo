@@ -40,7 +40,7 @@ Extend the product warranty management with warranty details on product / suppli
     ],
     'demo': [],
     'test': [],
-    'installable': True,
+    'installable': False,
     'active': False,
     'certificate' : '',
     'images': ['images/product_warranty.png'],

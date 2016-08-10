@@ -72,7 +72,7 @@ on this branch : https://code.launchpad.net/~akretion-team/openobject-addons/ope
     ], 
 #    'test': ['test/test_crm_claim.yml'], 
     'images': ['images/product_return.png', 'images/claim.png','images/return_line.png','images/exchange.png'],
-    'installable': True,
+    'installable': False,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
