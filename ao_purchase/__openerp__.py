@@ -5,7 +5,7 @@
 
 {
     "name": "AO-specific customizations on purchase",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Product",
