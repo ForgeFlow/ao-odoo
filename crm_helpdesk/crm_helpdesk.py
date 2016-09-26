@@ -20,9 +20,7 @@
 ##############################################################################
 
 import openerp
-from openerp.addons.crm import crm
 from openerp.osv import fields, osv
-from openerp import tools
 from openerp.tools.translate import _
 from openerp.tools import html2plaintext
 
@@ -46,8 +44,10 @@ class crm_helpdesk(osv.osv):
             'write_date': fields.datetime('Update Date' , readonly=True),
             'date_deadline': fields.date('Deadline'),
             'user_id': fields.many2one('res.users', 'Responsible'),
-            'section_id': fields.many2one('crm.case.section', 'Sales Team', \
-                            select=True, help='Responsible sales team. Define Responsible user and Email account for mail gateway.'),
+            'team_id': fields.many2one(
+                'crm.team', 'Sales Team', select=True,
+                help='Responsible sales team. Define Responsible user and '
+                     'Email account for mail gateway.'),
             'company_id': fields.many2one('res.company', 'Company'),
             'date_closed': fields.datetime('Closed', readonly=True),
             'partner_id': fields.many2one('res.partner', 'Partner'),
@@ -56,14 +56,14 @@ class crm_helpdesk(osv.osv):
             'date': fields.datetime('Date'),
             'ref': fields.reference('Reference', selection=openerp.addons.base.res.res_request.referencable_models),
             'ref2': fields.reference('Reference 2', selection=openerp.addons.base.res.res_request.referencable_models),
-            'channel_id': fields.many2one('crm.tracking.medium', 'Channel', help="Communication channel."),
+            'channel_id': fields.many2one('utm.medium', 'Channel', help="Communication channel."),
             'planned_revenue': fields.float('Planned Revenue'),
             'planned_cost': fields.float('Planned Costs'),
             'priority': fields.selection([('0','Low'), ('1','Normal'), ('2','High')], 'Priority'),
             'probability': fields.float('Probability (%)'),
-            'categ_id': fields.many2one('crm.case.categ', 'Category', \
-                            domain="['|',('section_id','=',False),('section_id','=',section_id),\
-                            ('object_id.model', '=', 'crm.helpdesk')]"),
+            'categ_id': fields.many2one(
+                'crm.lead.tag', 'Category',
+                domain="['|',('team_id','=',False),('team_id','=', team_id)]"),
             'duration': fields.float('Duration', states={'done': [('readonly', True)]}),
             'state': fields.selection(
                 [('draft', 'New'),
@@ -103,20 +103,6 @@ class crm_helpdesk(osv.osv):
             elif values.get('state') == 'done' and not values.get('date_closed'):
                 values['date_closed'] = fields.datetime.now()
         return super(crm_helpdesk, self).write(cr, uid, ids, values, context=context)
-
-    def case_escalate(self, cr, uid, ids, context=None):
-        """ Escalates case to parent level """
-        data = {'active': True}
-        for case in self.browse(cr, uid, ids, context=context):
-            if case.section_id and case.section_id.parent_id:
-                parent_id = case.section_id.parent_id
-                data['section_id'] = parent_id.id
-                if parent_id.change_responsible and parent_id.user_id:
-                    data['user_id'] = parent_id.user_id.id
-            else:
-                raise osv.except_osv(_('Error!'), _('You can not escalate, you are already at the top level regarding your sales-team category.'))
-            self.write(cr, uid, [case.id], data, context=context)
-        return True
 
     # -------------------------------------------------------
     # Mail gateway

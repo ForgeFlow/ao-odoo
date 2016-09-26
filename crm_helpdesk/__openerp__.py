@@ -23,7 +23,7 @@
 {
     'name': 'Helpdesk',
     'category': 'Customer Relationship Management', 
-    'version': '1.0',
+    'version': '9.0.1.0.0',
     'description': """
 Helpdesk Management.
 ====================
