@@ -7,12 +7,12 @@
             <field name="inherit_id"
                    ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
             <field name="arch" type="xml">
-                <button name="case_escalate" position="after">
+                <field name="state" position="before">
                     <button name="button_open" string="Open" type="object"
                             class="oe_highlight"
                             attrs="{'invisible':[('user_id','=',False),
                             ('state', 'not in', ['draft', 'pending'])]}"/>
-                </button>
+                </field>
             </field>
         </record>
 
