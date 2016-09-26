@@ -16,6 +16,6 @@
     "data": [
         "views/crm_helpdesk_view.xml"
     ],
-    'installable': False,
-    'active': False,
+    'installable': True,
+    'active': True,
 }
