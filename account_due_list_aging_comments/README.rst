@@ -6,8 +6,13 @@
 Account Due List Aging Comments
 ===============================
 
-This module extends the Payments and Due list to add the capability to
-introduce aging comments in-line.
+This module extends the Receivables and Payables Open Items lists to:
+
+* Allow to edit data in-line
+* Introduce aging comments
+
+These improvements are required in order to help users to review the open
+receivables and payables, and to add comments on their status.
 
 
 Configuration
@@ -20,11 +25,14 @@ Usage
 
 To use this module, you need to go to:
 
-* Accounting->Journal Entries->Payments and due list
+* Invoicing / Sales / Receivables Open Items
+* Invoicing / Purchases / Payables Open Items
+
+You can enter the aging comments in-line.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/8.0
+   :target: https://runbot.odoo-community.org/runbot/96/9.0
 
 Known issues / Roadmap
 ======================

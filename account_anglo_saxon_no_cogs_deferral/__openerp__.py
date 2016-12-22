@@ -7,12 +7,12 @@
     "name": "Account Anglo Saxon no COGS deferral",
     "summary": "Invalidates the COGS deferral introduced by the anglo saxon "
                "module",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Accounting & Finance",
     "depends": ["account_anglo_saxon"],
     "license": "AGPL-3",
-    'installable': False,
+    'installable': True,
 }

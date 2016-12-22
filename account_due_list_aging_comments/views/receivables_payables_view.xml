@@ -2,16 +2,16 @@
 <openerp>
     <data>
 
-        <record id="view_payments_tree" model="ir.ui.view">
+        <record id="view_receivables_payables_tree" model="ir.ui.view">
             <field name="name">Payments</field>
             <field name="model">account.move.line</field>
-            <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
+            <field name="inherit_id" ref="account_due_list.view_receivables_payables_tree"/>
             <field name="priority" eval="20"/>
             <field name="arch" type="xml">
                 <tree position="attributes">
                     <attribute name="editable">top</attribute>
                 </tree>
-                <field name="reconcile_partial_id" position="after">
+                <field name="blocked" position="after">
                     <field name="aging_comments"/>
                 </field>
             </field>
