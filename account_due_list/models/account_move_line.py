@@ -5,8 +5,9 @@
 # © 2011-2013 Agile Business Group sagl (<http://www.agilebg.com>)
 # © 2015 Andrea Cometa <info@andreacometa.it>
 # © 2015 Eneko Lacunza <elacunza@binovo.es>
-# © 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# © 2015 Tecnativa (http://www.tecnativa.com)
 # © 2016 Eficent Business and IT Consulting Services S.L.
+#        (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields, api
@@ -23,9 +24,20 @@ class AccountMoveLine(models.Model):
     payment_term_id = fields.Many2one('account.payment.term',
                                       related='invoice_id.payment_term_id',
                                       string='Payment Terms')
+    stored_invoice_id = fields.Many2one(
+        comodel_name='account.invoice', compute='_compute_invoice',
+        string='Invoice', store=True)
     invoice_user_id = fields.Many2one(
-        comodel_name='res.users', related='invoice_id.user_id',
+        comodel_name='res.users', related='stored_invoice_id.user_id',
         string="Invoice salesperson", store=True)
+
+    @api.multi
+    @api.depends('move_id', 'invoice_id.move_id')
+    def _compute_invoice(self):
+        for line in self:
+            invoices = self.env['account.invoice'].search(
+                [('move_id', '=', line.move_id.id)])
+            line.stored_invoice_id = invoices[:1]
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,

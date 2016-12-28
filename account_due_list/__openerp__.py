@@ -5,26 +5,28 @@
 # © 2011-2013 Agile Business Group sagl (<http://www.agilebg.com>)
 # © 2015 Andrea Cometa <info@andreacometa.it>
 # © 2015 Eneko Lacunza <elacunza@binovo.es>
-# © 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# © 2015 Tecnativa (http://www.tecnativa.com)
 # © 2016 Eficent Business and IT Consulting Services S.L.
+#        (http://www.eficent.com)
+# © 2016 David Dufresne <david.dufresne@savoirfairelinux.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': "Receivables and Payables Open Items",
+    'name': "Payments Due list",
     'version': '9.0.1.0.0',
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Community Association (OCA), '
               'Agile Business Group, '
               'Tecnativa,'
-              'Zikzakmedia SL,'
-              'Eficent',
+              'Zikzakmedia SL',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
         'account',
     ],
     "data": [
-        'views/receivables_payables_view.xml',
+        'views/payment_view.xml',
     ],
-    "installable": True,
+    'pre_init_hook': 'pre_init_hook',
+    "installable": True
 }
