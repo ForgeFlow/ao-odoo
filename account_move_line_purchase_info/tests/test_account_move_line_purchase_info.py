@@ -25,20 +25,20 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         self.company = self.env.ref('base.main_company')
 
         # Create account for Goods Received Not Invoiced
-        acc_type = 'equity'
+        acc_type = 'other'
         name = 'Goods Received Not Invoiced'
         code = 'grni'
         self.account_grni = self._create_account(acc_type, name, code,
                                                  self.company)
 
         # Create account for Cost of Goods Sold
-        acc_type = 'expense'
+        acc_type = 'other'
         name = 'Cost of Goods Sold'
         code = 'cogs'
         self.account_cogs = self._create_account(acc_type, name, code,
                                                  self.company)
         # Create account for Inventory
-        acc_type = 'asset'
+        acc_type = 'other'
         name = 'Inventory'
         code = 'inventory'
         self.account_inventory = self._create_account(acc_type, name, code,
@@ -48,12 +48,11 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
 
     def _create_account(self, acc_type, name, code, company):
         """Create an account."""
-        types = self.acc_type_model.search([('code', '=', acc_type)])
+        types = self.acc_type_model.search([('type', '=', acc_type)])
         account = self.account_model.create({
             'name': name,
             'code': code,
-            'type': 'other',
-            'user_type': types and types[0].id,
+            'user_type_id': types and types[0].id,
             'company_id': company.id
         })
         return account
@@ -190,8 +189,8 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         }).create({})
 
         wizard.makeInvoices()
-        invoice_lines = self.invoice_line_model.search(
-                [('purchase_line_id', '=', po_line.id)])
+        invoice_lines = self.invoice_line_model.search([
+            ('purchase_line_id', '=', po_line.id)])
 
         for line in invoice_lines:
             for aml in line.invoice_id.move_id.line_id:
