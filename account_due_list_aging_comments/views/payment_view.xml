@@ -11,7 +11,7 @@
                 <tree position="attributes">
                     <attribute name="editable">top</attribute>
                 </tree>
-                <field name="blocked" position="after">
+                <field name="reconciled" position="after">
                     <field name="aging_comments"/>
                 </field>
             </field>

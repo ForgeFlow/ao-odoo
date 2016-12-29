@@ -12,7 +12,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Accounting & Finance",
-    "depends": ["account_anglo_saxon"],
+    "depends": ["stock_account"],
     "license": "AGPL-3",
     'installable': True,
 }
