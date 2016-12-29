@@ -12,18 +12,6 @@ _DEPT_SELECTION = [('product', 'Product'),
                    ('mktg', 'Marketing')]
 
 
-class PurchaseOrder(models.Model):
-    _inherit = "purchase.order"
-
-    @api.model
-    def _prepare_inv_line(self, account_id, order_line):
-    
-        res = super(PurchaseOrder, self)._prepare_inv_line(account_id,
-                                                           order_line)
-        res['dept'] = order_line.dept
-        return res
-
-
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 

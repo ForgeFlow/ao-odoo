@@ -21,3 +21,8 @@ class AccountInvoiceLine(models.Model):
                             required=False,
                             size=32,
                             help="Department for which the item is required")
+
+    def _set_additional_fields(self, invoice):
+        if self.purchase_line_id:
+            self.dept = self.purchase_line_id.dept
+        super(AccountInvoiceLine, self)._set_additional_fields(invoice)
