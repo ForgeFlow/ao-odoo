@@ -8,7 +8,19 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def compute_account_move_line_stored_invoice_id(cr):
+def store_field_stored_invoice_id(cr):
+
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='account_move_line' AND
+    column_name='stored_invoice_id'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE account_move_line ADD COLUMN stored_invoice_id integer;
+            COMMENT ON COLUMN account_move_line.stored_invoice_id IS 'Invoice';
+            """)
+
     logger.info('Computing field stored_invoice_id on account.move.line')
 
     cr.execute(
@@ -22,7 +34,18 @@ def compute_account_move_line_stored_invoice_id(cr):
     )
 
 
-def compute_account_move_line_invoice_user_id(cr):
+def store_field_invoice_user_id(cr):
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='account_move_line' AND
+    column_name='invoice_user_id'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE account_move_line ADD COLUMN invoice_user_id integer;
+            COMMENT ON COLUMN account_move_line.invoice_user_id IS
+            'Invoice salesperson';
+            """)
     logger.info('Computing field invoice_user_id on account.move.line')
 
     cr.execute(
@@ -38,5 +61,5 @@ def compute_account_move_line_invoice_user_id(cr):
 def migrate(cr, version):
     if not version:
         return
-    compute_account_move_line_stored_invoice_id(cr)
-    compute_account_move_line_invoice_user_id(cr)
+    store_field_stored_invoice_id(cr)
+    store_field_invoice_user_id(cr)
