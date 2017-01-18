@@ -82,7 +82,7 @@ def check_ean(eancode):
         check = int(math.ceil(sum / 10.0) * 10 - sum)
 
     i += 1
-    if check != int(eancode[ean_len-1]): # last digit
+    if check != int(eancode[ean_len-1]):  # last digit
         return False
     return True
 
@@ -126,15 +126,15 @@ class ProductProduct(models.Model):
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    ean13 = fields.Char(string='EAN',
-                        help='Barcode number for EAN8 EAN13 JPC GTIN')
+    barcode = fields.Char(string='EAN',
+                          help='Barcode number for EAN8 EAN13 JPC GTIN')
     upc = fields.Char(string='UPC',
                       help='Barcode number for UPC')
 
     @api.one
-    @api.constrains('ean13')
+    @api.constrains('barcode')
     def _check_ean_key(self):
-        res = check_ean(self.ean13)
+        res = check_ean(self.barcode)
         if not res:
             raise Warning(_('Invalid Bar Code Number'))
 
@@ -147,7 +147,7 @@ class ResPartner(models.Model):
             raise Warning(_('Invalid UPC Code Number'))
         
     _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'),
-                        ('ean13', 'UNIQUE(ean13)',
+                        ('barcode', 'UNIQUE(barcode)',
                          'Cannot have duplicate EAN Code')]
 
 
