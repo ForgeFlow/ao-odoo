@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <openerp>
-<data>
-        
+
     <record id="ursa_product_tree_view" model="ir.ui.view">
             <field name="name">ursa_product.view.tree</field>
             <field name="model">product.product</field>
@@ -29,5 +28,4 @@
         </field>
     </record>
 
-</data>
 </openerp>
