@@ -29,9 +29,6 @@
                 <p t-field="o.payment_term_id and o.payment_term_id.name"/>
             </div>
         </xpath>
-        <xpath expr="//div[@t-if='o.reference']" position="replace"/>
-
-
 
     </template>
 
