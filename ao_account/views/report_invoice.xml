@@ -4,7 +4,7 @@
 
         <template id="report_invoice_document"
                   inherit_id="account.report_invoice_document">
-        <xpath expr="//p[@t-if='o.fiscal_position.note']" position="after">
+        <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
             <div t-if="o.type == 'out_invoice'">
                 <tr>
                     <td>All Payments to be made in US Dollars.<br/></td>
@@ -26,7 +26,7 @@
         <xpath expr="//div[@t-if='o.reference']" position="after">
             <div class="col-xs-5">
                 <strong>Payment Terms:</strong>
-                <p t-field="o.payment_term and o.payment_term.name"/>
+                <p t-field="o.payment_term_id and o.payment_term_id.name"/>
             </div>
         </xpath>
         <xpath expr="//div[@t-if='o.reference']" position="replace"/>
