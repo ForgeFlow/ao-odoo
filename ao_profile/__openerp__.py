@@ -130,7 +130,6 @@
         # OCA/server-tools
         # ----------------
         'base_technical_features',
-        'cron_run_manually',
         'database_cleanup',
         'auditlog',
         'base_search_fuzzy',
