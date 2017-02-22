@@ -21,7 +21,11 @@ class MrpProduction(models.Model):
             total_value = 0.0
             for move in production.move_lines:
                 for quant in move.reserved_quant_ids:
-                    total_value += quant.cost * quant.qty
+                    if quant.product_id.cost_method != 'real':
+                        unit_cost = quant.product_id.standard_price
+                    else:
+                        unit_cost = quant.cost
+                    total_value += unit_cost * quant.qty
             unit_cost = total_value / production.product_qty
             if main_production_move:
                 main_production_move.write({'price_unit': unit_cost})
