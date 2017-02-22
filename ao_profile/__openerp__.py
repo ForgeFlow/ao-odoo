@@ -247,7 +247,7 @@
         'ao_account_due_list',
         # 'ao_account_voucher', -- deprecated
         # 'ao_crm_helpdesk', -- deprecated
-        'ao_hr',
+        # 'ao_hr', -- deprecated
         # 'ao_hr_payroll', -- deprecated
         'ao_hr_timesheet_sheet',
         'ao_login_rename',
