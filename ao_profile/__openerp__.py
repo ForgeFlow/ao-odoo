@@ -186,9 +186,9 @@
         # 'account_advanced_reconcile_transaction_by_purchase_line', -- pending to migrate
         #
         # OCA/connector-telephony
-        'asterisk_click2dial',
-        'base_phone',
-        'crm_phone',
+        # 'asterisk_click2dial', -- not used
+        # 'base_phone', -- not used
+        # 'crm_phone', -- not used
         #'asterisk_click2dial_crm', -- deprecated
         #
         # OCA/crm
