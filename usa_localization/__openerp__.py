@@ -53,7 +53,7 @@ Contact: rcarnes@ursainfosystems.com
         'data/res.country.state.csv', 
         'data/changed_views.xml',        
         ],
-    'installable': False,
+    'installable': True,
     'js' : [
     ],
     'css' : [

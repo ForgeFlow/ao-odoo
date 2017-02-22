@@ -32,7 +32,7 @@
     'website': 'http://www.ursainfosystems.com',
     "depends" : [],
     'data': ['ursa_ref_partner_view.xml'],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }
 

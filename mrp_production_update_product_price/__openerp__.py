@@ -8,12 +8,12 @@
     "summary": "Updates the standard price field of the finished product "
                "considering the cost in the stock move resulting from "
                "production.",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Manufacture",
     "depends": ["mrp", "stock_account"],
     "license": "AGPL-3",
-    'installable': False,
+    'installable': True,
 }
