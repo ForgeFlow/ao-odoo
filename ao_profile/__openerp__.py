@@ -38,8 +38,7 @@
         #'account_analytic_plans', -- deprecated
         'account_budget',
         'account_cancel',
-        'account_chart',
-        'account_followup',
+        # 'account_followup', -- deprecated
         #'account_payment', -- deprecated
         'analytic',
         #'analytic_user_function', -- deprecated
