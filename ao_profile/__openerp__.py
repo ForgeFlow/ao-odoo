@@ -270,7 +270,7 @@
         'stock_account_change_product_valuation',
         'crm_helpdesk_button_open',
         'mrp_production_service',
-        'product_uom_change_fix',
+        # 'product_uom_change_fix', --deprecated
         # 'stock_picking_report_reserved_quant', -- deprecated
         # 'ursa_purchase_customizations', --deprecated
     ],
