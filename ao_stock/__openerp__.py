@@ -12,6 +12,7 @@
     "depends": ["stock"],
     "data": [
         "views/stock_view.xml",
+        "views/report_stockpicking_operations.xml"
     ],
     "license": "AGPL-3",
     'installable': True,
