@@ -26,12 +26,7 @@
                 <field name="move_id" position="attributes">
                     <attribute name="invisible">True</attribute>
                 </field>
-                <field name="reconcile_id" position="attributes">
-                    <attribute name="invisible">True</attribute>
-                </field>
-                <field name="reconcile_partial_id" position="attributes">
-                    <attribute name="invisible">True</attribute>
-                </field>
+
             </field>
         </record>
 
