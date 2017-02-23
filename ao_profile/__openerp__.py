@@ -257,7 +257,6 @@
         'ao_project',
         'ao_purchase',
         'ao_purchase_dept',
-        'ao_report',
         'ao_sale',
         # 'ao_stock', -- deprecated
         'ao_stock_account',
