@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <record id="mrp.mrp_bom_form_action2" model="ir.actions.act_window">
+        <record id="mrp.action2" model="ir.actions.act_window">
             <field name="view_type">form</field>
         </record>
 
