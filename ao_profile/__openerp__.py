@@ -217,7 +217,7 @@
         # -------------------------
         'mrp_bom_structure_report_level_1',
         'mrp_bom_structure_xlsx',
-        'mrp_bom_structure_xls_level_1',
+        'mrp_bom_structure_xlsx_level_1',
         #
         # Vauxoo
         # 'product_do_merge', -- deprecated
