@@ -273,7 +273,7 @@
         'ao_purchase_dept',
         'ao_sale',
         # 'ao_stock', -- deprecated
-        'ao_stock_account',
+        # 'ao_stock_account', --deprecated
         'stock_picking_menu',
         'stock_picking_sale_note',
         'account_anglo_saxon_no_cogs_deferral',
