@@ -115,9 +115,10 @@
         # OCA/account-financial-reporting
         #'account_financial_report_webkit', -- deprecated
         'account_financial_report_qweb',
+        'mis_builder',
         #
         # OCA/account-financial-tools
-        'account_move_line_purchase_info', # PR https://github.com/OCA/account-financial-tools/pull/444
+        'account_move_line_purchase_info',
         # OCA/product-attribute
         # ---------------------
         'product_manufacturer',
@@ -145,10 +146,14 @@
         'stock_quant_reserved_qty_uom', # PR https://github.com/OCA/stock-logistics-warehouse/pull/216
         'account_move_line_stock_info',
         'stock_quant_merge',
+        'stock_account_quant_merge', # PR https://github.com/OCA/stock-logistics-warehouse/pull/256
         #
         # OCA/account-invoicing
         # ---------------------
         'account_invoice_merge',
+        'account_invoice_refund_option',
+        'purchase_stock_picking_return_invoicing',
+        'sale_stock_picking_return_invoicing',
         #
         # OCA/purchase-workflow
         # ---------------------
@@ -176,8 +181,8 @@
         # -----------------
         # 'sale_stock_picking_back2draft', -- not yet ported to v9
         'stock_picking_back2draft', # PR https://github.com/OCA/stock-logistics-workflow/pull/276
-        'sale_procurement_group_by_line', # PR https://github.com/OCA/sale-workflow/pull/350
-        'sale_sourced_by_line', # PR https://github.com/OCA/sale-workflow/pull/350
+        'sale_procurement_group_by_line',
+        'sale_sourced_by_line',
         #
         # OCA/bank-statement-reconcile
         # 'account_easy_reconcile', -- migrated to account_mass_reconcile
@@ -189,13 +194,14 @@
         # 'asterisk_click2dial', -- not used
         # 'base_phone', -- not used
         # 'crm_phone', -- not used
-        #'asterisk_click2dial_crm', -- deprecated
+        # 'asterisk_click2dial_crm', -- deprecated
         #
         # OCA/crm
         'crm_deduplicate_acl',
+        'crm_sale_marketing',
         #
         # OCA/social
-        #'mail_debrand', -- Pending to migrate
+        # 'mail_debrand', -- Pending to migrate
         # 'mail_message_name_search', --deprecated
         #
         'base_search_mail_content',
@@ -204,9 +210,17 @@
         'account_due_list', # PR: https://github.com/OCA/account-payment/pull/122
         'account_due_list_aging_comments', # PR: https://github.com/OCA/account-payment/pull/124
         'account_due_list_days_overdue', # PR: https://github.com/OCA/account-payment/pull/123
+        'account_check_printing_report_base',
+        'account_check_printing_report_dlt103',
+        #
+        # OCA/manufacture-reporting
+        # -------------------------
+        'mrp_bom_structure_report_level_1',
+        'mrp_bom_structure_xlsx',
+        'mrp_bom_structure_xls_level_1',
         #
         # Vauxoo
-        #'product_do_merge', -- deprecated
+        # 'product_do_merge', -- deprecated
         #
         # WilldooIT/Pentaho-reports-for-OpenERP
         # 'pentaho_reports' -- deprecated
@@ -217,11 +231,11 @@
         'stock_available_unreserved',
         'stock_demand_estimate',
         'stock_warehouse_orderpoint_stock_info',
-        #'account_bank_statement_extensions', -- deprecated
-        #'l10n_be_coda', -- deprecated
+        # 'account_bank_statement_extensions', -- deprecated
+        # 'l10n_be_coda', -- deprecated
         # 'l10n_be_invoice_bba', -- deprecated
         # 'account_financial_report_webkit_xls', --deprecated
-        #'report_xls', -- deprecated
+        # 'report_xls', -- deprecated
         # OCA/reporting-engine
         #
         'bi_view_editor', # PR: https://github.com/OCA/reporting-engine/pull/59

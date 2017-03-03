@@ -21,8 +21,6 @@ class MrpProduction(models.Model):
             'product_id': line.product_id.id,
             'product_qty': line.product_qty,
             'product_uom': line.product_uom.id,
-            'product_uos_qty': line.product_uos_qty,
-            'product_uos': line.product_uos.id,
             'location_id': location.id,
             'warehouse_id': location.get_warehouse(location)
         }
@@ -32,9 +30,12 @@ class MrpProduction(models.Model):
         data = self._prepare_service_procurement(line)
         return self.env['procurement.order'].create(data)
 
-    @api.model
-    def _make_service_procurement(self, line):
-        """Override standard method"""
-        if line.product_id.type == 'service':
-            proc = self._create_service_procurement(line)
-            proc.run()
+    @api.multi
+    def action_confirm(self):
+        res = super(MrpProduction, self).action_confirm()
+        for production in self:
+            for line in production.product_lines:
+                if line.product_id.type == 'service':
+                    proc = self._create_service_procurement(line)
+                    proc.run()
+        return res
