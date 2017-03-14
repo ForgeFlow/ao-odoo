@@ -147,6 +147,7 @@
         'account_move_line_stock_info',
         'stock_quant_merge',
         'stock_account_quant_merge',
+        'subcontracted_service', # PR https://github.com/OCA/purchase-workflow/pull/351
         #
         # OCA/account-invoicing
         # ---------------------
