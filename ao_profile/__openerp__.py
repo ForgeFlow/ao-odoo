@@ -146,7 +146,7 @@
         'stock_quant_reserved_qty_uom', # PR https://github.com/OCA/stock-logistics-warehouse/pull/216
         'account_move_line_stock_info',
         'stock_quant_merge',
-        'stock_account_quant_merge', # PR https://github.com/OCA/stock-logistics-warehouse/pull/256
+        'stock_account_quant_merge',
         #
         # OCA/account-invoicing
         # ---------------------
@@ -158,13 +158,14 @@
         # OCA/purchase-workflow
         # ---------------------
         'product_by_supplier',
-        'purchase_location_by_line', # PR https://github.com/OCA/purchase-workflow/pull/313
+        'purchase_location_by_line',
         'purchase_delivery_split_date',
         'purchase_request_procurement',
         'purchase_request',
         'purchase_request_to_requisition',
         'purchase_request_to_rfq',
         'purchase_delivery_split_date',
+        'purchase_request_department',
         #
         # OCA/hr-timesheet
         # ----------------
