@@ -147,7 +147,7 @@
         'account_move_line_stock_info',
         'stock_quant_merge',
         'stock_account_quant_merge',
-        'subcontracted_service', # PR https://github.com/OCA/purchase-workflow/pull/351
+        'stock_picking_back2draft', # PR https://github.com/OCA/stock-logistics-workflow/pull/276
         #
         # OCA/account-invoicing
         # ---------------------
@@ -167,6 +167,7 @@
         'purchase_request_to_rfq',
         'purchase_delivery_split_date',
         'purchase_request_department',
+        'subcontracted_service', # PR https://github.com/OCA/purchase-workflow/pull/351
         #
         # OCA/hr-timesheet
         # ----------------
@@ -182,7 +183,6 @@
         # OCA/sale-workflow
         # -----------------
         # 'sale_stock_picking_back2draft', -- not yet ported to v9
-        'stock_picking_back2draft', # PR https://github.com/OCA/stock-logistics-workflow/pull/276
         'sale_procurement_group_by_line',
         'sale_sourced_by_line',
         #
