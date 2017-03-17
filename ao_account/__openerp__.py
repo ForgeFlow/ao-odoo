@@ -11,7 +11,8 @@
     "category": "Accounting",
     "depends": ["account"],
     "data": [
-        "views/report_invoice.xml"
+        "views/report_invoice.xml",
+        "views/partner_view.xml"
     ],
     "license": "AGPL-3",
     'installable': True,
