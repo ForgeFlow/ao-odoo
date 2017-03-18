@@ -9,6 +9,7 @@ AO-specific customizations on purchase
 This module contains customizations specific to Aleph Objects.
 
 * Add a menu entry 'Product Variant' to the 'Purchases' menu.
+* Adds a button to the purchase variants to purchases
 
 Credits
 =======
