@@ -29,6 +29,15 @@
               name="Product Variants"
               parent="purchase.menu_procurement_management" sequence="21"/>
 
+    <record model="ir.actions.act_window"
+            id="action_purchase_line_product_variant_tree">
+        <field name="context">{}</field>
+        <field name="domain">[('product_id','in',active_ids)]</field>
+        <field name="name">Purchases</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_id" ref="purchase.purchase_order_line_tree"/>
+    </record>
+
     <record model="ir.ui.view" id="product_form_view_purchase_order_button">
         <field name="name">product.product.purchase.order</field>
         <field name="model">product.product</field>
@@ -36,7 +45,8 @@
         <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-               <button class="oe_stat_button" name="%(purchase.action_purchase_line_product_tree)d"
+               <button class="oe_stat_button"
+                       name="%(ao_purchase.action_purchase_line_product_variant_tree)d"
                    type="action" icon="fa-shopping-cart">
                    <field string="Purchases" name="purchase_count" widget="statinfo"/>
                </button>
