@@ -140,14 +140,15 @@
         'stock_putaway_product',
         'stock_orderpoint_manual_procurement',
         'stock_orderpoint_uom',
-        'stock_inventory_revaluation', # PR https://github.com/OCA/stock-logistics-warehouse/pull/213
+        'stock_inventory_revaluation',
         'stock_valuation_account_manual_adjustment',
         'account_move_line_product',
-        'stock_quant_reserved_qty_uom', # PR https://github.com/OCA/stock-logistics-warehouse/pull/216
+        'stock_quant_reserved_qty_uom',
         'account_move_line_stock_info',
         'stock_quant_merge',
         'stock_account_quant_merge',
-        'stock_picking_back2draft', # PR https://github.com/OCA/stock-logistics-workflow/pull/276
+        # 'stock_picking_back2draft', Deprecated - See
+        # https://github.com/OCA/stock-logistics-workflow/pull/276
         #
         # OCA/account-invoicing
         # ---------------------
@@ -167,7 +168,7 @@
         'purchase_request_to_rfq',
         'purchase_delivery_split_date',
         'purchase_request_department',
-        'subcontracted_service', # PR https://github.com/OCA/purchase-workflow/pull/351
+        'subcontracted_service',
         #
         # OCA/hr-timesheet
         # ----------------
@@ -190,7 +191,7 @@
         # 'account_easy_reconcile', -- migrated to account_mass_reconcile
         # 'account_advanced_reconcile', -- migrated to account_mass_reconcile
         # 'account_mass_reconcile', -- pending to install
-        # 'account_advanced_reconcile_transaction_by_purchase_line', -- pending to migrate
+        # 'account_advanced_reconcile_transaction_by_purchase_line'. pending to migrate
         #
         # OCA/connector-telephony
         # 'asterisk_click2dial', -- not used
@@ -240,7 +241,7 @@
         # 'report_xls', -- deprecated
         # OCA/reporting-engine
         #
-        'bi_view_editor', # PR: https://github.com/OCA/reporting-engine/pull/59
+        'bi_view_editor',
         #
         # ao-odoo
         # -------
