@@ -13,16 +13,13 @@
             </field>
         </record>
         
-        <function model="ir.values" name="set_default">
-            <value>crm.helpdesk</value>
-            <value>helpdesk_reply_to</value>
-            <value>support@lulzbot.com</value>
-        </function>
-        
-        <function model="ir.values" name="set_default">
-            <value>crm.helpdesk</value>
-            <value>replace_helpdesk_email_from</value>
-            <value>1</value>
-        </function>
+        <function model="ir.values" name="set_default"
+                  id="default_helpdesk_reply_to"
+            eval="('crm.helpdesk', 'helpdesk_reply_to', 'support@lulzbot.com')"/>
+
+        <function model="ir.values" name="set_default"
+                  id="default_replace_helpdesk_email_from"
+            eval="('crm.helpdesk', 'replace_helpdesk_email_from', 1)"/>
+
     </data>
 </openerp>
