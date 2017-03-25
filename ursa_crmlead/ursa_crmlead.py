@@ -33,15 +33,14 @@ class UrsaLeads(models.Model):
 class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
-    @api.cr_uid_context
-    def message_get_reply_to(self, cr, uid, ids, default=None, context=None):
-        model_name = context.get('thread_model') or self._name
-        if model_name == 'crm.lead':
-            ir_values = self.pool.get('ir.values')
-            lead_reply_to = ir_values.get_default(cr, uid, 'crm',
+    @api.model
+    def message_get_reply_to(self, res_ids, default=None):
+        if self._name == 'crm.lead':
+            ir_values = self.env['ir.values']
+            lead_reply_to = ir_values.get_default('crm',
                                                   'lead_reply_to')
-            res = dict.fromkeys(ids, lead_reply_to)
+            res = dict.fromkeys(res_ids, lead_reply_to)
             return res
         else:
             return super(MailThread, self).message_get_reply_to(
-                cr, uid, ids, default=default, context=context)
+                res_ids, default=default)
