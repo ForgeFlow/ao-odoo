@@ -21,26 +21,19 @@
 
 from openerp import models, fields, api, _
 
+
 class ursa_helpdesk_mail(models.Model):
     _inherit = 'mail.mail'
-    
-    #def create(self, cr, uid, values, context=None):
 
-    #    ir_values = self.pool.get('ir.values')
-        
-    #    replacefrom = ir_values.get_default(cr, uid, 'crm.helpdesk', 'replace_helpdesk_email_from')
-    #    helpdeskemail = ir_values.get_default(cr, uid, 'crm.helpdesk', 'helpdesk_reply_to')
-        
-    #    if replacefrom:
-    #        values['email_from'] = 'Helpdesk<'+helpdeskemail+'>'  
-    
-    #    return super(ursa_helpdesk_mail, self).create(cr, uid, values, context)
-
-    @api.model
-    def send_get_email_dict(self, mail, partner=None):
+    @api.multi
+    def send_get_email_dict(self, partner=None):
         ir_values = self.env['ir.values']
-        replacefrom = ir_values.get_default('crm.helpdesk', 'replace_helpdesk_email_from')
-        helpdeskemail = ir_values.get_default('crm.helpdesk', 'helpdesk_reply_to')
-        if replacefrom and 'helpdesk' in mail.model:
-            mail.email_from = 'Helpdesk <'+helpdeskemail+'>'   
-        return  super(ursa_helpdesk_mail, self).send_get_email_dict(mail, partner= partner)
+        replacefrom = ir_values.get_default('crm.helpdesk',
+                                            'replace_helpdesk_email_from')
+        helpdeskemail = ir_values.get_default('crm.helpdesk',
+                                              'helpdesk_reply_to')
+        for mail in self:
+            if replacefrom and 'helpdesk' in mail.model:
+                mail.email_from = 'Helpdesk <'+helpdeskemail+'>'
+            return super(ursa_helpdesk_mail, mail).send_get_email_dict(
+                partner=partner)
