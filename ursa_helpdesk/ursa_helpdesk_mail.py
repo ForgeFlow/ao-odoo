@@ -27,13 +27,14 @@ class ursa_helpdesk_mail(models.Model):
 
     @api.multi
     def send_get_email_dict(self, partner=None):
+        self.ensure_one()
         ir_values = self.env['ir.values']
         replacefrom = ir_values.get_default('crm.helpdesk',
                                             'replace_helpdesk_email_from')
         helpdeskemail = ir_values.get_default('crm.helpdesk',
                                               'helpdesk_reply_to')
-        for mail in self:
-            if replacefrom and 'helpdesk' in mail.model:
-                mail.email_from = 'Helpdesk <'+helpdeskemail+'>'
-            return super(ursa_helpdesk_mail, mail).send_get_email_dict(
-                partner=partner)
+
+        if replacefrom and 'helpdesk' in self.model:
+            self.email_from = 'Helpdesk <'+helpdeskemail+'>'
+        return super(ursa_helpdesk_mail, self).send_get_email_dict(
+            partner=partner)
