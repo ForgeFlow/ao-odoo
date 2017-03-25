@@ -38,17 +38,13 @@ class UrsaHelpdesk(models.Model):
             msg, update_vals=update_vals)
 
 
-class MailThread(models.AbstractModel):
-    _inherit = 'mail.thread'
+class Message(models.Model):
+    _inherit = 'mail.message'
 
     @api.model
-    def message_get_reply_to(self, res_ids, default=None):
-        if self._name == 'crm.helpdesk':
-            ir_values = self.env['ir.values']
-            helpdeskemail = ir_values.get_default('crm.helpdesk',
-                                                  'helpdesk_reply_to')
-            res = dict.fromkeys(res_ids, helpdeskemail)
-            return res
-        else:
-            return super(MailThread, self).message_get_reply_to(
-                res_ids, default=default)
+    def _get_reply_to(self, values):
+        if values.get('model', False) == 'crm.helpdesk':
+            helpdeskemail = self.env['ir.values'].get_default(
+                'crm.helpdesk', 'helpdesk_reply_to')
+            values['email_from'] = helpdeskemail
+        return super(Message, self)._get_reply_to(values)

@@ -30,17 +30,13 @@ class UrsaLeads(models.Model):
                            default='sales@lulzbot.com')
 
 
-class MailThread(models.AbstractModel):
-    _inherit = 'mail.thread'
+class Message(models.Model):
+    _inherit = 'mail.message'
 
     @api.model
-    def message_get_reply_to(self, res_ids, default=None):
-        if self._name == 'crm.lead':
-            ir_values = self.env['ir.values']
-            lead_reply_to = ir_values.get_default('crm',
-                                                  'lead_reply_to')
-            res = dict.fromkeys(res_ids, lead_reply_to)
-            return res
-        else:
-            return super(MailThread, self).message_get_reply_to(
-                res_ids, default=default)
+    def _get_reply_to(self, values):
+        if values.get('model', False) == 'crm.lead':
+            lead_reply_to = self.env['ir.values'].get_default('crm',
+                                                              'lead_reply_to')
+            values['email_from'] = lead_reply_to
+        return super(Message, self)._get_reply_to(values)
