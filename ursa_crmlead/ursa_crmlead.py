@@ -29,14 +29,15 @@ class UrsaLeads(models.Model):
                            readonly=True, help="Reply",
                            default='sales@lulzbot.com')
 
-
-class Message(models.Model):
-    _inherit = 'mail.message'
-
     @api.model
-    def _get_reply_to(self, values):
-        if values.get('model', False) == 'crm.lead':
-            lead_reply_to = self.env['ir.values'].get_default('crm',
-                                                              'lead_reply_to')
-            values['email_from'] = lead_reply_to
-        return super(Message, self)._get_reply_to(values)
+    def message_get_reply_to(self, res_ids, default=None):
+
+        model_name = self.env.context.get('thread_model') or self._name
+        if model_name == 'crm.lead':
+            lead_reply_to = self.env['ir.values'].get_default(
+                'crm.lead', 'lead_reply_to')
+            res = dict.fromkeys(res_ids, lead_reply_to)
+            return res
+        else:
+            return super(UrsaLeads, self).message_get_reply_to(
+                res_ids, default=default)

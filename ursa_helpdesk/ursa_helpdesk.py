@@ -27,7 +27,7 @@ class UrsaHelpdesk(models.Model):
 
     reply_to = fields.Char(string='Reply-To', invisible=True,
                            readonly=True, help="Reply",
-                           default='sales@lulzbot.com')
+                           default='support@lulzbot.com')
 
     @api.multi
     def message_update(self, msg, update_vals=None):
@@ -37,14 +37,15 @@ class UrsaHelpdesk(models.Model):
         return super(UrsaHelpdesk, self).message_update(
             msg, update_vals=update_vals)
 
-
-class Message(models.Model):
-    _inherit = 'mail.message'
-
     @api.model
-    def _get_reply_to(self, values):
-        if values.get('model', False) == 'crm.helpdesk':
+    def message_get_reply_to(self, res_ids, default=None):
+
+        model_name = self.env.context.get('thread_model') or self._name
+        if model_name == 'crm.helpdesk':
             helpdeskemail = self.env['ir.values'].get_default(
                 'crm.helpdesk', 'helpdesk_reply_to')
-            values['email_from'] = helpdeskemail
-        return super(Message, self)._get_reply_to(values)
+            res = dict.fromkeys(res_ids, helpdeskemail)
+            return res
+        else:
+            return super(UrsaHelpdesk, self).message_get_reply_to(
+                res_ids, default=default)
