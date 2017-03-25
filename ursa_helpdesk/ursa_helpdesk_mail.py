@@ -34,7 +34,7 @@ class ursa_helpdesk_mail(models.Model):
         helpdeskemail = ir_values.get_default('crm.helpdesk',
                                               'helpdesk_reply_to')
 
-        if replacefrom and 'helpdesk' in self.model:
+        if replacefrom and self.model == 'crm.helpdesk':
             self.email_from = 'Helpdesk <'+helpdeskemail+'>'
         return super(ursa_helpdesk_mail, self).send_get_email_dict(
             partner=partner)
