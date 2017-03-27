@@ -134,6 +134,7 @@
         'database_cleanup',
         'auditlog',
         'base_search_fuzzy',
+        'disable_odoo_online',
         #
         # OCA/stock-logistics-warehouse
         # ---------------------
@@ -216,6 +217,9 @@
         'account_check_printing_report_base',
         'account_check_printing_report_dlt103',
         #
+        # OCA/manufacture-reporting
+        # -------------------------
+        'mrp_bom_component_menu',
         # OCA/manufacture-reporting
         # -------------------------
         'mrp_bom_structure_report_level_1',
