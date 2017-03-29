@@ -187,6 +187,7 @@
         # 'sale_stock_picking_back2draft', -- not yet ported to v9
         'sale_procurement_group_by_line',
         'sale_sourced_by_line',
+        'sale_force_invoiced',
         #
         # OCA/bank-statement-reconcile
         # 'account_easy_reconcile', -- migrated to account_mass_reconcile
@@ -207,6 +208,7 @@
         # OCA/social
         # 'mail_debrand', -- Pending to migrate
         # 'mail_message_name_search', --deprecated
+        'message_auto_subscribe_notify_force_send',
         #
         'base_search_mail_content',
         # OCA/account-payment
@@ -217,7 +219,7 @@
         'account_check_printing_report_base',
         'account_check_printing_report_dlt103',
         #
-        # OCA/manufacture-reporting
+        # OCA/manufacture
         # -------------------------
         'mrp_bom_component_menu',
         # OCA/manufacture-reporting
