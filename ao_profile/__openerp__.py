@@ -218,6 +218,7 @@
         'account_due_list_days_overdue', # PR: https://github.com/OCA/account-payment/pull/123
         'account_check_printing_report_base',
         'account_check_printing_report_dlt103',
+        'account_partner_reconcile',
         #
         # OCA/manufacture
         # -------------------------
