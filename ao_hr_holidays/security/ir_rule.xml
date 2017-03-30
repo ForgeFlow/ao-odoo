@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    <record id="hr_holidays.property_rule_holidays_employee" model="ir.rule">
+        <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+    </record>
+
+  </data>
+</openerp>
