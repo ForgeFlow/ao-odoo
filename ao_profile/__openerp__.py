@@ -157,6 +157,7 @@
         'account_invoice_refund_option',
         'purchase_stock_picking_return_invoicing',
         'sale_stock_picking_return_invoicing',
+        'account_invoice_view_payment',
         #
         # OCA/purchase-workflow
         # ---------------------
