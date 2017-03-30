@@ -275,6 +275,7 @@
         # 'ao_hr', -- deprecated
         # 'ao_hr_payroll', -- deprecated
         'ao_hr_timesheet_sheet',
+        'ao_hr_holidays',
         'ao_login_rename',
         # 'ao_mail_debrand', --pending to migrate
         'ao_mrp',
