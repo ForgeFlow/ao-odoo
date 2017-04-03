@@ -18,5 +18,29 @@
             </field>
         </record>
 
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <field name="date_order" position="before">
+                    <field name="create_date"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="priority">4</field>
+            <field name="arch" type="xml">
+                <field name="date_order" position="before">
+                    <field name="create_date"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
