@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+        <record id="view_task_form2" model="ir.ui.view">
+            <field name="name">project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <field name="description" position="after">
+                    <field name="work_ids" groups="project.group_tasks_work_on_tasks">
+                        <tree string="Task Work" editable="top">
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="user_id" context="{'default_groups_ref': ['base.group_user', 'base.group_partner_manager', 'project.group_project_user']}"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+</odoo>
