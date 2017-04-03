@@ -9,6 +9,8 @@ AO-specific customizations on stock
 This module contains customizations specific to Aleph Objects.
 
 * Pickings should show both the source and destination location zones
+* Display picking creation date in picking list
+
 
 Credits
 =======
