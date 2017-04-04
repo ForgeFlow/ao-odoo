@@ -294,6 +294,7 @@
         'product_bom_standard_cost',
         'stock_account_change_product_valuation',
         'crm_helpdesk_button_open',
+        'crm_helpdesk_add_suggested_recipient',
         'mrp_production_service',
         'project_task_work',
         # 'product_uom_change_fix', --deprecated
