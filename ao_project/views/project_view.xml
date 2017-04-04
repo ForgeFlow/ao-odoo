@@ -8,9 +8,9 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field eval="2" name="priority"/>
             <field name="arch" type="xml">
-                <field name="name" position="attributes">
+                <h1 position="attributes">
                     <attribute name="class"/>
-                </field>
+                </h1>
             </field>
         </record>
 
