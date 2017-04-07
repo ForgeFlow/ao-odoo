@@ -116,6 +116,8 @@
         #'account_financial_report_webkit', -- deprecated
         'account_financial_report_qweb',
         'mis_builder',
+        'customer_outstanding_statement',
+        'customer_activity_statement',
         #
         # OCA/account-financial-tools
         'account_move_line_purchase_info',
