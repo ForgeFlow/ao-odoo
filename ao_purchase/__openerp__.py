@@ -12,7 +12,8 @@
     "depends": ["purchase", "product"],
     "data": [
         "views/purchase_order_view.xml",
-        "views/product_view.xml"
+        "views/product_view.xml",
+        "views/report_purchase_order.xml"
     ],
     "license": "AGPL-3",
     'installable': True,
