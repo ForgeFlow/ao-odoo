@@ -222,6 +222,7 @@
         'account_check_printing_report_base',
         'account_check_printing_report_dlt103',
         'account_partner_reconcile',
+        'account_payment_show_invoices', #PR: https://github.com/OCA/account-payment/pull/133
         #
         # OCA/manufacture
         # -------------------------
