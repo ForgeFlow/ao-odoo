@@ -10,6 +10,7 @@ This module contains customizations specific to Aleph Objects.
 
 * Add a menu entry 'Product Variant' to the 'Purchases' menu.
 * Adds a button to the purchase variants to purchases
+* Purchase form shows name of the warehouse partner, not warehouse name
 
 Credits
 =======
