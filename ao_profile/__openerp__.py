@@ -233,6 +233,10 @@
         'mrp_bom_structure_xlsx',
         'mrp_bom_structure_xlsx_level_1',
         #
+        # OCA/project-reporting
+        # ---------------------
+        'project_task_report',
+        #
         # Vauxoo
         # 'product_do_merge', -- deprecated
         #
