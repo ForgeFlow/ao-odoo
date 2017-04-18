@@ -11,8 +11,10 @@
     "category": "Accounting",
     "depends": ["account"],
     "data": [
+        "security/ir.model.access.csv",
         "views/report_invoice.xml",
-        "views/partner_view.xml"
+        "views/partner_view.xml",
+        "views/invoice_analysis_report.xml"
     ],
     "license": "AGPL-3",
     'installable': True,
