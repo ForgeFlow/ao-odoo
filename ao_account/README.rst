@@ -8,7 +8,8 @@ AO-specific customizations on sale
 
 This module contains customizations specific to Aleph Objects.
 
-* Sales order list should be groupable by status
+* Sales order list should be groupable by status.
+* Accounting reports are now accessible for billing users too.
 
 Credits
 =======
