@@ -10,6 +10,8 @@ This module contains customizations specific to Aleph Objects.
 
 * Sales order list should be groupable by status.
 * Accounting reports are now accessible for billing users too.
+* Allow to change the *Purchase Unit of Measure* in product even if they
+  related account journal items.
 
 Credits
 =======
