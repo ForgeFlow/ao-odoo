@@ -137,6 +137,7 @@
         'auditlog',
         'base_search_fuzzy',
         'disable_odoo_online',
+        'report_paper_wkhtmltopdf_params',
         #
         # OCA/stock-logistics-warehouse
         # ---------------------
@@ -173,6 +174,11 @@
         'purchase_delivery_split_date',
         'purchase_request_department',
         'subcontracted_service',
+        'purchase_order_approved', # PR:https://github.com/OCA/purchase-workflow/pull/381
+        #
+        # OCA/hr
+        # ------
+        'hr_holiday_notify_employee_manager',
         #
         # OCA/hr-timesheet
         # ----------------
@@ -191,6 +197,7 @@
         'sale_procurement_group_by_line',
         'sale_sourced_by_line',
         'sale_force_invoiced',
+        'sale_validity',
         #
         # OCA/bank-statement-reconcile
         # 'account_easy_reconcile', -- migrated to account_mass_reconcile
@@ -291,6 +298,7 @@
         'ao_purchase',
         'ao_purchase_dept',
         'ao_sale',
+        'ao_crm',
         # 'ao_stock', -- deprecated
         # 'ao_stock_account', --deprecated
         'stock_picking_menu',
