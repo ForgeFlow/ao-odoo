@@ -151,6 +151,9 @@
         'account_move_line_stock_info',
         'stock_quant_merge',
         'stock_account_quant_merge',
+        'stock_cycle_count', # PR: https://github.com/OCA/stock-logistics-warehouse/pull/251
+        'stock_inventory_verification_request',
+        'stock_inventory_exclude_sublocation',
         # 'stock_picking_back2draft', Deprecated - See
         # https://github.com/OCA/stock-logistics-workflow/pull/276
         #
