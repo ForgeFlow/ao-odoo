@@ -137,7 +137,6 @@
         'auditlog',
         'base_search_fuzzy',
         'disable_odoo_online',
-        'report_paper_wkhtmltopdf_params',
         #
         # OCA/stock-logistics-warehouse
         # ---------------------
@@ -151,7 +150,7 @@
         'account_move_line_stock_info',
         'stock_quant_merge',
         'stock_account_quant_merge',
-        'stock_cycle_count', # PR: https://github.com/OCA/stock-logistics-warehouse/pull/251
+        'stock_cycle_count',
         'stock_inventory_verification_request',
         'stock_inventory_exclude_sublocation',
         # 'stock_picking_back2draft', Deprecated - See
@@ -226,9 +225,9 @@
         'base_search_mail_content',
         # OCA/account-payment
         # -------------------
-        'account_due_list', # PR: https://github.com/OCA/account-payment/pull/122
-        'account_due_list_aging_comments', # PR: https://github.com/OCA/account-payment/pull/124
-        'account_due_list_days_overdue', # PR: https://github.com/OCA/account-payment/pull/123
+        'account_due_list',
+        'account_due_list_aging_comments',
+        'account_due_list_days_overdue',
         'account_check_printing_report_base',
         'account_check_printing_report_dlt103',
         'account_partner_reconcile',
