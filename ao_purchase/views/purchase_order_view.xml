@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
+
     <record id="purchase_order_form" model="ir.ui.view">
         <field name="name">purchase.order.form</field>
         <field name="model">purchase.order</field>
@@ -10,4 +11,17 @@
             </field>
         </field>
     </record>
+
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">request.quotation.select</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <filter name="message_unread" position="replace">
+                <filter string="Unread Messages" name="message_needaction"
+                        domain="[('message_needaction','=',True)]"/>
+            </filter>
+        </field>
+    </record>
+
 </openerp>

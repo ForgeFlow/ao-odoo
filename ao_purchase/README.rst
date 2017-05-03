@@ -14,6 +14,9 @@ This module contains customizations specific to Aleph Objects.
 * Request for quotations can only be printed if they are not in state *To
   Approve*.
 * Purchase Orders cannot be printed if they are not Approved.
+* Add a *Unread Messages* filter to bypass a
+  `bug <https://github.com/odoo/odoo/issues/16763>`_ with *New Mail* filter of
+  odoo standard.
 
 Credits
 =======
