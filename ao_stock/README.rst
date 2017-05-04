@@ -10,7 +10,7 @@ This module contains customizations specific to Aleph Objects.
 
 * Pickings should show both the source and destination location zones
 * Display picking creation date in picking list
-
+* Show *Date* and hide *Expected Date* in stock moves to everyone.
 
 Credits
 =======
