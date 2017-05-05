@@ -177,6 +177,7 @@
         'purchase_request_department',
         'subcontracted_service',
         'purchase_order_approved', # PR:https://github.com/OCA/purchase-workflow/pull/381
+        'purchase_request_to_rfq_order_approved', # PR:https://github.com/OCA/purchase-workflow/pull/388
         #
         # OCA/hr
         # ------
