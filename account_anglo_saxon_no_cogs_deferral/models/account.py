@@ -5,10 +5,10 @@
 from openerp import api, models
 
 
-class AccountInvoiceLine(models.Model):
-    _inherit = 'account.invoice.line'
+class AccountInvoice(models.Model):
+    _inherit = "account.invoice"
 
     @api.model
-    def _anglo_saxon_sale_move_lines(self, i_line, res):
+    def _anglo_saxon_sale_move_lines(self, i_line):
         # We override the standard method to invalidate it
         return []

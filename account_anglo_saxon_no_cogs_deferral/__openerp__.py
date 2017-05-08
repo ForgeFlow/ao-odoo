@@ -8,7 +8,7 @@
     "summary": "Invalidates the COGS deferral introduced by the anglo saxon "
                "module",
     "version": "9.0.1.0.0",
-    "author": "Eficent Business and IT Consulting Services S.L., "
+    "author": "Eficent,"
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Accounting & Finance",
