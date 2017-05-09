@@ -130,6 +130,6 @@ class crm_helpdesk(osv.osv):
             This override updates the document according to the email.
         """
         custom_values = self._prepare_message_new_custom_values(
-            cr, uid, custom_values, context=context)
+            cr, uid, msg, custom_values, context=context)
         return super(crm_helpdesk, self).message_new(
             cr, uid, msg, custom_values=custom_values, context=context)
