@@ -14,5 +14,19 @@
             </field>
         </record>
 
+
+
+        <record model="ir.ui.view" id="crm_case_form_view_helpdesk">
+            <field name="name">CRM - Helpdesk Support Form</field>
+            <field name="model">crm.helpdesk</field>
+            <field name="inherit_id"
+                   ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
+            <field name="arch" type="xml">
+                <field name="email_from" position="before">
+                    <field name="contact_name"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
