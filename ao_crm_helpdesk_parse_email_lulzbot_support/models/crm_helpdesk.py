@@ -32,7 +32,7 @@ class CrmHelpdesk(osv.osv):
         to = msg.get('to', '')
         subject.lower()
         if subject.contains('Support Inquiry') and to.contains(
-                'support@lulzbot.com'):
+                'support@'):
             if custom_values is None:
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
