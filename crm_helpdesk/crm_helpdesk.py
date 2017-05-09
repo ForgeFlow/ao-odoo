@@ -108,11 +108,8 @@ class crm_helpdesk(osv.osv):
     # Mail gateway
     # -------------------------------------------------------
 
-    def message_new(self, cr, uid, msg, custom_values=None, context=None):
-        """ Overrides mail_thread message_new that is called by the mailgateway
-            through message_process.
-            This override updates the document according to the email.
-        """
+    def _prepare_message_new_custom_values(self, cr, uid, msg,
+                                           custom_values=None, context=None):
         if custom_values is None:
             custom_values = {}
         desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
@@ -125,6 +122,14 @@ class crm_helpdesk(osv.osv):
             'partner_id': msg.get('author_id', False),
         }
         defaults.update(custom_values)
-        return super(crm_helpdesk, self).message_new(cr, uid, msg, custom_values=defaults, context=context)
+        return defaults
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    def message_new(self, cr, uid, msg, custom_values=None, context=None):
+        """ Overrides mail_thread message_new that is called by the mailgateway
+            through message_process.
+            This override updates the document according to the email.
+        """
+        custom_values = self._prepare_message_new_custom_values(
+            cr, uid, custom_values, context=context)
+        return super(crm_helpdesk, self).message_new(
+            cr, uid, msg, custom_values=custom_values, context=context)
