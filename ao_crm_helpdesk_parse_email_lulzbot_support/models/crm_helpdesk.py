@@ -17,8 +17,7 @@ class CrmHelpdesk(osv.osv):
         )
 
         def parse_description(description):
-            fields = ['email', 'first and last name',
-                      'description of the issue']
+            fields = ['email', 'first and last name']
             _dict = {}
             description = description.lower()
             for line in description.split('\n'):
