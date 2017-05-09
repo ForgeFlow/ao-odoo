@@ -29,9 +29,8 @@ class CrmHelpdesk(osv.osv):
                             _dict[field] = line.split(':')[1].strip()
             return _dict
         subject = msg.get('subject', '')
-        to = msg.get('to', '')
         subject.lower()
-        if subject.contains('Support Inquiry'):
+        if 'support inquiry' in subject:
             if custom_values is None:
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
