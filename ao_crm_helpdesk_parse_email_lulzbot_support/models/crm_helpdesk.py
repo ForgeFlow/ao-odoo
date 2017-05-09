@@ -44,3 +44,4 @@ class CrmHelpdesk(osv.osv):
             }
             msg['from'] = _dict.get('email')
             custom_values.update(vals)
+        return custom_values
