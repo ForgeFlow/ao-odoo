@@ -11,7 +11,7 @@ class CrmHelpdesk(osv.osv):
 
     def _prepare_message_new_custom_values(self, cr, uid, msg,
                                            custom_values=None, context=None):
-        custom_values = super(
+        custom_values, msg = super(
             CrmHelpdesk, self)._prepare_message_new_custom_values(
             cr, uid, msg, custom_values=custom_values, context=context
         )
@@ -28,7 +28,7 @@ class CrmHelpdesk(osv.osv):
                             _dict[field] = line.split(':')[1].strip()
             return _dict
         subject = msg.get('subject', '')
-        subject.lower()
+        subject = subject.lower()
         if 'support inquiry' in subject:
             if custom_values is None:
                 custom_values = {}
@@ -38,5 +38,6 @@ class CrmHelpdesk(osv.osv):
                 'email_from': _dict.get('email'),
                 'contact_name': _dict.get('first and last name')
             }
+            msg['from'] = _dict.get('email')
             custom_values.update(vals)
-        return custom_values
+        return custom_values, msg

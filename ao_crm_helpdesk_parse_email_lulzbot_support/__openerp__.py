@@ -8,7 +8,7 @@
     'author': 'Eficent',
     'website': 'http://www.eficent.com',
     'category': 'CRM',
-    'depends': ['crm_helpdesk', 'ao_crm_helpdesk'],
+    'depends': ['crm_helpdesk'],
     'active': False,
     'installable': True,
 }

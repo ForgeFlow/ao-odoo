@@ -52,6 +52,7 @@ class crm_helpdesk(osv.osv):
             'date_closed': fields.datetime('Closed', readonly=True),
             'partner_id': fields.many2one('res.partner', 'Partner'),
             'email_cc': fields.text('Watchers Emails', size=252 , help="These email addresses will be added to the CC field of all inbound and outbound emails for this record before being sent. Separate multiple email addresses with a comma"),
+            'contact_name': fields.char('Contact Name', size=64),
             'email_from': fields.char('Email', size=128, help="Destination email for email gateway"),
             'date': fields.datetime('Date'),
             'ref': fields.reference('Reference', selection=openerp.addons.base.res.res_request.referencable_models),
@@ -122,14 +123,14 @@ class crm_helpdesk(osv.osv):
             'partner_id': msg.get('author_id', False),
         }
         defaults.update(custom_values)
-        return defaults
+        return defaults, msg
 
     def message_new(self, cr, uid, msg, custom_values=None, context=None):
         """ Overrides mail_thread message_new that is called by the mailgateway
             through message_process.
             This override updates the document according to the email.
         """
-        custom_values = self._prepare_message_new_custom_values(
+        custom_values, msg = self._prepare_message_new_custom_values(
             cr, uid, msg, custom_values, context=context)
         return super(crm_helpdesk, self).message_new(
             cr, uid, msg, custom_values=custom_values, context=context)

@@ -27,7 +27,10 @@
                             <group>
                                 <group string="Communication">
                                     <field name="partner_id"
-                                        on_change="on_change_partner_id(partner_id)"/>
+                                        on_change="on_change_partner_id(partner_id)"
+                                        context="{'default_name': contact_name,
+                                        'default_email': email_from}"/>
+                                    <field name="contact_name"/>
                                     <field name="email_from"/>
                                 </group>
                                 <group string="Categorization">
