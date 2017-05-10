@@ -17,7 +17,7 @@ class CrmHelpdesk(osv.osv):
         )
 
         def parse_description(description):
-            fields = ['email', 'first and last name']
+            fields = ['email', 'first & last name']
             _dict = {}
             description = description.lower()
             for line in description.split('\n'):
@@ -34,9 +34,16 @@ class CrmHelpdesk(osv.osv):
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
             _dict = parse_description(desc)
+            email_from = _dict.get('email')
+            contact_name = _dict.get('first & last name').title()
+            # Search for an existing partner:
+            partner_id = self.pool.get('res.partner').search(cr, uid, [
+                '|', ('name', '=', contact_name),
+                ('email', '=', email_from)], context=context, limit=1)
             vals = {
-                'email_from': _dict.get('email'),
-                'contact_name': _dict.get('first and last name')
+                'email_from': email_from,
+                'contact_name': contact_name,
+                'partner_id': partner_id[0] if partner_id else False,
             }
             msg['from'] = _dict.get('email')
             custom_values.update(vals)
