@@ -9,9 +9,6 @@
     "website": "http://www.eficent.com",
     "category": "CRM",
     "depends": ["crm_helpdesk"],
-    "data": [
-        "views/crm_helpdesk_view.xml"
-    ],
     "license": "AGPL-3",
     'installable': True,
 }
