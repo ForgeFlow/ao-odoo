@@ -9,10 +9,11 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Warehouse Management",
-    "depends": ["stock"],
+    "depends": ["stock", "stock_inventory_exclude_sublocation"],
     "data": [
         "views/stock_view.xml",
-        "views/report_stockpicking_operations.xml"
+        "views/report_stockpicking_operations.xml",
+        "views/report_stockinventory.xml"
     ],
     "license": "AGPL-3",
     'installable': True,
