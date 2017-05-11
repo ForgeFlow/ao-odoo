@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_inventory_ao"
+          inherit_id="stock.report_inventory">
+        <xpath expr="//table[1]" position="replace">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th><strong>Inventory</strong></th>
+                        <th t-if="o.exclude_sublocation"><strong>Location</strong></th>
+                        <th><strong>Date</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span t-field="o.name"/>
+                        </td>
+                        <td t-if="o.exclude_sublocation">
+                            <span t-field="o.location_id"/>
+                        </td>
+                        <td>
+                            <span t-field="o.date"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+
+</odoo>
