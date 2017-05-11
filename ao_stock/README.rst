@@ -11,6 +11,8 @@ This module contains customizations specific to Aleph Objects.
 * Pickings should show both the source and destination location zones
 * Display picking creation date in picking list
 * Show *Date* and hide *Expected Date* in stock moves to everyone.
+* Show inventory location for stock inventories that exclude sublocations
+  (this will show a location in zero-confirmations).
 
 Credits
 =======
