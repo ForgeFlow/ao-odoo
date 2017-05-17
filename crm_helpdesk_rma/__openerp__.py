@@ -11,8 +11,8 @@
     "depends": ["crm_helpdesk", "rma"],
     "license": "AGPL-3",
     "data": [
-        'views/crm_helpdesk_view.xml',
         'views/rma_order_view.xml',
+        'views/crm_helpdesk_view.xml',
     ],
     'installable': True,
 }

@@ -8,15 +8,21 @@
             <field name="inherit_id"
                    ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
             <field name="arch" type="xml">
-                <header position="inside">
-                    <button class="oe_stat_button"
-                            name="%(action_rma_customer)d"
+                <field name="state" position="before">
+                    <button name="%(crm_helpdesk_rma.action_helpdesk_rma_customer)d"
                             string="Create RMA"
                             type="action"
                             context="{'default_originating_helpdesk_id': active_id, 'default_partner_id': partner_id}">
                     </button>
-                </header>
+                </field>
+                <notebook position="inside">
+                    <page name="rma" string="RMA">
+                        <field name="rma_order_line_ids" nolabel="1"
+                               create="false"/>
+                    </page>
+                </notebook>
             </field>
+        </record>
 
     </data>
 </openerp>

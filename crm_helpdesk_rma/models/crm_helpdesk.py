@@ -8,7 +8,7 @@ from openerp import api, fields, models
 class CrmHelpdesk(models.Model):
     _inherit = "crm.helpdesk"
 
-    rma_order_line_ids = fields.One2Many(
+    rma_order_line_ids = fields.One2many(
         string='RMA Order Lines',
         comodel_name='rma.order.line',
         inverse_name='helpdesk_id',
