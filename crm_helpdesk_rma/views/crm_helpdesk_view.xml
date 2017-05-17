@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="crm_case_form_view_helpdesk">
+            <field name="name">CRM - Helpdesk Support Form</field>
+            <field name="model">crm.helpdesk</field>
+            <field name="inherit_id"
+                   ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <button class="oe_stat_button"
+                            name="%(action_rma_customer)d"
+                            string="Create RMA"
+                            type="action"
+                            context="{'default_originating_helpdesk_id': active_id, 'default_partner_id': partner_id}">
+                    </button>
+                </header>
+            </field>
+
+    </data>
+</openerp>
