@@ -11,6 +11,7 @@
     "depends": ["crm_helpdesk", "rma"],
     "license": "AGPL-3",
     "data": [
+        'security/ir.model.access.csv',
         'views/rma_order_view.xml',
         'views/crm_helpdesk_view.xml',
     ],
