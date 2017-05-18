@@ -12,6 +12,12 @@
             <field name="location_dest_id" position="attributes">
                 <attribute name="attrs">{}</attribute>
             </field>
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='from_loc']"
+                   position="after">
+                <field name="display_source_loc" invisible="1"/>
+                <field name="qty_available_in_source_loc"
+                       attrs="{'invisible': [('display_source_loc', '=', False)]}"/>
+            </xpath>
         </field>
     </record>
 
