@@ -17,7 +17,7 @@ class RmaOrderLine(models.Model):
     @api.model
     def create(self, values):
         if ('rma_id' in values.keys() and
-                'originating_helpdesk_id' not in values.keys()):
+                'helpdesk_id' not in values.keys()):
             rma = self.env['rma.order'].browse(values['rma_id'])
             values['helpdesk_id'] = rma.originating_helpdesk_id.id or False
         return super(RmaOrderLine, self).create(values)
