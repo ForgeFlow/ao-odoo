@@ -18,5 +18,14 @@ class StockPicking(models.Model):
             self.product_uom_id.id)
         self.qty_available_in_source_loc = res
 
+    @api.one
+    def _compute_display_source_loc(self):
+        self.display_source_loc = \
+            self.picking_id.picking_type_id.code != 'incoming'
+
     qty_available_in_source_loc = fields.Float(
+        string="Qty Available in Source",
         compute=_compute_qty_available_in_source_loc)
+
+    display_source_loc = fields.Boolean(
+        compute=_compute_display_source_loc)
