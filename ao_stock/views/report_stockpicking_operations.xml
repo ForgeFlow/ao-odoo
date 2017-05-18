@@ -47,7 +47,7 @@
                         </td>
                     </t>
                     <t t-if="o.picking_type_id.code != 'incoming'"><!--Customization-->
-                        <td><span t-field="pack_operation.qty_available_in_source_loc"/></td>
+                        <td><span t-field="pack_operation.qty_available_in_source_loc"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/></td>
                     </t>
                     <td>
                         <span t-if="pack_operation.product_id and pack_operation.product_id.barcode">
