@@ -33,27 +33,94 @@ class BomStructureXlsx(ReportXlsx):
         sheet.write(i, 6, ch.bom_id.code or '')
         sheet.write(i, 7, ch.product_id.manufacturer.name or '')
         sheet.write(i, 8, ch.product_id.manufacturer_pref or '')
-        childs = 0
+        empty = workbook.add_format({'bg_color': 'ffcc00'})
+        alert = workbook.add_format({'bg_color': 'ff3333'})
+        list_prices = []
         for seller in ch.product_id.seller_ids:
-            sheet.write(i, 9, seller.name.name or '')
-            sheet.write(i, 10, seller.product_code or '')
-            cur = seller.currency_id.name
-            curr = workbook.add_format({'num_format': '#,##0.00 [$' + cur +
-                                                      '];-#,##0.00 [$' + cur +
-                                                      ']'})
-            sheet.write(i, 11, seller.min_qty or '')
-            sheet.write(i, 12, seller.product_uom.name or '')
-            sheet.write(i, 13, seller.price or '', curr)
-            sheet.write(i, 14, seller.min_qty * seller.price or '', curr)
-            i += 1
-            childs += 1
-        if childs > 0:
-            i -= 1
+            if seller.price:
+                if seller.product_uom.category_id.id != ch.product_uom.\
+                        category_id.id:
+                    sheet.write(i, 9, seller.name.name or '')
+                    sheet.write(i, 10, seller.product_code or '')
+                    sheet.write(i, 11, seller.product_uom.name or '', alert)
+                    break
+                uom_from = seller.product_uom.id
+                uom_to = ch.product_uom.id
+                unit_qty = self.env['product.uom']._compute_qty(
+                    uom_from, 1.0, uom_to, False)
+                cur_from = seller.currency_id
+                cur_to = ch.product_id.currency_id
+                price = self.env['res.currency']._compute(
+                    cur_from, cur_to, seller.price, False)
+                price_unit = price / unit_qty
+                list_prices += [price_unit]
+        if list_prices:
+            seller_price = min(list_prices)
+            list_seller = []
+            sellers = 0
+            for seller in ch.product_id.seller_ids:
+                seller_id = seller.name.id
+                if seller.price:
+                    if seller.product_uom.category_id.id != ch.product_uom.\
+                            category_id.id:
+                        sheet.write(i, 9, seller.name.name or '')
+                        sheet.write(i, 10, seller.product_code or '')
+                        sheet.write(i, 11, seller.product_uom.name or '',
+                                    alert)
+                        break
+                    uom_from = seller.product_uom.id
+                    uom_to = ch.product_uom.id
+                    unit_qty = self.env['product.uom']._compute_qty(
+                        uom_from, 1.0, uom_to, False)
+                    cur_from = seller.currency_id
+                    cur_to = ch.product_id.currency_id
+                    price = self.env['res.currency']._compute(
+                        cur_from, cur_to, seller.price, False)
+                    price_unit = price / unit_qty
+                else:
+                    price_unit = False
+                if price_unit and seller_price == price_unit \
+                        and seller_id not in list_seller:
+                    list_seller += [seller_id]
+                    sheet.write(i, 9, seller.name.name or '')
+                    sheet.write(i, 10, seller.product_code or '')
+                    uom = ch.product_uom.name
+                    cur = ch.product_id.currency_id.name
+                    uom_cur = workbook.add_format(
+                        {'num_format': '#,##0.00 [$' + cur + '/' + uom +
+                                       '];-#,##0.00 [$' + cur + '/' + uom +
+                                       ']'})
+                    curr = workbook.add_format(
+                        {'num_format': '#,##0.00 [$' + cur + '];-#,##0.00 [$' +
+                                       cur + ']'})
+                    sheet.write(i, 11, seller.product_uom.name or '')
+                    sheet.write(i, 12, price_unit or '', uom_cur)
+                    sheet.write(i, 13, ch.product_qty * price_unit or '',
+                                curr)
+                    i += 1
+                    sellers += 1
+            if sellers > 0:
+                i -= 1
+        else:
+            seller_price = False
         i += 1
+        childs = 0
+        sum_prices = 0.0
         for child in ch.child_line_ids:
-            i = self.print_bom_children(child, sheet, i, j, workbook)
+            i, price_ch = self.print_bom_children(child, sheet, i, j, workbook)
+            cur_from = child.product_id.currency_id
+            cur_to = ch.product_id.currency_id
+            price_ch = self.env['res.currency']._compute(
+                cur_from, cur_to, price_ch, False)
+            sum_prices += price_ch
+            childs += 1
+        if childs == 0:
+            if seller_price:
+                sum_prices = ch.product_qty * seller_price
+            else:
+                sheet.write(i-1, 12, '', empty)
         j -= 1
-        return i
+        return i, sum_prices
 
     def generate_xlsx_report(self, workbook, data, objects):
         workbook.set_properties({
@@ -67,11 +134,11 @@ class BomStructureXlsx(ReportXlsx):
         sheet.set_column(3, 3, 40)
         sheet.set_column(4, 5, 20)
         sheet.set_column(6, 6, 15)
-        sheet.set_column(7, 9, 20)
-        sheet.set_column(10, 10, 15)
-        sheet.set_column(11, 12, 10)
-        sheet.set_column(13, 13, 15)
-        sheet.set_column(14, 14, 20)
+        sheet.set_column(7, 10, 20)
+        sheet.set_column(11, 11, 10)
+        sheet.set_column(12, 13, 20)
+        empty = workbook.add_format({'bg_color': 'ffcc00', 'bold': True})
+        alert = workbook.add_format({'bg_color': 'ff3333', 'bold': True})
         bold = workbook.add_format({'bold': True})
         title_style = workbook.add_format({'bold': True,
                                            'bg_color': '#FFFFCC',
@@ -87,11 +154,11 @@ class BomStructureXlsx(ReportXlsx):
                        _('Manufacturer Ref.'),
                        _('Distributor'),
                        _('Distributor Ref.'),
-                       _('Qty per Unit'),
-                       _('UOM'),
+                       _('Distr. UOM'),
                        _('Price per Unit'),
-                       _('Total Price per Unit')
+                       _('Price per BoM Qty')
                        ]
+        sheet_end = [_('Total BoM Price:')]
         sheet.set_row(0, None, None, {'collapsed': 1})
         sheet.write_row(1, 0, sheet_title, title_style)
         sheet.freeze_panes(2, 0)
@@ -106,30 +173,110 @@ class BomStructureXlsx(ReportXlsx):
             sheet.write(i, 6, o.code or '', bold)
             sheet.write(i, 7, o.product_id.manufacturer.name or '', bold)
             sheet.write(i, 8, o.product_id.manufacturer_pref or '', bold)
-            childs = 0
+            list_prices = []
             for seller in o.product_id.seller_ids:
-                sheet.write(i, 9, seller.name.name or '',
-                            bold)
-                sheet.write(i, 10, seller.product_code or
-                            '', bold)
-                cur = seller.currency_id.name
-                curr_bold = workbook.add_format(
-                    {'bold': True, 'num_format': '#,##0.00 [$' + cur +
-                                                 '];-#,##0.00 [$' + cur + ']'})
-                sheet.write(i, 11, seller.min_qty or '')
-                sheet.write(i, 12, seller.product_uom.name or '')
-                sheet.write(i, 13, seller.price or '', curr_bold)
-                sheet.write(i, 14, seller.min_qty * seller.price or '',
-                            curr_bold)
-                i += 1
-                childs += 1
-            if childs > 0:
-                i -= 1
+                if seller.price:
+                    if seller.product_uom.category_id.id != o.product_uom.\
+                            category_id.id:
+                        sheet.write(i, 9, seller.name.name or '', bold)
+                        sheet.write(i, 10, seller.product_code or '', bold)
+                        sheet.write(i, 11, seller.product_uom.name or '',
+                                    alert)
+                        break
+                    uom_from = seller.product_uom.id
+                    uom_to = o.product_uom.id
+                    unit_qty = self.env['product.uom']._compute_qty(
+                        uom_from, 1.0, uom_to, False)
+                    cur_from = seller.currency_id
+                    cur_to = o.product_id.currency_id or o.product_tmpl_id.\
+                        currency_id
+                    price = self.env['res.currency']._compute(
+                        cur_from, cur_to, seller.price, False)
+                    price_unit = price / unit_qty
+                    list_prices += [price_unit]
+            if list_prices:
+                seller_price = min(list_prices)
+                list_seller = []
+                sellers = 0
+                for seller in o.product_id.seller_ids:
+                    seller_id = seller.name.id
+                    if seller.price:
+                        if seller.product_uom.category_id.id != o.product_uom.\
+                                category_id.id:
+                            sheet.write(i, 9, seller.name.name or '', bold)
+                            sheet.write(i, 10, seller.product_code or '', bold)
+                            sheet.write(i, 11, seller.product_uom.name or '',
+                                        alert)
+                            break
+                        uom_from = seller.product_uom.id
+                        uom_to = o.product_uom.id
+                        unit_qty = self.env['product.uom']._compute_qty(
+                            uom_from, 1.0, uom_to, False)
+                        cur_from = seller.currency_id
+                        cur_to = o.product_id.currency_id or o.\
+                            product_tmpl_id.currency_id
+                        price = self.env['res.currency']._compute(
+                            cur_from, cur_to, seller.price, False)
+                        price_unit = price / unit_qty
+                    else:
+                        price_unit = False
+                    if price_unit and seller_price == price_unit \
+                            and seller_id not in list_seller:
+                        list_seller += [seller_id]
+                        sheet.write(i, 9, seller.name.name or '',
+                                    bold)
+                        sheet.write(i, 10, seller.product_code or
+                                    '', bold)
+                        uom = o.product_uom.name
+                        cur = o.product_id.currency_id.name or o.\
+                            product_tmpl_id.currency_id.name
+                        uom_cur_bold = workbook.add_format(
+                            {'num_format': '#,##0.00 [$' + cur + '/' + uom +
+                                           '];-#,##0.00 [$' + cur + '/' + uom +
+                                           ']', 'bold': True})
+                        curr_bold = workbook.add_format(
+                            {'num_format': '#,##0.00 [$' + cur +
+                                           '];-#,##0.00 [$' + cur + ']',
+                             'bold': True})
+                        sheet.write(i, 11, seller.product_uom.name or '')
+                        sheet.write(i, 12, price_unit or '', uom_cur_bold)
+                        sheet.write(i, 13, o.product_qty * price_unit or '',
+                                    curr_bold)
+                        i += 1
+                        sellers += 1
+                if sellers > 0:
+                    i -= 1
+            else:
+                seller_price = False
             i += 1
             j = 0
+            childs = 0
+            sum_prices = 0.0
             for ch in o.bom_line_ids:
-                i = self.print_bom_children(ch, sheet, i, j, workbook)
+                i, price_ch = self.print_bom_children(
+                    ch, sheet, i, j, workbook)
+                cur_from = ch.product_id.currency_id
+                cur_to = o.product_id.currency_id or o.product_tmpl_id.\
+                    currency_id
+                price_ch = self.env['res.currency']._compute(
+                    cur_from, cur_to, price_ch, False)
+                sum_prices += price_ch
+                childs += 1
+            if childs == 0:
+                if seller_price:
+                    sum_prices = o.product_qty * seller_price
+                else:
+                    sheet.write(i-1, 12, '', empty)
+            sheet.write_row(i, 12, sheet_end, title_style)
+            cur = o.product_id.currency_id.name or o.product_tmpl_id.\
+                currency_id.name
+            curr_bold = workbook.add_format(
+                {'bold': True, 'bg_color': '#FFFFCC', 'bottom': 1,
+                 'num_format': '#,##0.00 [$' + cur + '];-#,##0.00 [$' + cur +
+                               ']'})
+            sheet.write(i, 13, sum_prices, curr_bold)
+            i += 1
 
 
 BomStructureXlsx('report.ao.bom.structure.xlsx', 'mrp.bom',
-                  parser=bom_structure)
+                 parser=bom_structure)
