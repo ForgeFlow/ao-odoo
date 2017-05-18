@@ -13,6 +13,7 @@ This module contains customizations specific to Aleph Objects.
 * Show *Date* and hide *Expected Date* in stock moves to everyone.
 * Show inventory location for stock inventories that exclude sublocations
   (this will show a location in zero-confirmations).
+* Print the *Qty Available in Source* in the operations of stock pickings.
 
 Credits
 =======

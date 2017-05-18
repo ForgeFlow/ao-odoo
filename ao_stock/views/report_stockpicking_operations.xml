@@ -1,22 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-        <template id="external_layout_header_ao"
-                  inherit_id="stock.external_layout_header_barcode_right">
-            <xpath expr="//div[@class='header']" position="replace">
-                <div class="header">
-                    <div class="row">
-                        <div style="margin-left:100px;text-align:left;">
-                            <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 40px;"/>
-                        </div>
-                        <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.rml_header1"/>
+<odoo>
+
+    <template id="external_layout_header_ao"
+              inherit_id="stock.external_layout_header_barcode_right">
+        <xpath expr="//div[@class='header']" position="replace">
+            <div class="header">
+                <div class="row">
+                    <div style="margin-left:100px;text-align:left;">
+                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 40px;"/>
                     </div>
-                    <div class="row">
-                        <div style="margin-left:120px;text-align:left;">
-                            <div t-field="company.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                        </div>
+                    <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.rml_header1"/>
+                </div>
+                <div class="row">
+                    <div style="margin-left:120px;text-align:left;">
+                        <div t-field="company.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
                     </div>
                 </div>
-            </xpath>
-        </template>
+            </div>
+        </xpath>
+    </template>
 
-</openerp>
+    <template id="report_picking_ao"
+          inherit_id="stock.report_picking">
+        <xpath expr="//table[@t-if='o.pack_operation_ids']" position="replace">
+            <table class="table table-condensed" t-if="o.pack_operation_ids">
+              <thead>
+                <tr>
+                    <th><strong>Product</strong></th>
+                    <th class="text-right"><strong>Quantity</strong></th>
+                    <t t-if="o.picking_type_id.code != 'incoming'"><th><strong>Source</strong></th></t>
+                    <t
+                            t-if="o.picking_type_id.code != 'incoming'"><th><strong>Qty Available in Source</strong></th></t><!--Customization-->
+                    <th><strong>Barcode</strong></th>
+                    <t t-if="o.picking_type_id.code != 'outgoing'"><th><strong>Destination</strong></th></t>
+                </tr>
+              </thead>
+              <tbody>
+                <tr t-foreach="o.pack_operation_ids" t-as="pack_operation">
+                    <td><span t-field="pack_operation.product_id"/><br/>
+                        <span t-field="pack_operation.product_id.description_picking"/>
+                        <t t-if="not pack_operation.product_id and pack_operation.package_id"><span  t-field="pack_operation.package_id"/></t></td>
+                    <td class="text-right"><span t-field="pack_operation.product_qty"/> <span t-field="pack_operation.product_uom_id" groups="product.group_uom"/></td>
+                    <t t-if="o.picking_type_id.code != 'incoming'"><td><span t-field="pack_operation.location_id"/>
+                        <span t-if="pack_operation.package_id">:</span>
+                        <span t-field="pack_operation.package_id"/>
+                        </td>
+                    </t>
+                    <t t-if="o.picking_type_id.code != 'incoming'"><!--Customization-->
+                        <td><span t-field="pack_operation.qty_available_in_source_loc"/></td>
+                    </t>
+                    <td>
+                        <span t-if="pack_operation.product_id and pack_operation.product_id.barcode">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.product_id.barcode, 600, 100)" style="width:300px;height:50px"/>
+                        </span>
+                        <span t-if="pack_operation.package_id and not pack_operation.product_id">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', pack_operation.package_id.name, 600, 100)" style="width:300px;height:50px"/>
+                        </span>
+                        <table class="table table-condensed" t-if="pack_operation.pack_lot_ids">
+                            <thead>
+                                <tr><th>Lot</th><th>Qty</th></tr>
+                            </thead>
+                            <tr t-foreach="pack_operation.pack_lot_ids" t-as="packlot">
+                                <td>
+                                    <span t-field="packlot.lot_id"/>
+                                    <t t-if="not packlot.lot_id">
+                                        <span t-field="packlot.lot_name"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <span t-field="packlot.qty"/> <t t-if="o.picking_type_id.use_existing_lots and o.state!='done'"> / <span t-field="packlot.qty_todo"/></t>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <t t-if="o.picking_type_id.code != 'outgoing'"><td><span t-field="pack_operation.location_dest_id"/>
+                        <span t-if="pack_operation.result_package_id">:</span>
+                        <span t-field="pack_operation.result_package_id"/>
+                    </td></t>
+                </tr>
+              </tbody>
+            </table>
+        </xpath>
+    </template>
+
+</odoo>
