@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp.osv import fields, osv, orm
 from openerp.tools import html2plaintext
-
+import re
 
 class CrmHelpdesk(osv.osv):
 
@@ -34,7 +34,7 @@ class CrmHelpdesk(osv.osv):
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
             _dict = parse_description(desc)
-            email_from = _dict.get('email')
+            email_from = re.sub("\s\[\d\]", "", _dict.get('email')).strip()
             contact_name = _dict.get('first & last name').title()
             # Search for an existing partner:
             partner_id = self.pool.get('res.partner').search(cr, uid, [
