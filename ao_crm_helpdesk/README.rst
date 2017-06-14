@@ -8,8 +8,7 @@ AO-specific customizations on crm helpdesk
 
 This module contains customizations specific to Aleph Objects.
 
-* Ability to search helpdesk tickets by the content of the chatter messages
-
+* Adds problem tracking to helpdesk.
 
 Credits
 =======
