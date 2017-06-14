@@ -9,7 +9,7 @@ class QcProblemTrack(models.Model):
     _inherit = "qc.problem.track"
 
     @api.one
-    @api.depends('issue_ids', 'crm_helpdesk_count')
+    @api.depends('issue_ids', 'crm_helpdesk_ids')
     def _compute_count(self):
         super(QcProblemTrack, self)._compute_count()
         self.crm_helpdesk_count = len(self.crm_helpdesk_ids)
