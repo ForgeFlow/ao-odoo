@@ -16,7 +16,7 @@ This module contains customizations specific to Aleph Objects.
 * Purchase Orders cannot be printed if they are not Approved.
 * Add a *Unread Messages* filter to bypass a
   `bug <https://github.com/odoo/odoo/issues/16763>`_ with *New Mail* filter of
-  odoo standard.
+  odoo standard. (**removed - fixed in upstream**).
 
 Credits
 =======
