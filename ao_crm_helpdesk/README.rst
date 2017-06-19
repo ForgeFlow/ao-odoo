@@ -8,7 +8,7 @@ AO-specific customizations on crm helpdesk
 
 This module contains customizations specific to Aleph Objects.
 
-* Adds problem tracking to helpdesk.
+* No changes currently.
 
 Credits
 =======

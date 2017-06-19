@@ -8,11 +8,8 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "CRM",
-    "depends": ["crm_helpdesk", "quality_control_issue"],
+    "depends": ["crm_helpdesk"],
     "license": "AGPL-3",
-    "data": [
-        "views/crm_helpdesk_view.xml",
-        "views/qc_problem_track_view.xml",
-    ],
+    "data": [],
     "installable": True,
 }
