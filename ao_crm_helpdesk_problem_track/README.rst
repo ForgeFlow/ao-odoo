@@ -2,13 +2,13 @@
    :target: https://www.gnu.org/licenses/agpl.html
    :alt: License: AGPL-3
 
-==========================================
-AO-specific customizations on crm helpdesk
-==========================================
+=============================================================
+AO-specific customizations on crm helpdesk (problem tracking)
+=============================================================
 
 This module contains customizations specific to Aleph Objects.
 
-* No changes currently.
+* Adds problem tracking to helpdesk.
 
 Credits
 =======
