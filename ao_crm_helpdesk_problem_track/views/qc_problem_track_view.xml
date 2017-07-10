@@ -36,7 +36,7 @@
            ref="quality_control_issue.qc_problem_track_kanban_view"/>
         <field name="arch" type="xml">
             <field name="issue_count" position="after">
-                <field name="crm_helpdesk_count"/>helpdesk tickets
+                <field name="crm_helpdesk_count"/> helpdesk tickets
             </field>
         </field>
     </record>
