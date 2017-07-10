@@ -29,4 +29,16 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="qc_problem_track_kanban_view">
+        <field name="name">qc.problem.track.kanban - AO customization</field>
+        <field name="model">qc.problem.track</field>
+        <field name="inherit_id"
+           ref="quality_control_issue.qc_problem_track_kanban_view"/>
+        <field name="arch" type="xml">
+            <field name="issue_count" position="after">
+                <field name="crm_helpdesk_count"/> helpdesk tickets
+            </field>
+        </field>
+    </record>
+
 </odoo>
