@@ -11,11 +11,12 @@
                         <group colspan="2" col="2">
                             <separator string="Warning on the Helpdesk Tickets"
                                        colspan="4"/>
-                                <field name="helpdesk_warn" nolabel="1" />
+                                <field name="helpdesk_warn" nolabel="1"
+                                       colspan="2"/>
                                 <field name="helpdesk_warn_log"/>
-                                <field name="helpdesk_warn_msg" colspan="3"
-                                       nolabel="1"
-                                        attrs="{'required':[('helpdesk_warn','!=','no-message')],'readonly':[('helpdesk_warn','=','no-message')]}"/>
+                                <field name="helpdesk_warn_msg"
+                                       nolabel="1" colspan="2"
+                                       attrs="{'required':[('helpdesk_warn','!=','no-message')],'readonly':[('helpdesk_warn','=','no-message')]}"/>
                         </group>
                     </page>
                 </notebook>

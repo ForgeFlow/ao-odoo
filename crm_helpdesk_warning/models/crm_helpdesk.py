@@ -9,7 +9,7 @@ class CrmHelpdesk(models.Model):
     _inherit = 'crm.helpdesk'
 
     partner_id = fields.Many2one(track_visibility='always')
-    
+
     @api.v7
     def on_change_partner_id(self, cr, uid, ids, part, context=None):
         if not part:
