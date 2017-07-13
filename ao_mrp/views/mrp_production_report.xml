@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_mrporder"
+          inherit_id="mrp.report_mrporder">
+        <xpath expr="//div[@class='row mt32 mb32'][1]" position="inside">
+            <div class="col-xs-3">
+                <strong>Pending to produce:</strong><br/>
+                <span t-field="o.move_created_ids.product_qty"/>
+                <span t-field="o.move_created_ids.product_uom_qty.name"
+                      groups="product.group_uom"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
