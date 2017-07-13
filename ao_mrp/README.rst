@@ -11,6 +11,7 @@ This module contains customizations specific to Aleph Objects.
 * The menu "Bill of Material Components" should allow to import BOM components.
 * Add to the stock move form view a link to the manufacturing order.
 * Sort Manufacturing Orders by ID (descending).
+* Show the the qty pending to produce when printing MO.
 
 Credits
 =======

@@ -11,7 +11,8 @@
     "category": "Manfacturing",
     "depends": ["mrp"],
     "data": [
-        "views/mrp_view.xml"
+        "views/mrp_view.xml",
+        "views/mrp_production_report.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
