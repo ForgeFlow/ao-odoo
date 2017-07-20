@@ -10,14 +10,14 @@ class RmaOrderLine(models.Model):
 
     helpdesk_id = fields.Many2one(
         string='Helpdesk Ticket',
-        comodel_name='crm.helpdesk',
-        copy=False,
+        comodel_name='crm.helpdesk', readonly=True,
+        copy=False
     )
 
     @api.model
-    def create(self, values):
-        if ('rma_id' in values.keys() and
-                'helpdesk_id' not in values.keys()):
-            rma = self.env['rma.order'].browse(values['rma_id'])
-            values['helpdesk_id'] = rma.originating_helpdesk_id.id or False
-        return super(RmaOrderLine, self).create(values)
+    def create(self, vals):
+        rma_line = super(RmaOrderLine, self).create(vals)
+        if not rma_line.helpdesk_id:
+            rma_line.helpdesk_id = rma_line.rma_id.originating_helpdesk_id or \
+                                   False
+        return rma_line

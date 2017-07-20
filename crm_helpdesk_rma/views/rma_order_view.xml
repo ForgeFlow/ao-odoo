@@ -11,9 +11,6 @@
                 <field name="comment" position="before">
                     <field name="originating_helpdesk_id"/>
                 </field>
-                <field name="rma_line_ids" position="attributes">
-                    <attribute name="context">{'default_helpdesk_id': originating_helpdesk_id}</attribute>
-                </field>
             </field>
         </record>
 
