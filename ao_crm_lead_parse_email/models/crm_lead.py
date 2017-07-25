@@ -18,11 +18,6 @@ class CrmLead(osv.osv):
 
     def _prepare_message_new_custom_values(self, cr, uid, msg,
                                            custom_values=None, context=None):
-        custom_values, msg = super(
-            CrmLead, self)._prepare_message_new_custom_values(
-            cr, uid, msg, custom_values=custom_values, context=context
-        )
-
         def parse_description(description):
             fields = ['email', 'first & last name']
             _dict = {}
@@ -66,6 +61,7 @@ class CrmLead(osv.osv):
         rec_id = super(CrmLead, self).message_new(
             cr, uid, msg, custom_values=custom_values, context=context)
         if self._name == 'crm.lead':
+            custom_values = {}
             model = self._context.get('thread_model') or self._name
             lead = self.env[model]
             custom_values, msg = self._prepare_message_new_custom_values(
