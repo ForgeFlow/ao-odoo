@@ -46,6 +46,7 @@ class CrmLead(osv.osv):
                 vals = {
                     'email_from': email_from,
                     'contact_name': contact_name,
+                    'partner_name': contact_name,
                     'partner_id': partner_id[0] if partner_id else False,
                 }
                 msg['from'] = _dict.get('email')
@@ -60,11 +61,13 @@ class CrmLead(osv.osv):
         """
         rec_id = super(CrmLead, self).message_new(
             cr, uid, msg, custom_values=custom_values, context=context)
-        if self._name == 'crm.lead':
+        model = self._name
+        if model == 'crm.lead':
             custom_values = {}
-            model = self._context.get('thread_model') or self._name
-            lead = self.env[model]
+            lead_obj = self.pool[model]
             custom_values, msg = self._prepare_message_new_custom_values(
                 cr, uid, msg, custom_values, context=context)
-            lead.write(custom_values)
+            if custom_values:
+                lead_obj.write(cr, uid, [rec_id], custom_values,
+                               context=context)
         return rec_id
