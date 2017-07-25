@@ -43,7 +43,7 @@ class CrmLead(osv.osv):
                 desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
                 _dict = parse_description(desc)
                 email_from = re.sub("\s\[\d\]", "", _dict.get('email')).strip()
-                contact_name = _dict.get('name').title()
+                contact_name = _dict.get('first & last name').title()
                 # Search for an existing partner:
                 partner_id = self.pool.get('res.partner').search(cr, uid, [
                     '|', ('name', '=', contact_name),
@@ -63,7 +63,12 @@ class CrmLead(osv.osv):
             through message_process.
             This override updates the document according to the email.
         """
-        custom_values, msg = self._prepare_message_new_custom_values(
-            cr, uid, msg, custom_values, context=context)
-        return super(CrmLead, self).message_new(
+        rec_id = super(CrmLead, self).message_new(
             cr, uid, msg, custom_values=custom_values, context=context)
+        if self._name == 'crm.lead':
+            model = self._context.get('thread_model') or self._name
+            lead = self.env[model]
+            custom_values, msg = self._prepare_message_new_custom_values(
+                cr, uid, msg, custom_values, context=context)
+            lead.write(custom_values)
+        return rec_id
