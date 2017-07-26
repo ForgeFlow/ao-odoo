@@ -9,6 +9,6 @@ class CrmHelpdesk(models.Model):
     _inherit = "crm.helpdesk"
 
     problem_track_ids = fields.Many2many(
-        comodel_name="qc.problem.track", string="Problems",
+        comodel_name="qc.problem", string="Problems",
         relation="helpdesk_problem_rel", column1="crm_helpdesk_id",
         column2="qc_problem_id")

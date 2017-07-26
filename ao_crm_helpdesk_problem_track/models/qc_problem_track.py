@@ -6,7 +6,7 @@ from openerp import api, fields, models
 
 
 class QcProblemTrack(models.Model):
-    _inherit = "qc.problem.track"
+    _inherit = "qc.problem"
 
     @api.one
     @api.depends('issue_ids', 'crm_helpdesk_ids')

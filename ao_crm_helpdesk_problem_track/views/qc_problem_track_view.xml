@@ -3,11 +3,11 @@
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
-    <record id="qc_problem_track_tree" model="ir.ui.view">
-        <field name="name">qc.problem.track.tree - AO customization</field>
-        <field name="model">qc.problem.track</field>
+    <record id="qc_problem_tree" model="ir.ui.view">
+        <field name="name">qc.problem.tree - AO customization</field>
+        <field name="model">qc.problem</field>
                 <field name="inherit_id"
-               ref="quality_control_issue.qc_problem_track_tree"/>
+               ref="quality_control_issue.qc_problem_tree"/>
         <field name="arch" type="xml">
             <field name="issue_count" position="after">
                 <field name="crm_helpdesk_count"/>
@@ -15,11 +15,11 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="qc_problem_track_form">
-        <field name="name">qc.problem.track.form - AO customization</field>
-        <field name="model">qc.problem.track</field>
+    <record model="ir.ui.view" id="qc_problem_form">
+        <field name="name">qc.problem.form - AO customization</field>
+        <field name="model">qc.problem</field>
         <field name="inherit_id"
-               ref="quality_control_issue.qc_problem_track_form"/>
+               ref="quality_control_issue.qc_problem_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[last()]" position="after">
                 <page name="helpdesk" string="Helpdesk Tickets">
@@ -29,11 +29,11 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="qc_problem_track_kanban_view">
-        <field name="name">qc.problem.track.kanban - AO customization</field>
-        <field name="model">qc.problem.track</field>
+    <record model="ir.ui.view" id="qc_problem_kanban_view">
+        <field name="name">qc.problem.kanban - AO customization</field>
+        <field name="model">qc.problem</field>
         <field name="inherit_id"
-           ref="quality_control_issue.qc_problem_track_kanban_view"/>
+           ref="quality_control_issue.qc_problem_kanban_view"/>
         <field name="arch" type="xml">
             <field name="issue_count" position="after">
                 <field name="crm_helpdesk_count"/> helpdesk tickets
