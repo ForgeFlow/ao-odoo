@@ -34,12 +34,26 @@ class CrmHelpdesk(osv.osv):
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
             _dict = parse_description(desc)
-            email_from = re.sub("\s\[\d\]", "", _dict.get('email')).strip()
-            contact_name = _dict.get('first & last name').title()
+            contact_name = False
+            email_from = False
+            if _dict.get('email'):
+                email_from = re.sub("\s\[\d\]", "", _dict.get('email')).strip()
+            if _dict.get('first & last name'):
+                contact_name = _dict.get('first & last name').title()
             # Search for an existing partner:
-            partner_id = self.pool.get('res.partner').search(cr, uid, [
-                '|', ('name', '=', contact_name),
-                ('email', '=', email_from)], context=context, limit=1)
+            # Search for an existing partner:
+            if contact_name and email_from:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    '|', ('name', '=', contact_name),
+                    ('email', '=', email_from)], context=context, limit=1)
+            elif contact_name and not email_from:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    ('name', '=', contact_name)], context=context, limit=1)
+            elif email_from and not contact_name:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    ('email', '=', email_from)], context=context, limit=1)
+            else:
+                partner_id = False
             vals = {
                 'email_from': email_from,
                 'contact_name': contact_name,
