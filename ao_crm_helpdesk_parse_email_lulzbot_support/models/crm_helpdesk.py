@@ -29,7 +29,7 @@ class CrmHelpdesk(osv.osv):
             return _dict
         subject = msg.get('subject', '')
         subject = subject.lower()
-        if 'support inquiry' in subject:
+        if 'lulzbot webform' in subject:
             if custom_values is None:
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
