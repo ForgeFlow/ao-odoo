@@ -5,12 +5,6 @@ from openerp.osv import fields, osv, orm
 from openerp.tools import html2plaintext
 import re
 
-SUBJECT_NAME = [
-    'lulzbot education program inquiry',
-    'checkout help',
-    'enterprise inquiry'
-]
-
 
 class CrmLead(osv.osv):
 
@@ -31,42 +25,40 @@ class CrmLead(osv.osv):
             return _dict
         subject = msg.get('subject', '')
         subject = subject.lower()
-        for subj in SUBJECT_NAME:
-            if subj in subject:
-                if custom_values is None:
-                    custom_values = {}
-                desc = html2plaintext(msg.get('body')) if msg.get('body') \
-                    else ''
-                _dict = parse_description(desc)
-                contact_name = False
-                email_from = False
-                if _dict.get('email'):
-                    email_from = re.sub("\s\[\d\]", "",
-                                        _dict.get('email')).strip()
-                if _dict.get('first & last name'):
-                    contact_name = _dict.get('first & last name').title()
-                # Search for an existing partner:
-                if contact_name and email_from:
-                    partner_id = self.pool.get('res.partner').search(cr, uid, [
-                        '|', ('name', '=', contact_name),
-                        ('email', '=', email_from)], context=context, limit=1)
-                elif contact_name and not email_from:
-                    partner_id = self.pool.get('res.partner').search(cr, uid, [
-                        ('name', '=', contact_name)], context=context, limit=1)
-                elif email_from and not contact_name:
-                    partner_id = self.pool.get('res.partner').search(cr, uid, [
-                        ('email', '=', email_from)], context=context, limit=1)
-                else:
-                    partner_id = False
-                vals = {
-                    'email_from': email_from,
-                    'contact_name': contact_name,
-                    'partner_name': contact_name,
-                    'partner_id': partner_id[0] if partner_id else False,
-                }
-                msg['from'] = _dict.get('email')
-                custom_values.update(vals)
-                break
+        if 'lulzbot webform' in subject:
+            if custom_values is None:
+                custom_values = {}
+            desc = html2plaintext(msg.get('body')) if msg.get('body') \
+                else ''
+            _dict = parse_description(desc)
+            contact_name = False
+            email_from = False
+            if _dict.get('email'):
+                email_from = re.sub("\s\[\d\]", "",
+                                    _dict.get('email')).strip()
+            if _dict.get('first & last name'):
+                contact_name = _dict.get('first & last name').title()
+            # Search for an existing partner:
+            if contact_name and email_from:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    '|', ('name', '=', contact_name),
+                    ('email', '=', email_from)], context=context, limit=1)
+            elif contact_name and not email_from:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    ('name', '=', contact_name)], context=context, limit=1)
+            elif email_from and not contact_name:
+                partner_id = self.pool.get('res.partner').search(cr, uid, [
+                    ('email', '=', email_from)], context=context, limit=1)
+            else:
+                partner_id = False
+            vals = {
+                'email_from': email_from,
+                'contact_name': contact_name,
+                'partner_name': contact_name,
+                'partner_id': partner_id[0] if partner_id else False,
+            }
+            msg['from'] = _dict.get('email')
+            custom_values.update(vals)
         return custom_values, msg
 
     def message_new(self, cr, uid, msg, custom_values=None, context=None):
