@@ -29,7 +29,10 @@ class CrmHelpdesk(osv.osv):
             return _dict
         subject = msg.get('subject', '')
         subject = subject.lower()
-        if 'lulzbot webform' in subject:
+        keyphrase = self.pool.get('ir.config_parameter').get_param(
+            cr, uid, 'crm.helpdesk.parse.email.keyphrase',
+            default=False, context=context)
+        if keyphrase and keyphrase in subject:
             if custom_values is None:
                 custom_values = {}
             desc = html2plaintext(msg.get('body')) if msg.get('body') else ''
