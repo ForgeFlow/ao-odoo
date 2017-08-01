@@ -11,4 +11,7 @@
     'depends': ['crm_helpdesk'],
     'active': False,
     'installable': True,
+    'data': [
+        "data/crm_helpdesk_parse_email_config_data.xml",
+    ]
 }
