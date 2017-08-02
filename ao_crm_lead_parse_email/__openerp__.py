@@ -9,6 +9,9 @@
     'website': 'http://www.eficent.com',
     'category': 'CRM',
     'depends': ['crm'],
+    'data': [
+        "data/crm_lead_parse_email_config_data.xml",
+    ],
     'active': False,
     'installable': True,
 }

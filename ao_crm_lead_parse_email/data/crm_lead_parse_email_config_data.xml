@@ -3,9 +3,9 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
 
-    <record id="crm_helpdesk_parse_email_keyphrase"
+    <record id="crm_lead_parse_email_keyphrase"
             model="ir.config_parameter">
-        <field name="key">crm.helpdesk.parse.email.keyphrase</field>
+        <field name="key">crm.lead.parse.email.keyphrase</field>
         <field name="value">lulzbot webform</field>
     </record>
 
