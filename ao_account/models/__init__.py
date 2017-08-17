@@ -4,3 +4,4 @@
 
 from . import product
 from . import account_invoice_report
+from . import account_move_line
