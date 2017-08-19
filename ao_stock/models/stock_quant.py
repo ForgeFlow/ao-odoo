@@ -8,16 +8,13 @@ from openerp import api, fields, models
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
-    @api.cr_uid_ids_context
-    def external_price_update(self, cr, uid, quant_ids, newprice,
-                              context=None):
-        return self._price_update(self, cr, uid, quant_ids, newprice,
-                                  context=context)
 
-    @api.model
-    def get_first_move(self):
+    @api.cr_uid_context
+    def get_first_move(self, cr, uid, quant_id, context=None):
+        quant = self.pool['stock.quant'].browse(cr, uid, quant_id,
+                                                context=context)
         move = False
-        for m in self.history_ids:
+        for m in quant.history_ids:
             if not move or m.date < move.date:
                 move = m
-        return move
+        return move.id
