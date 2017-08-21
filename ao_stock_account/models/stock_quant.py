@@ -23,4 +23,8 @@ class StockQuant(models.Model):
                                          context=ctx)
             self.write(cr, SUPERUSER_ID, [quant.id], {'cost': newprice},
                        context=context)
+            if quant.product_id.cost_method == 'real' \
+                    and quant.location_id.usage != 'internal':
+                self.pool.get('stock.move')._store_average_cost_price(
+                    cr, uid, move, context=context)
         return True
