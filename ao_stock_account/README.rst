@@ -8,8 +8,7 @@ AO-specific customizations on stock account
 
 This module contains customizations specific to Aleph Objects.
 
-* When creating an invoice from a stock picking, add the source document of
-  the picking to the invoice reference as <picking name> : <picking origin>
+
 
 Credits
 =======
