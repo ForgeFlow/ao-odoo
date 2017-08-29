@@ -11,5 +11,5 @@
     "category": "Stock",
     "depends": ["stock_account"],
     "license": "AGPL-3",
-    'installable': False,
+    'installable': True,
 }
