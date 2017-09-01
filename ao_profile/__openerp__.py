@@ -221,7 +221,7 @@
         # OCA/social
         # 'mail_debrand', -- Pending to migrate
         # 'mail_message_name_search', --deprecated
-        'message_auto_subscribe_notify_force_send',
+        'mail_auto_follower_notify',
         #
         'base_search_mail_content',
         # OCA/account-payment
