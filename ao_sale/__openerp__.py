@@ -11,8 +11,10 @@
     "category": "Sales",
     "depends": ["sale"],
     "data": [
+        "security/ir.model.access.csv",
         "views/sale_view.xml",
-        "views/report_saleorder.xml"
+        "views/report_saleorder.xml",
+        "views/product_view.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
