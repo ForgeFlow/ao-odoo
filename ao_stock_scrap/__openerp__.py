@@ -10,11 +10,11 @@
     "category": "Warehouse Management",
     "depends": ["stock_scrap"],
     "data": [
-        "security/ir.model.access.csv",
         "security/stock_scrap_security.xml",
+        "security/ir.model.access.csv",
         "views/stock_scrap_view.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
-    # 'auto_install': True,
+    'auto_install': True,
 }
