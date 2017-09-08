@@ -4,7 +4,6 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 from openerp import api, fields, models
 
 
@@ -14,3 +13,28 @@ class ResPartner(models.Model):
     notify_email = fields.Selection(
         selection_add=[
             ('all_except_notification', 'All Messages Except Notifications')])
+
+    @api.multi
+    def _notify(
+            self, message, force_send=False, user_signature=True):
+        if message.message_type == 'notification':
+            message_sudo = message.sudo()
+            email_channels = message.channel_ids.filtered(
+                lambda channel: channel.email_send)
+            bad_email = message_sudo.author_id and\
+                message_sudo.author_id.email or message.email_from
+            self.sudo().search([
+                '|',
+                ('id', 'in', self.ids),
+                ('channel_ids', 'in', email_channels.ids),
+                ('email', '!=', bad_email),
+                ('notify_email', '=', 'always')])._notify_by_email(
+                    message, force_send=force_send,
+                    user_signature=user_signature)
+            self._notify_by_chat(message)
+            return True
+        else:
+            return super(ResPartner, self)._notify(
+                message, force_send=force_send,
+                send_after_commit=send_after_commit,
+                user_signature=user_signature)
