@@ -36,5 +36,4 @@ class ResPartner(models.Model):
         else:
             return super(ResPartner, self)._notify(
                 message, force_send=force_send,
-                send_after_commit=send_after_commit,
                 user_signature=user_signature)
