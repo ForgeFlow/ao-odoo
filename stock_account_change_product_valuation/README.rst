@@ -37,6 +37,11 @@ Pending to do:
   completely removed. Most importantly when you run a perpetual inventory
   (connected with accounting)
 
+Possible improvements:
+
+* Consider making ``update_cost_method`` a query-based method in order to
+  speed up the process, as with long portfolios of products for a given
+  category this action can take a long time.
 
 Bug Tracker
 ===========
