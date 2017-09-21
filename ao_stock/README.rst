@@ -14,6 +14,8 @@ This module contains customizations specific to Aleph Objects.
 * Show inventory location for stock inventories that exclude sublocations
   (this will show a location in zero-confirmations).
 * Print the *Qty Available in Source* in the operations of stock pickings.
+* New group *Modify Warehouses and Locations*. Only people in this group is
+  able to modify the Warehouse and Location configuration.
 
 Credits
 =======
