@@ -11,9 +11,11 @@
     "category": "Warehouse Management",
     "depends": ["stock", "stock_inventory_exclude_sublocation"],
     "data": [
+        "security/ao_stock_security.xml",
+        "security/ir.model.access.csv",
         "views/stock_view.xml",
         "views/report_stockpicking_operations.xml",
-        "views/report_stockinventory.xml"
+        "views/report_stockinventory.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
