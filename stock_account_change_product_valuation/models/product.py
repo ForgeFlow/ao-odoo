@@ -26,12 +26,6 @@ class ProductTemplate(models.Model):
             new_method = values.get('cost_method')
             product_type = values.get('type', False)
             self.update_cost_method(new_method, product_type)
-
-        # if values.get('property_cost_method'):
-        #     new_method = values.get('property_cost_method')
-        #     product_type = values.get('type', False)
-        #     self.update_cost_method(new_method, product_type)
-
         return super(ProductTemplate, self).write(values)
 
     @api.multi
