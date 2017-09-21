@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="ao_group_stock_warehouse_settings" model="res.groups">
+        <field name="name">Modify Warehouses and Locations</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+    </record>
+
+</odoo>
