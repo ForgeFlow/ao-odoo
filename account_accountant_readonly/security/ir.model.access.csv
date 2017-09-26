@@ -1,0 +1,49 @@
+id,group_id/id,name,model_id/id,perm_read,perm_write,perm_create,perm_unlink
+ir_attachment group_user_ro,group_account_user_ro,ir_attachment group_user.ro,base.model_ir_attachment,1,0,0,0
+ir_cron user_ro,group_account_user_ro,ir_cron user.ro,base.model_ir_cron,1,0,0,0
+ir_exports group_system_ro,group_account_user_ro,ir_exports group_system.ro,base.model_ir_exports,1,0,0,0
+ir_exports_line group_system_ro,group_account_user_ro,ir_exports_line group_system.ro,base.model_ir_exports_line,1,0,0,0
+ir_fields_converter_ro,group_account_user_ro,ir_fields_converter.ro,base.model_ir_fields_converter,1,0,0,0
+res_partner group_user_ro,group_account_user_ro,res_partner group_user.ro,account.model_res_partner,1,0,0,0
+res_partner_bank group_user_ro,group_account_user_ro,res_partner_bank group_user.ro,account.model_res_partner_bank,1,0,0,0
+res_partner_category group_user_ro,group_account_user_ro,res_partner_category group_user.ro,base.model_res_partner_category,1,0,0,0
+res_request group_user_ro,group_account_user_ro,res_request group_user.ro,base.model_res_request_link,1,0,0,0
+res_bank user_ro,group_account_user_ro,res_bank user.ro,base.model_res_bank,1,0,0,0
+ir_filters employee_ro,group_account_user_ro,ir_filters employee.ro,base.model_ir_filters,1,0,0,0
+mail_message_user_ro,group_account_user_ro,mail.message.user.ro,mail.model_mail_message,1,0,0,0
+mail_mail_user_ro,group_account_user_ro,mail.mail.user.ro,fetchmail.model_mail_mail,1,0,0,0
+mail_followers_user_ro,group_account_user_ro,mail.followers.user.ro,mail.model_mail_followers,1,0,0,0
+mail_notification_user_ro,group_account_user_ro,mail.notification.user.ro,mail.model_mail_notification,1,0,0,0
+mail_alias_user_ro,group_account_user_ro,mail.alias.user.ro,mail.model_mail_alias,1,0,0,0
+product_uom_categ_user_ro,group_account_user_ro,product.uom.categ.user.ro,product.model_product_uom_categ,1,0,0,0
+product_uom_user_ro,group_account_user_ro,product.uom.user.ro,product.model_product_uom,1,0,0,0
+product_category_user_ro,group_account_user_ro,product.category.user.ro,account.model_product_category,1,0,0,0
+product_template_user_ro,group_account_user_ro,product.template.user.ro,account.model_product_template,1,0,0,0
+product_packaging_user_ro,group_account_user_ro,product.packaging.user.ro,product.model_product_packaging,1,0,0,0
+product_supplierinfo_user_ro,group_account_user_ro,product.supplierinfo.user.ro,product.model_product_supplierinfo,1,0,0,0
+product_pricelist_user_ro,group_account_user_ro,product.pricelist.user.ro,product.model_product_pricelist,1,0,0,0
+product_pricelist_item_user_ro,group_account_user_ro,product.pricelist.item.user.ro,product.model_product_pricelist_item,1,0,0,0
+account_tax internal user_ro,group_account_user_ro,account.tax internal user.ro,account.model_account_tax,1,0,0,0
+account_account user_ro,group_account_user_ro,account.account user.ro,account.model_account_account,1,0,0,0
+account_invoice_line user_ro,group_account_user_ro,account.invoice.line user.ro,account.model_account_invoice_line,1,0,0,0
+account_payment_term partner manager_ro,group_account_user_ro,account.payment.term partner manager.ro,account.model_account_payment_term,1,0,0,0
+account_payment_term_line partner manager_ro,group_account_user_ro,account.payment.term.line partner manager.ro,account.model_account_payment_term_line,1,0,0,0
+account_fiscal_position all_ro,group_account_user_ro,account.fiscal.position all.ro,account.model_account_fiscal_position,1,0,0,0
+account_fiscal_position_tax all_ro,group_account_user_ro,account.fiscal.position.tax all.ro,account.model_account_fiscal_position_tax,1,0,0,0
+account_fiscal_position all_ro,group_account_user_ro,account.fiscal.position all.ro,account.model_account_fiscal_position_account,1,0,0,0
+account_account_ro,group_account_user_ro,account.account.ro,account.model_account_account,1,0,0,0
+account_account_type_ro,group_account_user_ro,account.account.type.ro,account.model_account_account_type,1,0,0,0
+account_analytic_line invoice_ro,group_account_user_ro,account.analytic.line invoice.ro,account.model_account_analytic_line,1,0,0,0
+account_bank_statement_ro,group_account_user_ro,account.bank.statement.ro,account.model_account_bank_statement,1,0,0,0
+account_bank_statement_line_ro,group_account_user_ro,account.bank.statement.line.ro,account.model_account_bank_statement_line,1,0,0,0
+account_cashbox_line_ro,group_account_user_ro,account.cashbox.line.ro,account.model_account_cashbox_line,1,0,0,0
+account_financial_report_ro,group_account_user_ro,account.financial.report.ro,account.model_account_financial_report,1,0,0,0
+account_invoice accountant_ro,group_account_user_ro,account.invoice accountant.ro,account.model_account_invoice,1,0,0,0
+account_invoice_line accountant_ro,group_account_user_ro,account.invoice.line accountant.ro,account.model_account_invoice_line,1,0,0,0
+account_invoice_tax accountant_ro,group_account_user_ro,account.invoice.tax accountant.ro,account.model_account_invoice_tax,1,0,0,0
+account_journal invoice_ro,group_account_user_ro,account.journal invoice.ro,account.model_account_journal,1,0,0,0
+account_move_ro,group_account_user_ro,account.move.ro,account.model_account_move,1,0,0,0
+account_move_line invoice_ro,group_account_user_ro,account.move.line invoice.ro,account.model_account_move_line,1,0,0,0
+account_payment_term_ro,group_account_user_ro,account.payment.term.ro,account.model_account_payment_term,1,0,0,0
+account_payment_term_line_ro,group_account_user_ro,account.payment.term.line.ro,account.model_account_payment_term_line,1,0,0,0
+account_tax_ro,group_account_user_ro,account.tax.ro,account.model_account_tax,1,0,0,0
