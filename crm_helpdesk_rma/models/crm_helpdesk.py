@@ -8,9 +8,31 @@ from openerp import api, fields, models
 class CrmHelpdesk(models.Model):
     _inherit = "crm.helpdesk"
 
+    @api.multi
+    def _compute_rma_count(self):
+        for rec in self:
+            rmas = rec.rma_order_line_ids.mapped('rma_id')
+            rec.rma_count = len(rmas)
+
+    rma_count = fields.Integer(
+        compute=_compute_rma_count, string='# of RMA')
+
     rma_order_line_ids = fields.One2many(
         string='RMA Order Lines',
         comodel_name='rma.order.line',
         inverse_name='helpdesk_id',
         copy=False,
     )
+
+    @api.multi
+    def action_view_rma_customer(self):
+        action = self.env.ref('rma.action_rma_customer')
+        result = action.read()[0]
+        rma_list = self.rma_order_line_ids.mapped('rma_id').ids
+        if len(rma_list) != 1:
+            result['domain'] = [('id', 'in', rma_list)]
+        elif len(rma_list) == 1:
+            res = self.env.ref('rma.view_rma_form', False)
+            result['views'] = [(res and res.id or False, 'form')]
+            result['res_id'] = rma_list[0]
+        return result
