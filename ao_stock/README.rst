@@ -16,6 +16,8 @@ This module contains customizations specific to Aleph Objects.
 * Print the *Qty Available in Source* in the operations of stock pickings.
 * New group *Modify Warehouses and Locations*. Only people in this group is
   able to modify the Warehouse and Location configuration.
+* New report *Inventory (Blank Quantity)* which do not print the qty in each
+  line so it could be filled up by pencil.
 
 Credits
 =======
