@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="report_inventory_ao"
+    <template id="report_inventory"
           inherit_id="stock.report_inventory">
         <xpath expr="//table[1]" position="replace">
             <table class="table table-condensed">
@@ -28,5 +28,21 @@
             </table>
         </xpath>
     </template>
+
+    <template id="report_inventory_ao"
+              inherit_id="ao_stock.report_inventory" primary="True">
+        <xpath expr="//tr[@t-as='line']/td[@class='text-right']"
+               position="replace">
+            <td class="text-right"/>
+        </xpath>
+    </template>
+
+    <report
+        string="Inventory (Blank Quantity)"
+        id="action_report_inventory_ao"
+        model="stock.inventory"
+        report_type="qweb-pdf"
+        name="ao_stock.report_inventory_ao"
+    />
 
 </odoo>
