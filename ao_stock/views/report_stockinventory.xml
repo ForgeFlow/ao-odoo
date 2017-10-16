@@ -35,6 +35,8 @@
                position="replace">
             <td class="text-right"/>
         </xpath>
+        <xpath expr="//span[@t-field='o.total_qty']" position="replace"/>
+        <xpath expr="//span[@t-field='o.product_id.uom_id']" position="replace"/>
     </template>
 
     <report
