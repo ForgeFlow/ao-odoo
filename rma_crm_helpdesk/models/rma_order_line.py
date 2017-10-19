@@ -9,9 +9,9 @@ class RmaOrderLine(models.Model):
     _inherit = "rma.order.line"
 
     helpdesk_id = fields.Many2one(
-        string='Helpdesk Ticket',
+        string='Originating Helpdesk Ticket',
         comodel_name='crm.helpdesk', readonly=True,
-        copy=False
+        copy=False,
     )
 
     @api.model

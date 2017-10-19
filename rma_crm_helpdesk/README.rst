@@ -3,12 +3,16 @@
    :alt: License: AGPL-3
 
 ================
-CRM Helpdesk RMA
+RMA CRM Helpdesk
 ================
 
 Allows to create RMA from a Helpesk Ticket, and to track the relationship
 between Tickets and RMA Lines.
 
+Roadmap
+=======
+
+* Support the creation of RMA groups from Helpdesk tickets.
 
 Credits
 =======
