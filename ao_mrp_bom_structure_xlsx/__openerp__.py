@@ -13,5 +13,5 @@
     "data": [
         'report/bom_structure_xlsx.xml',
     ],
-    "installable": True
+    "installable": False
 }
