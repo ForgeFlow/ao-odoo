@@ -6,7 +6,7 @@
     "name": "Product BOM Standard Cost",
     "summary": "Shows the standard cost of a product that has a BOM "
                "considering the BOM components and routing data",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L., "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
