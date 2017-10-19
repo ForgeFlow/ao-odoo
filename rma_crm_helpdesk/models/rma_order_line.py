@@ -20,4 +20,12 @@ class RmaOrderLine(models.Model):
         if not rma_line.helpdesk_id:
             rma_line.helpdesk_id = rma_line.rma_id.originating_helpdesk_id or \
                                    False
+        if rma_line.helpdesk_id:
+            body = """%s created.
+            <ul><li>Partner: %s</li>
+            <li>Product: %s</li></ul>
+            """ % (rma_line.name, rma_line.partner_id.name,
+                   rma_line.product_id.name)
+            rma_line.helpdesk_id.message_post(
+                body=body, subtype='mail.mt_comment')
         return rma_line
