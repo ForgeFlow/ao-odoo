@@ -11,6 +11,8 @@
     "category": "Manfacturing",
     "depends": ["mrp"],
     "data": [
+        "security/ao_mrp_security.xml",
+        "security/ir.model.access.csv",
         "views/mrp_view.xml",
         "views/mrp_production_report.xml",
     ],
