@@ -33,5 +33,16 @@
             <field name="groups_id" eval="[(4, ref('ao_mrp.ao_group_mrp_readonly'))]"/>
         </record>
 
+        <record id="mrp_bom_component_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bom.component.tree - ao_mrp</field>
+            <field name="model">mrp.bom.line</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_component_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="bom_id" position="before">
+                    <field name="bom_id_product_tmpl_id"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </odoo>
