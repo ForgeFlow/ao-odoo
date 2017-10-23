@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="ao_group_mrp_readonly" model="res.groups">
+        <field name="name">Read Only</field>
+        <field name="category_id" ref="base.module_category_manufacturing"/>
+    </record>
+
+    <record id="mrp.group_mrp_user" model="res.groups">
+        <field name="implied_ids"
+               eval="[(4, ref('ao_mrp.ao_group_mrp_readonly'))]"/>
+    </record>
+
+</odoo>

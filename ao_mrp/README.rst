@@ -12,6 +12,7 @@ This module contains customizations specific to Aleph Objects.
 * Add to the stock move form view a link to the manufacturing order.
 * Sort Manufacturing Orders by ID (descending).
 * Show the the qty pending to produce when printing MO.
+* Add a "Manufacturing Read Only" Security group.
 
 Credits
 =======
