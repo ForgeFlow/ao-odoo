@@ -27,5 +27,5 @@ class RmaOrderLine(models.Model):
             """ % (rma_line.name, rma_line.partner_id.name,
                    rma_line.product_id.name)
             rma_line.helpdesk_id.message_post(
-                body=body, subtype='mail.mt_comment')
+                body=body, subtype='mail.mt_note')
         return rma_line
