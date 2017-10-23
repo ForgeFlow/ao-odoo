@@ -39,7 +39,7 @@
             <field name="inherit_id" ref="mrp.mrp_bom_component_tree_view"/>
             <field name="arch" type="xml">
                 <field name="bom_id" position="before">
-                    <field name="bom_id_product_tmpl_id"/>
+                    <field name="bom_id_product_code"/>
                 </field>
             </field>
         </record>
