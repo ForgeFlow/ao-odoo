@@ -17,6 +17,12 @@
                                string="Invoice"/>
                     </button>
                 </div>
+                <field name="operations" position='attributes'>
+                    <attribute name='context'>{'default_product_uom_qty': product_qty,
+                        'to_refurbish': to_refurbish,
+                        'refurbish_location_dest_id': location_dest_id,
+                        'rma_line_id': rma_line_id}</attribute>
+                </field>
             </xpath>
         </field>
     </record>

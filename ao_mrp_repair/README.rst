@@ -8,7 +8,8 @@ AO-specific customizations on MRP
 
 This module contains customizations specific to Aleph Objects.
 
-* Destination locations for mrp.repair.line set to customer.
+* Destination locations for mrp.repair.line set to customer and Origin
+  location to in location of related rma line.
 
 Credits
 =======

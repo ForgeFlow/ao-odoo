@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, fields, models
+from openerp.osv import orm
 
 
 class MrpRepair(models.Model):
@@ -31,3 +32,23 @@ class MrpRepair(models.Model):
             result['views'] = [(res and res.id or False, 'form')]
             result['res_id'] = invoice_ids[0]
         return result
+
+
+class mrp_repair_line(orm.Model):
+    """To inherit using old api is needed here in order to be able to modify
+    the onchange method for `type`.
+    NOTE: This should be moved to new api in v10, when the standard is also
+    migrated.
+    """
+    _inherit = 'mrp.repair.line'
+
+    def onchange_operation_type(self, cr, uid, ids, type, guarantee_limit,
+                                company_id=False, context=None):
+        res = super(mrp_repair_line, self).onchange_operation_type(
+            cr, uid, ids, type, guarantee_limit, company_id=company_id,
+            context=context)
+        if context.get('rma_line_id'):
+            rma_line = self.pool['rma.order.line'].browse(
+                cr, uid, context.get('rma_line_id'), context=context)
+            res['value']['location_id'] = rma_line.location_id.id
+        return res
