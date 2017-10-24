@@ -13,4 +13,16 @@
         </field>
     </record>
 
+    <record id="action_helpdesk_rma_customer" model="ir.actions.act_window">
+        <field name="name">Customer RMA</field>
+        <field name="res_model">rma.order</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('type','=', 'customer')]</field>
+        <field name="context">{"search_default_requested_by":uid,
+            'customer':1}</field>
+        <field name="target">current</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="rma.view_rma_form"/>
+    </record>
+
 </odoo>
