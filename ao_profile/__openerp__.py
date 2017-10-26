@@ -198,7 +198,7 @@
         # -----------------
         # 'sale_stock_picking_back2draft', -- not yet ported to v9
         'sale_procurement_group_by_line',
-        'sale_sourced_by_line',
+        # 'sale_sourced_by_line',  -- not needed, feature is out-of-the-box.
         'sale_force_invoiced',
         'sale_validity',
         #
