@@ -24,7 +24,6 @@
         <field name="domain">[('type','=', 'customer')]</field>
         <field name="target">current</field>
         <field name="view_mode">form,tree</field>
-        <field name="view_id" ref="rma.view_rma_line_form"/>
     </record>
 
 </odoo>
