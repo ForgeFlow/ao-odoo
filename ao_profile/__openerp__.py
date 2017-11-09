@@ -77,7 +77,7 @@
         'payment',
         'payment_transfer',
         'procurement',
-        'procurement_jit',
+        # 'procurement_jit',  -- not with ddmrp (beware: it's auto-installed)
         #'procurement_jit_stock', -- deprecated
         'product',
         'project_issue_sheet',
