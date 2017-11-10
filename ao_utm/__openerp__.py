@@ -10,6 +10,7 @@
     "category": "CRM",
     "depends": ["utm"],
     "data": [
+        "security/ir.model.access.csv",
         "views/utm_view.xml",
     ],
     "license": "AGPL-3",
