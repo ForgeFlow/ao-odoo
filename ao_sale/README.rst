@@ -13,6 +13,8 @@ This module contains customizations specific to Aleph Objects.
 * Add the *Expiration Date* to the Quotation and Sales Order report.
 * Makes BOMs and MOs related to a product accessible from the form view for
   sales users.
+* Set the default Sales Team for a customer. *Customer form > Sales &
+  Purchases tab > Sale section > Sale Team*.
 
 
 Credits
