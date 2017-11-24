@@ -16,6 +16,7 @@
         "views/stock_view.xml",
         "views/report_stockpicking_operations.xml",
         "views/report_stockinventory.xml",
+        "views/report_deliveryslip.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
