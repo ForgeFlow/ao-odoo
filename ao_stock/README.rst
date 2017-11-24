@@ -18,6 +18,7 @@ This module contains customizations specific to Aleph Objects.
   able to modify the Warehouse and Location configuration.
 * New report *Inventory (Blank Quantity)* which do not print the qty in each
   line so it could be filled up by pencil.
+* Delivery Slip report sorted by source location.
 
 Credits
 =======
