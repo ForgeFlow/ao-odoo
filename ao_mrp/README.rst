@@ -15,6 +15,7 @@ This module contains customizations specific to Aleph Objects.
 * Add a "Manufacturing Read Only" Security group.
 * List internal reference number for the parent item on the Bill of Material
   Components (where used) tree view.
+* New customized report for manufacturing orders: *Production Order (AO)*.
 
 Credits
 =======
