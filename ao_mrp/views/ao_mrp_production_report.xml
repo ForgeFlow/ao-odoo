@@ -118,8 +118,11 @@
                                 </tr>
                                 <tr t-foreach="o.move_lines2" t-as="line2">
                                     <td>
-                                        <span t-field="line2.product_id.code"/>
+                                        <b><span t-field="line2.product_id.code"/></b>
                                         <span t-field="line2.product_id.name"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="'%i'%(line2.product_uom_qty/o.product_qty)"/>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="'%i'%line2.product_uom_qty"/>
@@ -127,9 +130,6 @@
                                     </td>
                                     <td class="text-center" groups="stock.group_locations">
                                         <span t-field="line2.location_id.name"/>
-                                    </td>
-                                    <td class="text-center" groups="stock.group_locations">
-                                        <span t-field="line2.location_dest_id.name"/>
                                     </td>
                                 </tr>
                             </t>
