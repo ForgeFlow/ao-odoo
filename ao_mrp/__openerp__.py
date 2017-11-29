@@ -15,6 +15,7 @@
         "security/ir.model.access.csv",
         "views/mrp_view.xml",
         "views/mrp_production_report.xml",
+        "views/ao_mrp_production_report.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
