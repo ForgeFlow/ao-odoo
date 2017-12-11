@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="0">
+
+    <record id="excep_external_taxes" model="sale.exception">
+        <field name="name">Drupal Taxes does not match OCA's</field>
+        <field name="description">The taxes computed by Drupal and OCA are differing</field>
+        <field name="sequence">10</field>
+        <field name="model">sale.order.line</field>
+        <field name="code">failed = object.price_tax_external != object.price_tax</field>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>
