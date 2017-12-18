@@ -11,5 +11,3 @@ class StockScrap(models.Model):
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
         default=lambda self: self.env.user.company_id)
-
-    scrap_location_id = fields.Many2one(required=True)
