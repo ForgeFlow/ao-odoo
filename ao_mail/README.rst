@@ -10,6 +10,7 @@ This module contains customizations specific to Aleph Objects.
 
 * Allow to select a new option related to email notifications: 'All Messages
   Except Notifications'.
+* Modify Default Template for Mails.
 
 
 Credits
