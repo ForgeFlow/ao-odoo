@@ -27,10 +27,12 @@
                 
                 % elif ctx.get('button_unfollow'):
                 <a href="${ctx['button_unfollow']['url']}" style="-webkit-user-select: none; padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#1f91d3; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #1f91d3; border: 1px solid #1f91d3; border-radius:3px" class="o_default_snippet_text">${ctx['button_unfollow']['title']}</a>
-                % endif
+
+                % else:
                 <div style="font-size:12px;font-weight:bold;color:#777777;">
                 <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" height=65px/>
                 </div>
+                % endif
             </td>
             <td valign="center" align="right" width="200" style="padding:5px 15px 5px 10px; font-size: 12px;">
                 <p>
