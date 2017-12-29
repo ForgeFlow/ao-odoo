@@ -8,7 +8,6 @@ AO-specific customizations on account_due_list
 
 This module contains customizations specific to Aleph Objects.
 
-* The field 'Residual Amount' is not stored
 * The view is customized per per AO requirements
 
 
