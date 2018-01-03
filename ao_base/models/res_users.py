@@ -2,7 +2,7 @@
 # © 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models
+from odoo import api, models
 
 
 class ResUsers(models.Model):
@@ -12,6 +12,5 @@ class ResUsers(models.Model):
     def write(self, vals):
         res = super(ResUsers, self).write(vals)
         if 'active' in vals:
-            for rec in self:
-                rec.partner_id.active = rec.active
+            self.mapped('partner_id').write({'active': vals.get('active')})
         return res
