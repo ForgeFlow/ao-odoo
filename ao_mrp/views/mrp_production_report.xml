@@ -6,8 +6,8 @@
         <xpath expr="//div[@class='row mt32 mb32'][1]" position="inside">
             <div class="col-xs-3">
                 <strong>Pending to produce:</strong><br/>
-                <span t-field="o.move_created_ids.product_qty"/>
-                <span t-field="o.move_created_ids.product_uom.name"
+                <span t-esc="(o.move_finished_ids.product_uom_qty - o.move_finished_ids.quantity_done)"/>
+                <span t-field="o.move_finished_ids.product_uom.name"
                       groups="product.group_uom"/>
             </div>
         </xpath>

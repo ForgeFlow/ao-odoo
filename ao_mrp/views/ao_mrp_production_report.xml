@@ -7,8 +7,16 @@
             <t t-call="report.internal_layout">
                 <div class="page">
                     <div class="oe_structure"/>
-                    <h2>Production Order # : <span t-field="o.name"/></h2>
-
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <h2>Production Order # : <span t-field="o.name"/></h2>
+                        </div>
+                        <div class="col-xs-5">
+                            <span class="text-right">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:350px;height:60px"/>
+                            </span>
+                        </div>
+                    </div>
                     <div class="row mt32 mb32">
                         <div class="col-xs-3">
                             <strong>Source Document:</strong><br/>
@@ -17,19 +25,18 @@
                         </div>
                         <div class="col-xs-3">
                             <strong>Product:</strong><br/>
-                            <!--<span t-field="o.product_id.code" style="background-color: #f9f39f;"/>-->
-                            <span t-esc="o.product_id.name_get()[0][1]" style="background-color: #f9f39f;"/>
-                            <br/><b>UPC#: </b><span t-esc="o.product_id.upc"/>
+                            <span t-field="o.product_id" style="background-color: #f9f39f;"/>
+                            <!--<br/><b>UPC#: </b><span t-esc="o.product_id.upc"/>-->
                         </div>
                         <div class="col-xs-3">
                             <strong>Quantity:</strong><br/>
                             <span t-esc="'%i'%o.product_qty"/>
-                            <span t-field="o.product_uom.name" groups="product.group_uom"/>
+                            <span t-field="o.product_uom_id.name" groups="product.group_uom"/>
                         </div>
                         <div class="col-xs-3" style="background-color: #f9f39f;">
                             <strong>Pending to produce:</strong><br/>
-                            <span t-esc="'%i'%o.move_created_ids.product_qty"/>
-                            <span t-field="o.move_created_ids.product_uom.name"
+                            <span t-esc="'%i'%(o.move_finished_ids.product_uom_qty - o.move_finished_ids.quantity_done)"/>
+                            <span t-field="o.move_finished_ids.product_uom.name"
                                   groups="product.group_uom"/>
                         </div>
                     </div>
@@ -37,7 +44,7 @@
                     <div class="row mt32 mb32">
                         <div class="col-xs-3">
                             <strong>Scheduled Date:</strong><br/>
-                            <span t-field="o.date_planned"/>
+                            <span t-field="o.date_planned_start"/><span t-if="o.date_planned_finished"> - <span t-field="o.date_planned_finished"/></span>
                         </div>
                         <div class="col-xs-3">
                             <strong>MO Created Date:</strong><br/>
@@ -45,57 +52,57 @@
                         </div>
                         <div class="col-xs-3">
                             <strong>Printing date:</strong><br/>
-                            <span t-esc="time.strftime('%Y-%m-%d')"/>
+                            <span t-esc="time.strftime('%Y-%m-%d')"
+                                  t-options='{"widget": "date"}'/>
                         </div>
-                        <div class="col-xs-3" t-if="'sale_ref' in o._columns.keys()">
+                        <div class="col-xs-3" t-if="'sale_ref' in o">
                             <strong>Partner Ref:</strong><br/>
-                            <span t-esc="'sale_ref' in o._columns.keys() and o.sale_ref"/>
+                            <span t-esc="'sale_ref' in o and o.sale_ref"/>
                         </div>
-                        <div class="col-xs-3" t-if="'sale_name' in o._columns.keys()">
+                        <div class="col-xs-3" t-if="'sale_name' in o">
                             <strong>SO Number:</strong><br/>
-                            <span t-esc="'sale_name' in o._columns.keys() and o.sale_name"/>
+                            <span t-esc="'sale_name' in o and o.sale_name"/>
                         </div>
                     </div>
 
-                    <div t-if="o.workcenter_lines">
+                    <div t-if="o.workorder_ids">
                         <strong>Work Orders</strong>
                         <table class="table table-condensed">
                             <tr>
-                                <td class="text-center"><strong>Sequence</strong></td>
                                 <td class="text-center"><strong>Name</strong></td>
                                 <td class="text-center"><strong>WorkCenter</strong></td>
-                                <td class="text-center"><strong>No. Of Cycles</strong></td>
-                                <td class="text-center"><strong>No. Of Hours</strong></td>
+                                <td class="text-center"><strong>No. Of Minutes</strong></td>
                             </tr>
-                            <tr t-foreach="o.workcenter_lines" t-as="line2">
-                                <td class="text-center"><span t-field="line2.sequence"/></td>
+                            <tr t-foreach="o.workorder_ids" t-as="line2">
                                 <td class="text-center"><span t-field="line2.name"/></td>
                                 <td class="text-center"><span t-field="line2.workcenter_id.name"/></td>
-                                <td class="text-center"><span t-field="line2.cycle"/></td>
-                                <td class="text-center"><span t-field="line2.hour"/></td>
+                                <td class="text-center"><span t-field="line2.duration_expected"/></td>
                             </tr>
                         </table>
                     </div>
 
-                    <h3 t-if="o.move_lines">Bill Of Material</h3>
+                    <h3 t-if="o.move_raw_ids">Bill Of Material</h3>
 
-                    <table class="table table-condensed" t-if="o.move_lines or o.move_lines2">
+                    <table class="table table-condensed" t-if="o.move_raw_ids">
                         <thead>
                             <tr>
                                 <th><strong>Product</strong></th>
                                 <th class="text-right"><strong>Qty per Unit</strong></th>
                                 <th class="text-right"><strong>Total Quantity</strong></th>
-                                <th class="text-center" groups="stock.group_locations">
+                                <th class="text-center" groups="stock.group_stock_multi_locations">
                                     <strong>Source Location</strong>
+                                </th>
+                                <th class="text-center">
+                                    <strong>Barcode</strong>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-if="o.move_lines">
+                            <t t-if="o.move_raw_ids">
                                 <tr>
                                     <td colspan="4"><strong>Products to Consume</strong></td>
                                 </tr>
-                                <tr t-foreach="o.move_lines" t-as="line">
+                                <tr t-foreach="o.move_raw_ids" t-as="line">
                                     <td>
                                         <b><span t-field="line.product_id.code"/></b>
                                         <span t-field="line.product_id.name"/>
@@ -107,29 +114,13 @@
                                         <span t-esc="'%i'%line.product_uom_qty"/>
                                         <span t-field="line.product_uom.name" groups="product.group_uom"/>
                                     </td>
-                                    <td class="text-center" groups="stock.group_locations">
+                                    <td class="text-center" groups="stock.group_stock_multi_locations">
                                         <span t-field="line.location_id.name"/>
                                     </td>
-                                </tr>
-                            </t>
-                            <t t-if="o.move_lines2">
-                                <tr>
-                                    <td colspan="4"><strong>Consumed Products</strong></td>
-                                </tr>
-                                <tr t-foreach="o.move_lines2" t-as="line2">
-                                    <td>
-                                        <b><span t-field="line2.product_id.code"/></b>
-                                        <span t-field="line2.product_id.name"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-esc="'%i'%(line2.product_uom_qty/o.product_qty)"/>
-                                    </td>
-                                    <td class="text-right">
-                                        <span t-esc="'%i'%line2.product_uom_qty"/>
-                                        <span t-field="line2.product_uom.name"/>
-                                    </td>
-                                    <td class="text-center" groups="stock.group_locations">
-                                        <span t-field="line2.location_id.name"/>
+                                    <td class="text-center">
+                                        <span t-if="line.product_id.barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', line.product_id.barcode, 600, 100)" style="width:300px;height:50px"/>
+                                        </span>
                                     </td>
                                 </tr>
                             </t>
