@@ -10,7 +10,8 @@ This module contains customizations specific to Aleph Objects.
 
 * Add company and multicompany rules.
 * New group *Allowed to Scrap* to constrain the use of the model.
-* Scrap locaton is now required.
+* Scrap location is now required. (Out-of-the-box in v11, remove on
+  migration).
 
 Credits
 =======
