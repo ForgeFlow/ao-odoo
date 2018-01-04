@@ -30,7 +30,7 @@
 
                 % else:
                 <div style="font-size:12px;font-weight:bold;color:#777777;">
-                <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" height=65px/>
+                <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" height="65"/>
                 </div>
                 % endif
             </td>
