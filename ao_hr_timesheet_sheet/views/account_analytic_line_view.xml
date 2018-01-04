@@ -4,13 +4,12 @@
 
 <odoo>
 
-    <record id="hr_timesheet.act_hr_timesheet_line_evry1_all_form" model="ir.actions.act_window">
+    <record id="hr_timesheet.act_hr_timesheet_line" model="ir.actions.act_window">
         <field name="name">Activities</field>
         <field name="res_model">account.analytic.line</field>
         <field name="view_type">form</field>
-        <field name="view_id" ref="hr_timesheet.hr_timesheet_line_form"/>
-        <field name="domain">[('user_id', '=', uid), ('is_timesheet', '=',True)]</field>
-        <field name="context">{"search_default_today":1, "default_is_timesheet":1}</field>
+        <field name="domain">[('project_id', '!=', False),('user_id', '=', uid)]</field>
+        <field name="context">{"search_default_today":1}</field>
         <field name="search_view_id"
                ref="hr_timesheet.hr_timesheet_line_search"/>
         <field name="help" type="html">
@@ -31,8 +30,8 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
-        <field name="domain">[('is_timesheet', '=',True)]</field>
-        <field name="context">{"search_default_today":1, "default_is_timesheet":1}</field>
+        <field name="domain">[('project_id', '!=', False)]</field>
+        <field name="context">{"search_default_today":1}</field>
         <field name="search_view_id"
                ref="hr_timesheet.hr_timesheet_line_search"/>
         <field name="help" type="html">
@@ -47,7 +46,7 @@
         </field>
     </record>
 
-    <menuitem id="menu_hr_working_hours" parent="hr_attendance.menu_hr_time_tracking"
-              action="act_hr_timesheet_line_all_users" groups="base.group_hr_user"/>
+    <menuitem id="menu_hr_working_hours" parent="hr_timesheet.menu_hr_time_tracking"
+              action="act_hr_timesheet_line_all_users" groups="hr.group_hr_user"/>
 
 </odoo>
