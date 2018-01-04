@@ -8,9 +8,9 @@
         <field name="name">stock.scrap.search - ao customization</field>
         <field name="model">stock.scrap</field>
         <field name="inherit_id"
-               ref="stock_scrap.stock_scrap_search_view"/>
+               ref="stock.stock_scrap_search_view"/>
         <field name="arch" type="xml">
-            <field name="create_date" positon="after">
+            <field name="create_date" position="after">
                  <field name="company_id" groups="base.group_multi_company"/>
             </field>
         </field>
@@ -20,9 +20,9 @@
         <field name="name">stock.scrap.form - ao customization</field>
         <field name="model">stock.scrap</field>
         <field name="inherit_id"
-               ref="stock_scrap.stock_scrap_form_view"/>
+               ref="stock.stock_scrap_form_view"/>
         <field name="arch" type="xml">
-            <field name="picking_id" positon="after">
+            <field name="scrap_location_id" position="after">
                  <field name="company_id" groups="base.group_multi_company"/>
             </field>
         </field>
@@ -32,9 +32,9 @@
         <field name="name">stock.scrap.tree - ao customization</field>
         <field name="model">stock.scrap</field>
         <field name="inherit_id"
-               ref="stock_scrap.stock_scrap_tree_view"/>
+               ref="stock.stock_scrap_tree_view"/>
         <field name="arch" type="xml">
-            <field name="scrap_location_id" positon="after">
+            <field name="scrap_location_id" position="after">
                  <field name="company_id" groups="base.group_multi_company"/>
             </field>
         </field>

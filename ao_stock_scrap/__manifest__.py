@@ -4,11 +4,11 @@
 
 {
     "name": "AO-specific customizations on stock scrap",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Warehouse Management",
-    "depends": ["stock_scrap"],
+    "depends": ["stock"],
     "data": [
         "security/stock_scrap_security.xml",
         "security/ir.model.access.csv",
@@ -16,5 +16,5 @@
     ],
     "license": "AGPL-3",
     'installable': True,
-    'auto_install': True,
+    'auto_install': False,
 }
