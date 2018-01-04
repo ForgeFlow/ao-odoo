@@ -13,8 +13,6 @@ This module contains customizations specific to Aleph Objects.
 * Sort Manufacturing Orders by ID (descending).
 * Show the the qty pending to produce when printing MO.
 * Add a "Manufacturing Read Only" Security group.
-* List internal reference number for the parent item on the Bill of Material
-  Components (where used) tree view.
 * New customized report for manufacturing orders: *Production Order (AO)*.
 
 Credits
