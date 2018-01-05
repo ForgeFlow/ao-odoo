@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
 
     <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
         <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="after">
@@ -17,5 +16,4 @@
         </xpath>
     </template>
 
-</data>
-</openerp>
+</odoo>
