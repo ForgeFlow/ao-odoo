@@ -8,7 +8,7 @@ AO-specific customizations on Web
 
 This module contains customizations specific to Aleph Objects.
 
-* Danger and infor colors are brighter now.
+* 'Danger' and 'info' colors are brighter now.
 
 Credits
 =======
