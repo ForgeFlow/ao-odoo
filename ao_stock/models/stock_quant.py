@@ -2,13 +2,13 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
-
+    # TODO: to remove?
     @api.cr_uid_context
     def get_first_move(self, cr, uid, quant_id, context=None):
         quant = self.pool['stock.quant'].browse(cr, uid, quant_id,
