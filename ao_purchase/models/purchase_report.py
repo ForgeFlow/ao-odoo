@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# © 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models
-from openerp.exceptions import UserError
+from odoo import api, models
+from odoo.exceptions import UserError
 
 
 class ReportPurchasePurchaseQuotation(models.AbstractModel):
     _name = 'report.purchase.report_purchasequotation'
 
-    @api.multi
-    def render_html(self, data=None):
-        pos = self.env['purchase.order'].browse(self.ids)
+    @api.model
+    def render_html(self, docids, data=None):
+        pos = self.env['purchase.order'].browse(docids)
         if 'to approve' in pos.mapped('state'):
             raise UserError('You cannot print a RFQ that is pending to '
                             'approve.')
@@ -27,9 +27,9 @@ class ReportPurchasePurchaseQuotation(models.AbstractModel):
 class ReportPurchasePurchaseOrder(models.AbstractModel):
     _name = 'report.purchase.report_purchaseorder'
 
-    @api.multi
-    def render_html(self, data=None):
-        pos = self.env['purchase.order'].browse(self.ids)
+    @api.model
+    def render_html(self, docids, data=None):
+        pos = self.env['purchase.order'].browse(docids)
         if any(state in ['sent', 'to approve', 'draft'] for state in
                pos.mapped('state')):
             raise UserError('You cannot print a Purchase Order that is not '
