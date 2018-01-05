@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-ao_access_utm_campaign_sale_manager,utm_campaign sale_manager,utm.model_utm_campaign,base.group_sale_manager,1,1,1,1
-ao_access_utm_medium_sale_manager,utm_medium sale_manager,utm.model_utm_medium,base.group_sale_manager,1,1,1,1
-ao_access_utm_source_sale_manager,utm_source sale_manager,utm.model_utm_source,base.group_sale_manager,1,1,1,1
+ao_access_utm_campaign_sale_manager,utm_campaign sale_manager,utm.model_utm_campaign,sales_team.group_sale_manager,1,1,1,1
+ao_access_utm_medium_sale_manager,utm_medium sale_manager,utm.model_utm_medium,sales_team.group_sale_manager,1,1,1,1
+ao_access_utm_source_sale_manager,utm_source sale_manager,utm.model_utm_source,sales_team.group_sale_manager,1,1,1,1
