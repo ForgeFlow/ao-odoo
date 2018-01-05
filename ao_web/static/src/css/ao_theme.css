@@ -1,7 +1,7 @@
 .text-danger {
-  color: #ff0000;
+  color: #ff0000 !important;
 }
 
 .text-info {
-  color: #0000ff;
+  color: #0000ff !important;
 }
