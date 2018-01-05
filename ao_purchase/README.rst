@@ -8,8 +8,8 @@ AO-specific customizations on purchase
 
 This module contains customizations specific to Aleph Objects.
 
-* Add a menu entry 'Product Variant' to the 'Purchases' menu.
 * Adds a button to the purchase variants to purchases
+* Always show the *Source Document*, even if empty.
 * Purchase form shows name of the warehouse partner, not warehouse name
 * Request for quotations can only be printed if they are not in state *To
   Approve*.
