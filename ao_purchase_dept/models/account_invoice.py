@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# Copyright 2015-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import fields, models
+from odoo import fields, models
 
-_DEPT_SELECTION = [('product', 'Product'),
-                   ('ga', 'G&A'),
-                   ('rd', 'R&D'),
-                   ('sales', 'Sales'),
-                   ('service', 'Service'),
-                   ('mktg', 'Marketing')]
+from .purchase import _DEPT_SELECTION
 
 
 class AccountInvoiceLine(models.Model):
-
     _inherit = "account.invoice.line"
 
-    dept = fields.Selection(_DEPT_SELECTION,
-                            string='Department',
-                            required=False,
-                            size=32,
-                            help="Department for which the item is required")
+    dept = fields.Selection(
+        selection=_DEPT_SELECTION,
+        string='Department', size=32,
+        help="Department for which the item is required",
+    )
 
     def _set_additional_fields(self, invoice):
         if self.purchase_line_id:
