@@ -2,30 +2,31 @@
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
     _inherit = "stock.pack.operation"
 
-    @api.one
+    @api.multi
     def _compute_qty_available_in_source_loc(self):
-        product_available = self.product_id.with_context(
-            location=self.location_id.id)._product_available()[
-            self.product_id.id]['qty_available']
-        res = self.product_uom_id._compute_qty(
-            self.product_id.product_tmpl_id.uom_id.id, product_available,
-            self.product_uom_id.id)
-        self.qty_available_in_source_loc = res
+        for rec in self:
+            product_available = rec.product_id.with_context(
+                location=rec.location_id.id)._product_available()[
+                rec.product_id.id]['qty_available']
+            res = rec.product_id.product_tmpl_id.uom_id._compute_quantity(
+                product_available, rec.product_uom_id)
+            rec.qty_available_in_source_loc = res
 
-    @api.one
+    @api.multi
     def _compute_display_source_loc(self):
-        self.display_source_loc = \
-            self.picking_id.picking_type_id.code != 'incoming'
+        for rec in self:
+            rec.display_source_loc = \
+                rec.picking_id.picking_type_id.code != 'incoming'
 
     qty_available_in_source_loc = fields.Float(
         string="Qty Available in Source",
-        compute=_compute_qty_available_in_source_loc)
+        compute="_compute_qty_available_in_source_loc")
 
     display_source_loc = fields.Boolean(
-        compute=_compute_display_source_loc)
+        compute="_compute_display_source_loc")
