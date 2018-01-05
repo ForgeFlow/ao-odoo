@@ -2,23 +2,23 @@
 <odoo>
 
     <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
     <record id="utm.marketing_utm" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
     <record id="utm.menu_utm_campaign_act" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
     <record id="utm.menu_utm_medium" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
     <record id="utm.menu_utm_source" model="ir.ui.menu">
-        <field name="groups_id" eval="[(4, ref('base.group_sale_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
 </odoo>
