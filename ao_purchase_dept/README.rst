@@ -6,8 +6,8 @@
 Purchase Dept
 =============
 
-This module adds the AO department to puchase order lines. The department is
- then moved to the invoice.
+This module adds the AO department to purchase order lines. The department is
+then moved to the invoice.
 
 Credits
 =======
