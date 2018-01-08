@@ -1,20 +1,18 @@
-<?xml version="1.0"?>
-<openerp>
-    <data>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
 
-        <record model="ir.ui.view" id="crm_case_form_view_helpdesk">
-            <field name="model">crm.helpdesk</field>
-            <field name="inherit_id"
-                   ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
-            <field name="arch" type="xml">
-                <field name="state" position="before">
-                    <button name="button_open" string="Open" type="object"
-                            class="oe_highlight"
-                            attrs="{'invisible':[('user_id','=',False),
-                            ('state', 'not in', ['draft', 'pending'])]}"/>
-                </field>
+    <record model="ir.ui.view" id="crm_case_form_view_helpdesk">
+        <field name="model">crm.helpdesk</field>
+        <field name="inherit_id"
+               ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="button_open" string="Open" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible':[('user_id','=',False),
+                        ('state', 'not in', ['draft', 'pending'])]}"/>
             </field>
-        </record>
+        </field>
+    </record>
 
-    </data>
-</openerp>
+</odoo>
