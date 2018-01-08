@@ -6,8 +6,8 @@
 CRM Helpdesk Warning
 ====================
 
-This module allows to define a warning message on the partner, that pops up
-in helpdesk tickets.
+This module allows to define a warning message on the partner, which will pop
+up and be posted in helpdesk tickets.
 
 
 Credits
