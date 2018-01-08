@@ -16,5 +16,6 @@
     ],
     "data": [
         'views/template.xml',
+        'views/res_users_view.xml',
     ],
 }
