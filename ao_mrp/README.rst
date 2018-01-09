@@ -16,6 +16,7 @@ This module contains customizations specific to Aleph Objects.
 * List internal reference number for the parent item on the Bill of Material
   Components (where used) tree view.
 * New customized report for manufacturing orders: *Production Order (AO)*.
+* Post an internal note on MO when printing a report.
 
 Credits
 =======
