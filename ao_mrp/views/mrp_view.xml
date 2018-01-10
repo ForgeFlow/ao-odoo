@@ -45,12 +45,36 @@
         </record>
 
         <record id="mrp_production_form_view" model="ir.ui.view">
-            <field name="name">mrp.production.form</field>
+            <field name="name">mrp.production.form - ao_mrp</field>
             <field name="model">mrp.production</field>
             <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
                     <field name="assigned_to"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">mrp.production.tree - ao_mrp</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                    <field name="assigned_to"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_mrp_production_filter" model="ir.ui.view">
+            <field name="name">mrp.production.select - ao_mrp</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="arch" type="xml">
+                <field name="product_tmpl_id" position="before">
+                    <separator/>
+                    <filter string="Assigned to me" domain="[('assigned_to','=', uid), ('state', 'not in', ('done', 'cancel'))]"
+                        help="Production orders not done and assigned to me"/>
                 </field>
             </field>
         </record>
