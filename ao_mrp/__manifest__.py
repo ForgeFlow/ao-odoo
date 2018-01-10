@@ -11,7 +11,7 @@
     "category": "Manfacturing",
     "depends": [
         "mrp",
-        # "ursa_product_gtin", -- pending to migrate
+        "ursa_product_gtin",
     ],
     "data": [
         "security/ao_mrp_security.xml",
