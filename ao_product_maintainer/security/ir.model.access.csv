@@ -21,6 +21,11 @@ hr_expense.access_product_template_hr_expense_user,product.template.hr.expense.u
 product.access_product_template_sale_manager,product.template salemanager,product.model_product_template,base.group_sale_manager,1,0,0,0
 product.access_product_product_sale_manager,product.product salemanager,product.model_product_product,base.group_sale_manager,1,0,0,0
 product.access_product_category_sale_manager,product.category salemanager,product.model_product_category,base.group_sale_manager,1,0,0,0
+hr_timesheet.access_product_product_user,product.product user,product.model_product_product,base.group_hr_user,1,0,0,0
+hr_timesheet.access_product_template_hr_timesheet,product.template.hr.timesheet,product.model_product_template,base.group_hr_user,1,0,0,0
+sale.access_product_category_sale_manager,product.category salemanager,product.model_product_category,base.group_sale_manager,1,0,0,0
+sale_stock.access_product_packaging_user,product.packaging.user,product.model_product_packaging,base.group_sale_salesman,1,0,0,0
+sale_stock.access_product_packaging_sale_manager,product.packaging salemanager,product.model_product_packaging,base.group_sale_manager,1,0,0,0
 ao_product_maintainer_product_product,product.product,product.model_product_product,ao_group_product_maintainer,1,1,1,1
 ao_product_maintainer_product_template,product.template,product.model_product_template,ao_group_product_maintainer,1,1,1,1
 ao_product_maintainer_product_packaging,product.packaging,product.model_product_packaging,ao_group_product_maintainer,1,1,1,1

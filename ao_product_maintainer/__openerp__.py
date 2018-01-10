@@ -17,6 +17,9 @@
         "stock",
         "point_of_sale",
         "hr_expense",
+        "hr_timesheet",
+        "sale_stock",
+        "sale",
     ],
     "data": [
         "security/product_maintainer_security.xml",
