@@ -14,6 +14,7 @@ This module contains customizations specific to Aleph Objects.
 * Show the the qty pending to produce when printing MO.
 * Add a "Manufacturing Read Only" Security group.
 * New customized report for manufacturing orders: *Production Order (AO)*.
+* Add a field "Assigned To" tracked in chatter.
 
 Credits
 =======

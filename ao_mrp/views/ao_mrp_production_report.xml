@@ -26,7 +26,7 @@
                         <div class="col-xs-3">
                             <strong>Product:</strong><br/>
                             <span t-field="o.product_id" style="background-color: #f9f39f;"/>
-                            <!--<br/><b>UPC#: </b><span t-esc="o.product_id.upc"/>-->
+                            <br/><b>UPC#: </b><span t-esc="o.product_id.upc"/>
                         </div>
                         <div class="col-xs-3">
                             <strong>Quantity:</strong><br/>
