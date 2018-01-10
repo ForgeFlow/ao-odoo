@@ -1,5 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-stock.access_stock_warehouse_manager,stock.warehouse.manager,stock.model_stock_warehouse,stock.group_stock_manager,1,0,0,0
-ao_access_stock_warehouse_settings,ao.stock.warehouse.settings,stock.model_stock_warehouse,ao_group_stock_warehouse_settings,1,1,1,1
-stock.access_stock_location_manager,stock.location.manager,stock.model_stock_location,stock.group_stock_manager,1,0,0,0
-ao_access_stock_location_settings,ao.stock.location.settings,stock.model_stock_location,ao_group_stock_warehouse_settings,1,1,1,1
+stock.access_stock_location_route_stock_manager,stock.location.route,stock.model_stock_location_route,stock.group_stock_manager,1,0,0,0
+ao_access_stock_route_settings,stock.location.route.ao,stock.model_stock_location_route,ao_group_stock_logistic_settings,1,1,1,1
+stock.access_stock_warehouse_orderpoint_system,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,stock.group_stock_manager,1,0,0,0
+ao_access_stock_warehouse_orderpoint_system,stock.warehouse.orderpoint,stock.model_stock_warehouse_orderpoint,ao_group_stock_logistic_settings,1,1,1,1
+stock.access_product_putaway_manager,product.putaway,stock.model_product_putaway,stock.group_stock_manager,1,0,0,0
+ao_access_product_putaway_manager,product.putaway,stock.model_product_putaway,ao_group_stock_logistic_settings,1,1,1,1
