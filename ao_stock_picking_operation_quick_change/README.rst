@@ -16,7 +16,6 @@ This module contains customizations specific to Aleph Objects.
 Migration Notes
 ---------------
 
-* The module is not ported to v10 in OCA.
 * It may not be needed in v11 as for new lock function for pickings.
 
 Credits
