@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="crm_case_form_view_leads_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+        <field name="arch" type="xml">
+            <field name="email_from" position="after">
+                <field name="reply_to" />
+            </field>
+        </field>
+    </record>
+
+    <function model="ir.values" name="set_default"
+              id="default_lead_reply_to"
+              eval="('crm', 'lead_reply_to', 'sales@lulzbot.com')"/>
+
+    <function model="ir.values" name="set_default"
+              id="default_replace_leads_email_from"
+              eval="('crm', 'replace_leads_email_from', 1)"/>
+
+</odoo>
