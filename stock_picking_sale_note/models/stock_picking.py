@@ -2,11 +2,20 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
+
+    sale_order_origin = fields.Boolean(
+        string="Has sales order",
+        compute="_compute_sale_order_origin",
+    )
+    sale_note = fields.Text(
+        string="Sales Order Terms and Conditions",
+        compute="_compute_sale_note",
+    )
 
     @api.multi
     @api.depends('origin')
@@ -29,11 +38,3 @@ class StockPicking(models.Model):
                                        limit=1)
                 if sale:
                     picking.sale_note = sale.note
-
-    sale_order_origin = fields.Boolean(
-        string='Has sales order',
-        compute='_compute_sale_order_origin'
-    )
-    sale_note = fields.Text(
-        string='Sales Order Terms and Conditions',
-        compute='_compute_sale_note')
