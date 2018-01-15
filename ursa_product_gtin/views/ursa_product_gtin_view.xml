@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-  <data>
+<odoo>
 
     <record id="product_gtin_form_view" model="ir.ui.view">
-      <field name="name">product.gtin.form.view</field>
-      <field name="model">product.product</field>
-      <field name="type">form</field>
-      <field eval="7" name="priority"/>
-      <field name="inherit_id" ref="product.product_normal_form_view"/>
-      <field name="arch" type="xml">
-           <field name="barcode" position="after">
-              <field name="upc" string="UPC" select="2" />
-           </field>
-      </field>
+        <field name="name">product.gtin.form.view</field>
+        <field name="model">product.product</field>
+        <field name="type">form</field>
+        <field eval="7" name="priority"/>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="upc" string="UPC" select="2" />
+            </field>
+        </field>
     </record>
 
     <record id="product_template_only_form_view" model="ir.ui.view">
@@ -25,7 +24,6 @@
                        attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
             </field>
         </field>
-      </record>
+    </record>
 
-  </data>
-</openerp>
+</odoo>
