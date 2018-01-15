@@ -1,0 +1,3 @@
+---Fields in module 'ursa_product_reference'---
+---XML records in module 'ursa_product_reference'---
+-- nothing has changed in this module
