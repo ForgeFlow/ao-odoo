@@ -4,9 +4,9 @@
 
 {
     "name": "Project Task Work",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "summary": "Allows to log work associated to a task, not related to "
-               "timesheet activities",
+               "timesheet activities.",
     "author": "Eficent",
     "website": "http://www.eficent.com",
     "category": "Procurements",
