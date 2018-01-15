@@ -5,15 +5,15 @@
 =================
 URSA Product GTIN
 =================
+
 This module contains customizations specific to Aleph Objects.
 
 Replaces the EAN13 code completion with a checkroutine for EAN13, EAN8, JPC,
- UPC and GTIN makes EAN visible in simplified view YOU MUST comment
- constraints in product/product.py manually
+UPC and GTIN makes EAN visible in simplified view YOU MUST comment
+constraints in product/product.py manually
 
 #_constraints = [(_check_ean_key, 'Error: Invalid ean code', ['ean13'])] or
-apply the patch  provided in https://bugs.launchpad
-.net/openobject-server/+bug/700451
+apply the patch  provided in https://bugs.launchpad.net/openobject-server/+bug/700451
 
 Verified with OpenERP 7.0, added additional functions for each type of code
 to restrict use of code in fields which will allow user to have multiple
@@ -26,4 +26,5 @@ Credits
 Contributors
 ------------
 
-* URSA
+* Ursa Information Systems <http://www.ursainfosystems.com)>
+* Eficent Business and IT Consulting Services S.L. <contact@eficent.com>

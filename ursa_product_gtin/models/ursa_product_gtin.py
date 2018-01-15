@@ -1,33 +1,14 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-# Copyright (c) 2004-2006 TINY SPRL. (http://tiny.be) All Rights Reserved.
-#
-# $Id: account.py 1005 2005-07-25 08:41:42Z nicoe $
-#
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
-#
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+# -*- coding: utf-8 -*-
+# Copyright 2004 TINY SPRL. Fabien Pinckaers <fp@tiny.Be>
+# Copyright 2008 ChriCar Beteilugungs- und Beratungs
+#                Ferdinand Gassauer <tiny@chricar.at>
+# Copyright 2013 Ursa Information Systems (http://www.ursainfosystems.com).
+# Copyright 2018 Eficent Business and IT Consulting Services S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import math
-from openerp import models, fields, api, _
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 def is_pair(x):
@@ -97,7 +78,7 @@ class ProductProduct(models.Model):
     def _check_ean_key(self):
         res = check_ean(self.barcode)
         if not res:
-            raise Warning(_('Invalid Bar Code Number'))
+            raise UserError(_('Invalid Bar Code Number'))
 
     # check function for upc key
     @api.one
@@ -105,20 +86,20 @@ class ProductProduct(models.Model):
     def _check_upc_key(self):
         res = check_upc(self.upc)
         if not res:
-            raise Warning(_('Invalid UPC Code Number'))
+            raise UserError(_('Invalid UPC Code Number'))
 
-    barcode = fields.Char(string='EAN',
-                          help='Barcode number for EAN8 EAN13 '
-                               'JPC GTIN http://en.wikipedia.org/'
-                               'wiki/Global_Trade_Item_Number')
-    upc = fields.Char(string='UPC',
-                      help='Barcode number for UPC '
-                           'http://en.wikipedia.org/wiki/'
-                           'Universal_Product_Code')
+    barcode = fields.Char(
+        string="EAN",
+        help="Barcode number for EAN8 EAN13 JPC GTIN "
+             "http://en.wikipedia.org/wiki/Global_Trade_Item_Number")
+    upc = fields.Char(
+        string="UPC",
+        help="Barcode number for UPC "
+             "http://en.wikipedia.org/wiki/Universal_Product_Code")
 
-    _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'),
-                        ('barcode', 'UNIQUE(barcode)',
-                         'Cannot have duplicate EAN Code')]
+    _sql_constraints = [("upc", "UNIQUE(upc)", "Cannot have duplicate UPC"),
+                        ("barcode", "UNIQUE(barcode)",
+                         "Cannot have duplicate EAN Code")]
 
 
 # ******* Just to be complete ****
@@ -136,7 +117,7 @@ class ResPartner(models.Model):
     def _check_ean_key(self):
         res = check_ean(self.barcode)
         if not res:
-            raise Warning(_('Invalid Bar Code Number'))
+            raise UserError(_('Invalid Bar Code Number'))
 
     # check function for upc key
     @api.one
@@ -144,7 +125,7 @@ class ResPartner(models.Model):
     def _check_upc_key(self):
         res = check_upc(self.upc)
         if not res:
-            raise Warning(_('Invalid UPC Code Number'))
+            raise UserError(_('Invalid UPC Code Number'))
         
     _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'),
                         ('barcode', 'UNIQUE(barcode)',
@@ -152,9 +133,10 @@ class ResPartner(models.Model):
 
 
 class ProductTemplate(models.Model):
-
-    _inherit = 'product.template'
+    _inherit = "product.template"
 
     # related to display product product information if is_product_variant
-    upc = fields.Char(related='product_variant_ids.upc', readonly=True,
-                      help='Barcode number for UPC')
+    upc = fields.Char(
+        related="product_variant_ids.upc", readonly=True,
+        help="Barcode number for UPC",
+    )
