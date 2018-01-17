@@ -32,6 +32,6 @@ class UrsaLeadsMail(models.Model):
         replacefrom = ir_values.get_default('crm', 'replace_leads_email_from')
         leademail = ir_values.get_default('crm', 'lead_reply_to')
         if replacefrom and self.model == 'crm.lead':
-            self.email_from = 'Sales<'+leademail+'>'
+            self.email_from = 'LulzBot Sales<'+leademail+'>'
         return super(UrsaLeadsMail, self).send_get_email_dict(
             partner=partner)
