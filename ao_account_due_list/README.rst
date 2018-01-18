@@ -8,7 +8,7 @@ AO-specific customizations on account_due_list
 
 This module contains customizations specific to Aleph Objects.
 
-* The view is customized per per AO requirements
+* The view is customized per AO requirements
 
 
 Credits
