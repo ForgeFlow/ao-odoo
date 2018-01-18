@@ -1,0 +1,5 @@
+---Fields in module 'ao_hr_timesheet_sheet'---
+---XML records in module 'ao_hr_timesheet_sheet'---
+NEW ir.actions.act_window: hr_timesheet.act_hr_timesheet_line
+DEL ir.actions.act_window: hr_timesheet.act_hr_timesheet_line_evry1_all_form
+# NOTHING TO DO
