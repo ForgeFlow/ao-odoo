@@ -2,8 +2,8 @@
 # © 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models
-from openerp.exceptions import UserError
+from odoo import api, models
+from odoo.exceptions import UserError
 
 
 class ProductTemplate(models.Model):
