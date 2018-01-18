@@ -1,0 +1,4 @@
+---Fields in module 'ao_purchase'---
+---XML records in module 'ao_purchase'---
+DEL ir.actions.act_window: ao_purchase.product_normal_action_purchase
+DEL ir.ui.menu: ao_purchase.menu_products
