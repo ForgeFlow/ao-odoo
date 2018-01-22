@@ -30,7 +30,7 @@
 
                 % else:
                 <div style="font-size:12px;font-weight:bold;color:#777777;">
-                <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" height="65"/>
+                <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" height="65" width="117"/>
                 </div>
                 % endif
             </td>
@@ -69,8 +69,8 @@
         </tr></tbody>
     </table>
 </div>
-<div style="padding:0px; width:600px; margin:0 auto; background: #FFFFFF repeat top /100%;color:#777777">
-    <table cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; width:600px; border-collapse:collapse; background:inherit; color:#333333">
+<div style="padding:0px; width:600px; margin:0; background: #FFFFFF repeat top /100%;color:#777777">
+    <table cellspacing="0" cellpadding="0" border="0" style="margin: 0; width:600px; border-collapse:collapse; background:inherit; color:#333333">
         <tbody><tr>
             <td style="padding:5px 10px 5px 5px;font-size: 14px;">
                 ${object.body | safe}
@@ -86,8 +86,8 @@
     </table>
 </div>
 % if ctx.get('signature'):
-<div style="padding:0px; width:600px;margin:0 auto; background: #FFFFFF repeat top /100%;color:#777777">
-    <table cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto; width:600px; border-collapse:collapse; background:inherit; color:inherit">
+<div style="padding:0px; width:600px; margin:0; background: #FFFFFF repeat top /100%;color:#777777">
+    <table cellspacing="0" cellpadding="0" border="0" style="margin: 0; width:600px; border-collapse:collapse; background:inherit; color:inherit">
         <tbody><tr>
             <td style="padding:5px 10px 5px 5px;font-size: 14px; text-align: left;">
                 ${ctx['signature'] | safe}
