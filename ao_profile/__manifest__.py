@@ -248,7 +248,7 @@
         #
         # OCA/social
         # ----------
-        # 'mail_debrand', -- integrated in ao_mail
+        'mail_debrand',
         # 'mail_message_name_search', --deprecated
         'base_search_mail_content',
         'mail_tracking',
@@ -287,7 +287,7 @@
         'ddmrp', # to be migrated to v10
         'ddmrp_exclude_moves_adu_calc',
         'ddmrp_history',
-        'ddmrp_mrp_production_request'
+        'ddmrp_mrp_production_request',
         'ddmrp_product_replace',
         'procurement_service',  # also OCA/manufacture, really needed?
         #
@@ -304,7 +304,7 @@
         # ao-odoo
         # -------
         # 'account_fstr', -- deprecated
-        # 'ao_account_check_writing', -- deprecated
+        'ao_account_check_writing',
         # 'ao_account_voucher', -- deprecated
         # 'ao_crm_helpdesk', -- deprecated
         # 'ao_hr', -- deprecated
