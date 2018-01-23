@@ -8,7 +8,7 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "CRM",
-    "depends": ["utm"],
+    "depends": ["sales_team", "utm"],
     "data": [
         "security/ir.model.access.csv",
         "views/utm_view.xml",
