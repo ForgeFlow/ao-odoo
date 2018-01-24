@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2016-2017 Akretion (http://www.akretion.com)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import api, fields, models
@@ -15,8 +15,8 @@ class ResPartner(models.Model):
             ('all_except_notification', 'All Messages Except Notifications')])
 
     @api.multi
-    def _notify(
-            self, message, force_send=False, user_signature=True):
+    def _notify(self, message, force_send=False,
+                send_after_commit=True, user_signature=True):
         if message.message_type == 'notification':
             message_sudo = message.sudo()
             email_channels = message.channel_ids.filtered(
@@ -36,4 +36,5 @@ class ResPartner(models.Model):
         else:
             return super(ResPartner, self)._notify(
                 message, force_send=force_send,
+                send_after_commit=send_after_commit,
                 user_signature=user_signature)
