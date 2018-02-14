@@ -9,7 +9,7 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Manfacturing",
-    "depends": ["mrp"],
+    "depends": ["mrp", "report_mrp_bom_matrix"],
     "data": [
         "security/ao_mrp_security.xml",
         "security/ir.model.access.csv",
