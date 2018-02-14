@@ -12,6 +12,7 @@
     "depends": [
         "mrp",
         "ursa_product_gtin",
+        "mrp_bom_matrix_report",
     ],
     "data": [
         "security/ao_mrp_security.xml",
