@@ -65,7 +65,7 @@ class FlattenedBomXlsx(ReportXlsx):
         i = 2
 
         for o in objects:
-            totals = o._get_flattened_totals2()
+            totals = o._get_flattened_totals()
             sheet.write(i, 0, o.product_tmpl_id.name or '', bold)
             sheet.write(i, 1, o.code or '', bold)
             sheet.write(i, 2, o.display_name or '', bold)
