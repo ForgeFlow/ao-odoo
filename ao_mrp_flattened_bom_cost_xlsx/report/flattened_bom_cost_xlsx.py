@@ -21,7 +21,8 @@ except ImportError:
 
 class FlattenedBomXlsx(ReportXlsx):
 
-    def print_flattened_bom_lines(self, bom, requirements, sheet, row):
+    def print_flattened_bom_lines(self, bom, requirements, sheet, row, workbook):
+        dollars = workbook.add_format({'num_format': '$#,##0.00'})
         i = row + 1
         for product, total_qty in requirements.iteritems():
             sheet.write(i, 1, product.default_code or '')
@@ -29,8 +30,8 @@ class FlattenedBomXlsx(ReportXlsx):
             sheet.write(i, 3, total_qty or 0.0)
             sheet.write(i, 4, product.uom_id.name or '')
             sheet.write(i, 5, product.code or '')
-            sheet.write(i, 6, '%.2f' % (product.standard_price))
-            sheet.write(i, 7, '%.2f' % (total_qty*product.standard_price))
+            sheet.write(i, 6, product.standard_price or '', dollars)
+            sheet.write(i, 7, total_qty * product.standard_price or '', dollars)
             i += 1
         return i
 
@@ -68,10 +69,10 @@ class FlattenedBomXlsx(ReportXlsx):
             sheet.write(i, 0, o.product_tmpl_id.name or '', bold)
             sheet.write(i, 1, o.code or '', bold)
             sheet.write(i, 2, o.display_name or '', bold)
-            sheet.write(i, 3, o.product_qty, bold)
+            sheet.write(i, 3, 1, bold)
             sheet.write(i, 4, o.product_uom.name or '', bold)
             sheet.write(i, 5, o.code or '', bold)
-            i = self.print_flattened_bom_lines(o, totals, sheet, i)
+            i = self.print_flattened_bom_lines(o, totals, sheet, i, workbook)
 
 
 FlattenedBomXlsx('report.flattened.bom.xlsx', 'mrp.bom',
