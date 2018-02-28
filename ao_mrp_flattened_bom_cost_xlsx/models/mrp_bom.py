@@ -17,16 +17,16 @@ class MrpBom(osv.osv):
         """
         if totals is None:
             totals = {}
+        factor /= self.product_qty * self.product_uom.factor_inv
         for line in self.bom_line_ids:
             sub_bom = self._bom_find(product_id=line.product_id.id)
             sub_bom = self.browse(sub_bom)
             if sub_bom:
-                new_factor = factor * line.product_uom.factor_inv * line.product_qty
-                sub_bom._get_flattened_totals(new_factor, totals)
+                factor *= line.product_uom.factor_inv * line.product_qty
+                sub_bom._get_flattened_totals(factor, totals)
             else:
-                # factor /= self.product_qty * self.product_uom.factor
                 if totals.get(line.product_id):
-                    totals[line.product_id] += line.product_qty * factor / (self.product_qty * self.product_uom.factor)
+                    totals[line.product_id] += line.product_qty * line.product_id.uom_id.factor * factor
                 else:
-                    totals[line.product_id] = line.product_qty * factor / (self.product_qty * self.product_uom.factor)
+                    totals[line.product_id] = line.product_qty * line.product_id.uom_id.factor * factor
         return totals
