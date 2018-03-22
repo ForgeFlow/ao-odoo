@@ -158,3 +158,8 @@ class ProductTemplate(models.Model):
     # related to display product product information if is_product_variant
     upc = fields.Char(related='product_variant_ids.upc', readonly=True,
                       help='Barcode number for UPC')
+    barcode = fields.Char(
+        string='EAN',
+        related='product_variant_ids.barcode', readonly=True,
+        help='Barcode number for EAN8 EAN13 JPC GTIN '
+             'http://en.wikipedia.org/wiki/Global_Trade_Item_Number')
