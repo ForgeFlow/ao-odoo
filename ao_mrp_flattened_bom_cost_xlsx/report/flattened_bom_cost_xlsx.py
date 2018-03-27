@@ -4,8 +4,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
-from openerp.report import report_sxw
-from openerp.tools.translate import _
+from odoo.report import report_sxw
+from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -70,10 +70,10 @@ class FlattenedBomXlsx(ReportXlsx):
             sheet.write(i, 1, o.code or '', bold)
             sheet.write(i, 2, o.display_name or '', bold)
             sheet.write(i, 3, 1, bold)
-            sheet.write(i, 4, o.product_uom.name or '', bold)
+            sheet.write(i, 4, o.product_uom_id.name or '', bold)
             sheet.write(i, 5, o.code or '', bold)
             i = self.print_flattened_bom_lines(o, totals, sheet, i, workbook)
 
 
-FlattenedBomXlsx('report.flattened.bom.xlsx', 'mrp.bom',
+FlattenedBomXlsx('report.ao.flattened.bom.cost.xlsx', 'mrp.bom',
                  parser=report_sxw.rml_parse)

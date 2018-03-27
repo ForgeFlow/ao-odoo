@@ -7,7 +7,7 @@
         <field name="name">Export Flattened BOM (with Cost) to Excel</field>
         <field name="model">mrp.bom</field>
         <field name="type">ir.actions.report.xml</field>
-        <field name="report_name">flattened.bom.xlsx</field>
+        <field name="report_name">ao.flattened.bom.cost.xlsx</field>
         <field name="report_type">xlsx</field>
         <field name="auto" eval="False"/>
     </record>
