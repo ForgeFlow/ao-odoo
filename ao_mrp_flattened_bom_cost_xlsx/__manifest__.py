@@ -5,7 +5,7 @@
 
 {
     'name': "Export Flattened BOM Cost to Excel",
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Manufacturing',
     'author': "Eficent",
     'website': 'https://github.com/Eficent',
