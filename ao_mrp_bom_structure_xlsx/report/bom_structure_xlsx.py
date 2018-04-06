@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
 
-from openerp.tools.translate import _
-from openerp.addons.mrp.report.bom_structure import bom_structure
+from odoo.tools.translate import _
+from odoo.report import report_sxw
 
 _logger = logging.getLogger(__name__)
 
 try:
-    from openerp.addons.report_xlsx.report.report_xlsx import ReportXlsx
+    from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
 except ImportError:
     _logger.debug("report_xlsx not installed, Excel export non functional")
 
@@ -29,7 +29,7 @@ class BomStructureXlsx(ReportXlsx):
         sheet.write(i, 2, ch.product_id.default_code or '')
         sheet.write(i, 3, ch.product_id.display_name or '')
         sheet.write(i, 4, ch.product_qty)
-        sheet.write(i, 5, ch.product_uom.name or '')
+        sheet.write(i, 5, ch.product_uom_id.name or '')
         sheet.write(i, 6, ch.bom_id.code or '')
         sheet.write(i, 7, ch.product_id.manufacturer.name or '')
         sheet.write(i, 8, ch.product_id.manufacturer_pref or '')
@@ -38,16 +38,14 @@ class BomStructureXlsx(ReportXlsx):
         list_prices = []
         for seller in ch.product_id.seller_ids:
             if seller.price:
-                if seller.product_uom.category_id.id != ch.product_uom.\
+                if seller.product_uom.category_id.id != ch.product_uom_id.\
                         category_id.id:
                     sheet.write(i, 9, seller.name.name or '')
                     sheet.write(i, 10, seller.product_code or '')
                     sheet.write(i, 11, seller.product_uom.name or '', alert)
                     break
-                uom_from = seller.product_uom.id
-                uom_to = ch.product_uom.id
-                unit_qty = self.env['product.uom']._compute_qty(
-                    uom_from, 1.0, uom_to, False)
+                unit_qty = seller.product_uom._compute_quantity(
+                    1.0, ch.product_uom_id, round=False)
                 cur_from = seller.currency_id
                 cur_to = ch.product_id.currency_id
                 price = self.env['res.currency']._compute(
@@ -61,17 +59,15 @@ class BomStructureXlsx(ReportXlsx):
             for seller in ch.product_id.seller_ids:
                 seller_id = seller.name.id
                 if seller.price:
-                    if seller.product_uom.category_id.id != ch.product_uom.\
+                    if seller.product_uom.category_id.id != ch.product_uom_id.\
                             category_id.id:
                         sheet.write(i, 9, seller.name.name or '')
                         sheet.write(i, 10, seller.product_code or '')
                         sheet.write(i, 11, seller.product_uom.name or '',
                                     alert)
                         break
-                    uom_from = seller.product_uom.id
-                    uom_to = ch.product_uom.id
-                    unit_qty = self.env['product.uom']._compute_qty(
-                        uom_from, 1.0, uom_to, False)
+                    unit_qty = seller.product_uom._compute_quantity(
+                        1.0, ch.product_uom_id, round=False)
                     cur_from = seller.currency_id
                     cur_to = ch.product_id.currency_id
                     price = self.env['res.currency']._compute(
@@ -84,7 +80,7 @@ class BomStructureXlsx(ReportXlsx):
                     list_seller += [seller_id]
                     sheet.write(i, 9, seller.name.name or '')
                     sheet.write(i, 10, seller.product_code or '')
-                    uom = ch.product_uom.name
+                    uom = ch.product_uom_id.name
                     cur = ch.product_id.currency_id.name
                     uom_cur = workbook.add_format(
                         {'num_format': '#,##0.00 [$' + cur + '/' + uom +
@@ -169,7 +165,7 @@ class BomStructureXlsx(ReportXlsx):
             sheet.write(i, 2, o.product_id.default_code or '', bold)
             sheet.write(i, 3, o.product_id.name or '', bold)
             sheet.write(i, 4, o.product_qty, bold)
-            sheet.write(i, 5, o.product_uom.name or '', bold)
+            sheet.write(i, 5, o.product_uom_id.name or '', bold)
             sheet.write(i, 6, o.code or '', bold)
             sheet.write(i, 7, o.product_id.manufacturer.name or '', bold)
             sheet.write(i, 8, o.product_id.manufacturer_pref or '', bold)
@@ -184,9 +180,9 @@ class BomStructureXlsx(ReportXlsx):
                                     alert)
                         break
                     uom_from = seller.product_uom.id
-                    uom_to = o.product_uom.id
-                    unit_qty = self.env['product.uom']._compute_qty(
-                        uom_from, 1.0, uom_to, False)
+                    uom_to = o.product_uom_id.id
+                    unit_qty = seller.product_uom._compute_quantity(
+                        1.0, o.product_uom_id, round=False)
                     cur_from = seller.currency_id
                     cur_to = o.product_id.currency_id or o.product_tmpl_id.\
                         currency_id
@@ -208,10 +204,8 @@ class BomStructureXlsx(ReportXlsx):
                             sheet.write(i, 11, seller.product_uom.name or '',
                                         alert)
                             break
-                        uom_from = seller.product_uom.id
-                        uom_to = o.product_uom.id
-                        unit_qty = self.env['product.uom']._compute_qty(
-                            uom_from, 1.0, uom_to, False)
+                        unit_qty = seller.product_uom._compute_quantity(
+                            1.0, o.product_uom_id, round=False)
                         cur_from = seller.currency_id
                         cur_to = o.product_id.currency_id or o.\
                             product_tmpl_id.currency_id
@@ -279,4 +273,4 @@ class BomStructureXlsx(ReportXlsx):
 
 
 BomStructureXlsx('report.ao.bom.structure.xlsx', 'mrp.bom',
-                 parser=bom_structure)
+                 parser=report_sxw.rml_parse)
