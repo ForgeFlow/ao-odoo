@@ -14,24 +14,14 @@ Usage
 
 To use this module, you need to:
 
-Go to the Bill of Materials form or list views, press 'More > Export BOM
-Structure to Excel (Extended)'.
-
-Bug Tracker
-===========
+#. Go to the Bill of Materials form or list views.
+#. Click 'More > Export BOM Structure to Excel (Extended)'.
 
 Credits
 =======
-
-Images
-------
 
 Contributors
 ------------
 
 * Miquel Raich <miquel.raich@eficent.com>
-
-Maintainer
-----------
-
-
+* Lois Rilo <lois.rilo@eficent.com>
