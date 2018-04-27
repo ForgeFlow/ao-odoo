@@ -29,12 +29,15 @@ def store_field_bom_standard_cost(cr):
             """)
 
         logger.info('Computing field bom_standard_cost on product.template')
-
+        # todo: do it from ir_values
+        """
+            select split_part(res_id, ',', 1) AS col1,
+            split_part(res_id, ',', 2) AS col2, value_text
+             from ir_property where name = 'standard_price'        
+        """
         cr.execute(
             """
                 UPDATE product_template
-                SET bom_standard_cost = pp.cost_price
-                from product_product pp
-                where pp.product_tmpl_id = product_template.id
+                SET bom_standard_cost = list_price
             """
         )
