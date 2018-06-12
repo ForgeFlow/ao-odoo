@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_fethmail_fetch_missing_form">
+        <field name="name">fetchmail.fetch.missing.form</field>
+        <field name="model">fetchmail.server</field>
+        <field name="priority" eval="1"/>
+        <field name="inherit_id" ref="fetchmail.view_email_server_form"/>
+        <field name="arch" type="xml">
+            <field name="date" position="after" >
+                <field name="nbr_days"
+                       attrs="{'invisible':[('type','!=','imap')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
