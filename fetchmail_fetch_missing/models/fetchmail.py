@@ -23,7 +23,7 @@ class FetchmailServer(models.Model):
         '# Days to fetch',
         help="Remote emails with a date greater today's date - # days will "
              "be fetched if not already processed",
-        default=30)
+        default=1)
 
     @api.model
     def _fetch_missing_imap(self, imap_server, count, failed):
