@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="crm_prospecting_status_search" model="ir.ui.view">
+        <field name="name">Prospecting Status - Search</field>
+        <field name="model">crm.prospecting.status</field>
+        <field name="arch" type="xml">
+            <search string="Prospecting Status Search">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_prospecting_status_tree" model="ir.ui.view">
+        <field name="name">crm.prospecting.status.tree</field>
+        <field name="model">crm.prospecting.status</field>
+        <field name="arch" type="xml">
+            <tree string="Prospecting Statuses">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_prospecting_status_form" model="ir.ui.view">
+        <field name="name">crm.prospecting.status.form</field>
+        <field name="model">crm.prospecting.status</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Stage">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" default_focus="1" placeholder="Name"/>
+                    </h1>
+                    <group>
+                        <separator string="Summary"/>
+                        <field name="summary" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_prospecting_status_action" model="ir.actions.act_window">
+        <field name="name">Prospecting Statuses</field>
+        <field name="res_model">crm.prospecting.status</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="crm_prospecting_status_tree"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to set a new prospecting status.
+          </p><p>
+            Prospecting statuses allow salespersons to easily classify partners
+             based on the sales cycle.
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_crm_config_prospecting_status"
+        name="Prospecting Statuses"
+        parent="base.menu_crm_config_lead"
+        sequence="10"
+        action="crm_prospecting_status_action"
+        groups="base.group_sale_manager"/>
+
+</odoo>
