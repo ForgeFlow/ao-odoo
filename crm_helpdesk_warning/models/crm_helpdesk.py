@@ -3,44 +3,26 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
 
 
 class CrmHelpdesk(models.Model):
     _inherit = 'crm.helpdesk'
 
     partner_id = fields.Many2one(track_visibility='always')
+    helpdesk_warn = fields.Selection(
+        selection=lambda self: self.env['res.partner']._columns[
+            'helpdesk_warn'].selection,
+        string='Warning message',
+        related='partner_id.helpdesk_warn')
+    helpdesk_warn_msg = fields.Text('Message for Helpdesk Tickets',
+                                    compute='_compute_helpdesk_msg')
+    helpdesk_block_msg = fields.Text('Message for Helpdesk Tickets',
+                                     compute='_compute_helpdesk_msg')
 
-    @api.onchange('partner_id')
-    def _onchange_partner_id(self):
-        if self.partner_id:
-            partner = self.partner_id
-            if (partner.helpdesk_warn != 'no-message' and
-                    partner.helpdesk_warn == 'block'):
-                raise UserError(_(
-                    "Warning for %s\n%s" %
-                    (partner.name, partner.helpdesk_warn_msg)
-                ))
-        return super(CrmHelpdesk, self)._onchange_partner_id()
-
-    @api.multi
-    def write(self, vals):
-        res = super(CrmHelpdesk, self).write(vals)
+    @api.depends('partner_id')
+    def _compute_helpdesk_msg(self):
         for rec in self:
-            if 'partner_id' in vals and rec.partner_id.helpdesk_warn_log and \
-                    not self.env.context.get('warning_message'):
-                message = _('Warning on %s: %s' % (
-                    rec.partner_id.name, rec.partner_id.helpdesk_warn_msg))
-                rec.with_context(warning_message=True).message_post(
-                    message, message_type='comment')
-        return res
-
-    @api.model
-    def create(self, vals):
-        rec = super(CrmHelpdesk, self).create(vals)
-        if rec.partner_id.helpdesk_warn_log:
-            message = _('Warning on %s: %s' % (
-                rec.partner_id.name, rec.partner_id.helpdesk_warn_msg))
-            rec.message_post(
-                message, message_type='comment')
-        return rec
+            rec.helpdesk_warn_msg = rec.partner_id.helpdesk_warn_msg \
+                if rec.helpdesk_warn == 'warning' else ''
+            rec.helpdesk_block_msg = rec.partner_id.helpdesk_warn_msg \
+                if rec.helpdesk_warn == 'block' else ''
