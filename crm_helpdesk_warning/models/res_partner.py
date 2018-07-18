@@ -17,13 +17,9 @@ class ResPartner(models.Model):
 
     helpdesk_warn = fields.Selection(selection=WARNING_MESSAGE,
                                      string='Warning message',
-                                     default='no-message')
-    helpdesk_warn_log = fields.Boolean(
-        string='Log the message in the helpdesk ticket', default=False)
-    helpdesk_warn_msg = fields.Text('Message for Helpdesk Tickets')
+                                     default='no-message',
+                                     track_visibility='onchange')
+    helpdesk_warn_msg = fields.Text(
+        string='Message for Helpdesk Tickets',
+        track_visibility='onchange')
 
-    @api.multi
-    @api.onchange('helpdesk_warn')
-    def _onchange_helpdesk_warn(self):
-        for rec in self:
-            rec.helpdesk_warn_log = rec.helpdesk_warn != 'no-message'

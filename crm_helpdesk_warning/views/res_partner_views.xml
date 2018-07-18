@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-         <record id="view_partner_warning_form" model="ir.ui.view">
-            <field name="name">res.partner.warning.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <notebook position="inside">
-                    <page name='heldesk_warnings' string="Helpdesk Warnings">
-                        <group colspan="2" col="2">
-                            <separator string="Warning on the Helpdesk Tickets"
-                                       colspan="4"/>
-                                <field name="helpdesk_warn" nolabel="1"
-                                       colspan="2"/>
-                                <field name="helpdesk_warn_log"/>
-                                <field name="helpdesk_warn_msg"
-                                       nolabel="1" colspan="2"
-                                       attrs="{'required':[('helpdesk_warn','!=','no-message')],'readonly':[('helpdesk_warn','=','no-message')]}"/>
-                        </group>
-                    </page>
-                </notebook>
-            </field>
-        </record>
+    <record id="view_partner_warning_form" model="ir.ui.view">
+        <field name="name">res.partner.warning.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name='heldesk_warnings' string="Helpdesk Warnings">
+                    <group colspan="2" col="2">
+                        <separator string="Warning on the Helpdesk Tickets"
+                                   colspan="4"/>
+                            <field name="helpdesk_warn" nolabel="1"
+                                   colspan="2"/>
+                            <field name="helpdesk_warn_msg"
+                                   nolabel="1" colspan="2"
+                                   attrs="{'required':[('helpdesk_warn','!=','no-message')],'readonly':[('helpdesk_warn','=','no-message')]}"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
 </odoo>

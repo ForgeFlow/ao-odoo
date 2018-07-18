@@ -4,64 +4,32 @@
 
 from openerp import api, fields, models, _
 
+WARNING_MESSAGE = [
+                   ('no-message', 'No Message'),
+                   ('warning', 'Warning'),
+                   ('block', 'Blocking Message')
+                   ]
+
 
 class CrmHelpdesk(models.Model):
     _inherit = 'crm.helpdesk'
 
     partner_id = fields.Many2one(track_visibility='always')
+    helpdesk_warn = fields.Selection(
+        selection=lambda self: self.env['res.partner']._columns[
+            'helpdesk_warn'].selection,
+        string='Warning message',
+        related='partner_id.helpdesk_warn')
+    helpdesk_warn_msg = fields.Text('Message for Helpdesk Tickets',
+                                    compute='_compute_helpdesk_msg')
+    helpdesk_block_msg = fields.Text('Message for Helpdesk Tickets',
+                                     compute='_compute_helpdesk_msg')
 
-    @api.v7
-    def on_change_partner_id(self, cr, uid, ids, part, context=None):
-        if not part:
-            return {'value': {'partner_id': False}}
-        warning = {}
-        title = False
-        message = False
-        partner = self.pool.get('res.partner').browse(cr, uid, part,
-                                                      context=context)
-        if partner.helpdesk_warn != 'no-message':
-            title = _("Warning for %s") % partner.name
-            message = partner.helpdesk_warn_msg
-            warning = {
-                'title': title,
-                'message': message,
-            }
-            if partner.helpdesk_warn == 'block':
-                return {'value': {'partner_id': False}, 'warning': warning}
-
-        result = super(CrmHelpdesk, self).on_change_partner_id(cr, uid, ids,
-                                                               part,
-                                                               context=context)
-
-        if result.get('warning', False):
-            warning['title'] = title and title + ' & ' + result['warning'][
-                'title'] or result['warning']['title']
-            warning['message'] = message and message + ' ' + result['warning'][
-                'message'] or result['warning']['message']
-
-        if warning:
-            result['warning'] = warning
-        return result
-
-    @api.multi
-    def write(self, vals):
-        res = super(CrmHelpdesk, self).write(vals)
+    @api.depends('partner_id')
+    def _compute_helpdesk_msg(self):
         for rec in self:
-            if 'partner_id' in vals and rec.partner_id.helpdesk_warn_log and \
-                    not self.env.context.get(
-                    'warning_message'):
-                message = _('Warning on %s: %s' %(
-                    rec.partner_id.name, rec.partner_id.helpdesk_warn_msg))
-                rec.with_context(warning_message=True).message_post(
-                    message, message_type='comment')
-        return res
+            rec.helpdesk_warn_msg = rec.partner_id.helpdesk_warn_msg \
+                if rec.helpdesk_warn == 'warning' else ''
+            rec.helpdesk_block_msg = rec.partner_id.helpdesk_warn_msg \
+                if rec.helpdesk_warn == 'block' else ''
 
-    @api.model
-    def create(self, vals):
-        rec = super(CrmHelpdesk, self).create(vals)
-        if rec.partner_id.helpdesk_warn_log:
-            message = _('Warning on %s: %s' %(
-                rec.partner_id.name, rec.partner_id.helpdesk_warn_msg))
-            rec.message_post(
-                message, message_type='comment')
-        return rec
