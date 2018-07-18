@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_helpdesk_view_warning" model="ir.ui.view">
+        <field name="name">crm.helpdesk.view.warning</field>
+        <field name="model">crm.helpdesk</field>
+        <field name="inherit_id" ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
+        <field name="arch" type="xml">
+                <header position="after">
+                    <field name="helpdesk_warn" invisible="1"/>
+                    <div class="alert alert-warning" attrs="{'invisible': [
+                 ('helpdesk_warn', '!=', 'warning')]}"
+                 style="margin-bottom:0px;">
+                        <i class="fa fa-exclamation-circle fa-3x" style="padding-right:3mm;"/>
+                        <field class="oe_inline" name="helpdesk_warn_msg" style="font-size: 18px;"/>
+                    </div>
+                    <div class="alert alert-danger" attrs="{'invisible': [
+                 ('helpdesk_warn', '!=', 'block')]}"
+                 style="margin-bottom:0px;">
+                        <i class="fa fa-exclamation-circle fa-3x" style="padding-right:3mm;"/>
+                        <field class="oe_inline" name="helpdesk_block_msg" style="font-size: 18px;"/>
+                    </div>
+                </header>
+        </field>
+    </record>
+
+</odoo>

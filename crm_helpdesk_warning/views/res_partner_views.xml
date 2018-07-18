@@ -13,7 +13,6 @@
                                    colspan="4"/>
                             <field name="helpdesk_warn" nolabel="1"
                                    colspan="2"/>
-                            <field name="helpdesk_warn_log"/>
                             <field name="helpdesk_warn_msg"
                                    nolabel="1" colspan="2"
                                    attrs="{'required':[('helpdesk_warn','!=','no-message')],'readonly':[('helpdesk_warn','=','no-message')]}"/>
@@ -22,4 +21,5 @@
             </notebook>
         </field>
     </record>
+
 </odoo>
