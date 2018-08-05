@@ -9,7 +9,9 @@
     "website": "http://www.eficent.com",
     "category": "CRM",
     "depends": ["crm"],
-    "data": [],
+    "data": [
+        'views/crm_lead_views.xml',
+    ],
     "license": "AGPL-3",
     'installable': True,
 }
