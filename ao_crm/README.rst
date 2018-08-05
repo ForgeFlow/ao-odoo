@@ -9,7 +9,7 @@ AO-specific customizations on CRM
 This module contains customizations specific to Aleph Objects.
 
 * Sort lead by ID (descending).
-
+* Add three fields to CRM lead to improve the CRM capabilities.
 
 Credits
 =======
