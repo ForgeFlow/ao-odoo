@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.view.form.popup</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity.mail_activity_view_form_popup"/>
+        <field name="arch" type="xml">
+            <field name="activity_type_id" position="after">
+                <field name="purpose_id" options="{'no_create': True, 'no_open': True}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

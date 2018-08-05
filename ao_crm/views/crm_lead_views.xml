@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="crm_case_form_view_oppor">
+        <field name="name">Opportunities</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <page name="lead" position="after">
+                <page name="extra" string="Extra">
+                    <group name="needs" string="Understanding of needs">
+                        <field name="understanding_of_need" nolabel="1"/>
+                    </group>
+                    <group name="impact" string="Understanding of impact">
+                        <field name="understanding_of_impact" nolabel="1"/>
+                    </group>
+                    <group name="buying_process" string="Buying process">
+                        <field name="buying_process" nolabel="1"/>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>
