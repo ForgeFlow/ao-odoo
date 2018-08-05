@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="mail_activity_progress_view_form" model="ir.ui.view">
+        <field name="name">mail.activity.progress.view.form</field>
+        <field name="model">mail.activity.progress</field>
+        <field name="arch" type="xml">
+            <form string="Activity Progress">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="activity_type_ids" widget="many2many_tags"/>
+                            <field name="summary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_activity_progress_view_tree" model="ir.ui.view">
+        <field name="name">mail.activity.progress.view.tree</field>
+        <field name="model">mail.activity.progress</field>
+        <field name="arch" type="xml">
+            <tree string="Activity Progress">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="activity_type_ids"/>
+                <field name="summary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_activity_progress_action" model="ir.actions.act_window">
+        <field name="name">Activity Progress</field>
+        <field name="res_model">mail.activity.progress</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+      id="menu_mail_activity_progress"
+      action="mail_activity_progress_action"
+      parent="base.menu_email"
+    />
+
+</odoo>
