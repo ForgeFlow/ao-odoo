@@ -19,9 +19,12 @@ def convert_crm_activity_types(env):
             "ALTER TABLE mail_activity_type ADD COLUMN crm_activity INTEGER")
 
     type_mapping = {
-        'crm.crm_activity_data_email': 'mail.mail_activity_data_email',
-        'crm.crm_activity_data_call': 'mail.mail_activity_data_call',
-        'crm.crm_activity_data_meeting': 'mail.mail_activity_data_todo',
+        'crm.crm_activity_data_email':
+            'mail_activity.mail_activity_data_email',
+        'crm.crm_activity_data_call':
+            'mail_activity.mail_activity_data_call',
+        'crm.crm_activity_data_meeting':
+            'mail_activity.mail_activity_data_todo',
     }
     migrated_ids = []
     for old_xml_id, new_xml_id in type_mapping.items():
@@ -34,12 +37,11 @@ def convert_crm_activity_types(env):
         if row:
             old_id = row[0]
             migrated_ids.append(old_id)
-            if env.ref(new_xml_id, False):
-                env.cr.execute(
-                    "UPDATE mail_activity_type "
-                    "SET %s = %s WHERE id = %s",
-                    (column_name, old_id, env.ref(new_xml_id).id),
-                )
+            env.cr.execute(
+                "UPDATE mail_activity_type "
+                "SET %s = %s WHERE id = %s"
+                % (column_name, old_id, env.ref(new_xml_id).id)
+            )
     env.cr.execute("""
         INSERT INTO mail_activity_type
             (name, sequence, res_model_id, category, days,
