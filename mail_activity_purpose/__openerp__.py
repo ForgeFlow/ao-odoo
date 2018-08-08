@@ -10,6 +10,7 @@
     "category": "Discuss",
     "depends": [
         'mail_activity',
+        'mail_activity_calendar',
     ],
     "data": [
         'security/ir.model.access.csv',
