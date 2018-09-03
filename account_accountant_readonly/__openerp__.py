@@ -4,7 +4,7 @@
 
 {
     'name': 'Add Read-Only Accountant Group',
-    'version': '10.0.1.0.0',
+    'version': '9.0.1.0.0',
     'category': 'Accounting & Finance',
     'summary': """Adds a read-only accountant group to have an external
                   accountant go through your accounting records in Odoo.""",
