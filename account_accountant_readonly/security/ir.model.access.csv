@@ -47,3 +47,4 @@ account_move_line invoice_ro,group_account_user_ro,account.move.line invoice.ro,
 account_payment_term_ro,group_account_user_ro,account.payment.term.ro,account.model_account_payment_term,1,0,0,0
 account_payment_term_line_ro,group_account_user_ro,account.payment.term.line.ro,account.model_account_payment_term_line,1,0,0,0
 account_tax_ro,group_account_user_ro,account.tax.ro,account.model_account_tax,1,0,0,0
+account_partial_reconcile_ro,group_account_user_ro,account.partial.reconcile.ro,account.model_account_partial_reconcile,1,0,0,0

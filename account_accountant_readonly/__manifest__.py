@@ -14,6 +14,7 @@
     'data': [
         'security/account_security.xml',
         'security/ir.model.access.csv',
+        'views/account_reconcile_view.xml',
         ],
     'installable': True,
 }
