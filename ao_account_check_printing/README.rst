@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-================
-AO Check Writing
-================
+=================
+AO Check Printing
+=================
 
 Customizes AO check form
 

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "AO Check Writing",
+    "name": "AO Check Printing",
     "version": "11.0.1.0.0",
     "author": "Eficent",
     "license": "AGPL-3",
