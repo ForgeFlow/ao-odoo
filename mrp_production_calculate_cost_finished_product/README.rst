@@ -8,13 +8,11 @@ MRP Production Calculate Cost Finished Product
 
 This module calculates the cost of the finished product on the basis of the
 planned costs of the components that have been reserved for the
-manufacturing order, and adds this cost to the finished product stock move &
-associated quant.
+manufacturing order, and adds this cost to the finished product stock move.
 
 The current module will only consider as cost of the finished product the
 cost of the raw materials. Other modules can extend it to add other costs,
 such as labor, machine, subcontracting, etc...
-
 
 Usage
 =====
@@ -39,6 +37,7 @@ Contributors
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Aaron Henriquez <ahenriquez@eficent.com>
+* Lois Rilo <lois.rilo@eficent.com>
 
 Maintainer
 ----------
