@@ -5,7 +5,7 @@
     "name": "MRP Production Calculate Cost Finished Product",
     "summary": "Calculates the cost of the finished product, adds it to "
                "the finished product stock move",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",

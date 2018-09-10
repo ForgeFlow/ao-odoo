@@ -212,6 +212,12 @@ class TestCostFinishedProduct(common.SavepointCase):
         mo.action_assign()
         self.assertEqual(self.product_2.standard_price, 300.0)
         self._produce(mo, 2.0)
-        mo.button_mark_done()
+        mo.post_inventory()
         self.assertEqual(mo.move_finished_ids[0].price_unit, 575.0)
+        self.assertEqual(self.product_2.standard_price, 575.0)
+        self._produce(mo, 1.0)
+        self._produce(mo, 1.0)
+        mo.button_mark_done()
+        for m in mo.move_finished_ids:
+            self.assertEqual(m.price_unit, 575.0)
         self.assertEqual(self.product_2.standard_price, 575.0)
