@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
             <page name="lead" position="after">
-                <page name="extra" string="Extra">
+                <page name="extra" string="Extra Info">
                     <group name="needs" string="Understanding of needs">
                         <field name="understanding_of_need" nolabel="1"/>
                     </group>
