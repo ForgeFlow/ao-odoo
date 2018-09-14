@@ -6,7 +6,8 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
-            <field name="credit" position="after">
+            <field name="trust" position="before">
+                <field name="credit" widget="monetary" groups="base.group_no_one"/>
                 <field name="credit_limit" widget="monetary"/>
             </field>
         </field>
