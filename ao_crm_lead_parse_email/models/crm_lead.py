@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, models
 from odoo.tools import html2plaintext
 import re
 
@@ -35,7 +34,7 @@ class CrmLead(models.Model):
             contact_name = False
             email_from = False
             if _dict.get('email'):
-                email_from = re.sub("\s\[\d\]", "",
+                email_from = re.sub(r'\s\[\d\]', '',
                                     _dict.get('email')).strip()
             if _dict.get('first & last name'):
                 contact_name = _dict.get('first & last name').title()
@@ -69,9 +68,8 @@ class CrmLead(models.Model):
         model = self._name
         if model == 'crm.lead':
             custom_values = {}
-            lead_obj = self.env[model]
             custom_values, msg = self._prepare_message_new_custom_values(
                 msg, custom_values)
             if custom_values:
-                lead_obj.browse(rec_id).write(custom_values)
+                rec_id.write(custom_values)
         return rec_id
