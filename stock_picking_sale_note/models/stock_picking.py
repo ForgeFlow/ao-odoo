@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class StockPicking(models.Model):
