@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="stock_picking_operation_quick_change.stock_picking_operation_change_location_view"/>
         <field name="arch" type="xml">
             <field name="new_location_dest_id" position="attributes">
-                <attribute name="domain"></attribute>
+                <attribute name="domain"/>
             </field>
         </field>
     </record>

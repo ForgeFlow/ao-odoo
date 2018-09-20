@@ -2,3 +2,5 @@
 account-payment https://github.com/OCA/account-payment.git 11.0
 # module: ao_hr_timesheet_sheet
 hr-timesheet https://github.com/OCA/hr-timesheet.git 11.0
+# module: ao_stock_picking_operation_quick_change
+stock-logistics-workflow https://github.com/OCA/stock-logistics-workflow.git 11.0
