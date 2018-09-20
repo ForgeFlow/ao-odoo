@@ -4,7 +4,7 @@
         <field name="name">view.res.partner.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="groups_id" eval="[(4, ref('base.group_sale_salesman_all_leads'))]"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
         <field name="arch" type="xml">
             <group name="sale" position="inside">
                 <field name="prospecting_status" options="{'no_create': True}"/>
