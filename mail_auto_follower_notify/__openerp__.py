@@ -7,6 +7,7 @@
     "name": "Mail Auto Follower Notify",
     "summary": "This module extends the functionality of mail by sending an "
                "email notification to new followers that are system users",
+    "version": "9.0.1.0.0",
     "author": "Eficent, "
               "Odoo Community Association (OCA)",
     "website": "https://odoo-community.org/",

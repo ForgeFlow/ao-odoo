@@ -6,6 +6,7 @@
     "name": "AO-specific customizations on Sale Drupal",
     "summary": "AO Customization for Drupal integration.",
     "category": "Sales",
+    "version": "9.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "depends": [
         "sale", "sale_exception",

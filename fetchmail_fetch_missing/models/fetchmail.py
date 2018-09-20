@@ -6,9 +6,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import imaplib
 from datetime import datetime, timedelta
-import time
 import email
 from openerp import api, fields, models
 

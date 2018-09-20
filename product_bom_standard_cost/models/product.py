@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models
-from openerp.addons import decimal_precision as dp
+from odoo import api, fields, models
+from odoo.addons import decimal_precision as dp
 
 UNIT = dp.get_precision('Product Price')
 

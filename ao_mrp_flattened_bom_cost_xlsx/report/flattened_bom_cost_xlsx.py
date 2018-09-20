@@ -10,7 +10,7 @@ from odoo.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 try:
-    from openerp.addons.report_xlsx.report.report_xlsx import ReportXlsx
+    from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
 except ImportError:
     _logger.debug("report_xlsx not installed, Excel export non functional")
 
