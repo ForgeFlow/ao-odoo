@@ -1,5 +1,5 @@
-.. image:: https://img.shields.io/badge/license-AGPLv3-blue.svg
-   :target: https://www.gnu.org/licenses/agpl.html
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 =================================
@@ -11,7 +11,7 @@ This module contains customizations specific to Aleph Objects.
 * The menu "Bill of Material Components" should allow to import BOM components.
 * Add to the stock move form view a link to the manufacturing order.
 * Sort Manufacturing Orders by ID (descending).
-* Show the the qty pending to produce when printing MO.
+* Show the qty pending to produce when printing MO.
 * Add a "Manufacturing Read Only" Security group.
 * New customized report for manufacturing orders: *Production Order (AO)*.
 * Add a field "Assigned To" tracked in chatter.
