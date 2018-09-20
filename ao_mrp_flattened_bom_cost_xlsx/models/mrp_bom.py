@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -31,9 +30,11 @@ class MrpBom(models.Model):
                 if totals.get(line.product_id):
                     totals[line.product_id] += \
                         line.product_uom._compute_quantity(
-                    line.product_qty, line.product_id.uom_id, round=False)
+                            line.product_qty,
+                            line.product_id.uom_id, round=False)
                 else:
                     totals[line.product_id] = \
                         line.product_uom._compute_quantity(
-                    line.product_qty, line.product_id.uom_id, round=False)
+                            line.product_qty,
+                            line.product_id.uom_id, round=False)
         return totals
