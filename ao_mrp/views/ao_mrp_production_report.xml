@@ -2,19 +2,14 @@
 <odoo>
 
     <template id="ao_report_mrporder">
-    <t t-call="report.html_container">
+    <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
-            <t t-call="report.internal_layout">
+            <t t-call="web.internal_layout">
                 <div class="page">
                     <div class="oe_structure"/>
                     <div class="row">
-                        <div class="col-xs-7">
+                        <div class="col-xs-12">
                             <h2>Production Order # : <span t-field="o.name"/></h2>
-                        </div>
-                        <div class="col-xs-5">
-                            <span class="text-right">
-                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:350px;height:60px"/>
-                            </span>
                         </div>
                     </div>
                     <div class="row mt32 mb32">
@@ -55,14 +50,6 @@
                             <span t-esc="time.strftime('%Y-%m-%d')"
                                   t-options='{"widget": "date"}'/>
                         </div>
-                        <div class="col-xs-3" t-if="'sale_ref' in o">
-                            <strong>Partner Ref:</strong><br/>
-                            <span t-esc="'sale_ref' in o and o.sale_ref"/>
-                        </div>
-                        <div class="col-xs-3" t-if="'sale_name' in o">
-                            <strong>SO Number:</strong><br/>
-                            <span t-esc="'sale_name' in o and o.sale_name"/>
-                        </div>
                     </div>
 
                     <div t-if="o.workorder_ids">
@@ -92,9 +79,6 @@
                                 <th class="text-center" groups="stock.group_stock_multi_locations">
                                     <strong>Source Location</strong>
                                 </th>
-                                <th class="text-center">
-                                    <strong>Barcode</strong>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,8 +88,7 @@
                                 </tr>
                                 <tr t-foreach="o.move_raw_ids" t-as="line">
                                     <td>
-                                        <b><span t-field="line.product_id.code"/></b>
-                                        <span t-field="line.product_id.name"/>
+                                        <span t-field="line.product_id"/>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="'%i'%(line.product_uom_qty/o.product_qty)"/>
@@ -116,11 +99,6 @@
                                     </td>
                                     <td class="text-center" groups="stock.group_stock_multi_locations">
                                         <span t-field="line.location_id.name"/>
-                                    </td>
-                                    <td class="text-center">
-                                        <span t-if="line.product_id.barcode">
-                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', line.product_id.barcode, 600, 100)" style="width:300px;height:50px"/>
-                                        </span>
                                     </td>
                                 </tr>
                             </t>
@@ -140,6 +118,5 @@
         report_type="qweb-pdf"
         name="ao_mrp.ao_report_mrporder"
     />
-
 
 </odoo>
