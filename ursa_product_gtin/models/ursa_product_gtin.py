@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2004 TINY SPRL. Fabien Pinckaers <fp@tiny.Be>
 # Copyright 2008 ChriCar Beteilugungs- und Beratungs
 #                Ferdinand Gassauer <tiny@chricar.at>
@@ -22,21 +21,21 @@ def check_upc(upccode):
         return False
     try:
         int(upccode)
-    except:
+    except Exception:
         return False
-    sum = 0
+    code_sum = 0
     i = 0
     check = 0
     upc_len = len(upccode)
     for i in range(upc_len-1):
         pos = int(upc_len-2-i)
         if is_pair(i):
-            sum += 3 * int(upccode[pos])
+            code_sum += 3 * int(upccode[pos])
         else:
-            sum += int(upccode[pos])
-        check = int(math.ceil(sum / 10.0) * 10 - sum)
+            code_sum += int(upccode[pos])
+        check = int(math.ceil(code_sum / 10.0) * 10 - code_sum)
     i += 1
-    if check != int(upccode[upc_len-1]):# last digit
+    if check != int(upccode[upc_len-1]):  # last digit
         return False
     return True
 
@@ -44,23 +43,23 @@ def check_upc(upccode):
 def check_ean(eancode):
     if not eancode:
         return True
-    if not len(eancode) in [8,12,13,14]:
+    if not len(eancode) in [8, 12, 13, 14]:
         return False
     try:
         int(eancode)
-    except:
+    except Exception:
         return False
-    sum = 0
+    code_sum = 0
     i = 0
     check = 0
-    ean_len=len(eancode)
+    ean_len = len(eancode)
     for i in range(ean_len-1):
-        pos=int(ean_len-2-i)
+        pos = int(ean_len-2-i)
         if is_pair(i):
-            sum += 3 * int(eancode[pos])
+            code_sum += 3 * int(eancode[pos])
         else:
-            sum += int(eancode[pos])
-        check = int(math.ceil(sum / 10.0) * 10 - sum)
+            code_sum += int(eancode[pos])
+        check = int(math.ceil(code_sum / 10.0) * 10 - code_sum)
 
     i += 1
     if check != int(eancode[ean_len-1]):  # last digit
@@ -73,20 +72,22 @@ class ProductProduct(models.Model):
 
     # this def shouldn't be necessary,
     # but is not available from product_product
-    @api.one
+    @api.multi
     @api.constrains('barcode')
     def _check_ean_key(self):
-        res = check_ean(self.barcode)
-        if not res:
-            raise UserError(_('Invalid Bar Code Number'))
+        for product in self:
+            res = check_ean(product.barcode)
+            if not res:
+                raise UserError(_('Invalid Bar Code Number'))
 
     # check function for upc key
-    @api.one
+    @api.multi
     @api.constrains('upc')
     def _check_upc_key(self):
-        res = check_upc(self.upc)
-        if not res:
-            raise UserError(_('Invalid UPC Code Number'))
+        for product in self:
+            res = check_upc(product.upc)
+            if not res:
+                raise UserError(_('Invalid UPC Code Number'))
 
     barcode = fields.Char(
         string="EAN",
@@ -112,21 +113,23 @@ class ResPartner(models.Model):
     upc = fields.Char(string='UPC',
                       help='Barcode number for UPC')
 
-    @api.one
+    @api.multi
     @api.constrains('barcode')
     def _check_ean_key(self):
-        res = check_ean(self.barcode)
-        if not res:
-            raise UserError(_('Invalid Bar Code Number'))
+        for partner in self:
+            res = check_ean(partner.barcode)
+            if not res:
+                raise UserError(_('Invalid Bar Code Number'))
 
     # check function for upc key
-    @api.one
+    @api.multi
     @api.constrains('upc')
     def _check_upc_key(self):
-        res = check_upc(self.upc)
-        if not res:
-            raise UserError(_('Invalid UPC Code Number'))
-        
+        for partner in self:
+            res = check_upc(partner.upc)
+            if not res:
+                raise UserError(_('Invalid UPC Code Number'))
+
     _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'),
                         ('barcode', 'UNIQUE(barcode)',
                          'Cannot have duplicate EAN Code')]
