@@ -1,3 +1,0 @@
----Fields in module 'ursa_product_gtin'---
----XML records in module 'ursa_product_gtin'---
--- nothing has changed in this module
