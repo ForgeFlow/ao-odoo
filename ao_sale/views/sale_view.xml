@@ -22,7 +22,7 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_tree"/>
         <field name="arch" type="xml">
-            <field name="date_order" position="before">
+            <field name="confirmation_date" position="before">
                 <field name="create_date"/>
             </field>
         </field>
