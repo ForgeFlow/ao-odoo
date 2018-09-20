@@ -2,13 +2,11 @@
    :target: https://www.gnu.org/licenses/agpl.html
    :alt: License: AGPL-3
 
-=================================
-AO-specific customizations on CRM
-=================================
+=========================
+AO CRM Prospecting Status
+=========================
 
-This module contains customizations specific to Aleph Objects.
-
-* Sort lead by ID (descending).
+This module add the prospecting status and allow to specify it on a customer.
 
 
 Credits
