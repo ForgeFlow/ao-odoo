@@ -1,0 +1,2 @@
+# module: ao_account_due_list
+account-payment https://github.com/OCA/account-payment.git 11.0
