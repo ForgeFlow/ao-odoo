@@ -3,9 +3,9 @@
 
     <template id="report_delivery_document_ao"
           inherit_id="stock.report_delivery_document">
-        <xpath expr="//tr[@t-foreach='o.pack_operation_ids']"
+        <xpath expr="//tr[@t-foreach='o.move_line_ids']"
                position="attributes">
-            <attribute name="t-foreach">o.pack_operation_ids.sorted(key=lambda x: x.location_id.complete_name)</attribute>
+            <attribute name="t-foreach">o.move_line_ids.sorted(key=lambda x: x.location_id.complete_name)</attribute>
         </xpath>
     </template>
 
