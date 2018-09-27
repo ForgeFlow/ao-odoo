@@ -45,7 +45,7 @@
         % endif
     </td>
     <td valign="center" align="right">
-        <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" style="padding: 0px; margin: 0px; height: auto; width: 80px;"/>
+        <img src="https://www.lulzbot.com/sites/default/files/odoo_header_AO-LB_logo.jpg" alt="Aleph Objects, Inc. - Makers of the LulzBot 3D Printers" style="padding: 0px; margin: 0px; height: auto; max-width: 80px; max-height: 40px;">
     </td>
 </tr>
 <tr>
@@ -53,16 +53,18 @@
         <hr width="100%"
             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:10px 0;">
         % if ctx.get('subtype') and ctx.get('subtype').internal:
-        <span style="background-color: #f2dede; padding: 5px;">
-            <strong>Internal note</strong>: replies are not sent to followers.
-        </span>
+        <p style="background-color: #f2dede; padding: 5px; margin-bottom: 16px;">
+            <strong>Internal communication</strong>: Replying will post an internal note. Followers won't receive any email notification.
+        </p>
         % endif
     </td>
 </tr>
 </tbody></table>
 </div>
 % endif
-${object.body | safe}
+<div>
+    ${object.body | safe}
+</div>
 % if ctx.get('tracking'):
     <ul>
     % for tracking in ctx['tracking']
@@ -85,10 +87,9 @@ ${object.body | safe}
     </a>
     % endif
     using
-    <a href="https://www.odoo.com" style="text-decoration:none; color: #1f91d3;">Odoo</a>.
+    <a target="_blank" href="https://www.odoo.com" style="text-decoration:none; color: #1f91d3;">Odoo</a>.
 </p>
-</div>]]>
-        </field>
+</div>]]></field>
     </record>
 
 </odoo>
