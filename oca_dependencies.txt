@@ -13,3 +13,5 @@ reporting-engine https://github.com/OCA/reporting-engine.git 11.0
 crm https://github.com/Eficent/crm.git 11.0-mig-crm_helpdesk
 # module: ao_stock
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git 11.0
+# module: ao_mail
+social https://github.com/OCA/social.git 11.0
