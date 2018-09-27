@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
 
 
-class StockPicking(models.Model):
-    _inherit = "stock.pack.operation"
+class StockMoveLine(models.Model):
+    _inherit = "stock.move.line"
 
     @api.multi
     def _compute_qty_available_in_source_loc(self):
