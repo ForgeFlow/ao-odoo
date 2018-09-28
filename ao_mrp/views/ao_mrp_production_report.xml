@@ -104,8 +104,7 @@
                                 </tr>
                                 <tr t-foreach="o.move_raw_ids" t-as="line">
                                     <td>
-                                        <b><span t-field="line.product_id.code"/></b>
-                                        <span t-field="line.product_id.name"/>
+                                        <span t-field="line.product_id"/>
                                     </td>
                                     <td class="text-right">
                                         <span t-esc="'%i'%(line.product_uom_qty/o.product_qty)"/>
