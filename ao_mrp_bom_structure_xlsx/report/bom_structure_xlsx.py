@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -6,21 +5,14 @@
 import logging
 
 from odoo.tools.translate import _
-from odoo.report import report_sxw
+from odoo import models
 
 _logger = logging.getLogger(__name__)
 
-try:
-    from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
-except ImportError:
-    _logger.debug("report_xlsx not installed, Excel export non functional")
 
-    class ReportXlsx(object):
-        def __init__(self, *args, **kwargs):
-            pass
-
-
-class BomStructureXlsx(ReportXlsx):
+class BomStructureXlsx(models.AbstractModel):
+    _name = 'report.mrp_bom_structure_xlsx.bom_structure_xlsx'
+    _inherit = 'report.report_xlsx.abstract'
 
     def print_bom_children(self, ch, sheet, row, level, workbook):
         i, j = row, level
@@ -28,8 +20,9 @@ class BomStructureXlsx(ReportXlsx):
         sheet.write(i, 1, '> '*j)
         sheet.write(i, 2, ch.product_id.default_code or '')
         sheet.write(i, 3, ch.product_id.display_name or '')
-        sheet.write(i, 4, ch.product_qty)
-        sheet.write(i, 5, ch.product_uom_id.name or '')
+        sheet.write(i, 4, ch.product_uom_id._compute_quantity(
+            ch.product_qty, ch.product_id.uom_id) or '')
+        sheet.write(i, 5, ch.product_id.uom_id.name or '')
         sheet.write(i, 6, ch.bom_id.code or '')
         sheet.write(i, 7, ch.product_id.manufacturer.name or '')
         sheet.write(i, 8, ch.product_id.manufacturer_pref or '')
@@ -120,7 +113,7 @@ class BomStructureXlsx(ReportXlsx):
 
     def generate_xlsx_report(self, workbook, data, objects):
         workbook.set_properties({
-            'comments': 'Created with Python and XlsxWriter from Odoo 9.0'})
+            'comments': 'Created with Python and XlsxWriter from Odoo 11.0'})
         sheet = workbook.add_worksheet(_('BoM Structure'))
         sheet.set_landscape()
         sheet.fit_to_pages(1, 0)
@@ -179,8 +172,8 @@ class BomStructureXlsx(ReportXlsx):
                         sheet.write(i, 11, seller.product_uom.name or '',
                                     alert)
                         break
-                    uom_from = seller.product_uom.id
-                    uom_to = o.product_uom_id.id
+                    # uom_from = seller.product_uom.id
+                    # uom_to = o.product_uom_id.id
                     unit_qty = seller.product_uom._compute_quantity(
                         1.0, o.product_uom_id, round=False)
                     cur_from = seller.currency_id
@@ -270,7 +263,3 @@ class BomStructureXlsx(ReportXlsx):
                                ']'})
             sheet.write(i, 13, sum_prices, curr_bold)
             i += 1
-
-
-BomStructureXlsx('report.ao.bom.structure.xlsx', 'mrp.bom',
-                 parser=report_sxw.rml_parse)
