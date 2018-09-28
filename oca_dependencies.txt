@@ -6,3 +6,6 @@ hr-timesheet https://github.com/OCA/hr-timesheet.git 11.0
 stock-logistics-workflow https://github.com/OCA/stock-logistics-workflow.git 11.0
 # module: ao_mrp
 manufacture-reporting https://github.com/OCA/manufacture-reporting.git 11.0
+# module: ao_mrp_bom_structure_xlsx
+product-attribute https://github.com/OCA/product-attribute.git 11.0
+reporting-engine https://github.com/OCA/reporting-engine.git 11.0
