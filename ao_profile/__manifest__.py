@@ -183,7 +183,7 @@
         'account_invoice_view_payment',
         'purchase_stock_picking_return_invoicing',
         'sale_stock_picking_return_invoicing',
-        'purchase_stock_picking_return_invoicing_open_qty',  # TODO: not migrated
+        # 'purchase_stock_picking_return_invoicing_open_qty',  -- Deprecaded in v10
         'account_invoice_fixed_discount',
         #
         # OCA/purchase-workflow
