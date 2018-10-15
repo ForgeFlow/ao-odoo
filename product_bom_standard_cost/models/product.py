@@ -12,8 +12,6 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     @api.multi
-    @api.depends('standard_price', 'bom_ids.bom_line_ids',
-                 'bom_ids.product_qty')
     def _compute_bom_standard_cost(self):
         bom_obj = self.env['mrp.bom']
         for template in self:
@@ -40,5 +38,4 @@ class ProductTemplate(models.Model):
 
     bom_standard_cost = fields.Float(string='Standard cost of BOM',
                                      compute='_compute_bom_standard_cost',
-                                     store=True,
                                      digits=UNIT)
