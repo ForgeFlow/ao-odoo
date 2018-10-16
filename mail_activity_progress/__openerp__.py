@@ -16,5 +16,6 @@
         'security/ir.model.access.csv',
         'views/mail_activity_progress_views.xml',
         'views/mail_activity_views.xml',
+        'views/calendar_event_view.xml',
     ],
 }
