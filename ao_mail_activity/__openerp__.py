@@ -14,7 +14,8 @@
         "mail_activity_calendar"
     ],
     "data": [
-        'views/mail_activity_view.xml',
+        'views/mail_activity_views.xml',
+        'views/calendar_event_views.xml',
     ],
     "license": "AGPL-3",
     'installable': True,
