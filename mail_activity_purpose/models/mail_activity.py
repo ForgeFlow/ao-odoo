@@ -39,3 +39,12 @@ class MailActivity(models.Model):
                     _('The purpose %s is not allowed for the '
                       'selected activity type %s.') %
                     (rec.purpose_id.name, rec.activity_type_id.name))
+
+    @api.multi
+    def action_create_calendar_event(self):
+        action = super(MailActivity, self).action_create_calendar_event()
+        if action.get('context'):
+            action['context'].update({
+                'default_purpose_id': self.purpose_id.id,
+            })
+        return action

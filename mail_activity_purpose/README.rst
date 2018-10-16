@@ -1,21 +1,21 @@
-======================
-Mail Activity Progress
-======================
+=====================
+Mail Activity Purpose
+=====================
 
-This module allows to record the progress of the activity in a
+This module allows to record the purpose of the activity in a
 categorized manner, in a dropdown field.
 
 Configuration
 =============
 
-Go to *Settings > Technical > Email > Activity Progress* and define the
-progress indicators. You can assign a progress indicator to several activity
+Go to *Settings > Technical > Email > Activity Purposes* and define the
+purposes indicators. You can assign a progress indicator to several activity
 types if you want the indicator to be specific to one or more types.
 
 Usage
 =====
 
-Complete the progress when creating or editing an activity.
+Complete the purpose when creating or editing an activity.
 
 
 Known issues / Roadmap
@@ -54,6 +54,8 @@ Contributors
 **This module is a backport from Odoo SA and as such, it is not included in the OCA CLA. That means we do not have a copy of the copyright on it like all other OCA modules.**
 
 * Holger Brunn <hbrunn@therp.nl>
+* Jordi Ballester <jordi.ballester@eficent.com>
+* Lois Rilo <lois.rilo@eficent.com>
 
 Do not contact contributors directly about help with questions or problems concerning this addon, but use the `community mailing list <mailto:community@mail.odoo.com>`_ or the `appropriate specialized mailinglist <https://odoo-community.org/groups>`_ for help, and the bug tracker linked in `Bug Tracker`_ above for technical issues.
 
