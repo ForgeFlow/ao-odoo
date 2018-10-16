@@ -10,7 +10,8 @@ class CalendarEvent(models.Model):
 
     purpose_id = fields.Many2one(
         'mail.activity.purpose', 'Purpose',
-        index=True, ondelete='restrict')
+        index=True, ondelete='restrict',
+        domain="[('activity_type_ids.category', '=', 'meeting')]")
 
     def _sync_activities(self, values):
         res = super(CalendarEvent, self)._sync_activities(values)

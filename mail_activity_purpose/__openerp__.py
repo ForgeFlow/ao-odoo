@@ -11,6 +11,7 @@
     "depends": [
         'mail_activity',
         'mail_activity_calendar',
+        'mail_activity_board',
     ],
     "data": [
         'security/ir.model.access.csv',
