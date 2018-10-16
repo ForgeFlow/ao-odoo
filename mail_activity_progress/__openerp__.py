@@ -4,13 +4,13 @@
 {
     "name": "Mail Activity Progress",
     "version": "9.0.1.0.0",
-    "author": "Eficent,"
-              "Odoo Community Association (OCA)",
+    "author": "Eficent",
     "license": "LGPL-3",
     "category": "Discuss",
     "depends": [
         'mail_activity',
         'mail_activity_calendar',
+        'mail_activity_board',
     ],
     "data": [
         'security/ir.model.access.csv',
