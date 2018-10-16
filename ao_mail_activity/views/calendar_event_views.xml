@@ -2,18 +2,31 @@
 <openerp>
     <data>
 
+        <record model="ir.ui.view" id="view_calendar_event_form">
+            <field name="name">Calendar - Event Form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[4]" position="attributes">
+                    <attribute name="groups"/>
+                </xpath>
+                <field name="location" position="after">
+                    <field name="date_deadline"/>
+                </field>
+            </field>
+        </record>
 
-    <record model="ir.ui.view" id="view_calendar_event_form">
-        <field name="name">Calendar - Event Form</field>
-        <field name="model">calendar.event</field>
-        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//page[@string='Misc']" position="attributes">
-                <attribute name="groups"/>
-            </xpath>
-
-        </field>
-    </record>
+        <record id="view_calendar_event_form_popup" model="ir.ui.view">
+            <field name="name">calendar.event.form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form_popup"/>
+            <field name="arch" type="xml">
+                <field name="alarm_ids" position="after">
+                    <field name="date_deadline"/>
+                    <field name="user_id"/>
+                </field>
+            </field>
+        </record>
 
     </data>
 </openerp>
