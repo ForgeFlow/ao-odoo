@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--
+    VIEWS
+-->
+
+    <!-- SEARCH VIEW -->
+    <record id="mail_activity_view_search" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.search</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr='//filter[@name="activities_my"]' position='after'>
+
+                <!-- COMPLETED -->
+				<filter string="Completed Last Month" separator="1"
+				        domain="[('done', '=', True), ('date_done','&lt;=', (datetime.date.today() - relativedelta(day=31,months=1)).strftime('%%Y-%%m-%%d')),('date_done','&gt;=',(datetime.date.today() - relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"
+				        help="Completed last month"/>
+                <filter string="Completed This Month" separator="1"
+				        domain="[
+                                ('done', '=', True),
+                                ('date_done', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                                ('date_done', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d')),
+                            ]"
+				        help="Completed this month"/>
+				<filter string="Completed Last Week" separator="1"
+				        domain="[('done', '=', True), ('date_done','&lt;=', (datetime.date.today()-datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d')),('date_done','&gt;=',(datetime.date.today()-datetime.timedelta(weeks=2)).strftime('%%Y-%%m-%%d'))]"
+				        help="Completed last week"/>
+				<filter string="Completed This Week" separator="1"
+				        domain="[
+				                ('done', '=', True),
+                                ('date_done', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('date_done', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),
+                            ]"
+				        help="Completed this week"/>
+				<filter string="Completed Yesterday" separator="1"
+				 		domain="[('done', '=', True), ('date_done','&lt;=', (datetime.date.today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d')),('date_done','&gt;=',(datetime.date.today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
+				 		help="Completed yesterday"/>
+                <filter string="Completed Today" name="activities_done_today"
+                        domain="[('done', '=', True),
+                                 ('date_done', '=', (context_today()).strftime('%Y-%m-%d'))]"
+                        help="Show activities completed today."/>
+
+                <!-- DUE DATE -->
+                <filter string="Due Next Month" separator="1"
+				        domain="[
+				                ('date_deadline','&lt;=', (datetime.date.today() + relativedelta(day=31,months=1)).strftime('%%Y-%%m-%%d')),
+				                ('date_deadline','&gt;=',(datetime.date.today() + relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"
+				        help="Due next month"/>
+                <filter string="Due This Month" separator="1"
+				        domain="[
+                                ('date_deadline', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                                ('date_deadline', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d')),
+                            ]"
+				        help="Due this month"/>
+				<filter string="Due Last Month" separator="1"
+				        domain="[('date_deadline','&lt;=', (datetime.date.today() - relativedelta(day=31,months=1)).strftime('%%Y-%%m-%%d')),('date_deadline','&gt;=',(datetime.date.today() - relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"
+				        help="Due last month"/>
+				<filter string="Due Next Week" separator="1"
+				        domain="[
+				                ('date_deadline','&lt;=', (datetime.date.today()+datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d')),
+				                ('date_deadline','&gt;=',(datetime.date.today()+datetime.timedelta(weeks=2)).strftime('%%Y-%%m-%%d'))]"
+				        help="Due next week"/>
+				<filter string="Due This Week" separator="1"
+				        domain="[
+                                ('date_deadline', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('date_deadline', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),
+                            ]"
+				        help="Due this week"/>
+				<filter string="Due Last Week" separator="1"
+				        domain="[
+				                ('date_deadline','&lt;=', (datetime.date.today()-datetime.timedelta(weeks=1)).strftime('%%Y-%%m-%%d')),
+				                ('date_deadline','&gt;=',(datetime.date.today()-datetime.timedelta(weeks=2)).strftime('%%Y-%%m-%%d'))]"
+				        help="Due last week"/>
+				<filter string="Due Tomorrow" separator="1"
+				 		domain="[
+				 		        ('date_deadline','&lt;=', (datetime.date.today()+datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d')),
+				 		        ('date_deadline','&gt;=',(datetime.date.today()+datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
+				 		help="Due yesterday"/>
+                <filter string="Due Today" separator="1"
+				 		domain="[('date_deadline','=', (datetime.date.today()).strftime('%%Y-%%m-%%d'))]"
+				 		help="Due today"/>
+				<filter string="Due Yesterday" separator="1"
+				 		domain="[
+				 		        ('date_deadline','&lt;=', (datetime.date.today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d')),
+				 		        ('date_deadline','&gt;=',(datetime.date.today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
+				 		help="Due yesterday"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="mail_activity_view_tree" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.tree</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">(date_deadline &lt; current_date) and state != 'done'</attribute>
+                <attribute name="decoration-warning">(date_deadline == current_date) and state != 'done'</attribute>
+                <attribute name="decoration-success">(date_deadline &gt; current_date)and state != 'done'</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
