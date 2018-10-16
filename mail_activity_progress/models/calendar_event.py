@@ -16,6 +16,8 @@ class CalendarEvent(models.Model):
         res = super(CalendarEvent, self)._sync_activities(values)
         if self.mapped('activity_ids'):
             activity_values = {}
-            if values.get('name'):
+            if values.get('progress_id'):
                 activity_values['progress_id'] = values['progress_id']
+            if activity_values.keys():
+                self.mapped('activity_ids').write(activity_values)
         return res
