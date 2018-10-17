@@ -18,5 +18,6 @@
         'views/calendar_event_views.xml',
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
+    "post_init_hook": "post_init_hook",
 }
