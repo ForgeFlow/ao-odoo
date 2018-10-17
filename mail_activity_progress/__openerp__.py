@@ -3,7 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Mail Activity Progress",
-    "version": "9.0.1.0.0",
+    "version": "9.0.2.0.0",
     "author": "Eficent",
     "license": "LGPL-3",
     "category": "Discuss",

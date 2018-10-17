@@ -10,7 +10,7 @@
                 <page name="lead" position="after">
                     <page name="extra" string="Extra">
                         <group name="needs" string="Understanding of needs">
-                            <field name="understanding_of_need" nolabel="1"/>
+                            <field name="understanding_of_needexit" nolabel="1"/>
                         </group>
                         <group name="impact" string="Understanding of impact">
                             <field name="understanding_of_impact" nolabel="1"/>
