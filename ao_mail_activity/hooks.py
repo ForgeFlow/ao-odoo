@@ -2,13 +2,8 @@
 # Copyright 2018 Odoo, S.A.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from openerp.addons.mail_activity.models.mail_activity import MailActivity
-from openerp.addons.mail_activity.models.mail_activity import \
-    message_post_with_view
-from openerp import fields
 
-
-def post_init_hook(cr):
+def post_init_hook(cr, registry):
     """
     The objective of this hook is to default to false all values of field
     'done' of mail.activity
