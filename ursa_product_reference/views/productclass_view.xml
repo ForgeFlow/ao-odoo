@@ -62,17 +62,4 @@
               action="action_productclass"
               groups="stock.group_stock_manager" sequence="2"/>
 
-    <record id="ursa_product_code_view" model="ir.ui.view">
-        <field name="name">ursa_product.code.form</field>
-        <field name="model">product.product</field>
-        <field name="type">form</field>
-        <field name="priority" eval="99"/>
-        <field name="inherit_id" ref="product.product_normal_form_view"/>
-        <field name="arch" type="xml">
-            <field name="default_code" position="after">
-               <field name="product_class" placeholder="Select Product Class"/>
-            </field>
-        </field>
-    </record>
-
 </odoo>
