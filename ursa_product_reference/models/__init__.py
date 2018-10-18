@@ -1,6 +1,2 @@
-# -*- coding: utf-8 -*-
-# Copyright 2013 Ursa Information Systems (http://www.ursainfosystems.com).
-# Copyright 2018 Eficent Business and IT Consulting Services S.L.
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
-from . import productclass
+from . import product_product
+from . import product_class
