@@ -8,12 +8,6 @@
                 <td>$25.00 Wire Fee Charge added to all International Wire Transactions.<br/></td>
             </tr>
         </xpath>
-        <xpath expr="//div[@id='informations']" position="inside">
-            <div name="payment_term" t-if="doc.validity_date" class="col-xs-3">
-                <strong>Expiration Date:</strong>
-                <p t-field="doc.validity_date"/>
-            </div>
-        </xpath>
     </template>
 
 </odoo>
