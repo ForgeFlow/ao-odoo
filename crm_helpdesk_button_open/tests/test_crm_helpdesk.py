@@ -1,17 +1,20 @@
-# -*- coding: utf-8 -*-
 # © 2015 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests import common
 
 
-class TestCrmHelpdeskSetOpen(common.TransactionCase):
+@common.at_install(False)
+@common.post_install(True)
+class TestCrmHelpdeskButtonOpen(common.TransactionCase):
 
     def setUp(self):
-        super(TestCrmHelpdeskSetOpen, self).setUp()
-        self.crm_helpdesk = self.env['crm.helpdesk']
+        super(TestCrmHelpdeskButtonOpen, self).setUp()
+        self.obj_helpdesk = self.env['crm.helpdesk']
+        self.obj_user = self.env['res.users']
         # groups
-        self.group_sale_salesman = self.env.ref('base.group_sale_salesman')
+        self.group_sale_salesman = self.env.ref(
+            'sales_team.group_sale_salesman')
         # company
         self.company1 = self.env.ref('base.main_company')
         # Create users
@@ -23,8 +26,7 @@ class TestCrmHelpdeskSetOpen(common.TransactionCase):
         """ Create a user."""
         group_ids = [group.id for group in groups]
         user = \
-            self.ResUsers.with_context({'no_reset_password': True}). \
-                create({
+            self.obj_user.with_context({'no_reset_password': True}).create({
                 'name': 'Test User',
                 'login': login,
                 'password': 'demo',
@@ -39,10 +41,10 @@ class TestCrmHelpdeskSetOpen(common.TransactionCase):
         vals = {
             'name': 'Test'
         }
-        crm_helpdesk = self.crm_helpdesk.create(vals)
+        crm_helpdesk = self.obj_helpdesk.create(vals)
         crm_helpdesk.sudo(self.user1_id).button_open()
         self.assertEqual(
             crm_helpdesk.state, 'open',
             'Helpdesk ticket should be in state open')
-        self.assertEqual(crm_helpdesk.user_id, self.user1_id,
+        self.assertEqual(crm_helpdesk.user_id.id, self.user1_id,
                          'Helpdesk ticket should be assigned to Test User')
