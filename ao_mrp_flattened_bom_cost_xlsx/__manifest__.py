@@ -7,9 +7,9 @@
     'version': '11.0.1.0.0',
     'category': 'Manufacturing',
     'author': "Eficent",
-    'website': 'https://github.com/Eficent',
+    'website': 'https:www,eficent.com',
     'license': 'AGPL-3',
-    'depends': ['report_xlsx', 'mrp'],
+    'depends': ['report_xlsx', 'mrp_flattened_bom_xlsx'],
     'data': [
         'report/flattened_bom_cost_xlsx.xml',
     ],

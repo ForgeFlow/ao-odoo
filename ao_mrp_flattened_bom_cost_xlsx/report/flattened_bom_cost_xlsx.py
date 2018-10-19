@@ -9,8 +9,8 @@ from odoo.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 
-class FlattenedBomXlsx(models.AbstractModel):
-    _name = 'report.mrp_flattened_bom_xlsx.flattened_bom_xlsx'
+class FlattenedBomCostXlsx(models.AbstractModel):
+    _name = 'report.mrp_flattened_bom_cost_xlsx.flattened_bom_xlsx'
     _inherit = 'report.report_xlsx.abstract'
 
     def print_flattened_bom_lines(
@@ -60,11 +60,14 @@ class FlattenedBomXlsx(models.AbstractModel):
         i = 2
 
         for o in objects:
-            totals = o._get_flattened_totals()
+            # We need to calculate the totals for the BoM qty and UoM:
+            starting_factor = o.product_uom_id._compute_quantity(
+                o.product_qty, o.product_tmpl_id.uom_id, round=False)
+            totals = o._get_flattened_totals(factor=starting_factor)
             sheet.write(i, 0, o.product_tmpl_id.name or '', bold)
             sheet.write(i, 1, o.code or '', bold)
             sheet.write(i, 2, o.display_name or '', bold)
-            sheet.write(i, 3, 1, bold)
+            sheet.write(i, 3, o.product_qty, bold)
             sheet.write(i, 4, o.product_uom_id.name or '', bold)
             sheet.write(i, 5, o.code or '', bold)
             i = self.print_flattened_bom_lines(o, totals, sheet, i, workbook)
