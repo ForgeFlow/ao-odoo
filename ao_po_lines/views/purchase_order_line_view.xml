@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<openerp>
+    <data>
+
+      <record id="purchase_order_line_search" model="ir.ui.view">
+        <field name="name">purchase.order.line.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_search"/>
+        <field name="arch" type="xml">
+            <field name="order_id" position="after">
+                <field name="state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="po_lines_form" model="ir.ui.view" >
+        <field name="name">purchase.order.line.form - po_line</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="replace">
+                <group>
+                    <group>
+                        <field name="product_uom" invisible="1"/>
+                        <field name="product_id" readonly="1"/>
+                        <label for="product_qty" string="Ordered Qty"/>
+                        <div>
+                            <field name="product_qty" readonly="1" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                        </div>
+                        <label for="qty_received" string="Received Qty"/>
+                        <div>
+                            <field name="qty_received" readonly="1" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                        </div>
+                        <label for="product_qty" string="Billed Qty"/>
+                        <div>
+                            <field name="qty_invoiced" readonly="1" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                        </div>
+                        <field name="price_unit"/>
+                    </group>
+                    <group>
+                        <field name="date_planned" widget="date" readonly="1"/>
+                        <field name="currency_id" invisible="1"/>
+                            <label for="price_total" string="Total"/>
+                                <div>
+                                    <field name="price_total" widget="monetary" readonly="True" class="oe_inline"/>
+                                </div>
+                            <label for="amount_invoiced" string="Invoiced"/>
+                                <div>
+                                    <field name="amount_invoiced" widget="monetary" readonly="True" class="oe_inline"/>
+                                </div>
+                            <label for="balance_due" string="To Invoice"/>
+                                <div>
+                                    <field name="balance_due" widget="monetary" readonly="True" class="oe_inline"/>
+                                </div>
+                        <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use', '=', 'purchase')]"/>
+                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        <field name="account_analytic_id" colspan="4" groups="purchase.group_analytic_accounting"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="po_lines_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree - po_line</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree default_order='date_planned'
+                  create="false" delete="false"
+                  decoration-warning="balance_due &gt; 0.0">
+                <field name="order_id" widget="many2one" readonly="True"/>
+                <field name="date_planned"  widget="date" readonly="True"/>
+                <field name="partner_id" string="Vendor"/>
+                <field name="product_id" readonly="True"/>
+                <field name="product_qty" readonly="True" string="Ordered Qty"/>
+                <field name="qty_received" readonly="True" string="Received Qty"/>
+                <field name="qty_invoiced" readonly="True" string="Billed Qty"/>
+                <field name="product_uom" readonly="True" string=" "/>
+                <field name="price_total" widget="monetary" readonly="True"/>
+                <field name="amount_invoiced" widget="monetary" readonly="True" string="Invoiced"/>
+                <field name="balance_due" widget="monetary" readonly="True" string="To Invoice"/>
+                <field name="currency_id" readonly="True" invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="po_lines_action" model="ir.actions.act_window">
+        <field name="name">Purchase Order Lines</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_id" ref="po_lines_tree"/>
+        <field name="context">{'search_default_state': 'purchase'}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem
+        id="menu_po_lines"
+        action="po_lines_action"
+        parent="purchase.menu_procurement_management"
+        sequence="8"/>
+    </data>
+</openerp>
