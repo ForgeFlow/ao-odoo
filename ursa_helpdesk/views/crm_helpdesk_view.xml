@@ -13,12 +13,4 @@
         </field>
     </record>
 
-    <function model="ir.values" name="set_default"
-              id="default_helpdesk_reply_to"
-              eval="('crm.helpdesk', 'helpdesk_reply_to', 'support@lulzbot.com')"/>
-
-    <function model="ir.values" name="set_default"
-              id="default_replace_helpdesk_email_from"
-              eval="('crm.helpdesk', 'replace_helpdesk_email_from', 1)"/>
-
 </odoo>

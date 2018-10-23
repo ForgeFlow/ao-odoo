@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="crm_helpdesk_replace_email_from"
+            model="ir.config_parameter">
+        <field name="key">crm.helpdesk.replace.email.from</field>
+        <field name="value">True</field>
+    </record>
+
+    <function model="ir.default" name="set"
+          id="default_helpdesk_reply_to"
+          eval="('crm.helpdesk', 'reply_to', 'support@lulzbot.com')"/>
+
+</odoo>
