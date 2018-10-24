@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Eficent <http://www.eficent.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from openerp import fields, models
+
+from odoo import fields, models
 
 
 class MailActivityProgress(models.Model):
     _name = 'mail.activity.progress'
     _description = 'Activity Progress'
-    _rec_name = 'name'
     _order = 'sequence, id'
 
     name = fields.Char('Name', required=True, translate=True)

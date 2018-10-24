@@ -1,7 +1,7 @@
 # Copyright 2018 Eficent Business and IT Consulting Services S.L.
 # Copyright 2018 Tecnativa, S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, SUPERUSER_ID
+from odoo import api, SUPERUSER_ID
 
 
 def update_calendar_event(env):
