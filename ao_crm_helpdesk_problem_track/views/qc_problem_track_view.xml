@@ -35,9 +35,9 @@
         <field name="inherit_id"
            ref="quality_control_issue.qc_problem_kanban_view"/>
         <field name="arch" type="xml">
-            <field name="issue_count" position="after">
+            <group name="info" position="inside">
                 <field name="crm_helpdesk_count"/> helpdesk tickets
-            </field>
+            </group>
         </field>
     </record>
 
