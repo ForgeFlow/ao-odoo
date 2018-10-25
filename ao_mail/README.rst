@@ -8,8 +8,8 @@ AO-specific customizations on Mail
 
 This module contains customizations specific to Aleph Objects.
 
-* Allow to select a new option related to email notifications: 'All Messages
-  Except Notifications'.
+* Allow to select a new option related to email notifications: *System
+  notifications by Email*.
 * Modify Default Template for Mails.
 
 
