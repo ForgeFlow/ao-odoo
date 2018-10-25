@@ -5,7 +5,7 @@ from odoo import api, fields, models
 
 
 class StockMoveLine(models.Model):
-    _inherit = "stock.move.line"
+    _inherit = "stock.move"
 
     @api.multi
     def _compute_qty_available_in_source_loc(self):
@@ -14,7 +14,7 @@ class StockMoveLine(models.Model):
                 location=rec.location_id.id)._product_available()[
                 rec.product_id.id]['qty_available']
             res = rec.product_id.product_tmpl_id.uom_id._compute_quantity(
-                product_available, rec.product_uom_id)
+                product_available, rec.product_uom)
             rec.qty_available_in_source_loc = res
 
     @api.multi
@@ -25,7 +25,8 @@ class StockMoveLine(models.Model):
 
     qty_available_in_source_loc = fields.Float(
         string="Qty Available in Source",
-        compute="_compute_qty_available_in_source_loc")
-
+        compute="_compute_qty_available_in_source_loc",
+    )
     display_source_loc = fields.Boolean(
-        compute="_compute_display_source_loc")
+        compute="_compute_display_source_loc",
+    )
