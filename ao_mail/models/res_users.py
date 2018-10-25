@@ -7,4 +7,9 @@ from odoo import fields, models
 class Users(models.Model):
     _inherit = 'res.users'
 
-    email_notifications = fields.Boolean(string='Email Notifications')
+    notification_by_email = fields.Boolean(
+        string="System notifications by Email",
+        default=True,
+        help="Uncheck this box if you don't want to receive System"
+             "notification in your email.",
+    )

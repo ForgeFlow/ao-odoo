@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
             <data>
                 <field name="notification_type" position="after">
-                    <field name="email_notifications" readonly="0"/>
+                    <field name="notification_by_email" readonly="0"/>
                 </field>
             </data>
             </field>
@@ -24,7 +24,7 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="notification_type" position="after">
-                        <field name="email_notifications"/>
+                        <field name="notification_by_email"/>
                     </field>
                 </data>
             </field>
