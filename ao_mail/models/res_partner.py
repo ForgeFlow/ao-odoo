@@ -13,7 +13,7 @@ class Partner(models.Model):
         if message.message_type == 'notification':
             notif_partners = self.filtered(
                 lambda partner: partner.mapped(
-                    'user_ids.notifications_by_email'))
+                    'user_ids.notification_by_email'))
         else:
             notif_partners = self
         return super(Partner, notif_partners)._notify(
