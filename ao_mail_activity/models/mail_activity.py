@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Eficent <http://www.eficent.com>
+# Copyright 2018 Eficent <https://www.eficent.com>
+# Copyright 2018 Aleph Objects Inc. <https://www.alephobjects.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from openerp import api, fields, models, _
-from openerp.exceptions import ValidationError
+from odoo import api, models
 
 
 class MailActivity(models.Model):
