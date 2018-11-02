@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Odoo SA <https://www.odoo.com>
-# Copyright 2018 Eficent <http://www.eficent.com>
+# Copyright 2018 Eficent <https://www.eficent.com>
+# Copyright 2018 Aleph Objects Inc. <https://www.alephobjects.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from openerp import api, models, fields
+from odoo import fields, models
 
 
 class CalendarEvent(models.Model):
