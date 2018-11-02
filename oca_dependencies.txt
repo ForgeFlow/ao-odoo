@@ -17,3 +17,5 @@ stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git 1
 social https://github.com/OCA/social.git 11.0
 # module: rma_crm_helpdesk
 stock-rma https://github.com/Eficent/stock-rma.git 11.0
+# until mail_activity_done gets merged:
+social-eficent https://github.com/Eficent/social.git 11.0-mail_activity_done
