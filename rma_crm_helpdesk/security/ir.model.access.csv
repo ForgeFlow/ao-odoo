@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_rma_order_sales_manager,rma.order.sales.manager,rma.model_rma_order,base.group_sale_manager,1,0,0,0
-access_rma_order_sales_user,rma.order.sales.manager,rma.model_rma_order,base.group_sale_salesman,1,0,0,0
-access_rma_order_line_sales_manager,rma.order.line.sales.manager,rma.model_rma_order_line,base.group_sale_manager,1,0,0,0
-access_rma_order_line_sales_user,rma.order.line.sales.user,rma.model_rma_order_line,base.group_sale_salesman,1,0,0,0
-access_rma_operation_sales_manager,rma.operation.sales.manager,rma.model_rma_operation,base.group_sale_manager,1,0,0,0
-access_rma_operation_sales_user,rma.operation.sales.user,rma.model_rma_operation,base.group_sale_salesman,1,0,0,0
+access_rma_order_sales_manager,rma.order.sales.manager,rma.model_rma_order,sales_team.group_sale_manager,1,0,0,0
+access_rma_order_sales_user,rma.order.sales.manager,rma.model_rma_order,sales_team.group_sale_salesman,1,0,0,0
+access_rma_order_line_sales_manager,rma.order.line.sales.manager,rma.model_rma_order_line,sales_team.group_sale_manager,1,0,0,0
+access_rma_order_line_sales_user,rma.order.line.sales.user,rma.model_rma_order_line,sales_team.group_sale_salesman,1,0,0,0
+access_rma_operation_sales_manager,rma.operation.sales.manager,rma.model_rma_operation,sales_team.group_sale_manager,1,0,0,0
+access_rma_operation_sales_user,rma.operation.sales.user,rma.model_rma_operation,sales_team.group_sale_salesman,1,0,0,0

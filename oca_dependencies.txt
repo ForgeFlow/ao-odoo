@@ -15,3 +15,5 @@ crm https://github.com/Eficent/crm.git 11.0-mig-crm_helpdesk
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git 11.0
 # module: ao_mail
 social https://github.com/OCA/social.git 11.0
+# module: rma_crm_helpdesk
+stock-rma https://github.com/Eficent/stock-rma.git 11.0

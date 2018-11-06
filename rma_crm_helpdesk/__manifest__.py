@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "RMA CRM Helpdesk",
     "summary": "Allows to create RMAs from a Helpesk Ticket, and to track the "
                "relationship between Tickets and RMA Lines.",
-    "version": "9.0.1.0.0",
+    "version": "11.0.1.0.0",
     "author": "Eficent",
-    "website": "https://github.com/Eficent/stock-rma",
+    "website": "https://www.eficent.com",
     "category": "RMA",
     "depends": ["rma", "crm_helpdesk"],
     "license": "AGPL-3",
