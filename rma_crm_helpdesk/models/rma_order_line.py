@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-# © 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class RmaOrderLine(models.Model):
@@ -19,7 +18,7 @@ class RmaOrderLine(models.Model):
         rma_line = super(RmaOrderLine, self).create(vals)
         if not rma_line.helpdesk_id:
             rma_line.helpdesk_id = rma_line.rma_id.originating_helpdesk_id or \
-                                   False
+                False
         if rma_line.helpdesk_id:
             body = """%s created.
             <ul><li>Partner: %s</li>
