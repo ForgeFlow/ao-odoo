@@ -14,6 +14,7 @@
     "data": [
         "data/mail_data.xml",
         "views/res_users_views.xml",
+        "views/mail_message_views.xml",
     ],
     "license": "AGPL-3",
     "installable": True,
