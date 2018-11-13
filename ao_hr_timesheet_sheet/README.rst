@@ -12,7 +12,8 @@ This module contains customizations specific to Aleph Objects.
 * A manager can view/create/edit HR Timesheets of the employees she is in
   charge of.
 * A department manager can view/create/edit HR Timesheets of the employees
-  in her department.
+  in her department
+* Users cannot create projects from HR Timesheets
 
 Credits
 =======

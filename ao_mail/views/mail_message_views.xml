@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- mail.message form: short view !-->
+        <record model="ir.ui.view" id="view_message_form">
+            <field name="name">mail.message.form</field>
+            <field name="model">mail.message</field>
+            <field name="inherit_id" ref="mail.view_message_form"/>
+            <field name="arch" type="xml">
+                <field name="tracking_value_ids" position="attributes">
+                    <attribute name="groups">base.group_system</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
