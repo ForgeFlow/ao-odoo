@@ -30,4 +30,8 @@
         <field name="perm_read" eval="1"/>
     </record>
 
+    <record id="hr_timesheet.timesheet_line_rule_user" model="ir.rule">
+        <field name="perm_read" eval="1"/>
+    </record>
+
 </odoo>
