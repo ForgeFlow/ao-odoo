@@ -15,6 +15,11 @@ crm https://github.com/Eficent/crm.git 11.0-mig-crm_helpdesk
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git 11.0
 # module: ao_mail
 social https://github.com/OCA/social.git 11.0
+# module: ddmrp_dlt_purchase_manual
+ddmrp https://github.com/OCA/ddmrp.git 11.0
+manufacture https://github.com/OCA/manufacture.git 11.0
+web https://github.com/OCA/web.git 11.0
+server-tools https://github.com/OCA/server-tools.git 11.0
 # module: rma_crm_helpdesk
 stock-rma https://github.com/Eficent/stock-rma.git 11.0
 # until mail_activity_done gets merged:
