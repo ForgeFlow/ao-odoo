@@ -16,7 +16,7 @@
         
     <record id="base.main_company" model="res.company">
         <field name="currency_id" ref="base.USD"/>
-        <field name="paper_format">us_letter</field>
+        <field name="rml_paper_format">us_letter</field>
     </record>
 
 </odoo>
