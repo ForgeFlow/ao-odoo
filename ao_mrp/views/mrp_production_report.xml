@@ -3,7 +3,7 @@
 
     <template id="report_mrporder"
           inherit_id="mrp.report_mrporder">
-        <xpath expr="//div[@class='row mt32 mb32'][1]" position="inside">
+        <xpath expr="//div[hasclass('row', 'mt32', 'mb32')][1]" position="inside">
             <div class="col-xs-3">
                 <strong>Pending to produce:</strong><br/>
                 <span t-esc="(o.move_finished_ids.product_uom_qty - o.move_finished_ids.quantity_done)"/>
