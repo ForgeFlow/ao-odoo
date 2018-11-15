@@ -3,7 +3,7 @@
 
     <!--<template id="external_layout_header_ao"-->
               <!--inherit_id="stock.external_layout_header_barcode_right">-->
-        <!--<xpath expr="//div[@class='header']" position="replace">-->
+        <!--<xpath expr="//div[hasclass('header')]" position="replace">-->
             <!--<div class="header">-->
                 <!--<div class="row">-->
                     <!--<div style="margin-left:100px;text-align:left;">-->

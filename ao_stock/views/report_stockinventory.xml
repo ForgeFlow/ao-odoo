@@ -31,7 +31,7 @@
 
     <template id="report_inventory_ao"
               inherit_id="ao_stock.report_inventory" primary="True">
-        <xpath expr="//tr[@t-as='line']/td[@class='text-right']"
+        <xpath expr="//tr[@t-as='line']/td[hasclass('text-right')]"
                position="replace">
             <td class="text-right"/>
         </xpath>
