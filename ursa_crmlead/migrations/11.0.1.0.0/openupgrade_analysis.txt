@@ -1,0 +1,3 @@
+---Fields in module 'ursa_crmlead'---
+---XML records in module 'ursa_crmlead'---
+NEW ir.config_parameter: ursa_crmlead.crm_lead_replace_leads_email_from (noupdate)

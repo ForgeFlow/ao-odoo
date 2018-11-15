@@ -1,0 +1,4 @@
+---Fields in module 'ao_hr_timesheet_sheet'---
+---XML records in module 'ao_hr_timesheet_sheet'---
+NEW ir.rule: hr_timesheet.timesheet_line_rule_user
+NEW ir.ui.view: ao_hr_timesheet_sheet.hr_timesheet_sheet_form

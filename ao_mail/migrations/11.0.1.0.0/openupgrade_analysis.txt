@@ -1,0 +1,7 @@
+---Fields in module 'ao_mail'---
+ao_mail      / res.partner              / notify_email (False)          : DEL selection_keys: ['all_except_notification', 'always', 'none'], mode: modify
+ao_mail      / res.users                / notification_by_email (boolean): NEW 
+---XML records in module 'ao_mail'---
+NEW ir.ui.view: ao_mail.view_message_form
+NEW ir.ui.view: ao_mail.view_users_form_mail
+NEW ir.ui.view: ao_mail.view_users_form_simple_modif_mail

@@ -1,0 +1,5 @@
+---Fields in module 'ao_mrp_flattened_bom_cost_xlsx'---
+---XML records in module 'ao_mrp_flattened_bom_cost_xlsx'---
+NEW ir.actions.report: ao_mrp_flattened_bom_cost_xlsx.ao_flattened_bom_xlsx
+DEL ir.actions.report.xml: ao_mrp_flattened_bom_cost_xlsx.action_flattened_bom_xlsx
+DEL ir.values: ao_mrp_flattened_bom_cost_xlsx.action_flattened_bom_xlsx_values

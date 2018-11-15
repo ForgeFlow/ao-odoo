@@ -1,0 +1,6 @@
+---Fields in module 'crm_helpdesk_warning'---
+crm_helpdesk_warning / res.partner              / helpdesk_warn (selection)     : NEW selection_keys: ['block', 'no-message', 'warning']
+crm_helpdesk_warning / res.partner              / helpdesk_warn_msg (text)      : NEW 
+---XML records in module 'crm_helpdesk_warning'---
+NEW ir.ui.view: crm_helpdesk_warning.crm_helpdesk_view_warning
+NEW ir.ui.view: crm_helpdesk_warning.view_partner_warning_form

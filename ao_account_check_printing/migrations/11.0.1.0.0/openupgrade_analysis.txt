@@ -1,0 +1,3 @@
+---Fields in module 'ao_account_check_printing'---
+---XML records in module 'ao_account_check_printing'---
+NEW ir.ui.view: ao_account_check_printing.view_account_supplier_payment_tree

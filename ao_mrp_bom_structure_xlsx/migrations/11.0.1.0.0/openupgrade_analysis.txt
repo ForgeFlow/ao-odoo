@@ -1,0 +1,5 @@
+---Fields in module 'ao_mrp_bom_structure_xlsx'---
+---XML records in module 'ao_mrp_bom_structure_xlsx'---
+NEW ir.actions.report: ao_mrp_bom_structure_xlsx.bom_structure_xlsx
+DEL ir.actions.report.xml: ao_mrp_bom_structure_xlsx.action_ao_bom_structure_xlsx
+DEL ir.values: ao_mrp_bom_structure_xlsx.action_ao_bom_structure_xlsx_values

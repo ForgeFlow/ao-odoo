@@ -1,0 +1,3 @@
+---Fields in module 'ursa_helpdesk'---
+---XML records in module 'ursa_helpdesk'---
+NEW ir.config_parameter: ursa_helpdesk.crm_helpdesk_replace_email_from (noupdate)

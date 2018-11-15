@@ -1,0 +1,4 @@
+---Fields in module 'ao_stock'---
+---XML records in module 'ao_stock'---
+NEW ir.ui.view: ao_stock.stock_move_tree2
+DEL ir.ui.view: ao_stock.external_layout_header_ao
