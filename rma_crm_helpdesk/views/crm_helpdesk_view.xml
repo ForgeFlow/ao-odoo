@@ -7,7 +7,7 @@
         <field name="inherit_id"
                ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@class='oe_header']" position="before">
+            <xpath expr="//group[hasclass('oe_header')]" position="before">
                 <div class="oe_button_box">
                     <button type="object"
                             name="action_view_rma_customer"
