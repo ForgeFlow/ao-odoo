@@ -10,6 +10,6 @@ class MrpProduction(models.Model):
     _order = "id DESC"
 
     assigned_to = fields.Many2one(
-        comodel_name="res.users", string="Assigned to", 
+        comodel_name="res.users", string="Assigned to",
         track_visibility="onchange"
     )

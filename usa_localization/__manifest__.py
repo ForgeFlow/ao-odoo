@@ -18,11 +18,11 @@
         "data/base_data.xml",
         "data/res_country_data.xml",
         "data/res.country.state.csv",
-        "data/changed_views.xml",        
+        "data/changed_views.xml",
     ],
     "installable": True,
     "images": [
-        "images/sale_crm_crm_dashboard.png", 
+        "images/sale_crm_crm_dashboard.png",
         "images/crm_dashboard.jpeg",
         "images/leads.jpeg",
         "images/meetings.jpeg",

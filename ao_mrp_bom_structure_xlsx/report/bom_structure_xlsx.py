@@ -179,8 +179,8 @@ class BomStructureXlsx(ReportXlsx):
                         sheet.write(i, 11, seller.product_uom.name or '',
                                     alert)
                         break
-                    uom_from = seller.product_uom.id
-                    uom_to = o.product_uom_id.id
+                    # uom_from = seller.product_uom.id
+                    # uom_to = o.product_uom_id.id
                     unit_qty = seller.product_uom._compute_quantity(
                         1.0, o.product_uom_id, round=False)
                     cur_from = seller.currency_id

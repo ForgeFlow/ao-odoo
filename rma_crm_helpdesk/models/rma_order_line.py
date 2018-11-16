@@ -18,8 +18,8 @@ class RmaOrderLine(models.Model):
     def create(self, vals):
         rma_line = super(RmaOrderLine, self).create(vals)
         if not rma_line.helpdesk_id:
-            rma_line.helpdesk_id = rma_line.rma_id.originating_helpdesk_id or \
-                                   False
+            rma_line.helpdesk_id = \
+                rma_line.rma_id.originating_helpdesk_id or False
         if rma_line.helpdesk_id:
             body = """%s created.
             <ul><li>Partner: %s</li>
