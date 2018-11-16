@@ -22,7 +22,7 @@ def check_upc(upccode):
         return False
     try:
         int(upccode)
-    except:
+    except Exception:
         return False
     sum = 0
     i = 0
@@ -36,7 +36,7 @@ def check_upc(upccode):
             sum += int(upccode[pos])
         check = int(math.ceil(sum / 10.0) * 10 - sum)
     i += 1
-    if check != int(upccode[upc_len-1]):# last digit
+    if check != int(upccode[upc_len-1]):  # last digit
         return False
     return True
 
@@ -44,18 +44,18 @@ def check_upc(upccode):
 def check_ean(eancode):
     if not eancode:
         return True
-    if not len(eancode) in [8,12,13,14]:
+    if not len(eancode) in [8, 12, 13, 14]:
         return False
     try:
         int(eancode)
-    except:
+    except Exception:
         return False
     sum = 0
     i = 0
     check = 0
-    ean_len=len(eancode)
+    ean_len = len(eancode)
     for i in range(ean_len-1):
-        pos=int(ean_len-2-i)
+        pos = int(ean_len-2-i)
         if is_pair(i):
             sum += 3 * int(eancode[pos])
         else:
@@ -126,7 +126,7 @@ class ResPartner(models.Model):
         res = check_upc(self.upc)
         if not res:
             raise UserError(_('Invalid UPC Code Number'))
-        
+
     _sql_constraints = [('upc', 'UNIQUE(upc)', 'Cannot have duplicate UPC'),
                         ('barcode', 'UNIQUE(barcode)',
                          'Cannot have duplicate EAN Code')]

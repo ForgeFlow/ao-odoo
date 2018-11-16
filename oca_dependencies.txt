@@ -1,0 +1,4 @@
+crm https://github.com/Eficent/crm.git 10.0-mig-crm_helpdesk
+manufacture https://github.com/OCA/manufacture.git 10.0
+server-tools https://github.com/OCA/server-tools.git 10.0
+social https://github.com/OCA/social.git 10.0

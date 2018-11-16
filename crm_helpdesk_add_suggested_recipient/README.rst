@@ -8,5 +8,5 @@ CRM Helpdesk Add Suggested Recipient
 
 This module adds the possibility to include the partner indicated in the
 Helpdesk ticket in email responses created from the chatter. The partner then
- becomes a follower.
+becomes a follower.
 

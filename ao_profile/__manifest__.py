@@ -3,6 +3,7 @@
 # - Jordi Ballester Alomar
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+# pylint: disable=E501
 {
     'name': 'AO Profile',
     'version': '10.0.1.0.0',
@@ -113,7 +114,7 @@
         #
         # OCA/account-financial-reporting
         # -------------------------------
-        #'account_financial_report_webkit', -- deprecated
+        # 'account_financial_report_webkit', -- deprecated
         'account_financial_report_qweb',
         'customer_activity_statement',
         'customer_outstanding_statement',
@@ -269,7 +270,7 @@
         'mrp_bom_component_menu',
         'mrp_mto_with_stock',
         'mrp_production_putaway_strategy',
-        'mrp_production_request',  #TODO: To be migrated to v10
+        'mrp_production_request',  # TODO: To be migrated to v10
         # 'mrp_disable_force_availability_button', -- deprecated, trust stock_no_negative
         #
         # OCA/manufacture-reporting
@@ -284,7 +285,7 @@
         #
         # Eficent/ddmrp
         # -------------
-        'ddmrp', # to be migrated to v10
+        'ddmrp',  # to be migrated to v10
         'ddmrp_exclude_moves_adu_calc',
         'ddmrp_history',
         'ddmrp_mrp_production_request',

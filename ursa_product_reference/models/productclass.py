@@ -12,19 +12,20 @@ class ProductClass(models.Model):
     _description = "Product Internal Classification"
 
     code = fields.Char(string="Code", help="Product Classification Code")
-    name =fields.Char(string="Name", help="Product Classification Name")
+    name = fields.Char(string="Name", help="Product Classification Name")
     parent_id = fields.Many2one("product.class", string="Parent Category")
     sequence_no = fields.Integer(
-        string="Next number", default=1, 
+        string="Next number", default=1,
         help="Sequence Number",
     )
-        
+
 
 # associate product classification to product
 class ProductProduct(models.Model):
     _inherit = "product.product"
+
     product_class = fields.Many2one(
-        comodel_name="product.class", string="product_class", 
+        comodel_name="product.class", string="product_class",
         help="Product Class to help generate Internal Reference number",
     )
 
@@ -35,9 +36,10 @@ class ProductProduct(models.Model):
             nulls = '0' * cnt
             return '%s%s' % (nulls, num)
 
-        result = {}                   
+        result = {}
         if self.product_class:
-            if not (self.default_code and len(self.default_code)) and self.product_class:
+            if not (self.default_code and len(self.default_code)) and \
+                    self.product_class:
                 seq = self.product_class.sequence_no
                 code = (self.product_class.code or '' + seq_no(seq, 4))
                 self.default_code = code

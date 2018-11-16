@@ -21,7 +21,8 @@ except ImportError:
 
 class FlattenedBomXlsx(ReportXlsx):
 
-    def print_flattened_bom_lines(self, bom, requirements, sheet, row, workbook):
+    def print_flattened_bom_lines(self, bom, requirements, sheet, row,
+                                  workbook):
         dollars = workbook.add_format({'num_format': '$#,##0.00'})
         i = row + 1
         for product, total_qty in requirements.iteritems():
@@ -31,13 +32,14 @@ class FlattenedBomXlsx(ReportXlsx):
             sheet.write(i, 4, product.uom_id.name or '')
             sheet.write(i, 5, product.code or '')
             sheet.write(i, 6, product.standard_price or '', dollars)
-            sheet.write(i, 7, total_qty * product.standard_price or '', dollars)
+            sheet.write(i, 7, total_qty * product.standard_price or '',
+                        dollars)
             i += 1
         return i
 
     def generate_xlsx_report(self, workbook, data, objects):
         workbook.set_properties({
-            'comments': 'Created with Python and XlsxWriter from openerp 10.0'})
+            'comments': 'Created with Python and XlsxWriter from Odoo'})
         sheet = workbook.add_worksheet(_('Flattened BOM'))
         sheet.set_landscape()
         sheet.fit_to_pages(1, 0)
