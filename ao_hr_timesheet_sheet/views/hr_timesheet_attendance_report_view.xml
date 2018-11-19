@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="hr_timesheet_attendance_report_filter_last_week" model="ir.ui.view">
+        <field name="name">hr.timesheet.attendance.report.filter.last.week</field>
+        <field name="model">hr.timesheet.attendance.report</field>
+        <field name="inherit_id" ref="hr_timesheet_attendance.view_hr_timesheet_attendance_report_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='month']" position="after">
+                <filter name="last_week" string="Last Week"
+                        domain="[
+                            '&amp;',
+                            ('date', '>=', (context_today() + relativedelta(weeks=-2,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                            ('date', '&lt;=', (context_today() + relativedelta(weeks=-1,weekday=6)).strftime('%Y-%m-%d')),
+                        ]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

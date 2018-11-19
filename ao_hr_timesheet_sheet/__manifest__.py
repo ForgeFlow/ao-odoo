@@ -8,12 +8,14 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Human Resources",
-    "depends": ["hr_timesheet_sheet"],
+    "depends": ["hr_timesheet_sheet",
+                "hr_timesheet_attendance"],
     "license": "AGPL-3",
     "data": [
         "security/hr_timesheet_sheet_security.xml",
         "views/account_analytic_line_view.xml",
         "views/hr_timesheet_sheet_views.xml",
+        "views/hr_timesheet_attendance_report_view.xml"
     ],
     "installable": True,
 }

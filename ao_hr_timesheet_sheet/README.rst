@@ -14,6 +14,7 @@ This module contains customizations specific to Aleph Objects.
 * A department manager can view/create/edit HR Timesheets of the employees
   in her department
 * Users cannot create projects from HR Timesheets
+* Add Last Week filter on Timesheet Reporting
 
 Credits
 =======
