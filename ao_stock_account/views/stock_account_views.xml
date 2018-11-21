@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_stock_product_tree2" model="ir.ui.view">
+            <field name="name">product.stock.tree.2</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_account.view_stock_product_tree2"/>
+            <field name="arch" type="xml">
+                <field name="cost_method" position="after">
+                    <field name="last_date_moved"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>
