@@ -37,4 +37,16 @@
         </field>
     </record>
 
+    <record id="view_crm_case_helpdesk_filter" model="ir.ui.view">
+        <field name="name">CRM - Helpdesk Search</field>
+        <field name="model">crm.helpdesk</field>
+        <field name="inherit_id"
+               ref="crm_helpdesk.view_crm_case_helpdesk_filter"/>
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="rma_order_line_ids"/>
+            </field>
+        </field>
+    </record>
+
 </odoo>
