@@ -44,8 +44,18 @@
             <field name="act_window_id" ref="crm_case_helpdesk_act111"/>
         </record>
 
-        <menuitem name="Helpdesk and Support" id="menu_help_support_main"
-            groups="sales_team.group_sale_salesman"
-            parent="crm.crm_menu_pipeline" action="crm_case_helpdesk_act111"/>
+        <menuitem name="Helpdesk" id="menu_help_support_root"
+                  groups="sales_team.group_sale_salesman"/>
+
+        <menuitem name="Helpdesk" id="menu_helpdesk"
+                  groups="sales_team.group_sale_salesman"
+                  sequence="10"
+                  parent="menu_help_support_root"
+        />
+
+        <menuitem name="Helpdesk Cases" id="menu_helpdesk_cases"
+                  parent="crm_helpdesk.menu_helpdesk"
+                  sequence="10"
+                  action="crm_case_helpdesk_act111"/>
 
 </odoo>
