@@ -11,6 +11,7 @@ product-attribute https://github.com/OCA/product-attribute.git 11.0
 reporting-engine https://github.com/OCA/reporting-engine.git 11.0
 # module: ao_crm_helpdesk
 crm https://github.com/Eficent/crm.git 11.0-mig-crm_helpdesk
+crm2 https://github.com/Eficent/crm.git 11.0-add-crm_stage_type
 # module: ao_stock
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git 11.0
 # module: ao_mail
