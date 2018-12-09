@@ -8,10 +8,14 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "https://www.alephobjects.com",
     "category": "Stock",
-    "depends": ["stock_account"],
+    "depends": [
+        "stock_account",
+        "stock_account_valuation_report",
+    ],
     "license": "AGPL-3",
     "data": [
         'views/stock_account_views.xml',
+        'views/product_product_views.xml',
     ],
     'installable': True,
 }
