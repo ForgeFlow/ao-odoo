@@ -21,4 +21,8 @@
         <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
     </record>
 
+    <menuitem id="utm.menu_link_tracker_root" name="Link Tracker"
+              groups="base.group_no_one" sequence="30"
+              web_icon="ao_utm,static/description/icon.png"/>
+
 </odoo>
