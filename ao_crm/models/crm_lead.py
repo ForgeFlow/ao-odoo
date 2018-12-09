@@ -44,6 +44,10 @@ class Lead(models.Model):
         types = ['both']
         if ctx_type:
             types += [ctx_type]
+        # check whether we should try to add a condition on type
+        avoid_add_type_term = any([
+            term for term in domain if len(term) == 3 if term[0] == 'lead_type'
+        ])
         # collect all team_ids by adding given one,
         # and the ones related to the current leads
         team_ids = set()
@@ -52,13 +56,15 @@ class Lead(models.Model):
         for lead in self:
             if lead.team_id:
                 team_ids.add(lead.team_id.id)
-        # generate the domain
+        # OR all team_ids
+        search_domain = []
         if team_ids:
-            search_domain = ['|', ('team_ids', '=', False),
-                             ('team_ids', 'in', list(team_ids))]
-        else:
-            search_domain = [('team_ids', '=', False)]
-        search_domain.append(('lead_type', 'in', types))
+            search_domain += [('|')] * (len(team_ids) - 1)
+            for team_id in team_ids:
+                search_domain.append(('team_ids', '=', team_id))
+        # AND with cases types
+        if not avoid_add_type_term:
+            search_domain.append(('lead_type', 'in', types))
         # AND with the domain in parameter
         if domain:
             search_domain += list(domain)
