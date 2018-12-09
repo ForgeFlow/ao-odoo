@@ -6,9 +6,9 @@
         <field name="inherit_id" ref="stock_account_valuation_report.view_stock_product_tree2"/>
         <field name="arch" type="xml">
             <!-- Aleph has wrong quantities here, so we hide this field -->
-            <button name="account_qty_at_date" position="attributes">
+            <field name="account_qty_at_date" position="attributes">
                 <attribute name="invisible">True</attribute>
-            </button>
+            </field>
         </field>
     </record>
 </odoo>
