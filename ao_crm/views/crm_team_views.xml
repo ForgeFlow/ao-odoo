@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sales_team_form_view_in_crm" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit.ao</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="crm.sales_team_form_view_in_crm"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='members']" position="after">
+                <page string="Stages" groups="base.group_no_one">
+                    <separator string="Select Stages for this Sales Team"/>
+                        <field name="stage_ids"/>
+                </page>
+           </xpath>
+        </field>
+    </record>
+
+</odoo>
