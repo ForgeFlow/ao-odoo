@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_product_tree2" model="ir.ui.view">
+        <field name="name">product.stock.tree.2.inherit.ao</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock_account_valuation_report.view_stock_product_tree2"/>
+        <field name="arch" type="xml">
+            <!-- Aleph has wrong quantities here, so we hide this field -->
+            <button name="account_qty_at_date" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </button>
+        </field>
+    </record>
+</odoo>
