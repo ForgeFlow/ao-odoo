@@ -7,9 +7,12 @@
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "CRM",
-    "depends": ["crm"],
+    "depends": ["crm",
+                "crm_stage_type"],
     "data": [
         'views/crm_lead_views.xml',
+        'views/crm_stage_views.xml',
+        'views/crm_team_views.xml',
     ],
     "license": "AGPL-3",
     'installable': True,
