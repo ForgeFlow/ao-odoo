@@ -61,7 +61,7 @@ class CrmHelpdesk(models.Model):
          ('open', 'In Progress'),
          ('pending', 'Pending'),
          ('done', 'Closed'),
-         ('cancel', 'Cancelled')], 'Status', readonly=True,
+         ('cancel', 'Cancelled')], 'Status',
         track_visibility='onchange', index=True,
         help='The status is set to \'Draft\', when a case is created.\
               \nIf the case is in progress the status is set to \'Open\'.\
