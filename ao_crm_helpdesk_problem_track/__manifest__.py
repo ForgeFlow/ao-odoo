@@ -11,6 +11,7 @@
     "depends": ["crm_helpdesk", "quality_control_issue"],
     "license": "AGPL-3",
     "data": [
+        "security/ir.model.access.csv",
         "views/crm_helpdesk_view.xml",
         "views/qc_problem_track_view.xml",
     ],
