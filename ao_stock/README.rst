@@ -19,6 +19,7 @@ This module contains customizations specific to Aleph Objects.
 * New report *Inventory (Blank Quantity)* which do not print the qty in each
   line so it could be filled up by pencil.
 * Delivery Slip report sorted by source location.
+* Able to access picking from stock move form view.
 
 Credits
 =======
