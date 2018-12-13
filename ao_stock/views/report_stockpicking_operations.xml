@@ -46,7 +46,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr t-foreach="o.move_lines.sorted(key=lambda m: m.product_id.id)" t-as="move">
+                <tr t-foreach="o.move_lines.sorted(key=lambda m: m.move_line_ids[0].location_id.display_name if m.move_line_ids else 'Z')" t-as="move"><!--Customization-->
                     <td>
                         <span t-field="move.product_id.display_name"/><br/>
                         <span t-field="move.product_id.description_picking"/>
