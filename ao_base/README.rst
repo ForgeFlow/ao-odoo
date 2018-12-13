@@ -10,6 +10,7 @@ This module contains customizations specific to Aleph Objects.
 
 * When a user is deactivated, the corresponding partner should also be
   deactivated (#12077).
+* In contact, fill Country field when setting the state first.
 
 Credits
 =======
