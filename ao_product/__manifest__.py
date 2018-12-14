@@ -9,6 +9,8 @@
     "category": "Product",
     "depends": ["stock"],
     "data": [
+        "security/product_security.xml",
+        "security/ir.model.access.csv",
         "views/product_product_view.xml",
         "views/product_template_view.xml",
     ],
