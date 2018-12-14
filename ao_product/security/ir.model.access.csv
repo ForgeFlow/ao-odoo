@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_template_maintainer,product.template.maintainer,product.model_product_template,group_product_maintainer,1,1,1,1
+access_product_product_maintainer,product.product.maintainer,product.model_product_product,group_product_maintainer,1,1,1,1
+access_product_price_history_maintainer,product.price.history maintainer,product.model_product_price_history,group_product_maintainer,1,1,1,1
+access_ir_property_maintainer,ir.property maintainer,base.model_ir_property,group_product_maintainer,1,1,1,1

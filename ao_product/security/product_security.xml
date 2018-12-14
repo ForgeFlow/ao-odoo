@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="res.groups" id="group_product_maintainer">
+        <field name="name">Product Maintainer</field>
+    </record>
+
+</odoo>
