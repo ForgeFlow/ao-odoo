@@ -30,9 +30,12 @@
                         </div>
                         <div class="col-xs-3" style="background-color: #f9f39f;">
                             <strong>Pending to produce:</strong><br/>
-                            <span t-esc="'%i'%(o.move_finished_ids.product_uom_qty - o.move_finished_ids.quantity_done)"/>
-                            <span t-field="o.move_finished_ids.product_uom.name"
-                                  groups="product.group_uom"/>
+                            <t t-foreach="o.move_finished_ids" t-as="f">
+                                <span t-esc="'%i'%(f.product_uom_qty - f.quantity_done)"/>
+                                <span t-field="f.product_uom.name"
+                                      groups="product.group_uom"/>
+                                <br/>
+                            </t>
                         </div>
                     </div>
 
