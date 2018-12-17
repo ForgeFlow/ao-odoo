@@ -23,7 +23,7 @@ class CrmHelpdesk(models.Model):
     write_date = fields.Datetime('Update Date', readonly=True)
     date_deadline = fields.Date('Deadline')
     user_id = fields.Many2one(
-        'res.users', string='Responsible', index=True,
+        'res.users', string='Helpdesk Responsible', index=True,
         default=lambda self: self.env.user)
     team_id = fields.Many2one(
         'crm.team', string='Sales Team', index=True,
