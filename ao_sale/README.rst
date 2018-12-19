@@ -14,6 +14,8 @@ This module contains customizations specific to Aleph Objects.
   sales users.
 * Set the default Sales Team for a customer. *Customer form > Sales &
   Purchases tab > Sale section > Sale Channel*.
+* Adds an extended Sales Order report which shows quantity delived and routes
+  in lines.
 
 
 Credits
