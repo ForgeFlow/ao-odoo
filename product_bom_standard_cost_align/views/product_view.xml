@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="standard_price" position="after">
+                <br/>
+                <button string="Align to BOM standard cost" type="action"
+                    name="%(action_view_change_standard_price)d"
+                        attrs="{'invisible':['|',('valuation','!=', 'real_time'), ('cost_method', 'not in', ['standard'])]}"
+                    context="{'bom_standard_cost': 1}"
+                    groups="product_bom_standard_cost_align.group_align bom_cost_user"
+                    class="oe_link oe_read_only" colspan="2"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_view_tree_inherit_product_state" model="ir.ui.view">
+        <field name="name">product.template.tree (product_state)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <field name="standard_price" position="after">
+                <field name="bom_standard_cost" string="BOM cost"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="name">product.template.search</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="is_cost_misaligned"/>
+            </field>
+            <field name="pricelist_id" position="after">
+                <filter string="Misalignment with BOM cost"
+                        name="cost_misalignment"
+                        domain="[('is_cost_misaligned', '=', True)]"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
