@@ -13,6 +13,7 @@
         'views/crm_lead_views.xml',
         'views/crm_stage_views.xml',
         'views/crm_team_views.xml',
+        'views/mail_templates.xml',
     ],
     "license": "AGPL-3",
     'installable': True,
