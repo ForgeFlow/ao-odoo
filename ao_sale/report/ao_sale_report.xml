@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="ao_report_saleorder_document"
+          inherit_id="sale.report_saleorder_document" primary="True">
+        <xpath expr="//t[@t-as='page']/table/thead/tr/th[2]" position="after">
+            <th class="text-right">Qty Delivered</th>
+            <th class="text-right">Route</th>
+        </xpath>
+        <xpath expr="//t[@t-foreach=&quot;layout_category['lines']&quot;]/tr/td[2]" position="after">
+            <td class="text-right">
+                <span t-field="l.qty_delivered"/>
+            </td>
+            <td class="text-right">
+                <span t-field="l.route_id"/>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_saleorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="ao_sale.ao_report_saleorder_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="ao_action_report_saleorder"
+        string="Quotation / Order (Extended)"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="ao_sale.report_saleorder"
+        name="ao_sale.report_saleorder"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+    />
+
+</odoo>
