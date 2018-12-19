@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, SUPERUSER_ID
+from odoo.tools import pycompat, mail
 
 
 class Lead(models.Model):
@@ -71,3 +72,18 @@ class Lead(models.Model):
         # perform search, return the first found
         return self.env['crm.stage'].search(
             search_domain, order=order, limit=1)
+
+    @api.multi
+    def message_post_with_view(self, views_or_xmlid, **kwargs):
+        if isinstance(views_or_xmlid, pycompat.string_types):
+            if views_or_xmlid == 'mail.message_user_assigned':
+                views_or_xmlid = 'ao_crm.message_user_assigned_lead'
+        super(Lead, self).message_post_with_view(views_or_xmlid, **kwargs)
+        return
+
+    @api.multi
+    def message_post_with_template(self, template_id, **kwargs):
+        if kwargs.get('body'):
+            kwargs['body'] = mail.html_sanitize(kwargs.get('body'))
+        return super(Lead, self).message_post_with_template(
+            template_id, **kwargs)
