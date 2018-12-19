@@ -10,7 +10,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["mrp"],
+    "depends": ["mrp", "mrp_flattened_bom_xlsx"],
     "data": [
         "views/product_view.xml",
     ],
