@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_quant_valudatoin_standard_cost_tree" model="ir.ui.view">
+        <field name="name">stock.quant.valuation.standard.cost.tree</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="quantity"/>
+                <field name="last_date_moved"/>
+                <field name="standard_valuation"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_quant_valuation_standard_cost" model="ir.actions.act_window">
+        <field name="name">Standard Cost Valuation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('view_stock_quant_valudatoin_standard_cost_tree')}),]"/>
+        <field name="search_view_id" ref="stock.quant_search_view"/>
+        <field name="context">{'search_default_internal_loc': 1}</field>
+    </record>
+
+    <menuitem id="menu_valuation_standard_cost"
+              action="action_quant_valuation_standard_cost"
+              name="Standard Cost Valuation"
+              sequence="120"
+              parent="stock.menu_warehouse_report"/>
+
+</odoo>
