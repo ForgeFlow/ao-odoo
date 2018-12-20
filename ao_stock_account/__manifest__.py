@@ -4,7 +4,7 @@
 
 {
     "name": "AO-specific customizations on stock account",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.1.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "https://www.alephobjects.com",
     "category": "Stock",
@@ -16,6 +16,7 @@
     "data": [
         'views/stock_account_views.xml',
         'views/product_product_views.xml',
+        'views/stock_quant_views.xml',
     ],
     'installable': True,
 }
