@@ -15,6 +15,22 @@
         </field>
     </record>
 
+    <record id="quant_search_view" model="ir.ui.view">
+        <field name="name">stock.quant.search - ao_stock_account</field>
+        <field name="model">stock.quant</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="stock.quant_search_view"/>
+        <field name="arch" type="xml">
+            <filter name="reserved" position="after">
+                <separator/>
+                <filter name="active_product" string="Active Products" domain="[('product_id.active', '=', True)]"/>
+                <separator/>
+                <filter name="moves_current_year" string="Moved in Last 12 months"
+                        domain="[('last_date_moved', '&gt;=', (datetime.date.today() - relativedelta(months=12)).strftime('%%Y-%%m-%%d') )]"/>
+            </filter>
+        </field>
+    </record>
+
     <record id="action_quant_valuation_standard_cost" model="ir.actions.act_window">
         <field name="name">Standard Cost Valuation</field>
         <field name="type">ir.actions.act_window</field>
@@ -22,8 +38,11 @@
         <field name="view_ids"
                    eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('view_stock_quant_valudatoin_standard_cost_tree')}),]"/>
-        <field name="search_view_id" ref="stock.quant_search_view"/>
-        <field name="context">{'search_default_internal_loc': 1}</field>
+        <field name="search_view_id" ref="quant_search_view"/>
+        <field name="context">{
+            'search_default_internal_loc': 1,
+            'search_default_active_product': 1,
+        }</field>
     </record>
 
     <menuitem id="menu_valuation_standard_cost"

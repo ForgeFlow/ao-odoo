@@ -1,8 +1,11 @@
 # 2018 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from datetime import datetime, timedelta
+
 import odoo.tests.common as common
 from odoo.exceptions import UserError
+from odoo import fields
 
 
 class TestAoStockAccount(common.SavepointCase):
@@ -59,7 +62,9 @@ class TestAoStockAccount(common.SavepointCase):
         with self.assertRaises(UserError):
             self.product_obj.search([
                 ('last_date_moved', '>', 2018)])
-        products_no_moves = self.product_obj.search([
-            ('last_date_moved', '=', False)])
-        # There are plenty of product with no moves in demo data.
-        self.assertTrue(products_no_moves)
+        yesterday_dt = datetime.today() - timedelta(days=1)
+        yesterday = fields.Datetime.to_string(yesterday_dt)
+        products_with_moves = self.product_obj.search([
+            ('last_date_moved', '>', yesterday)])
+        # all moves should have been created today to run CI:
+        self.assertTrue(products_with_moves)
