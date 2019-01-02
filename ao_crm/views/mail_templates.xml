@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
         <template id="message_user_assigned_lead">
             <p>Dear <t t-esc="object.user_id.sudo().name"/>,</p>
             <p>You have been assigned to the <t t-esc="object._description.lower()"/> <t t-esc="object.name_get()[0][1]"/>.</p>
@@ -11,10 +12,9 @@
             </p>
             <!--begin patch-->
             <p>
-                <t t-raw="object.message_ids.browse(max(object.message_ids.filtered(lambda m: m.message_type == 'email').ids)).body"/>
+                <t t-raw="object.message_ids.browse(max(object.message_ids.filtered(lambda m: m.message_type == 'email').ids)).body if object.message_ids.filtered(lambda m: m.message_type == 'email') else False"/>
             </p>
             <!--end patch-->
-            <p style="color:#9E588B;">Powered by <a target="_blank" href="https://www.odoo.com">Odoo</a>.</p>
         </template>
 
 </odoo>
