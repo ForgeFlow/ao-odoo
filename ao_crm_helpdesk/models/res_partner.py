@@ -12,6 +12,12 @@ class ResPartner(models.Model):
     )
     helpdesk_count = fields.Integer(compute="_compute_helpdesk_count")
 
+    helpdesk_default_priority = fields.Selection(
+        [('0', 'Low'), ('1', 'Normal'), ('2', 'High')],
+        string='Default Tickets Priority',
+        index=True
+    )
+
     @api.multi
     def _compute_helpdesk_count(self):
         for rec in self:

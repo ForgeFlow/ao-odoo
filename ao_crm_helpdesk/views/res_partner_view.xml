@@ -15,6 +15,13 @@
                     <field name="helpdesk_count" widget="statinfo" string="Helpdesk"/>
                 </button>
             </div>
+            <page name='sales_purchases' position="after">
+                <page name='helpdesk' string="Helpdesk">
+                    <group>
+                        <field name="helpdesk_default_priority"/>
+                    </group>
+                </page>
+            </page>
         </field>
     </record>
 
