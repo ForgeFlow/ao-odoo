@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2019 Eficent Business and IT Consulting Services S.L.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
@@ -15,6 +15,13 @@
                     <field name="helpdesk_count" widget="statinfo" string="Helpdesk"/>
                 </button>
             </div>
+            <page name='sales_purchases' position="after">
+                <page name='helpdesk' string="Helpdesk">
+                    <group>
+                        <field name="helpdesk_default_priority"/>
+                    </group>
+                </page>
+            </page>
         </field>
     </record>
 

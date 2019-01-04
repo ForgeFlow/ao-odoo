@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -11,6 +11,12 @@ class ResPartner(models.Model):
         comodel_name="crm.helpdesk", inverse_name="partner_id",
     )
     helpdesk_count = fields.Integer(compute="_compute_helpdesk_count")
+
+    helpdesk_default_priority = fields.Selection(
+        [('0', 'Low'), ('1', 'Normal'), ('2', 'High')],
+        string='Default Tickets Priority',
+        index=True
+    )
 
     @api.multi
     def _compute_helpdesk_count(self):
