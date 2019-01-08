@@ -17,6 +17,7 @@ This module contains customizations specific to Aleph Objects.
 * Adds an extended Sales Order report which shows quantity delived and routes
   in lines.
 * Disabling check availability because is not accurate
+* Extend Sales Analysis to include Sales tags.
 
 Credits
 =======
