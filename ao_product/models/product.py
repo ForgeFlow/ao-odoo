@@ -19,7 +19,7 @@ class AoProductSecurity(models.AbstractModel):
 
     @api.multi
     def write(self, vals):
-        pm_fields = ['standard_price']
+        pm_fields = ['standard_price', 'type', 'categ_id']
         if any([x in vals for x in pm_fields]) and not self.env.user.has_group(
                 'ao_product.group_product_maintainer') and \
                 self.env.uid != SUPERUSER_ID:
