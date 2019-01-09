@@ -13,6 +13,8 @@ This module contains customizations specific to Aleph Objects.
   related account journal items.
 * Add the *Product Internal Reference* field to Invoice analysis to make
   possible to create custom filters using it.
+* Do not send messages to the salesperson from the invoice
+
 
 Credits
 =======
