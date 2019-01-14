@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "views/crm_helpdesk_view.xml",
         "views/qc_problem_track_view.xml",
+        "reports/qc_problem_track_views.xml",
     ],
     "installable": True,
 }
