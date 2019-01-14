@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_qc_problem_report_pivot" model="ir.ui.view">
+         <field name="name">qc.problem.report.pivot</field>
+         <field name="model">qc.problem.report</field>
+         <field name="arch" type="xml">
+             <pivot string="Problem Track Analysis" disable_linking="True">
+                 <field name="problem_group_id" type="col"/>
+                 <field name="date" interval="month" type="row"/>
+                 <field name="crm_helpdesk_count" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+
+    <record id="view_qc_problem_report_graph" model="ir.ui.view">
+         <field name="name">qc.problem.report.graph</field>
+         <field name="model">qc.problem.report</field>
+         <field name="arch" type="xml">
+             <graph string="Problem Track Analysis">
+                 <field name="date" interval="month" type="row"/>
+                 <field name="crm_helpdesk_count" type="measure"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="view_qc_problem_report_search" model="ir.ui.view">
+        <field name="name">qc.problem.report.search</field>
+        <field name="model">qc.problem.report</field>
+        <field name="arch" type="xml">
+            <search string="Problem Track Analysis">
+                <group expand="1" string="Group By">
+                    <filter string="Helpdesk Date" context="{'group_by':'date'}"/>
+                    <filter string="QC Team" context="{'group_by':'qc_team_id'}"/>
+                    <filter string="Problem Group" context="{'group_by':'problem_group_id'}"/>
+                    <filter string="Stage" context="{'group_by':'stage_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_qc_problem_report_all" model="ir.actions.act_window">
+        <field name="name">Problem Track Analysis</field>
+        <field name="res_model">qc.problem.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="view_id"/>
+        <field name="search_view_id" ref="view_qc_problem_report_search"/>
+    </record>
+
+    <menuitem id="menu_qc_problem_track_report"
+          parent="quality_control_issue.menu_qc_problem_tracking"
+          action="action_qc_problem_report_all"
+          sequence="30" name="Problems Track Analysis"/>
+</odoo>
