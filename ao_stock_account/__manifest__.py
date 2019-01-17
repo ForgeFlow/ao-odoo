@@ -17,6 +17,7 @@
         'views/stock_account_views.xml',
         'views/product_product_views.xml',
         'views/stock_quant_views.xml',
+        'wizards/stock_quantity_history_views.xml',
     ],
     'installable': True,
 }
