@@ -36,3 +36,34 @@ class TestParseEmailLulzbot(TransactionCase):
              ('contact_name', '=', 'James Knight')])
         self.assertTrue(ticket)
         self.assertEqual(ticket.partner_id, partner)
+
+    def test_03_pase_email_existing_partner_default_priority(self):
+        partner = self.partner_obj.create({
+            'name': 'James Knight',
+            'email': 'james.k@customer.com',
+            'helpdesk_default_priority': '2',
+        })
+        self.helpdesk_obj.message_process('crm.helpdesk', self.test_message)
+        ticket = self.helpdesk_obj.search(
+            [('email_from', '=', 'james.k@customer.com'),
+             ('contact_name', '=', 'James Knight')])
+        self.assertTrue(ticket)
+        self.assertEqual(ticket.priority, partner.helpdesk_default_priority)
+
+    def test_04_pase_email_existing_commercial_partner_default_priority(self):
+        commercial_partner = self.partner_obj.create({
+            'name': 'NASA',
+            'helpdesk_default_priority': '2',
+        })
+        self.partner_obj.create({
+            'name': 'James Knight',
+            'email': 'james.k@customer.com',
+            'parent_id': commercial_partner.id,
+        })
+        self.helpdesk_obj.message_process('crm.helpdesk', self.test_message)
+        ticket = self.helpdesk_obj.search(
+            [('email_from', '=', 'james.k@customer.com'),
+             ('contact_name', '=', 'James Knight')])
+        self.assertTrue(ticket)
+        self.assertEqual(ticket.priority,
+                         commercial_partner.helpdesk_default_priority)
