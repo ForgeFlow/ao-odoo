@@ -7,14 +7,12 @@ from odoo import api, fields, models
 class CrmHelpdesk(models.Model):
     _inherit = "crm.helpdesk"
 
-    user_id = fields.Many2one(track_visibility='onchange')
-
     @api.multi
     def button_open(self):
         """ Opens the Helpdesk Ticket """
         for helpdesk in self:
             if helpdesk.state == 'draft':
                 helpdesk.date_open = fields.datetime.now()
-            if not helpdesk.user_id or helpdesk.user_id != self.env.user:
+            if not helpdesk.user_id:
                 helpdesk.user_id = self.env.uid
             helpdesk.state = 'open'

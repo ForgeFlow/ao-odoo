@@ -39,7 +39,8 @@ class TestCrmHelpdeskButtonOpen(common.TransactionCase):
 
     def test_crm_helpdesk_set_open(self):
         vals = {
-            'name': 'Test'
+            'name': 'Test',
+            'user_id': False,
         }
         crm_helpdesk = self.obj_helpdesk.create(vals)
         crm_helpdesk.sudo(self.user1_id).button_open()
