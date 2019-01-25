@@ -56,6 +56,21 @@ class CrmHelpdesk(models.Model):
                 'contact_name': contact_name,
                 'partner_id': partner_id.id if partner_id else False,
             }
+            # Check if partner has default helpdesk ticket priority or has
+            # commercial partner with default helpdesk ticket priority
+            if partner_id:
+                default_priority = partner_id.helpdesk_default_priority
+                commercial_partner = partner_id.commercial_partner_id
+                if default_priority:
+                    vals.update({
+                        'priority': default_priority,
+                    })
+                elif commercial_partner and commercial_partner.\
+                        helpdesk_default_priority:
+                    vals.update({
+                        'priority':
+                            commercial_partner.helpdesk_default_priority,
+                    })
             msg['from'] = _dict.get('email')
             custom_values.update(vals)
         return custom_values, msg

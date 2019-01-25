@@ -9,6 +9,7 @@ AO-specific customizations on crm helpdesk
 This module contains customizations specific to Aleph Objects.
 
 * Add a button to access helpdesk tickets from customer form view.
+* Add a field to set default priority for a specific customer
 
 Credits
 =======

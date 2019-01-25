@@ -7,7 +7,7 @@
     'author': 'Eficent',
     'website': 'http://www.eficent.com',
     'category': 'CRM',
-    'depends': ['crm_helpdesk'],
+    'depends': ['crm_helpdesk', 'ao_crm_helpdesk'],
     'installable': True,
     'data': [
         "data/crm_helpdesk_parse_email_config_data.xml",
