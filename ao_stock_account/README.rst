@@ -17,6 +17,9 @@ This module contains customizations specific to Aleph Objects:
   - It is not the biggest source of truth. Real valuation looks at accounting.
     This view only aims to help management in a standard cost strategy.
 
+* When reversing a transfer, set the field 'to refund' to true by
+  default (#20925)
+
 Credits
 =======
 
