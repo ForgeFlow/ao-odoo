@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <!--  Helpdesk Support Tree View -->
+        <record model="ir.ui.view" id="crm_case_tree_view_helpdesk">
+            <field name="name">CRM - Helpdesk Support Tree</field>
+            <field name="model">crm.helpdesk</field>
+            <field name="inherit_id" ref="crm_helpdesk.crm_case_tree_view_helpdesk"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-warning">(priority == '2') and state != 'pending'</attribute>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
