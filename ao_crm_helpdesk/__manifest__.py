@@ -11,6 +11,7 @@
     "license": "AGPL-3",
     "data": [
         "views/res_partner_view.xml",
+        "views/crm_helpdesk_view.xml",
     ],
     "installable": True,
 }
