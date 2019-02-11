@@ -18,10 +18,10 @@ class StockQuantityHistory(models.TransientModel):
         self.ensure_one()
         if self.compute_at_date:
             self.date = datetime.strptime(
-                "%s %s" % (self.date_wizard, "23:59:59.9999"),
-                '%Y-%m-%d %H:%M:%S.%f')
+                "%s %s" % (self.date_wizard, "23:59:00"),
+                '%Y-%m-%d %H:%M:%S')
         res = super(StockQuantityHistory, self).open_table()
         res.update({
-            'context': dict(self.env.context, to_date=self.date)
+            'context': dict(res['context'], to_date=self.date)
         })
         return res
