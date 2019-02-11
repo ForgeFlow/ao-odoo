@@ -13,12 +13,12 @@ class StockQuantityHistory(models.TransientModel):
         self.ensure_one()
         if self.compute_at_date:
             self.date = datetime.strptime(
-                "%s %s" % (self.date_wizard, "23:59:59.9999"),
-                '%Y-%m-%d %H:%M:%S.%f')
+                "%s %s" % (self.date_wizard, "23:59:00"),
+                '%Y-%m-%d %H:%M:%S')
         action = super(StockQuantityHistory, self).open_table()
         if self.compute_at_date:
             action.update({
-                'context': dict(self.env.context, to_date=self.date)
+                'context': dict(action['context'], to_date=self.date)
             })
             tree_view_id = self.env.ref(
                 'ao_stock_account.view_stock_product_tree2').id
