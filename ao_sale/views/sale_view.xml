@@ -39,4 +39,131 @@
         </field>
     </record>
 
+    <record id="view_sales_order_uninvoiced_line_filter" model="ir.ui.view">
+        <field name="name">sale.order.uninvoiced.line</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Uninvoiced Lines">
+                <filter string="To Do" domain="[('state','=','confirmed')]" name="sale order" help="Confirmed sales order lines, not yet delivered"/>
+                <filter string="Done" domain="[('state','=','done')]" name="sale_order_done" help="Sales order lines done"/>
+                <filter string="Shipped" domain="[('qty_to_deliver','=', 0)]" name="shipped" help="Sales Order Lines that are completely delivered"/>
+                <separator/>
+                <filter string="To deliver" name="unshipped" domain="[('qty_to_deliver','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are pending to deliver"/>
+                <separator/>
+                <filter string="Partially delivered" name="partial" domain="[('qty_to_deliver','&lt;&gt;', 0),('qty_delivered','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are partially delivered"/>
+                <separator/>
+                <filter string="Uninvoiced" name="uninvoiced" domain="[('qty_to_invoice','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are confirmed, done or in exception state and haven't yet been invoiced"/>
+                <separator/>
+                <filter string="My Sales Order Lines" icon="terp-personal" domain="[('salesman_id','=',uid)]" help="My Sales Order Lines"/>
+                <field name="order_id"/>
+                <field name="confirmation_date"/>
+                <field name="order_partner_id" operator="child_of"/>
+                <field name="product_id"/>
+                <field name="salesman_id"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Order" domain="[]" context="{'group_by':'order_id'}" help="Order reference"/>
+                    <filter string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Salesperson" domain="[]" context="{'group_by':'salesman_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_order_line_tree2" model="ir.actions.act_window">
+            <field name="name">Order Lines to Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_sales_order_uninvoiced_line_filter"/>
+            <field name="context">{"search_default_uninvoiced":1}</field>
+            <field name="filter" eval="True"/>
+            <field name="help" type="html">
+              <p>
+                Here is a list of each sales order line to be invoiced.
+              </p>
+            </field>
+    </record>
+
+    <record id="action_order_line_tree3" model="ir.actions.act_window">
+            <field name="name">Order Lines to Deliver</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_sales_order_uninvoiced_line_filter"/>
+            <field name="context">{"search_default_unshipped":1}</field>
+            <field name="filter" eval="True"/>
+            <field name="help" type="html">
+              <p>
+                Here is a list of each sales order line to be shipped.
+              </p>
+            </field>
+    </record>
+
+    <record id="sale_order_line_ext_tree_view" model="ir.ui.view">
+        <field name="name">sale.order.line.ext.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="confirmation_date"/>
+            </field>
+            <field name="qty_delivered" position="after">
+                <field name="qty_to_deliver"/>
+            </field>
+        </field>
+    </record>
+
+    <!--define view for sale order line-->
+    <record id="view_order_line_form" model="ir.ui.view">
+        <field name="name">sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Sales Order Lines">
+                <sheet>
+                <label for="order_id" class="oe_edit_only"/>
+                <h1><field name="order_id"/></h1>
+                <label for="order_partner_id" class="oe_edit_only"/>
+                <h2><field name="order_partner_id"/></h2>
+                <group>
+                    <group>
+                        <field name="state" invisible="1"/>
+                        <field name="product_id"/>
+                        <label for="product_uom_qty"/>
+                        <div>
+                            <field name="product_uom_qty" readonly="1" class="oe_inline"/>
+                            <field name="product_uom" groups="product.group_uom" class="oe_inline"/>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="price_unit"/>
+                        <field name="discount" groups="sale.group_discount_per_so_line"/>
+                        <field name="price_subtotal"/>
+                        <field name="qty_invoiced"/>
+                        <field name="qty_to_invoice"/>
+                        <field name="qty_delivered"/>
+                        <field name="qty_to_deliver"/>
+                        <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                    </group>
+                </group>
+                <label for="name"/>
+                <field name="name"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_invoicing_sales_order_lines"
+              parent="sale.menu_sale_invoicing"
+              action="action_order_line_tree2" sequence="10"
+              groups="sales_team.group_sale_manager"/>
+
+    <menuitem id="menu_shipping_sales_order_lines"
+          parent="sale.menu_sale_report"
+          action="action_order_line_tree3" sequence="99"
+          groups="sales_team.group_sale_manager"/>
+
+
 </odoo>
