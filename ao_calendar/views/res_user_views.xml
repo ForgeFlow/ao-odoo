@@ -2,18 +2,25 @@
 
 <odoo>
 
-    <record id="view_users_form" model="ir.ui.view">
-        <field name="name">calendar.res.users.form</field>
+    <record id="view_users_form_simple_modif_calendar" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.calendar</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <group name="preferences" position="inside">
+                <field name="calendar_allow_ui_edition"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_users_form_calendar" model="ir.ui.view">
+        <field name="name">res.users.form.calendar</field>
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//notebook/page[1]" position="after">
-                <page string="Calendar">
-                    <group name="calendar" string="Calendar Edition Rights">
-                        <field name="calendar_allow_ui_edition"/>
-                    </group>
-                </page>
-            </xpath>
+            <group name="preferences" position="inside">
+                <field name="calendar_allow_ui_edition"/>
+            </group>
         </field>
     </record>
 
