@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="res.groups" id="group_calendar_allow_ui_edition">
+        <field name="name">Allow in-calendar edition</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_no_one'))]" />
+    </record>
+</odoo>
