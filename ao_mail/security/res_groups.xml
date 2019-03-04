@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="res.groups" id="group_notification_by_email">
+        <field name="name">System notifications by Email</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_no_one'))]" />
+    </record>
+</odoo>
