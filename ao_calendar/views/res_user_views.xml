@@ -8,7 +8,7 @@
         <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
         <field name="arch" type="xml">
             <group name="preferences" position="inside">
-                <field name="calendar_allow_ui_edition"/>
+                <field name="calendar_allow_ui_edition" readonly="0"/>
             </group>
         </field>
     </record>
@@ -19,7 +19,7 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <group name="preferences" position="inside">
-                <field name="calendar_allow_ui_edition"/>
+                <field name="calendar_allow_ui_edition" eval="True"/>
             </group>
         </field>
     </record>
