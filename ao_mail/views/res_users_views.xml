@@ -24,7 +24,7 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="notification_type" position="after">
-                        <field name="notification_by_email"/>
+                        <field name="notification_by_email" eval="True"/>
                     </field>
                 </data>
             </field>
