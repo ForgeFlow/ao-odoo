@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="group_manage_filters" model="res.groups">
+            <field name="name">Manage Global Filters</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="manage_global_filters" model="ir.rule">
+            <field name="name">Manage Global Filters</field>
+            <field name="model_id" ref="base.model_ir_filters"/>
+            <field name="groups" eval="[(6,0, [ref('group_manage_filters')])]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
