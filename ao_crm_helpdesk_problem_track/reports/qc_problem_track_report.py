@@ -1,6 +1,8 @@
 # Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from psycopg2.extensions import AsIs
+
 from odoo import tools
 from odoo import api, fields, models
 
@@ -65,11 +67,11 @@ class QCProblemReport(models.Model):
     @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
-        self.env.cr.execute("""CREATE or REPLACE VIEW %s as (
-            %s
+        self.env.cr.execute(
+            """
+            CREATE or REPLACE VIEW %s as (%s
             FROM ( %s )
-            %s
-            )""" % (self._table,
-                    self._select(),
-                    self._from(),
-                    self._group_by()))
+            %s)""",
+            (AsIs(self._table), AsIs(self._select()),
+             AsIs(self._from()), AsIs(self._group_by())),
+        )
