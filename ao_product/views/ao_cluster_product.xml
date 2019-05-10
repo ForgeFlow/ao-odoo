@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="ao_cluster_product_form_view">
+        <field name="name">ao.cluster.product.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="after">
+                <div name="ao_options">
+                    <field name="is_cluster_product"/>
+                    <label for="is_cluster_product"/>
+                </div>
+            </div>
+            <notebook position="inside">
+                 <page string="Cluster" name="cluster" attrs="{'invisible':[('is_cluster_product', '=', False)]}">
+                    <group>
+                        <group>
+                            <field name="bagging_amount"/>
+                            <field name="processed"/>
+                            <field name="inserted"/>
+                            <field name="build_reference" widget="url"/>
+                        </group>
+                        <group>
+                            <field name="print_quality"/>
+                            <field name="print_time" type="measure" widget="float_time"/>
+                            <field name="color"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
