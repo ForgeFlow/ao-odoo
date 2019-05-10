@@ -126,8 +126,7 @@ class TestProductBomStandardCostAlign(common.SavepointCase):
 
     def test_01_standard_cost(self):
         self.assertEqual(self.product_1.standard_price, 300.0)
-        print(self.product_1.standard_price)
-        print(self.product_1.bom_standard_cost)
+        self.assertEqual(self.product_1.bom_standard_cost, 575.0)
         self.assertTrue(self.product_2.is_cost_misaligned)
         self.wiz_obj = self.wiz_obj.with_context(
             bom_standard_cost=True, active_id=self.product_1.id,
