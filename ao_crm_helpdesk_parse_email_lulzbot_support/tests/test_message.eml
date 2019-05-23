@@ -9,7 +9,7 @@ Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
 First & Last Name: James Knight
-Email: james.k@customer.com
+Email: <a href="mailto:james.k@customer.com">james.k@customer.com</a><br />
 Description: I want to download a pdf user manual of the TAZ6.
 Could you provide me a link?
 Thanks.
