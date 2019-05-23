@@ -1,9 +1,15 @@
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+
 from odoo import api, models
 from odoo.tools import html2plaintext
 import re
+import logging
+
+_logger = logging.getLogger(__name__)
+
+EMAIL_PATTERN = r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+"
 
 
 class CrmHelpdesk(models.Model):
@@ -16,15 +22,23 @@ class CrmHelpdesk(models.Model):
                 msg, custom_values=custom_values)
 
         def parse_description(description):
-            fields = ['email', 'first & last name']
             _dict = {}
             description = description.lower()
             for line in description.split('\n'):
-                for field in fields:
-                    if field in line:
-                        split_line = line.split(':')
-                        if len(split_line) > 1:
-                            _dict[field] = line.split(':')[1].strip()
+                if 'first & last name' in line:
+                    split_line = line.split(':')
+                    if len(split_line) > 1:
+                        _dict['first & last name'] = line.split(':')[1].strip()
+                elif 'email' in line:
+                    pattern = re.compile(EMAIL_PATTERN)
+                    result = pattern.match(line.split(':')[1].strip())
+                    try:
+                        _dict['email'] = result.group()
+                    except AttributeError:
+                        _logger.warning(
+                            'Parsing email error for lulzbot webform: %s'
+                            % description)
+                        _dict['email'] = 'Not found'
             return _dict
         subject = msg.get('subject', '')
         subject = subject.lower()
