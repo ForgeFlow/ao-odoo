@@ -11,6 +11,7 @@ This module contains customizations specific to Aleph Objects.
 * Sort lead by ID (descending).
 * Add three fields to CRM lead to improve the CRM capabilities.
 * Add new form view for users to have the same abilities on the lead/opportunity pipeline as they have in the regular pipeline
+* Allow Sales Managers to add users to Sales Channel.
 
 Credits
 =======
