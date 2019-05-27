@@ -9,6 +9,7 @@
     "website": "http://www.eficent.com",
     "category": "Base",
     "depends": ["base"],
+    "data": ["security/ao_base_security.xml"],
     "license": "AGPL-3",
     'installable': True,
 }
