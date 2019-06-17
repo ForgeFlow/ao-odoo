@@ -49,6 +49,7 @@
               action="action_quant_valuation_standard_cost"
               name="Standard Cost Valuation"
               sequence="120"
-              parent="stock.menu_warehouse_report"/>
+              parent="stock.menu_warehouse_report"
+              groups="stock.group_stock_manager"/>
 
 </odoo>
