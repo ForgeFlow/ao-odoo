@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_report_quantity_by_location.menu_quantity_by_location" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6,0,[ref('stock.group_stock_user')])]"/>
+    </record>
+
+</odoo>
