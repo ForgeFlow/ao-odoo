@@ -1,9 +1,12 @@
 # Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import re
+import logging
 
 from odoo import api, models
 from odoo.tools import html2plaintext
-import re
+
+_logger = logging.getLogger(__name__)
 
 
 class CrmLead(models.Model):
@@ -11,7 +14,8 @@ class CrmLead(models.Model):
 
     def _prepare_message_new_custom_values(self, msg, custom_values=None):
         def parse_description(description):
-            fields = ['email', 'first & last name']
+            fields = ['email', 'first & last name', 'campaign',
+                      'medium', 'source']
             _dict = {}
             description = description.lower()
             for line in description.split('\n'):
@@ -47,12 +51,52 @@ class CrmLead(models.Model):
                     ('name', '=', contact_name)], limit=1)
             else:
                 partner_id = False
+            campaign = medium = source = False
+            # Campaign, medium, source (task #21636)
+            if _dict.get('campaign'):
+                campaign_name = _dict.get('campaign')
+                if campaign_name:
+                    campaign = self.env['utm.campaign'].search([
+                        ('name', '=ilike', campaign_name)], limit=1)
+                    if not campaign:
+                        _logger.info(
+                            "Parsing incoming email with subject %s "
+                            "could not identify a valid utm.campaign with "
+                            "name %s", subject, campaign_name)
+            if _dict.get('medium'):
+                medium_name = _dict.get('medium')
+                if medium_name:
+                    medium = self.env['utm.medium'].search([
+                        ('name', '=ilike', medium_name)], limit=1)
+                    if not medium:
+                        _logger.info(
+                            "Parsing incoming email with subject %s "
+                            "could not identify a valid utm.medium with "
+                            "name %s", subject, medium_name)
+            if _dict.get('source'):
+                source_name = _dict.get('source')
+                if source_name:
+                    source = self.env['utm.source'].search([
+                        ('name', '=ilike', source_name)], limit=1)
+                    if not source:
+                        _logger.info(
+                            "Parsing incoming email with subject %s "
+                            "could not identify a valid utm.source with "
+                            "name %s", subject, source_name)
             vals = {
                 'email_from': email_from,
                 'contact_name': contact_name,
                 'partner_name': contact_name,
                 'partner_id': partner_id.id if partner_id else False,
             }
+            # Update the vals, only if it is required.
+            if campaign:
+                vals.update({'campaign_id': campaign.id})
+            if medium:
+                vals.update({'medium_id': medium.id})
+            if source:
+                vals.update({'source_id': source.id})
+
             msg['from'] = _dict.get('email')
             custom_values.update(vals)
         return custom_values, msg
