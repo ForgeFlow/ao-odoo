@@ -11,6 +11,7 @@
     "depends": [
         "purchase",
         "purchase_open_qty",
+        "purchase_unreconciled",
     ],
     "data": [
         "data/ir_cron.xml",

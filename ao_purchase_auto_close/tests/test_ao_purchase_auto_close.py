@@ -60,7 +60,7 @@ class TestAutoClosePo(common.SavepointCase):
             "type": "in_invoice",
         })
         invoice.purchase_order_change()
-        invoice.invoice_validate()
+        invoice.action_invoice_open()
         self.assertEqual(self.po.qty_to_invoice, 0.0)
         # Invoice fully processed, now running cron:
         self.assertEqual(self.po.state, "purchase")
