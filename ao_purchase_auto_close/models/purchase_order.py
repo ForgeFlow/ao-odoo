@@ -17,6 +17,7 @@ class PurchaseOrder(models.Model):
             ("invoice_status", "=", "invoiced"),
             ("qty_to_invoice", "=", 0),
             ("qty_to_receive", "=", 0),
+            ("unreconciled", "=", False),
         ]
 
     @api.model
