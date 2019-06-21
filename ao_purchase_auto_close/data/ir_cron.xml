@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="ir_cron_ao_purchase_auto_close" model="ir.cron" forcecreate="True">
+        <field name="name">Auto-close finished Purchase Orders</field>
+        <field name="state">code</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+        <field eval="False" name="doall"/>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="code">model.cron_ao_auto_close_purchases()</field>
+    </record>
+
+</odoo>
