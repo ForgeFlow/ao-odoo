@@ -31,7 +31,11 @@ class PurchaseOrder(models.Model):
     def _search_unreconciled(self, operator, value):
         if operator != '=' or not isinstance(value, bool):
             raise ValueError(_("Unsupported search operator"))
-        pos = self.search([
-            ("state", "=", "purchase")]).filtered(
-            lambda r: r.unreconciled is value)
+        acc_item = self.env["account.move.line"]
+        unreconciled_items = acc_item.search([
+            ("purchase_id", "!=", False),
+            ("account_id.reconcile", "=", True),
+            ("reconciled", "=", not value),
+        ])
+        pos = unreconciled_items.mapped('purchase_id')
         return [('id', 'in', pos.ids)]
