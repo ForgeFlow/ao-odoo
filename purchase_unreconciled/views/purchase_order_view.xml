@@ -9,6 +9,14 @@
             <field name="invoice_status" position="after">
                 <field name="unreconciled"/>
             </field>
+            <div name="button_box" position="inside">
+                <button type="object"
+                        string="Unreconciled Journal Items"
+                        name="action_view_unreconciled"
+                        class="oe_stat_button"
+                        icon="fa-gears" attrs="{'invisible':[('unreconciled', '=', False)]}">
+                </button>
+            </div>
         </field>
     </record>
 
@@ -21,6 +29,7 @@
                 <filter name="unreconciled"
                         string="Unreconciled"
                         domain="[('unreconciled','=', True)]"
+                        groups="account.group_account_user"
                         help="Purchase orders with unreconciled journal items."/>
             </filter>
         </field>

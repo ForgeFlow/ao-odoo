@@ -35,7 +35,28 @@ class PurchaseOrder(models.Model):
         unreconciled_items = acc_item.search([
             ("purchase_id", "!=", False),
             ("account_id.reconcile", "=", True),
-            ("reconciled", "=", not value),
+            ("reconciled", "=", False),
         ])
-        pos = unreconciled_items.mapped('purchase_id')
-        return [('id', 'in', pos.ids)]
+        unreconciled_pos = unreconciled_items.mapped('purchase_id')
+        if value:
+            return [('id', 'in', unreconciled_pos.ids)]
+        else:
+            return [('id', 'not in', unreconciled_pos.ids)]
+
+    @api.multi
+    def action_view_unreconciled(self):
+        self.ensure_one()
+        acc_item = self.env["account.move.line"]
+        unreconciled_items = acc_item.search([
+            ("purchase_id", "=", self.id),
+            ("account_id.reconcile", "=", True),
+            ("reconciled", "=", False),
+        ])
+        return {
+            'name': _('Unreconciled journal items'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move.line',
+            'domain': [('id', 'in', unreconciled_items.ids)],
+        }
