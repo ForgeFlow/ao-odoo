@@ -22,6 +22,7 @@ This module contains customizations specific to Aleph Objects.
 * Able to access picking from stock move form view.
 * Change generic PG/XXXXX for route name on origin due to module
   procurement_auto_create_group
+* Stock Request Kanban -> Change the paper format to letter.
 
 Credits
 =======
