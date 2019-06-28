@@ -25,6 +25,9 @@ This module contains customizations specific to Aleph Objects.
 * Report 'Inventory / Inventory by Location' should be allowed to Stock/User.
   (https://projects.alephobjects.com/projects/odoo-trouble-tickets/
   work_packages/21577)
+* Kanbans related to Stock Requests should use a Letter format.
+  (https://projects.alephobjects.com/projects/odoo-trouble-tickets/
+  work_packages/21747)
 
 Credits
 =======
