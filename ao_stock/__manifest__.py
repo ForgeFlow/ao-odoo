@@ -21,6 +21,7 @@
         "views/report_deliveryslip.xml",
         "views/stock_menu_views.xml",
         "wizard/stock_quantity_history.xml",
+        "reports/report_paper_format.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
