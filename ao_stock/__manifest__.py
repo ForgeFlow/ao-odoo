@@ -23,6 +23,7 @@
         "views/stock_menu_views.xml",
         "wizard/stock_quantity_history.xml",
         "reports/report_paper_format.xml",
+        "reports/stock_request_kanban_templates.xml",
     ],
     "license": "AGPL-3",
     'installable': True,
