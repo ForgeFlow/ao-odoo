@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="res.groups" id="group_uom_maintainer">
+        <field name="name">UoM Maintainer</field>
+    </record>
+
+    <record model="res.groups" id="group_stock_maintainer">
+        <field name="name">Stock Maintainer</field>
+    </record>
+
+    <record model="res.groups" id="group_bom_maintainer">
+        <field name="name">BoM Maintainer</field>
+    </record>
+
+</odoo>
