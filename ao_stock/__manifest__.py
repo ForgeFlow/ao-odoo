@@ -11,6 +11,7 @@
     "depends": ["stock",
                 "stock_inventory_exclude_sublocation",
                 "stock_report_quantity_by_location",
+                "stock_request_kanban",
                 ],
     "data": [
         # "security/ao_stock_security.xml", --not approved yet
