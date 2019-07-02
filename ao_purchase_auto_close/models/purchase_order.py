@@ -15,8 +15,8 @@ class PurchaseOrder(models.Model):
         return [
             ("state", "=", "purchase"),
             ("invoice_status", "=", "invoiced"),
-            ("qty_to_invoice", "=", 0),
-            ("qty_to_receive", "=", 0),
+            ("pending_qty_to_invoice", "=", False),
+            ("pending_qty_to_receive", "=", False),
             ("unreconciled", "=", False),
         ]
 
