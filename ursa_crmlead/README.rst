@@ -7,7 +7,8 @@ Ursa Crm Lead
 =============
 
 Sets reply-to in the lead items. This allows a standard reply-to address
-to be set when chatter is used to respond to leads
+to be set when chatter is used to respond to leads. You can keep normal Odoo
+behavior at Sales team level using the field *Reply to Email Alias*.
 
 Credits
 =======

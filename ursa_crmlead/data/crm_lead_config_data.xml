@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+<!-- Copyright 2018-19 Eficent Business and IT Consulting Services S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
 
@@ -9,8 +9,9 @@
         <field name="value">True</field>
     </record>
 
-    <function model="ir.default" name="set"
-          id="default_lead_reply_to"
-          eval="('crm.lead', 'reply_to', 'sales@lulzbot.com')"/>
+    <record id="crm_lead_default_reply_to" model="ir.config_parameter">
+        <field name="key">crm.lead.default.reply.to</field>
+        <field name="value">sales@lulzbot.com</field>
+    </record>
 
 </odoo>
