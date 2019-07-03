@@ -70,7 +70,7 @@
             <t t-foreach="docs" t-as="o">
 
                 <div class="page">
-                    <t t-call="stock_request_kanban.report_simple_label">
+                    <t t-call="ao_stock.report_simple_label_us_letter">
                         <t t-set="o" t-value="o"/>
                     </t>
                 </div>
