@@ -34,7 +34,7 @@ class MrpBom(models.Model):
                         del_lines.append(line[1])
                 if del_lines:
                     bom.message_post_with_view(
-                        'ao_mrp_bom.track_bom_template',
+                        'mrp_bom_tracking.track_bom_template',
                         values={
                             'lines': self.env["mrp.bom.line"].browse(
                                 del_lines),
@@ -49,7 +49,7 @@ class MrpBom(models.Model):
                 new_lines = bom.bom_line_ids - bom_line_ids[bom.id]
                 if new_lines:
                     bom.message_post_with_view(
-                        'ao_mrp_bom.track_bom_template',
+                        'mrp_bom_tracking.track_bom_template',
                         values={
                             'lines': new_lines,
                             'mode': 'New',
@@ -74,7 +74,7 @@ class MrpBomLine(models.Model):
                 product_id = product_id or lines.product_id
                 if lines:
                     bom.message_post_with_view(
-                        'ao_mrp_bom.track_bom_template_2',
+                        'mrp_bom_tracking.track_bom_template_2',
                         values={
                             'lines': lines,
                             'product_id': product_id,
@@ -93,7 +93,7 @@ class MrpBomLine(models.Model):
                             product_uom_id)
                     product_uom_id = product_uom_id or lines.product_uom_id
                     bom.message_post_with_view(
-                        'ao_mrp_bom.track_bom_line_template',
+                        'mrp_bom_tracking.track_bom_line_template',
                         values={
                             'lines': lines,
                             'product_qty': product_qty,
