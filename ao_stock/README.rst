@@ -22,6 +22,12 @@ This module contains customizations specific to Aleph Objects.
 * Able to access picking from stock move form view.
 * Change generic PG/XXXXX for route name on origin due to module
   procurement_auto_create_group
+* Report 'Inventory / Inventory by Location' should be allowed to Stock/User.
+  (https://projects.alephobjects.com/projects/odoo-trouble-tickets/
+  work_packages/21577)
+* Kanbans related to Stock Requests should use a Letter format.
+  (https://projects.alephobjects.com/projects/odoo-trouble-tickets/
+  work_packages/21747)
 
 Credits
 =======
