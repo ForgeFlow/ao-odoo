@@ -10,7 +10,11 @@ class TestParseEmailLead(TransactionCase):
         super(TestParseEmailLead, self).setUp(*args, **kwargs)
         self.partner_obj = self.env['res.partner']
         self.lead_obj = self.env['crm.lead']
-
+        self.campaign = self.env['utm.campaign'].create(
+            {'name': 'test_cpg_1'})
+        self.medium = self.env.ref('utm.utm_medium_email')
+        self.source = self.env['utm.source'].create(
+            {'name': 'test_src_1'})
         request_file = open(get_module_resource(
             'ao_crm_lead_parse_email',
             'tests', 'test_message.eml'), 'rb')
@@ -36,3 +40,6 @@ class TestParseEmailLead(TransactionCase):
              ('contact_name', '=', 'Laura Fincher')])
         self.assertTrue(lead)
         self.assertEqual(lead.partner_id, partner)
+        self.assertEqual(lead.campaign_id, self.campaign)
+        self.assertEqual(lead.medium_id, self.medium)
+        self.assertEqual(lead.source_id, self.source)

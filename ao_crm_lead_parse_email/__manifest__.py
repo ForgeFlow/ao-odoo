@@ -7,7 +7,7 @@
     'author': 'Eficent',
     'website': 'http://www.eficent.com',
     'category': 'CRM',
-    'depends': ['crm'],
+    'depends': ['crm', 'utm'],
     'data': [
         "data/crm_lead_parse_email_config_data.xml",
     ],

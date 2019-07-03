@@ -9,5 +9,8 @@ Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
 First & Last Name: Laura Fincher
-Email: laura.f@customer.com
+Email: <a href="mailto:laura.f@customer.com">laura.f@customer.com</a><br />
 Description: I am interested in on of those awesome printers. Thanks
+Campaign: test_cpg_1
+Medium: email
+Source: test_src_1
