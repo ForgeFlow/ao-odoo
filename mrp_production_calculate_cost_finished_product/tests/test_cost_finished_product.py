@@ -1,7 +1,7 @@
-# 2018 Eficent Business and IT Consulting Services S.L.
+# 2018-19 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import odoo.tests.common as common
+from odoo.tests import common, Form
 
 
 class TestCostFinishedProduct(common.SavepointCase):
@@ -18,8 +18,8 @@ class TestCostFinishedProduct(common.SavepointCase):
         cls.produce_wiz = cls.env['mrp.product.produce']
         cls.sm_obj = cls.env['stock.move']
 
-        cls.uom_unit = cls.env.ref('product.product_uom_unit')
-        cls.uom_dozen = cls.env.ref('product.product_uom_dozen')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
+        cls.uom_dozen = cls.env.ref('uom.product_uom_dozen')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.customer_location = cls.env.ref('stock.stock_location_customers')
 
@@ -116,13 +116,13 @@ class TestCostFinishedProduct(common.SavepointCase):
         })
 
     def _produce(self, mo, qty=0.0):
-        wiz = self.produce_wiz.with_context({
+        wiz = Form(self.produce_wiz.with_context({
             'active_id': mo.id,
             'active_ids': [mo.id],
-        }).create({
-            'product_qty': qty or mo.product_qty,
-        })
-        wiz.do_produce()
+        }))
+        wiz.product_qty = qty or mo.product_qty
+        produce_wizard = wiz.save()
+        produce_wizard.do_produce()
         return True
 
     def test_01_standard_cost(self):
