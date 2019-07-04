@@ -6,10 +6,10 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
-            <field name="trust" position="before">
+            <group name="sale" position="inside">
                 <field name="credit" widget="monetary" groups="base.group_no_one"/>
                 <field name="credit_limit" widget="monetary"/>
-            </field>
+            </group>
         </field>
     </record>
 

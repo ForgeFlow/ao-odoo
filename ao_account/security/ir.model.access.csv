@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_account_invoice_report_user,account.invoice.report_user,account.model_account_invoice_report,account.group_account_invoice,1,0,0,0
