@@ -6,8 +6,8 @@
 
     <template id="assets_backend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet"
-                  href="/ao_web/static/src/css/ao_theme.css"/>
+            <link rel="stylesheet" type="text/scss"
+                  href="/ao_web/static/src/scss/ao_theme.scss"/>
         </xpath>
     </template>
 

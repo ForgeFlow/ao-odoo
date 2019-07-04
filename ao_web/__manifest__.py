@@ -3,7 +3,7 @@
 
 {
     "name": "AO-specific customizations on Web",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "summary": "AO Customization for Web module.",
     "category": "Website",
     "author": "Eficent Business and IT Consulting Services S.L.",
