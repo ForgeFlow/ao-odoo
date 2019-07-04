@@ -3,7 +3,7 @@
 {
     "name": "Purchase Analytic Default",
     "summary": "Set default values for analytic accounts in purchases",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Accounting",
     "author": "Eficent",
     "license": "AGPL-3",
