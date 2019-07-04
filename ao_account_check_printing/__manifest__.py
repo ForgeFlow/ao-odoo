@@ -3,7 +3,7 @@
 
 {
     "name": "AO Check Printing",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent",
     "license": "AGPL-3",
     "category": "Customizations",
