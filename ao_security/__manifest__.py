@@ -10,7 +10,7 @@
     'license': 'AGPL-3',
     'author': 'Eficent Business and IT Consulting Services S.L.',
     'website': 'http://www.eficent.com',
-    'depends': ['base'],
+    'depends': ['sale_stock', 'purchase', 'mrp', 'hr_expense'],
     'data': [
         "security/ao_security_groups.xml",
         "security/ir.model.access.csv",
