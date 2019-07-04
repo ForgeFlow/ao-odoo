@@ -5,7 +5,7 @@
 
 {
     "name": "AO-specific customizations on mail activity",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent, Aleph Objects Inc.",
     "website": "https://www.alephobjects.com",
     "category": "CRM",

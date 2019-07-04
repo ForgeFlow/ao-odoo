@@ -1,7 +1,7 @@
-# Copyright 2016 Odoo SA <https://www.odoo.com>
 # Copyright 2018 Eficent <https://www.eficent.com>
 # Copyright 2018 Aleph Objects Inc. <https://www.alephobjects.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+
 from odoo import fields, models
 
 
