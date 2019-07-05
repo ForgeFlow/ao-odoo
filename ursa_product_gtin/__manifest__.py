@@ -4,7 +4,7 @@
 
 {
     "name": "Product GTIN EAN8 EAN13 UPC JPC Support",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "author": "ChriCar Beteiligungs- und Beratungs- GmbH, "
               "Ursa Information Systems",

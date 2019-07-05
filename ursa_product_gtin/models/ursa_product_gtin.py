@@ -27,15 +27,15 @@ def check_upc(upccode):
     i = 0
     check = 0
     upc_len = len(upccode)
-    for i in range(upc_len-1):
-        pos = int(upc_len-2-i)
+    for i in range(upc_len - 1):
+        pos = int(upc_len - 2 - i)
         if is_pair(i):
             code_sum += 3 * int(upccode[pos])
         else:
             code_sum += int(upccode[pos])
         check = int(math.ceil(code_sum / 10.0) * 10 - code_sum)
     i += 1
-    if check != int(upccode[upc_len-1]):  # last digit
+    if check != int(upccode[upc_len - 1]):  # last digit
         return False
     return True
 
@@ -53,8 +53,8 @@ def check_ean(eancode):
     i = 0
     check = 0
     ean_len = len(eancode)
-    for i in range(ean_len-1):
-        pos = int(ean_len-2-i)
+    for i in range(ean_len - 1):
+        pos = int(ean_len - 2 - i)
         if is_pair(i):
             code_sum += 3 * int(eancode[pos])
         else:
@@ -62,7 +62,7 @@ def check_ean(eancode):
         check = int(math.ceil(code_sum / 10.0) * 10 - code_sum)
 
     i += 1
-    if check != int(eancode[ean_len-1]):  # last digit
+    if check != int(eancode[ean_len - 1]):  # last digit
         return False
     return True
 
