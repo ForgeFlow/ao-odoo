@@ -4,7 +4,7 @@
 
 {
     'name': "AO - Export BoM Structure to Excel",
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Manufacturing',
     'author': "Eficent",
     'license': 'AGPL-3',

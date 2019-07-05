@@ -5,7 +5,7 @@
 import logging
 
 from odoo.tools.translate import _
-from odoo import models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -15,9 +15,12 @@ class BomStructureXlsx(models.AbstractModel):
     _inherit = 'report.report_xlsx.abstract'
 
     def print_bom_children(self, ch, sheet, row, level, workbook):
+        today = fields.Date.today()
+        company = self.env['res.company'].browse(self._context.get(
+            'company_id')) or self.env['res.users']._get_company()
         i, j = row, level
         j += 1
-        sheet.write(i, 1, '> '*j)
+        sheet.write(i, 1, '> ' * j)
         sheet.write(i, 2, ch.product_id.default_code or '')
         sheet.write(i, 3, ch.product_id.display_name or '')
         sheet.write(i, 4, ch.product_uom_id._compute_quantity(
@@ -41,8 +44,7 @@ class BomStructureXlsx(models.AbstractModel):
                     1.0, ch.product_uom_id, round=False)
                 cur_from = seller.currency_id
                 cur_to = ch.product_id.currency_id
-                price = self.env['res.currency']._compute(
-                    cur_from, cur_to, seller.price, False)
+                price = cur_from._convert(seller.price, cur_to, company, today)
                 price_unit = price / unit_qty
                 list_prices += [price_unit]
         if list_prices:
@@ -63,8 +65,8 @@ class BomStructureXlsx(models.AbstractModel):
                         1.0, ch.product_uom_id, round=False)
                     cur_from = seller.currency_id
                     cur_to = ch.product_id.currency_id
-                    price = self.env['res.currency']._compute(
-                        cur_from, cur_to, seller.price, False)
+                    price = cur_from._convert(
+                        seller.price, cur_to, company, today)
                     price_unit = price / unit_qty
                 else:
                     price_unit = False
@@ -99,15 +101,15 @@ class BomStructureXlsx(models.AbstractModel):
             i, price_ch = self.print_bom_children(child, sheet, i, j, workbook)
             cur_from = child.product_id.currency_id
             cur_to = ch.product_id.currency_id
-            price_ch = self.env['res.currency']._compute(
-                cur_from, cur_to, price_ch, False)
+            price_ch = cur_from._convert(
+                price_ch, cur_to, company, today)
             sum_prices += price_ch
             childs += 1
         if childs == 0:
             if seller_price:
                 sum_prices = ch.product_qty * seller_price
             else:
-                sheet.write(i-1, 12, '', empty)
+                sheet.write(i - 1, 12, '', empty)
         j -= 1
         return i, sum_prices
 
@@ -152,6 +154,9 @@ class BomStructureXlsx(models.AbstractModel):
         sheet.write_row(1, 0, sheet_title, title_style)
         sheet.freeze_panes(2, 0)
         i = 2
+        today = fields.Date.today()
+        company = self.env['res.company'].browse(self._context.get(
+            'company_id')) or self.env['res.users']._get_company()
         for o in objects:
             sheet.write(i, 0, o.product_tmpl_id.name or '', bold)
             sheet.write(i, 1, '', bold)
@@ -179,8 +184,8 @@ class BomStructureXlsx(models.AbstractModel):
                     cur_from = seller.currency_id
                     cur_to = o.product_id.currency_id or o.product_tmpl_id.\
                         currency_id
-                    price = self.env['res.currency']._compute(
-                        cur_from, cur_to, seller.price, False)
+                    price = cur_from._convert(
+                        seller.price, cur_to, company, today)
                     price_unit = price / unit_qty
                     list_prices += [price_unit]
             if list_prices:
@@ -202,8 +207,8 @@ class BomStructureXlsx(models.AbstractModel):
                         cur_from = seller.currency_id
                         cur_to = o.product_id.currency_id or o.\
                             product_tmpl_id.currency_id
-                        price = self.env['res.currency']._compute(
-                            cur_from, cur_to, seller.price, False)
+                        price = cur_from._convert(
+                            seller.price, cur_to, company, today)
                         price_unit = price / unit_qty
                     else:
                         price_unit = False
@@ -245,15 +250,14 @@ class BomStructureXlsx(models.AbstractModel):
                 cur_from = ch.product_id.currency_id
                 cur_to = o.product_id.currency_id or o.product_tmpl_id.\
                     currency_id
-                price_ch = self.env['res.currency']._compute(
-                    cur_from, cur_to, price_ch, False)
+                price_ch = cur_from._convert(price_ch, cur_to, company, today)
                 sum_prices += price_ch
                 childs += 1
             if childs == 0:
                 if seller_price:
                     sum_prices = o.product_qty * seller_price
                 else:
-                    sheet.write(i-1, 12, '', empty)
+                    sheet.write(i - 1, 12, '', empty)
             sheet.write_row(i, 12, sheet_end, title_style)
             cur = o.product_id.currency_id.name or o.product_tmpl_id.\
                 currency_id.name
