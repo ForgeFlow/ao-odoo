@@ -34,8 +34,10 @@
         <field name="arch" type="xml">
             <filter name="late" position="before">
                 <separator/>
-                <filter string="Assigned to me" domain="[('assigned_to','=', uid), ('state', 'not in', ('done', 'cancel'))]"
-                    help="Production orders not done and assigned to me"/>
+                <filter name="assigned_to_me"
+                        string="Assigned to me"
+                        domain="[('assigned_to','=', uid), ('state', 'not in', ('done', 'cancel'))]"
+                        help="Production orders not done and assigned to me"/>
             </filter>
         </field>
     </record>

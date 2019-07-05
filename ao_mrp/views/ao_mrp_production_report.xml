@@ -8,27 +8,32 @@
                 <div class="page">
                     <div class="oe_structure"/>
                     <div class="row">
-                        <div class="col-xs-12">
-                            <h2>Production Order # : <span t-field="o.name"/></h2>
+                        <div class="col-7">
+                            <h2><span t-field="o.name"/></h2>
+                        </div>
+                        <div class="col-5">
+                            <span class="text-right">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:350px;height:60px"/>
+                            </span>
                         </div>
                     </div>
                     <div class="row mt32 mb32">
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>Source Document:</strong><br/>
                             <span style="background-color: #B1EDB3;"
                                   t-field="o.origin"/>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>Product:</strong><br/>
                             <span t-field="o.product_id" style="background-color: #f9f39f;"/>
                             <br/><b>UPC#: </b><span t-esc="o.product_id.upc"/>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>Quantity:</strong><br/>
                             <span t-esc="'%i'%o.product_qty"/>
                             <span t-field="o.product_uom_id.name" groups="product.group_uom"/>
                         </div>
-                        <div class="col-xs-3" style="background-color: #f9f39f;">
+                        <div class="col-3" style="background-color: #f9f39f;">
                             <strong>Pending to produce:</strong><br/>
                             <t t-foreach="o.move_finished_ids" t-as="f">
                                 <span t-esc="'%i'%(f.product_uom_qty - f.quantity_done)"/>
@@ -40,15 +45,15 @@
                     </div>
 
                     <div class="row mt32 mb32">
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>Scheduled Date:</strong><br/>
                             <span t-field="o.date_planned_start"/><span t-if="o.date_planned_finished"> - <span t-field="o.date_planned_finished"/></span>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>MO Created Date:</strong><br/>
                             <span t-field="o.create_date"/>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <strong>Printing date:</strong><br/>
                             <span t-esc="time.strftime('%Y-%m-%d')"
                                   t-options='{"widget": "date"}'/>
