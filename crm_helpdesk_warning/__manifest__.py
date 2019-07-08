@@ -4,7 +4,7 @@
 
 {
     "name": "Crm Helpdesk Warning",
-    "version": "11.0.1.1.0",
+    "version": "12.0.1.1.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Customer Relationship Management",
@@ -14,5 +14,5 @@
         "views/crm_helpdesk_views.xml",
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }
