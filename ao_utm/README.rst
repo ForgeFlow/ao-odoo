@@ -10,6 +10,7 @@ This module contains customizations specific to Aleph Objects.
 
 * Menus are accessible to Sales Managers.
 * Give all permission to Sales Managers.
+* UTM's tooltips customization
 
 Credits
 =======
