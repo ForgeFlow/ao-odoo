@@ -21,9 +21,9 @@ Usage
 
 To use this module, you need to:
 
-#. Go to 'Manufacturing / Products / Bill of Materials'
-#. Select a BOM or more
-#. Go to 'Action / Export Flattened BOM Cost Excel'.
+#. Go to 'Manufacturing / Master Data / Bill of Materials'
+#. Select one or more BoM's.
+#. Go to 'Print / Export Flattened BOM Cost Excel'.
 
 Credits
 =======
