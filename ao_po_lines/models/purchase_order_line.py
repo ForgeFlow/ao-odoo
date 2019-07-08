@@ -1,4 +1,4 @@
-# Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018-19 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -17,6 +17,7 @@ class PurchaseOrderLine(models.Model):
     )
 
     @api.multi
+    @api.depends("invoice_lines")
     def _compute_balance_due(self):
         to_compute = self.filtered(
             lambda r: r.state in ['purchase'])

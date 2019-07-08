@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2017-18 Eficent Business and IT Consulting Services S.L.
-     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
 
-  <record id="purchase_order_line_search" model="ir.ui.view">
+    <record id="purchase_order_line_search" model="ir.ui.view">
         <field name="name">purchase.order.line.search</field>
         <field name="model">purchase.order.line</field>
         <field name="inherit_id" ref="purchase.purchase_order_line_search"/>
@@ -23,7 +23,7 @@
             <xpath expr="//group" position="replace">
                 <group>
                     <group>
-                        <field name="product_uom" invisible="1"/>
+                        <!--<field name="product_uom" invisible="1"/>-->
                         <field name="product_id" readonly="1"/>
                         <label for="product_qty" string="Ordered Qty"/>
                         <div>
