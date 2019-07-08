@@ -9,8 +9,10 @@ class MailActivityProgress(models.Model):
     _description = 'Activity Progress'
     _order = 'sequence, id'
 
-    name = fields.Char('Name', required=True, translate=True)
-    summary = fields.Char('Summary', translate=True)
-    sequence = fields.Integer('Sequence', default=10)
-    activity_type_ids = fields.Many2many(string='Activity Types',
-                                         comodel_name='mail.activity.type')
+    name = fields.Char(required=True, translate=True)
+    summary = fields.Char(translate=True)
+    sequence = fields.Integer(default=10)
+    activity_type_ids = fields.Many2many(
+        string='Activity Types',
+        comodel_name='mail.activity.type',
+    )
