@@ -9,15 +9,17 @@ class TestCrmHelpdesk(TransactionCase):
 
     def setUp(self):
         super(TestCrmHelpdesk, self).setUp()
+        self.user_obj = self.env['res.users'].with_context(
+            no_reset_password=True)
 
-        self.helpdesk_user = self.env['res.users'].create({
-            'company_id': self.env.ref("base.main_company").id,
-            'name': "Helpdesk User",
-            'login': "hdu",
-            'email': "helpdeskuser@yourcompany.com",
-            'groups_id': [(6, 0, [
-                self.env.ref('sales_team.group_sale_salesman').id,
-                self.env.ref('base.group_partner_manager').id])]
+        self.helpdesk_user = self.user_obj.create({
+            "company_id": self.env.ref("base.main_company").id,
+            "name": "Helpdesk User",
+            "login": "hdu",
+            "email": "helpdeskuser@yourcompany.com",
+            "groups_id": [(6, 0, [
+                self.env.ref("sales_team.group_sale_salesman").id,
+                self.env.ref("base.group_partner_manager").id])]
         })
 
     def test_crm_helpdesk_form(self):

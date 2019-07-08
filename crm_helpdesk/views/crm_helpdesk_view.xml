@@ -109,10 +109,11 @@
                     <field name="name" string="Query"/>
                     <field name="date"/>
                     <filter string="New" name="current" domain="[('state','=','draft')]" help="New Helpdesk Request" />
-                    <filter string="Open" domain="[('state','=','open')]" help="Open Helpdesk Request" />
-                    <filter string="Pending" domain="[('state','=','pending')]" help="All pending Helpdesk Request" />
+                    <filter string="Open" name="open" domain="[('state','=','open')]" help="Open Helpdesk Request" />
+                    <filter string="Pending" name="Pending" domain="[('state','=','pending')]" help="All pending Helpdesk Request" />
                     <separator/>
-                    <filter string="Assigned to Me or My Sales Team(s)"
+                    <filter name="my_teams"
+                            string="Assigned to Me or My Sales Team(s)"
                             domain="['|', ('team_id.user_id','=',uid), ('team_id.member_ids', 'in', [uid])]"
                             help="Helpdesk requests that are assigned to me or to one of the sale teams I manage" groups="sales_team.group_sale_salesman"/>
                     <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
@@ -120,16 +121,17 @@
                     <field name="team_id" string="Sales Team"
                            groups="sales_team.group_sale_salesman"/>
                     <group expand="0" string="Group By">
-                        <filter string="Partner" domain="[]" help="Partner" context="{'group_by':'partner_id'}" />
-                        <filter string="Responsible" domain="[]" help="Responsible User" context="{'group_by':'user_id'}" />
-                        <filter string="Sales Team"
+                        <filter name="group_partner" string="Partner" domain="[]" help="Partner" context="{'group_by':'partner_id'}" />
+                        <filter name="group_responsible" string="Responsible" domain="[]" help="Responsible User" context="{'group_by':'user_id'}" />
+                        <filter name="group_sales_team"
+                                string="Sales Team"
                                 domain="[]" help="Sales Team"
                                 context="{'group_by':'team_id'}"
                                 groups="sales_team.group_sale_salesman"/>
-                        <filter string="Priority" domain="[]" context="{'group_by':'priority'}" />
-                        <filter string="Status" domain="[]" context="{'group_by':'state'}" />
-                        <filter string="Request Month" domain="[]" help="Request Date by Month" context="{'group_by':'date'}" />
-                        <filter string="Deadline" domain="[]" context="{'group_by':'date_deadline'}" />
+                        <filter name="group_priority" string="Priority" domain="[]" context="{'group_by':'priority'}" />
+                        <filter name="group_status" string="Status" domain="[]" context="{'group_by':'state'}" />
+                        <filter name="group_requets_month" string="Request Month" domain="[]" help="Request Date by Month" context="{'group_by':'date'}" />
+                        <filter name="group_deadline" string="Deadline" domain="[]" context="{'group_by':'date_deadline'}" />
                     </group>
                 </search>
             </field>
