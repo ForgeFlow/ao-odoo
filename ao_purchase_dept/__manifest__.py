@@ -4,11 +4,11 @@
 
 {
     "name": "Purchase Dept",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
-    "category": "Product",
-    "depends": ["purchase"],
+    "category": "Purchases",
+    "depends": ["purchase_stock"],
     "data": [
         "views/purchase_view.xml",
         "views/account_invoice_view.xml"
