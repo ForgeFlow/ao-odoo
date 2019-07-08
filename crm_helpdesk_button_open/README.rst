@@ -25,11 +25,6 @@ Go to *Sales > Sales > Helpdesk and Support*, open a Ticket and click on
 Credits
 =======
 
-Images
-------
-
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
-
 Contributors
 ------------
 
@@ -39,14 +34,4 @@ Contributors
 Maintainer
 ----------
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-This module is maintained by the OCA.
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-To contribute to this module, please visit https://odoo-community.org.
+This module is maintained by `Eficent <https://www.eficent.com>`_.

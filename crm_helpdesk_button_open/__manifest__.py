@@ -5,7 +5,7 @@
     "name": "CRM Helpdesk Button Open",
     "summary": "Button to open a draft Helpdesk ticket and assign the current "
                "user as owner.",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.,"
               "Odoo Community Association (OCA)",
     "website": "https://www.odoo-community.org",
@@ -15,6 +15,6 @@
     "data": [
         "views/crm_helpdesk_view.xml",
     ],
-    'installable': True,
-    'active': True,
+    "installable": True,
+    "active": True,
 }

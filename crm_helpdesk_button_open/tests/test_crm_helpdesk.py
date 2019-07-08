@@ -11,7 +11,8 @@ class TestCrmHelpdeskButtonOpen(common.TransactionCase):
     def setUp(self):
         super(TestCrmHelpdeskButtonOpen, self).setUp()
         self.obj_helpdesk = self.env['crm.helpdesk']
-        self.obj_user = self.env['res.users']
+        self.obj_user = self.env['res.users'].with_context(
+            no_reset_password=True)
         # groups
         self.group_sale_salesman = self.env.ref(
             'sales_team.group_sale_salesman')
