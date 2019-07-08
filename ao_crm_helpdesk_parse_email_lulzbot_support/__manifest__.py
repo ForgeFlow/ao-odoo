@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     'name': 'AO CRM Helpdesk Parse Email Lulzbot Support',
-    'version': '11.0.1.0.1',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Eficent',
     'website': 'http://www.eficent.com',
