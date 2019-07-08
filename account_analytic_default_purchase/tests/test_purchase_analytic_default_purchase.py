@@ -39,7 +39,6 @@ class TestPurchaseAnalyticDefault(common.SavepointCase):
                 (0, 0, {
                     "name": "po line",
                     "price_unit": 1000.0,
-                    "purchase_price": 700.0,
                     "product_qty": 10.0,
                     "product_uom": self.product_1.uom_id.id,
                     "date_planned": fields.Datetime.now(),
