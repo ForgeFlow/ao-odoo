@@ -28,17 +28,17 @@
                         <label for="product_qty" string="Ordered Qty"/>
                         <div>
                             <field name="product_qty" readonly="1" class="oe_inline"/>
-                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="uom.group_uom" class="oe_inline"/>
                         </div>
                         <label for="qty_received" string="Received Qty"/>
                         <div>
                             <field name="qty_received" readonly="1" class="oe_inline"/>
-                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="uom.group_uom" class="oe_inline"/>
                         </div>
                         <label for="product_qty" string="Billed Qty"/>
                         <div>
                             <field name="qty_invoiced" readonly="1" class="oe_inline"/>
-                            <field name="product_uom" readonly="1" groups="product.group_uom" class="oe_inline"/>
+                            <field name="product_uom" readonly="1" groups="uom.group_uom" class="oe_inline"/>
                         </div>
                         <field name="price_unit"/>
                     </group>

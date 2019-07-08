@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class ReportPurchasePurchaseQuotation(models.AbstractModel):
     _name = 'report.purchase.report_purchasequotation'
+    _description = 'RFQ Printed Report'
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -24,6 +25,7 @@ class ReportPurchasePurchaseQuotation(models.AbstractModel):
 
 class ReportPurchasePurchaseOrder(models.AbstractModel):
     _name = 'report.purchase.report_purchaseorder'
+    _description = 'Purchase Order Printed Report'
 
     @api.model
     def _get_report_values(self, docids, data=None):

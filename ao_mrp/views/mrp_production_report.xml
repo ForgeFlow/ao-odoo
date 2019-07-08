@@ -8,7 +8,7 @@
                 <strong>Pending to produce:</strong><br/>
                 <span t-esc="(o.move_finished_ids.product_uom_qty - o.move_finished_ids.quantity_done)"/>
                 <span t-field="o.move_finished_ids.product_uom.name"
-                      groups="product.group_uom"/>
+                      groups="uom.group_uom"/>
             </div>
         </xpath>
     </template>
