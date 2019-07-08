@@ -12,7 +12,8 @@ class ProjectTaskWork(models.Model):
         string="Work summary",
     )
     date = fields.Datetime(
-        string="Date", default=fields.Date.today(),
+        string="Date",
+        default=fields.Datetime.now,
     )
     task_id = fields.Many2one(
         comodel_name='project.task', string="Task",
