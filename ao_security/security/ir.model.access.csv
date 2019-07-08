@@ -1,41 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-stock.access_product_product_stock_manager,product.product stock_manager,product.model_product_product,stock.group_stock_manager,1,0,0,0
-stock.access_product_template_stock_manager,product.template stock_manager,product.model_product_template,stock.group_stock_manager,1,0,0,0
-purchase.access_product_product_purchase_manager,product.product purchase_manager,product.model_product_product,purchase.group_purchase_manager,1,0,0,0
-purchase.access_product_template_purchase_manager,product.template purchase_manager,product.model_product_template,purchase.group_purchase_manager,1,0,0,0
-mrp.access_product_product_mrp_manager,product.product mrp_manager,product.model_product_product,mrp.group_mrp_manager,1,0,0,0
-mrp.access_product_template_mrp_manager,product.template mrp_manager,product.model_product_template,mrp.group_mrp_manager,1,0,0,0
-hr_expense.access_product_product_hr_expense_user,product.product.hr.expense.user,product.model_product_product,hr_expense.group_hr_expense_user,1,0,0,0
-hr_expense.access_product_template_hr_expense_user,product.template.hr.expense.user,product.model_product_template,hr_expense.group_hr_expense_user,1,0,0,0
-account.access_product_product_account_manager,product.product.account.manager,product.model_product_product,account.group_account_manager,1,0,0,0
-account.access_product_template_account_manager,product.template.account.manager,product.model_product_template,account.group_account_manager,1,0,0,0
-sale.access_product_product_sale_manager,product.product salemanager,product.model_product_product,sales_team.group_sale_manager,1,0,0,0
-sale.access_product_template_sale_manager,product.template salemanager,product.model_product_template,sales_team.group_sale_manager,1,0,0,0
-purchase.access_product_uom_categ_purchase_manager,product.uom.categ purchase_manager,product.model_product_uom_categ,purchase.group_purchase_manager,1,0,0,0
-purchase.access_product_uom_purchase_manager,product.uom purchase_manager,product.model_product_uom,purchase.group_purchase_manager,1,0,0,0
 access_product_uom_categ_maintainer,product.uom.categ uom_maintainer,product.model_product_uom_categ,group_uom_maintainer,1,1,1,1
 access_product_uom_maintainer,product.uom uom_maintainer,product.model_product_uom,group_uom_maintainer,1,1,1,1
-stock.access_product_uom_categ_stock_manager,product.uom.categ stock_manager,product.model_product_uom_categ,stock.group_stock_manager,1,0,0,0
-stock.access_product_uom_stock_manager,product.uom stock_manager,product.model_product_uom,stock.group_stock_manager,1,0,0,0
-hr_expense.access_product_uom_hr_expense_user,product.uom.hr.expense.user,product.model_product_uom,hr_expense.group_hr_expense_user,1,0,0,0
-mrp.access_product_uom_categ_mrp_manager,product.uom.categ mrp_manager,product.model_product_uom_categ,mrp.group_mrp_manager,1,0,0,0
-mrp.access_product_uom_mrp_manager,product.uom mrp_manager,product.model_product_uom,mrp.group_mrp_manager,1,0,0,0
-sale.access_product_uom_categ_sale_manager,product.uom.categ salemanager,product.model_product_uom_categ,sales_team.group_sale_manager,1,0,0,0
-sale.access_product_uom_sale_manager,product.uom salemanager,product.model_product_uom,sales_team.group_sale_manager,1,0,0,0
 access_stock_warehouse_maintainer,stock.warehouse.maintainer,stock.model_stock_warehouse,group_stock_maintainer,1,1,1,1
 access_stock_location_maintainer,stock.location.maintainer,stock.model_stock_location,group_stock_maintainer,1,1,1,1
 access_procurement_rule_maintainer,procurement_rule maintainer,stock.model_procurement_rule,group_stock_maintainer,1,1,1,1
 access_stock_location_route_stock_maintainer,stock.location.route.maintainer,stock.model_stock_location_route,group_stock_maintainer,1,1,1,1
 access_stock_picking_type_maintainer,stock.picking.type maintainer,stock.model_stock_picking_type,group_stock_maintainer,1,1,1,1
-stock.access_stock_warehouse_manager,stock.warehouse.manager,stock.model_stock_warehouse,stock.group_stock_manager,1,0,0,0
-stock.access_stock_location_manager,stock.location.manager,stock.model_stock_location,stock.group_stock_manager,1,0,0,0
-stock.access_procurement_rule_manager,procurement_rule manager,stock.model_procurement_rule,stock.group_stock_manager,1,0,0,0
-stock.access_procurement_rule_stock_manager,procurement_rule stock manager,stock.model_procurement_rule,stock.group_stock_manager,1,0,0,0
-sale_stock.access_procurement_rule_salemanager,procurement_rule salemanager,stock.model_procurement_rule,sales_team.group_sale_manager,1,0,0,0
-stock.access_procurement_rule,procurement.rule,stock.model_procurement_rule,base.group_user,1,0,0,0
-stock.access_stock_location_route_stock_manager,stock.location.route,stock.model_stock_location_route,stock.group_stock_manager,1,0,0,0
-stock.access_stock_picking_type_manager,stock.picking.type manager,stock.model_stock_picking_type,stock.group_stock_manager,1,0,0,0
 access_mrp_bom_maintainer,mrp.bom.maintainer,mrp.model_mrp_bom,group_bom_maintainer,1,1,1,1
 access_mrp_bom_line_maintainer,mrp.bom.line.maintainer,mrp.model_mrp_bom_line,group_bom_maintainer,1,1,1,1
-mrp.access_mrp_bom_manager,mrp.bom.manager,mrp.model_mrp_bom,mrp.group_mrp_manager,1,0,0,0
-mrp.access_mrp_bom_line_manager,mrp.bom.line.manager,mrp.model_mrp_bom_line,mrp.group_mrp_manager,1,0,0,0
