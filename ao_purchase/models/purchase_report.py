@@ -9,7 +9,7 @@ class ReportPurchasePurchaseQuotation(models.AbstractModel):
     _name = 'report.purchase.report_purchasequotation'
 
     @api.model
-    def get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         pos = self.env['purchase.order'].browse(docids)
         if 'to approve' in pos.mapped('state'):
             raise UserError('You cannot print a RFQ that is pending to '
@@ -26,7 +26,7 @@ class ReportPurchasePurchaseOrder(models.AbstractModel):
     _name = 'report.purchase.report_purchaseorder'
 
     @api.model
-    def get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         pos = self.env['purchase.order'].browse(docids)
         if any(state in ['sent', 'to approve', 'draft'] for state in
                pos.mapped('state')):

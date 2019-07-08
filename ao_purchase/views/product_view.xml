@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record model="ir.actions.act_window"
-            id="action_purchase_line_product_variant_tree">
+    <record id="action_purchase_line_product_variant_tree" model="ir.actions.act_window">
         <field name="context">{}</field>
         <field name="domain">[('product_id','in',active_ids)]</field>
         <field name="name">Purchases</field>
@@ -10,7 +9,7 @@
         <field name="view_id" ref="purchase.purchase_order_line_tree"/>
     </record>
 
-    <record model="ir.ui.view" id="product_form_view_purchase_order_button">
+    <record id="product_form_view_purchase_order_button" model="ir.ui.view">
         <field name="name">product.product.purchase.order</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
@@ -20,7 +19,7 @@
                <button class="oe_stat_button"
                        name="%(ao_purchase.action_purchase_line_product_variant_tree)d"
                    type="action" icon="fa-shopping-cart">
-                   <field string="Purchases" name="purchase_count" widget="statinfo"/>
+                   <field string="Purchases" name="purchased_product_qty" widget="statinfo"/>
                </button>
             </div>
         </field>
