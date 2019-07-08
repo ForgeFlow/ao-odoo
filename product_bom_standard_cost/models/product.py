@@ -9,7 +9,6 @@ UNIT = dp.get_precision('Product Price')
 
 
 class ProductTemplate(models.Model):
-
     _inherit = 'product.template'
 
     @api.multi
@@ -29,7 +28,7 @@ class ProductTemplate(models.Model):
                             factor=starting_factor)
                         for product, total_qty in totals.items():
                             price += total_qty * product.standard_price
-                    except UserError as e:
+                    except UserError:
                         pass
                 else:
                     price = template.standard_price
