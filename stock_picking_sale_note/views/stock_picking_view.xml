@@ -6,7 +6,7 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-            <field name="move_lines" position="after">
+            <field name="move_ids_without_package" position="after">
                 <field name="sale_order_origin" invisible="True"/>
                 <div attrs="{'invisible': [('sale_order_origin','=',False)]}">
                     <label for="sale_note"/>
