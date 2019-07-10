@@ -1,3 +1,0 @@
----Fields in module 'ursa_product_customizations'---
----XML records in module 'ursa_product_customizations'---
--- nothing has changed in this module
