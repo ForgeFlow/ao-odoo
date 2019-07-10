@@ -6,32 +6,31 @@
         <field name="code">ad</field>
         <field name="currency_id" ref="base.EUR"/>
     </record>
-    
+
     <record id="base.af" model="res.country">
         <field name="name">Afghanistan</field>
         <field name="code">af</field>
         <field name="currency_id" ref="base.AFN"/>
     </record>
-    
+
     <record id="base.bq" model="res.country">
         <field name="name">Bonaire</field>
         <field name="code">bq</field>
         <field name="currency_id" ref="base.USD"/>
     </record>
-    
 
     <record id="base.bn" model="res.country">
         <field name="name">Brunei</field>
         <field name="code">bn</field>
         <field name="currency_id" ref="base.BND"/>
     </record>
-        
+
     <record id="base.ba" model="res.country">
         <field name="name">Bosnia and Herzegovina</field>
         <field name="code">ba</field>
         <field name="currency_id" ref="base.BAM"/>
-        </record>
-        
+    </record>
+
     <record id="base.cd" model="res.country">
         <field name="name">DRC Congo</field>
         <field name="code">cd</field>
@@ -43,7 +42,7 @@
         <field name="code">cg</field>
         <field name="currency_id" ref="base.XAF"/>
     </record>
-        
+
     <record id="base.gp" model="res.country">
         <field name="name">Guadeloupe</field>
         <field name="code">gp</field>
@@ -55,66 +54,53 @@
         <field name="code">gu</field>
         <field name="currency_id" ref="base.USD"/>
     </record>
-        
+
     <record id="base.gf" model="res.country">
         <field name="name">French Guiana</field>
         <field name="code">gf</field>
         <field name="currency_id" ref="base.GEL"/>
     </record>
-        
+
     <record id="base.kh" model="res.country">
         <field name="name">Kingdom of Cambodia</field>
         <field name="code">kh</field>
         <field name="currency_id" ref="base.KHR"/>
     </record>
-        
+
     <record id="base.mf" model="res.country">
         <field name="name">Saint Martin</field>
         <field name="code">mf</field>
         <field name="currency_id" ref="base.EUR"/>
     </record>
 
-    <!--<record id="base.gw" model="res.country">-->
-        <!--<field name="name">Guinea-Bissau</field>-->
-        <!--<field name="code">gw</field>-->
-        <!--<field name="currency_id" ref="base.GWP"/>-->
-    <!--</record>-->
-        
     <record id="base.gm" model="res.country">
         <field name="name">The Gambia</field>
         <field name="code">gm</field>
         <field name="currency_id" ref="base.GMD"/>
     </record>
-    
-        
+
     <record id="base.cn" model="res.country">
         <field name="name">People's Republic of China</field>
         <field name="code">cn</field>
         <field name="currency_id" ref="base.CNY"/>
     </record>
-        
+
     <record id="base.mk" model="res.country">
         <field name="name">Republic of Macedonia</field>
         <field name="code">mk</field>
         <field name="currency_id" ref="base.MKD"/>
     </record>
-        
+
     <record id="base.mq" model="res.country">
         <field name="name">Martinique</field>
         <field name="code">mq</field>
         <field name="currency_id" ref="base.EUR"/>
     </record>
-        
+
     <record id="base.nc" model="res.country">
         <field name="name">New Caledonia</field>
         <field name="code">nc</field>
         <field name="currency_id" ref="base.XPF"/>
-    </record>
-   
-    <record id="base.nt" model="res.country">
-        <field name="name">Saudi–Kuwaiti neutral zone</field>
-        <field name="code">nt</field>
-        <field name="currency_id" ref="base.IQD"/>
     </record>
 
     <record id="base.pf" model="res.country">
@@ -122,19 +108,19 @@
         <field name="code">pf</field>
         <field name="currency_id" ref="base.XPF"/>
     </record>
-    
+
     <record id="base.ps" model="res.country">
         <field name="name">The Palestinian Territories</field>
         <field name="code">ps</field>
         <field name="currency_id" ref="base.ILS"/>
     </record>
-        
+
     <record id="base.re" model="res.country">
         <field name="name">Reunion (French)</field>
         <field name="code">re</field>
         <field name="currency_id" ref="base.EUR"/>
     </record>
-    
+
     <record id="base.sx" model="res.country">
         <field name="name">Sint Maarten</field>
         <field name="code">sx</field>
@@ -152,7 +138,6 @@
         <field name="code">us</field>
         <field name="address_format" eval="'%(street)s\n%(street2)s\n%(city)s, %(state_code)s %(zip)s'" />
         <field name="currency_id" ref="base.USD"/>
-        
     </record>
-    
+
 </odoo>

@@ -1,9 +1,0 @@
----Fields in module 'usa_localization'---
----XML records in module 'usa_localization'---
-DEL ir.ui.menu: base.menu_custom
-DEL res.country: base.gw
-DEL res.country.state: usa_localization.state_us_100
-DEL res.country.state: usa_localization.state_us_101
-DEL res.country.state: usa_localization.state_us_102
-DEL res.country.state: usa_localization.state_us_103
-DEL res.country.state: usa_localization.state_us_105
