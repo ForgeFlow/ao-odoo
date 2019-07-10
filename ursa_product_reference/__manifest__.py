@@ -4,7 +4,7 @@
 
 {
     "name": "Product Internal Reference Generation",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Ursa Information Systems, USA",
     "license": "AGPL-3",
     "category": "Stock",
