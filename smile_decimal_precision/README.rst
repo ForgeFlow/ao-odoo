@@ -11,11 +11,11 @@ It is also possible to manage a number of decimal places to display on devices.
 Features:
 
 * The administrator edit the decimal precision by specifying the name of digits parameter.
-* He put the number of digits he want to compute.
-* He put the number of digits he want to display.
+* The administrator put the number of digits he want to compute.
+* The administrator put the number of digits he want to display.
 * By default the display digits equals the the digits calculated.
-* He can make the display digits superior than the the digits calculated.
-* He can make the display digits inferior than the the digits calculated.
+* The administrator can make the display digits superior than the the digits calculated.
+* The administrator can make the display digits inferior than the the digits calculated.
 
 **Table of contents**
 

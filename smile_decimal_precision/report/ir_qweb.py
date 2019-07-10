@@ -2,7 +2,7 @@
 # (C) 2012 Smile (<http://www.smile.fr>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.base.ir.ir_qweb.fields import FloatConverter
+from odoo.addons.base.models.ir_qweb_fields import FloatConverter
 
 
 def record_to_html(self, record, field_name, options):
