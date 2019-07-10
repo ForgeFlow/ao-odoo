@@ -1,5 +1,5 @@
 # Copyright 2013 Ursa Information Systems (http://www.ursainfosystems.com).
-# Copyright 2018 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018-19 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -23,13 +23,15 @@ class CrmHelpdesk(models.Model):
             msg, update_vals=update_vals)
 
     @api.model
-    def message_get_reply_to(self, res_ids, default=None):
-        model_name = self.env.context.get('thread_model') or self._name
-        if model_name == 'crm.helpdesk':
-            help_reply_to = self.env['ir.default'].get(
-                'crm.helpdesk', 'reply_to')
-            if help_reply_to:
-                res = dict.fromkeys(res_ids, help_reply_to)
-                return res
-        return super().message_get_reply_to(
-            res_ids, default=default)
+    def _notify_get_reply_to(
+            self, default=None, records=None, company=None, doc_names=None,
+    ):
+        help_reply_to = self.env["ir.default"].get(
+            "crm.helpdesk", "reply_to")
+        if help_reply_to:
+            res = dict.fromkeys(self.ids, help_reply_to)
+            return res
+        return super()._notify_get_reply_to(
+            default=default, records=records,
+            company=company, doc_names=doc_names,
+        )

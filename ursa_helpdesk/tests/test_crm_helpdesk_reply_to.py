@@ -35,5 +35,6 @@ class TestCrmHelpdeskReplyTo(TransactionCase):
             'body': '<p>This is a test message</p>',
         })
         self.assertEqual(message.reply_to, 'support@lulzbot.com')
+        message._notify(message, {}, force_send=True)
         self.assertEqual(
             message.email_from, 'LulzBot Support <support@lulzbot.com>')
