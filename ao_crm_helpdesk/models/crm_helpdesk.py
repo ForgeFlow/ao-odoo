@@ -24,6 +24,22 @@ class CrmHelpdesk(models.Model):
         default=_get_default_priority
     )
 
+    phone = fields.Char('Phone')
+
+    state = fields.Selection(
+        [('draft', 'New'),
+         ('open', 'In Progress'),
+         ('pending', 'Pending'),
+         ('done', 'Closed'),
+         ('resolved', 'Resolved'),
+         ('cancel', 'Cancelled')], 'Status',
+        track_visibility='onchange', index=True,
+        help='The status is set to \'Draft\', when a case is created.\
+                  \nIf the case is in progress the status is set to \'Open\'.\
+                  \nWhen the case is over, the status is set to \'Done\'.\
+                  \nIf the case needs to be reviewed then the status is set to'
+             ' \'Pending\'.', default='draft')
+
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         self.priority = self._get_default_priority()

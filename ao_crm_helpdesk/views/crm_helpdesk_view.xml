@@ -13,4 +13,15 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="crm_case_form_view_helpdesk_phone_number">
+            <field name="name">CRM - Helpdesk Support Form Phone Number</field>
+            <field name="model">crm.helpdesk</field>
+            <field name="inherit_id" ref="crm_helpdesk.crm_case_form_view_helpdesk"/>
+            <field name="arch" type="xml">
+                <field name="email_from" position="after">
+                    <field name="phone"/>
+                </field>
+            </field>
+        </record>
+
 </odoo>
