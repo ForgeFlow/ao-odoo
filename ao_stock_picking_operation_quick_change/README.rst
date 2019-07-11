@@ -13,11 +13,6 @@ This module contains customizations specific to Aleph Objects.
 * When using *Change All* flag also the picking destination location will be
   changed and a msg posted in the chatter.
 
-Migration Notes
----------------
-
-* It may not be needed in v11 as for new lock function for pickings.
-
 Credits
 =======
 
