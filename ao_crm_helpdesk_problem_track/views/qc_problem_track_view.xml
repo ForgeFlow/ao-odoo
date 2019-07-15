@@ -15,7 +15,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="qc_problem_form">
+    <record id="qc_problem_form" model="ir.ui.view">
         <field name="name">qc.problem.form - AO customization</field>
         <field name="model">qc.problem</field>
         <field name="inherit_id"
@@ -29,15 +29,15 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="qc_problem_kanban_view">
+    <record id="qc_problem_kanban_view" model="ir.ui.view">
         <field name="name">qc.problem.kanban - AO customization</field>
         <field name="model">qc.problem</field>
         <field name="inherit_id"
            ref="quality_control_issue.qc_problem_kanban_view"/>
         <field name="arch" type="xml">
-            <group name="info" position="inside">
+            <div name="info" position="inside">
                 <field name="crm_helpdesk_count"/> helpdesk tickets
-            </group>
+            </div>
         </field>
     </record>
 

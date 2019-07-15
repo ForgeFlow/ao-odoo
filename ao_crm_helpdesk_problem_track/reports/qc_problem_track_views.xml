@@ -31,20 +31,22 @@
             <search string="Problem Track Analysis">
                 <field name="problem_group_id"/>
                 <separator/>
-                <filter string="Last Month"
+                <filter name="last_month"
+                        string="Last Month"
                         domain="[('date','&lt;=', (datetime.date.today() - relativedelta(day=31,months=1)).strftime('%%Y-%%m-%%d')),
                                  ('date','&gt;=',(datetime.date.today() - relativedelta(day=1,months=1)).strftime('%%Y-%%m-%%d'))]"
                         help="Helpdesk Tickets opened last month"/>
-                <filter string="This Month"
+                <filter name="this_month"
+                        string="This Month"
                         domain="[('date', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
                                  ('date', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"
                         help="Helpdesk Tickets opened this month"/>
                 <separator/>
                 <group expand="1" string="Group By">
-                    <filter string="Helpdesk Date" context="{'group_by':'date'}"/>
-                    <filter string="QC Team" context="{'group_by':'qc_team_id'}"/>
-                    <filter string="Problem Group" context="{'group_by':'problem_group_id'}"/>
-                    <filter string="Stage" context="{'group_by':'stage_id'}"/>
+                    <filter name="group_by_date" string="Helpdesk Date" context="{'group_by':'date'}"/>
+                    <filter name="group_by_team" string="QC Team" context="{'group_by':'qc_team_id'}"/>
+                    <filter name="group_by_problem_group" string="Problem Group" context="{'group_by':'problem_group_id'}"/>
+                    <filter name="group_by_stage" string="Stage" context="{'group_by':'stage_id'}"/>
                 </group>
             </search>
         </field>

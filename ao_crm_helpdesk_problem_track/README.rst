@@ -9,8 +9,8 @@ AO-specific customizations on crm helpdesk (problem tracking)
 This module contains customizations specific to Aleph Objects.
 
 * Adds problem tracking to helpdesk.
-* Adds problem tracking by helpdesk date tikets on:
-    * Quality Control > Problem Tracking > Problems Track Analysis
+* Adds a report that analyses problem tracking by helpdesk date tickets
+  located at *Quality Control > Problem Tracking > Problems Track Analysis*.
 
 Credits
 =======
