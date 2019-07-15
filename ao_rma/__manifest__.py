@@ -8,7 +8,7 @@
     "author": "Eficent",
     "website": "http://www.eficent.com",
     "category": "rma",
-    "depends": ["rma",
+    "depends": ["rma_account", "rma_repair",
                 ],
     "data": ["views/rma_operation_view.xml",
              "views/rma_order_line_view.xml"],
