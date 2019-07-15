@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="view_rma_order_line_make_repair" model="ir.ui.view">
+        <field name="name">RMA Line Make Repair</field>
+        <field name="model">rma.order.line.make.repair</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="rma_repair.view_rma_order_line_make_repair"/>
+        <field name="arch" type="xml">
+             <xpath expr="//group/field[@name='item_ids']/tree/field[@name='to_refurbish']" position="before">
+                 <field name="type_id"/>
+                 <field name="team_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

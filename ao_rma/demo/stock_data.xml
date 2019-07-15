@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--    LOCATION-->
+    <record id="rma_external_location" model="stock.location">
+        <field name="name">RMA External Location</field>
+        <field name="usage">customer</field>
+        <field name="return_location" eval="True"/>
+    </record>
+
+    <!--    SEQUENCES-->
+    <record id="seq_picking_rma_external_in" model="ir.sequence">
+        <field name="name">RMA EXT IN</field>
+        <field name="code">stock.picking</field>
+        <field name="prefix">RMA-EX-IN/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_picking_rma_external_out" model="ir.sequence">
+        <field name="name">RMA EXT OUT</field>
+        <field name="code">stock.picking</field>
+        <field name="prefix">RMA-EX-OUT/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_picking_rma_internal_in" model="ir.sequence">
+        <field name="name">RMA INT IN</field>
+        <field name="code">stock.picking</field>
+        <field name="prefix">RMA-INT-IN/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_picking_rma_internal_out" model="ir.sequence">
+        <field name="name">RMA INT OUT</field>
+        <field name="code">stock.picking</field>
+        <field name="prefix">RMA-INT-OUT/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!--    PICKING TYPES-->
+    <record id="picking_type_rma_cust_in" model="stock.picking.type">
+        <field name="name">Customer → RMA EXTERNAL</field>
+        <field name="sequence_id" ref="seq_picking_rma_external_in"/>
+        <field name="default_location_src_id" ref="stock.stock_location_customers"/>
+        <field name="default_location_dest_id"
+               ref="ao_rma.rma_external_location"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">incoming</field>
+    </record>
+
+    <record id="picking_type_rma_cust_out" model="stock.picking.type">
+        <field name="name">RMA EXTERNAL → Customer</field>
+        <field name="sequence_id" ref="seq_picking_rma_external_out"/>
+        <field name="default_location_src_id"
+               ref="ao_rma.rma_external_location"/>
+        <field name="default_location_dest_id" ref="stock.stock_location_customers"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">outgoing</field>
+    </record>
+
+    <!--    PROCUREMENT RULES-->
+
+    <record id="rule_rma_customer_in_pull" model="procurement.rule">
+        <field name="name">Customer → RMA External</field>
+        <field name="action">move</field>
+        <field name="warehouse_id" ref="stock.warehouse0"/>
+        <field name="location_src_id" ref="stock.stock_location_customers"/>
+        <field name="location_id" ref="ao_rma.rma_external_location"/>
+        <field name="procure_method">make_to_stock</field>
+        <field name="route_id" ref="rma.route_rma_customer"/>
+        <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_in"/>
+    </record>
+
+
+    <record id="rule_rma_customer_out_pull" model="procurement.rule">
+        <field name="name">RMA External → Customer</field>
+        <field name="action">move</field>
+        <field name="warehouse_id" ref="stock.warehouse0"/>
+        <field name="location_src_id" ref="ao_rma.rma_external_location"/>
+        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="procure_method">make_to_stock</field>
+        <field name="route_id" ref="rma.route_rma_customer"/>
+        <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_out"/>
+    </record>
+
+</odoo>

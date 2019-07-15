@@ -8,10 +8,16 @@
     "author": "Eficent",
     "website": "http://www.eficent.com",
     "category": "rma",
-    "depends": ["rma_account", "rma_repair",
+    "depends": ["rma", "rma_account", "rma_repair", "mrp_repair_account",
                 ],
     "data": ["views/rma_operation_view.xml",
-             "views/rma_order_line_view.xml"],
+             "views/rma_order_line_view.xml",
+             "wizards/rma_order_line_make_repair_view.xml",
+             ],
+    "demo": [
+        "demo/stock_data.xml",
+        "demo/rma_operation.xml",
+    ],
     "license": "AGPL-3",
     'installable': True,
 }

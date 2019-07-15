@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rma_operation_repair_nw" model="rma.operation">
+        <field name="name">Repair no warranty</field>
+        <field name="code">REP-NW</field>
+        <field name="receipt_policy">ordered</field>
+        <field name="delivery_policy">repair</field>
+        <field name="repair_type">received</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="mrp_repair_account.mrp_repair_type_warranty"/>
+        <field name="location_id" ref="ao_rma.rma_external_location"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_warranty" model="rma.operation">
+        <field name="name">Repair Under Warranty</field>
+        <field name="code">REP-W</field>
+        <field name="receipt_policy">ordered</field>
+        <field name="delivery_policy">repair</field>
+        <field name="repair_type">received</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="mrp_repair_account.mrp_repair_type_no_warranty"/>
+        <field name="location_id" ref="ao_rma.rma_external_location"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+</odoo>
