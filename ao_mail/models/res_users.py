@@ -37,7 +37,7 @@ class ResUsers(models.Model):
                 raise AccessError(
                     _('The user does not have access to System notifications '
                       'by Email.'))
-        if user.calendar_allow_ui_edition:
+        if user.notification_by_email:
             self.sudo().write({'groups_id': [(4, group.id)]})
         else:
             self.sudo().write({'groups_id': [(3, group.id)]})

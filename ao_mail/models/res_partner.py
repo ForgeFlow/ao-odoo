@@ -8,8 +8,9 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    def _notify(self, message, force_send=False,
-                send_after_commit=True, user_signature=True):
+    def _notify(self, message, rdata, record, force_send=False,
+                send_after_commit=True, model_description=False,
+                mail_auto_delete=True):
         if message.message_type == 'notification':
             notif_partners = self.filtered(
                 lambda partner: partner.mapped(
@@ -17,6 +18,8 @@ class Partner(models.Model):
         else:
             notif_partners = self
         return super(Partner, notif_partners)._notify(
-            message, force_send=force_send,
+            message, rdata, record, force_send=force_send,
             send_after_commit=send_after_commit,
-            user_signature=user_signature)
+            model_description=model_description,
+            mail_auto_delete=mail_auto_delete,
+        )
