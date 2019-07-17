@@ -6,7 +6,7 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_sales_order_filter"/>
         <field name="arch" type="xml">
-            <field name="product_id" position="after">
+            <field name="order_line" position="after">
                 <field name="state"/>
             </field>
             <group position="inside">
@@ -44,27 +44,60 @@
         <field name="model">sale.order.line</field>
         <field name="arch" type="xml">
             <search string="Search Uninvoiced Lines">
-                <filter string="To Do" domain="[('state','=','confirmed')]" name="sale order" help="Confirmed sales order lines, not yet delivered"/>
-                <filter string="Done" domain="[('state','=','done')]" name="sale_order_done" help="Sales order lines done"/>
-                <filter string="Shipped" domain="[('qty_to_deliver','=', 0)]" name="shipped" help="Sales Order Lines that are completely delivered"/>
+                <filter string="To Do"
+                        domain="[('state','=','confirmed')]"
+                        name="sale order"
+                        help="Confirmed sales order lines, not yet delivered"/>
+                <filter string="Done"
+                        domain="[('state','=','done')]"
+                        name="sale_order_done"
+                        help="Sales order lines done"/>
+                <filter string="Shipped"
+                        domain="[('qty_to_deliver','=', 0)]"
+                        name="shipped"
+                        help="Sales Order Lines that are completely delivered"/>
                 <separator/>
-                <filter string="To deliver" name="unshipped" domain="[('qty_to_deliver','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are pending to deliver"/>
+                <filter string="To deliver"
+                        name="unshipped"
+                        domain="[('qty_to_deliver','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]"
+                        help="Sales Order Lines that are pending to deliver"/>
                 <separator/>
-                <filter string="Partially delivered" name="partial" domain="[('qty_to_deliver','&lt;&gt;', 0),('qty_delivered','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are partially delivered"/>
+                <filter string="Partially delivered"
+                        name="partial"
+                        domain="[('qty_to_deliver','&lt;&gt;', 0),('qty_delivered','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are partially delivered"/>
                 <separator/>
-                <filter string="Uninvoiced" name="uninvoiced" domain="[('qty_to_invoice','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]" help="Sales Order Lines that are confirmed, done or in exception state and haven't yet been invoiced"/>
+                <filter string="Uninvoiced"
+                        name="uninvoiced"
+                        domain="[('qty_to_invoice','&lt;&gt;', 0),('state','&lt;&gt;','draft'),('state','&lt;&gt;','cancel'),('state','&lt;&gt;','sent')]"
+                        help="Sales Order Lines that are confirmed, done or in exception state and haven't yet been invoiced"/>
                 <separator/>
-                <filter string="My Sales Order Lines" icon="terp-personal" domain="[('salesman_id','=',uid)]" help="My Sales Order Lines"/>
+                <filter string="My Sales Order Lines"
+                        name="my_so_lines"
+                        icon="terp-personal"
+                        domain="[('salesman_id','=',uid)]"
+                        help="My Sales Order Lines"/>
                 <field name="order_id"/>
                 <field name="confirmation_date"/>
                 <field name="order_partner_id" operator="child_of"/>
                 <field name="product_id"/>
                 <field name="salesman_id"/>
                 <group expand="0" string="Group By...">
-                    <filter string="Order" domain="[]" context="{'group_by':'order_id'}" help="Order reference"/>
-                    <filter string="Product" domain="[]" context="{'group_by':'product_id'}"/>
-                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
-                    <filter string="Salesperson" domain="[]" context="{'group_by':'salesman_id'}"/>
+                    <filter string="Order"
+                            name="group_by_order"
+                            domain="[]" context="{'group_by':'order_id'}"
+                            help="Order reference"/>
+                    <filter string="Product"
+                            name="group_by_product"
+                            domain="[]"
+                            context="{'group_by':'product_id'}"/>
+                    <filter string="Status"
+                            name="group_by_status"
+                            domain="[]"
+                            context="{'group_by':'state'}"/>
+                    <filter string="Salesperson"
+                            name="group_by_salesman"
+                            domain="[]"
+                            context="{'group_by':'salesman_id'}"/>
                 </group>
             </search>
         </field>

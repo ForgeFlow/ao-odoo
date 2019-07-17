@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//p[@t-if='doc.payment_term_id.note']" position="after">
+        <xpath expr="//div[@t-if='doc.payment_term_id']" position="after">
             <tr>
                 <td>All Payments to be made in US Dollars.<br/></td>
                 <td>$25.00 Wire Fee Charge added to all International Wire Transactions.<br/></td>

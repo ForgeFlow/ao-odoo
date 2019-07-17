@@ -3,16 +3,16 @@
 
     <template id="ao_report_saleorder_document"
           inherit_id="sale.report_saleorder_document" primary="True">
-        <xpath expr="//t[@t-as='page']/table/thead/tr/th[2]" position="after">
+        <xpath expr="//div[hasclass('page')]/table/thead/tr/th[2]" position="after">
             <th class="text-right">Qty Delivered</th>
             <th class="text-right">Route</th>
         </xpath>
-        <xpath expr="//t[@t-foreach=&quot;layout_category['lines']&quot;]/tr/td[2]" position="after">
+        <xpath expr="//t[@t-foreach=&quot;doc.order_line&quot;]/tr/t[@t-if=&quot;not line.display_type&quot;]/td[2]" position="after">
             <td class="text-right">
-                <span t-field="l.qty_delivered"/>
+                <span t-field="line.qty_delivered"/>
             </td>
             <td class="text-right">
-                <span t-field="l.route_id"/>
+                <span t-field="line.route_id"/>
             </td>
         </xpath>
     </template>
