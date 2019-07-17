@@ -79,8 +79,8 @@
                     </div>
                 </button>
             </button>
-            <xpath expr="//div[hasclass('label','label-success','pull-right')]" position="before">
-                <div class="label label-danger pull-right" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">Lost</div>
+            <xpath expr="//div[hasclass('badge-pill','badge-success','float-right')]" position="before">
+                <div class="badge-pill badge-danger float-right" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">Lost</div>
             </xpath>
             <field name="name" position="attributes">
                 <attribute name="placeholder">e.g. Product Pricing</attribute>
@@ -160,7 +160,6 @@
                             </div>
                             <field name="function"/>
                             <field name="mobile"/>
-                            <field name="opt_out"/>
                         </group>
                         <group string="Marketing">
                             <field name="campaign_id" />

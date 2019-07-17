@@ -5,10 +5,14 @@ from odoo import fields, models
 
 
 class CrmStage(models.Model):
-    _inherit = 'crm.stage'
+    _inherit = "crm.stage"
 
     team_ids = fields.Many2many(
-        'crm.team', 'crm_team_stage_rel',
-        'stage_id', 'team_id', 'Teams',
+        comodel_name="crm.team",
+        relation="crm_team_stage_rel",
+        column1="stage_id",
+        column2="team_id",
+        string="Teams",
         help="Link between stages and sales teams. When set, this "
-             "limitate the current stage to the selected sales teams.")
+             "limit the current stage to the selected sales teams.",
+    )
