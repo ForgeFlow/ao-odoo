@@ -13,6 +13,7 @@ reporting-engine https://github.com/OCA/reporting-engine.git
 # crm2 https://github.com/Eficent/crm.git 11.0-add-crm_stage_type
 # module: ao_stock
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git
+stock-logistics-reporting
 # module: ao_mail
 social https://github.com/OCA/social.git
 # module: ddmrp_dlt_purchase_manual
