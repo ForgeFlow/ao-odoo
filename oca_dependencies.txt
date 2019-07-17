@@ -10,7 +10,7 @@ manufacture-reporting https://github.com/OCA/manufacture-reporting.git
 product-attribute https://github.com/OCA/product-attribute.git
 reporting-engine https://github.com/OCA/reporting-engine.git
 # module: ao_crm
-# crm2 https://github.com/Eficent/crm.git 11.0-add-crm_stage_type
+crm
 # module: ao_stock
 stock-logistics-warehouse https://github.com/OCA/stock-logistics-warehouse.git
 stock-logistics-reporting
