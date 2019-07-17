@@ -1,9 +1,18 @@
-# Copyright 2018 Aleph Objects Inc.
-# Copyright 2018 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018-19 Aleph Objects Inc.
+# Copyright 2018-19 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+
+from datetime import datetime as dt
+try:
+    fromisoformat = dt.fromisoformat
+except AttributeError:
+    # Make code compatible with python versions previous to 3.7
+    from backports.datetime_fromisoformat import MonkeyPatch
+    MonkeyPatch.patch_fromisoformat()
+    fromisoformat = dt.fromisoformat
 
 import operator as py_operator
 
@@ -34,7 +43,7 @@ class ProductProduct(models.Model):
             WHERE state = 'done'
             GROUP BY product_id
         """)
-        for product_id,  last_move_date in self.env.cr.fetchall():
+        for product_id, last_move_date in self.env.cr.fetchall():
             last_move[product_id] = last_move_date
         for rec in self:
             if rec.id in last_move.keys():
@@ -51,6 +60,9 @@ class ProductProduct(models.Model):
         for product in self.with_context(prefetch_fields=False).search([]):
             if not product['last_date_moved']:
                 continue
-            if OPERATORS[operator](product['last_date_moved'], value):
+            # Comparison is done between two naive datetimes.
+            if OPERATORS[operator](
+                    product['last_date_moved'],
+                    fromisoformat(value.replace("Z", ""))):
                 ids.append(product.id)
         return [('id', 'in', ids)]

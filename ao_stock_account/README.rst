@@ -20,6 +20,14 @@ This module contains customizations specific to Aleph Objects:
 * When reversing a transfer, set the field 'to refund' to true by
   default (#20925)
 
+Installation
+============
+
+If you use a **python version lower than 3.7**, you will have an extra
+dependency. Install it by running::
+
+    pip install backports-datetime-fromisoformat
+
 Credits
 =======
 
