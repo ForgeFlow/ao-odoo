@@ -4,7 +4,7 @@
 
 {
     "name": "AO-specific customizations on stock",
-    "version": "11.0.1.1.0",
+    "version": "12.0.1.1.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Warehouse Management",
@@ -26,5 +26,5 @@
         "reports/stock_request_kanban_templates.xml",
     ],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }

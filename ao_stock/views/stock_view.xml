@@ -23,7 +23,7 @@
             <field name="location_dest_id" position="attributes">
                 <attribute name="attrs">{}</attribute>
             </field>
-            <xpath expr="//field[@name='move_lines']/tree/field[@name='product_uom_qty']"
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']"
                    position="after">
                 <field name="display_source_loc" invisible="1"/>
                 <field name="qty_available_in_source_loc"
