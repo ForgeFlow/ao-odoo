@@ -41,6 +41,7 @@
         view_mode="form" target="new" view_type="form"
         context="{'mass_convert' : True}"
         view_id="view_change_standard_price"
+        groups="product_bom_standard_cost_align.group_align_bom_cost_user"
     />
 
 </odoo>

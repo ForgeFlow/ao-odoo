@@ -12,7 +12,7 @@
                     name="%(action_view_change_standard_price)d"
                         attrs="{'invisible':['|',('valuation','!=', 'real_time'), ('cost_method', 'not in', ['standard'])]}"
                     context="{'bom_standard_cost': 1}"
-                    groups="product_bom_standard_cost_align.group_align bom_cost_user"
+                    groups="product_bom_standard_cost_align.group_align_bom_cost_user"
                     class="oe_link oe_read_only" colspan="2"/>
             </field>
         </field>

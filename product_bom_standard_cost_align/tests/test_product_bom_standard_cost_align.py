@@ -19,8 +19,8 @@ class TestProductBomStandardCostAlign(common.SavepointCase):
         cls.produce_wiz = cls.env['mrp.product.produce']
         cls.sm_obj = cls.env['stock.move']
 
-        cls.uom_unit = cls.env.ref('product.product_uom_unit')
-        cls.uom_dozen = cls.env.ref('product.product_uom_dozen')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
+        cls.uom_dozen = cls.env.ref('uom.product_uom_dozen')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.customer_location = cls.env.ref('stock.stock_location_customers')
 

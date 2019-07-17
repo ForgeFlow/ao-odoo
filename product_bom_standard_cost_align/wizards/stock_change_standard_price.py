@@ -1,4 +1,4 @@
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, models
@@ -41,4 +41,4 @@ class StockChangeStandardPrice(models.TransientModel):
                         product.bom_standard_cost,
                         self.counterpart_account_id.id)
             return {'type': 'ir.actions.act_window_close'}
-        super(StockChangeStandardPrice, self).change_price()
+        return super(StockChangeStandardPrice, self).change_price()
