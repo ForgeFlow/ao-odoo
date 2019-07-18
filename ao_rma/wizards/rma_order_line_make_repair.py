@@ -29,4 +29,6 @@ class RmaLineMakeRepairItem(models.TransientModel):
             rma_line)
         res['type_id'] = self.type_id.id
         res['team_id'] = self.team_id.id
+        if self.type_id.to_refurbish and self.type_id.refurbish_location_id:
+            res['location_dest_id'] = self.type_id.refurbish_location_id.id
         return res

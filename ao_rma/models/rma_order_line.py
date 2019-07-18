@@ -115,7 +115,7 @@ class RmaOrderLine(models.Model):
                         op(m.location_id.usage,
                            rec.type)
                         and not m.location_dest_id.return_location or
-                        m.location_dest_id.return_location))
+                        m.location_id.return_location))
             for move in moves:
                 qty += product_obj._compute_quantity(
                     move.product_uom_qty, rec.uom_id)

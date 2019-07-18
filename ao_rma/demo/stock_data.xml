@@ -62,6 +62,17 @@
         <field name="code">outgoing</field>
     </record>
 
+    <record id="picking_type_rma_cust_internal" model="stock.picking.type">
+        <field name="name">Customer → RMA Internal</field>
+        <field name="sequence_id" ref="seq_picking_rma_internal_in"/>
+        <field name="default_location_src_id" ref="stock.stock_location_customers"/>
+        <field name="default_location_dest_id"
+               ref="stock.stock_location_stock"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">incoming</field>
+    </record>
+
+
     <!--    PROCUREMENT RULES-->
 
     <record id="rule_rma_customer_in_pull" model="procurement.rule">
@@ -75,7 +86,6 @@
         <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_in"/>
     </record>
 
-
     <record id="rule_rma_customer_out_pull" model="procurement.rule">
         <field name="name">RMA External → Customer</field>
         <field name="action">move</field>
@@ -85,6 +95,17 @@
         <field name="procure_method">make_to_stock</field>
         <field name="route_id" ref="rma.route_rma_customer"/>
         <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_out"/>
+    </record>
+
+    <record id="rule_rma_customer_internal_pull" model="procurement.rule">
+        <field name="name">Customer → RMA Internal</field>
+        <field name="action">move</field>
+        <field name="warehouse_id" ref="stock.warehouse0"/>
+        <field name="location_src_id" ref="stock.stock_location_customers"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="procure_method">make_to_stock</field>
+        <field name="route_id" ref="rma.route_rma_customer"/>
+        <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_internal"/>
     </record>
 
 </odoo>
