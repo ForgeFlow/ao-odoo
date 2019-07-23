@@ -10,7 +10,7 @@ class StockQuantityHistory(models.TransientModel):
     _inherit = 'stock.quantity.history'
 
     date_wizard = fields.Date(
-        'Inventory at Date',
+        'Inventory at Selected Date',
         help="Choose a date to get the inventory at that date",
         default=fields.Date.context_today
     )
