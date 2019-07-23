@@ -13,9 +13,9 @@ class CrmHelpdesk(models.Model):
             'helpdesk_warn'].selection,
         string='Warning message',
         related='partner_id.helpdesk_warn')
-    helpdesk_warn_msg = fields.Text('Message for Helpdesk Tickets',
+    helpdesk_warn_msg = fields.Text('Warning Message for Helpdesk Tickets',
                                     compute='_compute_helpdesk_msg')
-    helpdesk_block_msg = fields.Text('Message for Helpdesk Tickets',
+    helpdesk_block_msg = fields.Text('Blocking Message for Helpdesk Tickets',
                                      compute='_compute_helpdesk_msg')
 
     @api.depends('partner_id')
