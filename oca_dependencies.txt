@@ -25,3 +25,5 @@ server-tools https://github.com/OCA/server-tools.git
 stock-rma https://github.com/Eficent/stock-rma.git
 # module: ao_stock_account
 # stock-logistics-reporting https://github.com/Eficent/stock-logistics-reporting.git 11.0-stock_account_valuation_report
+# module: purchase_unreconciled
+purchase-workflow https://github.com/OCA/purchase-workflow.git
