@@ -4,11 +4,11 @@
 from odoo import api, models
 
 
-class ProcurementRule(models.Model):
-    _inherit = 'procurement.rule'
+class StockRule(models.Model):
+    _inherit = 'stock.rule'
 
     @api.model
     def _make_pr_get_domain(self, values):
-        super(ProcurementRule, self)._make_pr_get_domain(values)
+        super(StockRule, self)._make_pr_get_domain(values)
         domain = (('id', '=', 0),)
         return domain
