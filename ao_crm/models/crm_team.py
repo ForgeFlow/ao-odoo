@@ -18,3 +18,9 @@ class CrmTeam(models.Model):
         else:
             result = super(CrmTeam, self).write(vals)
         return result
+
+    @api.model
+    def action_your_pipeline(self):
+        action = super(CrmTeam, self).action_your_pipeline()
+        action['context'].pop('default_team_id', None)
+        return action
