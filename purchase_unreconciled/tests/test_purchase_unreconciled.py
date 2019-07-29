@@ -25,9 +25,18 @@ class TestPurchaseUnreconciled(common.SingleTransactionCase):
             "name": "Test Vendor",
         })
         # Create standard product:
+        product_categ_1 = cls.category_obj.create({
+            "name": "Test Category 1",
+            "property_valuation": 'manual_periodic',
+            "property_cost_method": 'average',
+            "property_stock_account_input_categ_id": False,
+            "property_stock_account_output_categ_id": False,
+        })
         cls.product = cls.product_obj.create({
             "name": "Purchased Product",
             "type": "product",
+            "categ_id": product_categ_1.id,
+            "standard_price": 100.0,
         })
         # Create product that uses a reconcilable stock input account.
         cls.account = cls.acc_obj.create({
@@ -36,14 +45,17 @@ class TestPurchaseUnreconciled(common.SingleTransactionCase):
             "user_type_id": assets.id,
             "reconcile": True,
         })
-        product_categ = cls.category_obj.create({
+        product_categ_2 = cls.category_obj.create({
             "name": "Test Category",
             "property_stock_account_input_categ_id": cls.account.id,
+            "property_valuation": 'real_time',
+            "property_cost_method": 'average',
         })
         cls.product_to_reconcile = cls.product_obj.create({
             "name": "Purchased Product (To reconcile)",
             "type": "product",
-            "categ_id": product_categ.id,
+            "categ_id": product_categ_2.id,
+            "standard_price": 100.0,
         })
 
         # Create PO's:
@@ -103,7 +115,7 @@ class TestPurchaseUnreconciled(common.SingleTransactionCase):
         self.assertEqual(po.state, "draft")
         po.button_confirm()
         self._do_picking(po.picking_ids, fields.Datetime.now())
-        self.assertFalse(po.unreconciled)
+        self.assertTrue(po.unreconciled)
         # Invoice created and validated:
         invoice = self.invoice_obj.create({
             "partner_id": self.partner.id,
@@ -114,13 +126,18 @@ class TestPurchaseUnreconciled(common.SingleTransactionCase):
         invoice.purchase_order_change()
         invoice.action_invoice_open()
         self.assertEqual(po.state, "purchase")
-        self.assertTrue(po.unreconciled)
+        # In v12 Odoo will attempt to automatically reconcile stock entries
+        # with the invoice.
+        po._compute_unreconciled()
+        is_unreconciled = po.unreconciled
+        self.assertFalse(is_unreconciled)
 
     def test_03_search_unreconciled(self):
         """Test searching unreconciled PO's."""
-        res = self.po_obj.search([("unreconciled", "=", True)])
+        res = self.po_obj.search(
+            [("unreconciled", "=", True)])
         self.assertNotIn(self.po, res)
-        self.assertIn(self.po_2, res)
+        self.assertNotIn(self.po_2, res)
         # Test value error:
         with self.assertRaises(ValueError):
             self.po_obj.search([("unreconciled", "=", "true")])

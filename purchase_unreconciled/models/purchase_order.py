@@ -20,6 +20,7 @@ class PurchaseOrder(models.Model):
     def _compute_unreconciled(self):
         acc_item = self.env["account.move.line"]
         for rec in self:
+            rec.unreconciled = False
             unreconciled_items = acc_item.search([
                 ("purchase_id", "=", rec.id),
                 ("account_id.reconcile", "=", True),
