@@ -13,11 +13,11 @@ class Mail(models.Model):
         return self.env[self.model].browse(self.res_id).reply_to
 
     @api.multi
-    def send_get_email_dict(self, partner=None):
+    def _send_prepare_values(self, partner=None):
         self.ensure_one()
         replacefrom = self.env['ir.config_parameter'].sudo().get_param(
             'crm.lead.replace.email.from', default=False)
         if replacefrom and self.model == "crm.lead":
             email_from = self._get_crm_lead_email_from()
             self.email_from = email_from
-        return super().send_get_email_dict(partner=partner)
+        return super()._send_prepare_values(partner=partner)

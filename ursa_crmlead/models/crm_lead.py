@@ -24,20 +24,25 @@ class CrmLead(models.Model):
         for rec in not_standard:
             rec.reply_to = ao_fallback_mail
         standard = (self - not_standard)
-        aliases = self.env['crm.team'].message_get_reply_to(
-            standard.mapped('team_id').ids, default=None)
-        for rec in standard:
-            rec.reply_to = aliases.get(
-                rec.team_id.id or 0, ao_fallback_mail)
+        if standard:
+            aliases = self.mapped('team_id')._notify_get_reply_to(default=None)
+            for rec in standard:
+                rec.reply_to = aliases.get(
+                    rec.team_id.id or 0, ao_fallback_mail)
 
     @api.model
-    def message_get_reply_to(self, res_ids, default=None):
-        res = super().message_get_reply_to(res_ids, default=default)
+    def _notify_get_reply_to(
+            self, default=None, records=None, company=None, doc_names=None,
+    ):
+        res = super()._notify_get_reply_to(
+            default=default, records=records,
+            company=company, doc_names=doc_names,
+        )
         default_reply_to = self.env['ir.config_parameter'].sudo().get_param(
             "crm.lead.default.reply.to", default=False)
         if not default_reply_to:
             return res
-        leads_to_modify = self.browse(res_ids).filtered(
+        leads_to_modify = self.filtered(
             lambda r: not r.team_id.reply_to_alias)
         for lead in leads_to_modify:
             res[lead.id] = default_reply_to

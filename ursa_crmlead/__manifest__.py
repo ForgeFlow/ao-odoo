@@ -4,7 +4,7 @@
 
 {
     "name": "Lead Set Reply-To",
-    "version": "11.0.1.1.0",
+    "version": "12.0.1.1.0",
     "author": "Ursa Information Systems, Eficent",
     "license": "AGPL-3",
     "category": "CRM",
