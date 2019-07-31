@@ -10,6 +10,9 @@ This module contains customizations specific to Aleph Objects.
 
 * Disables the capability to group into a single purchase request
   from various procurements.
+* Purchase Request Product Usage custom workflow:
+    * Usage is seen by Purchase Request Users also
+    * Usage is required if Product is Consumible or a Service
 
 Credits
 =======

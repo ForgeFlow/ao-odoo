@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3.0) -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_purchase_request_form">
+        <field name="name">purchase.request.form</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request_product_usage.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='usage_id']"
+                   position="before">
+                <field name="product_type" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='usage_id']"
+                   position="attributes">
+                <attribute name="attrs">{'required': ['|', ('product_id','=', False), ('product_type', 'in', ['consu', 'service'])]}</attribute>
+                <attribute name="groups"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/sheet/group/group/field[@name='usage_id']"
+                   position="before">
+                <field name="product_type" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/form/sheet/group/group/field[@name='usage_id']"
+                   position="attributes">
+                <attribute name="attrs">{'required': ['|', ('product_id','=', False), ('product_type', 'in', ['consu', 'service'])]}</attribute>
+                <attribute name="groups"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="purchase_request_line_form">
+        <field name="name">purchase.request.line.form</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request_product_usage.purchase_request_line_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//sheet/group/group/field[@name='usage_id']" position="before">
+                <field name="product_type" invisible="1"/>
+             </xpath>
+             <xpath expr="//sheet/group/group/field[@name='usage_id']" position="attributes">
+                <attribute name="attrs">{'required': ['|', ('product_id','=', False), ('product_type', 'in', ['consu', 'service'])]}</attribute>
+                <attribute name="groups"/>
+             </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_request_line_search" model="ir.ui.view">
+        <field name="name">purchase.request.line.search</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request_product_usage.purchase_request_line_search"/>
+        <field name="arch" type="xml">
+            <field name="usage_id" position="replace">
+                <field name="product_type" invisible="1"/>
+                <field name="usage_id" attrs="{'required': ['|', ('product_id','=', False), ('product_type', 'in', ['consu', 'service'])]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3.0) -->
+<odoo>
+
+    <record id="view_purchase_request_line_make_purchase_order" model="ir.ui.view">
+        <field name="name">Purchase Request Line Make Purchase Order</field>
+        <field name="model">purchase.request.line.make.purchase.order</field>
+        <field name="inherit_id" ref="purchase_request_product_usage.view_purchase_request_line_make_purchase_order"/>
+        <field name="arch" type="xml">
+            <field name="usage_id" position="replace">
+                <field name="product_type" invisible="1"/>
+                <field name="usage_id" attrs="{'required': ['|', ('product_id','=', False), ('product_type', 'in', ['consu', 'service'])]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
+
