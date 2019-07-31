@@ -4,13 +4,14 @@
 
 {
     "name": "AO-specific customizations on purchase",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.1.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "http://www.eficent.com",
     "category": "Product",
-    "depends": ["purchase", "product"],
+    "depends": ["purchase", "product", "purchase_product_usage"],
     "data": [
         "views/purchase_order_view.xml",
+        "views/purchase_order_line_view.xml",
         "views/product_view.xml",
         "views/report_purchase_order.xml",
     ],

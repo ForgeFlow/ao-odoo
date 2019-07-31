@@ -17,6 +17,8 @@ This module contains customizations specific to Aleph Objects.
 * Add a *Unread Messages* filter to bypass a
   `bug <https://github.com/odoo/odoo/issues/16763>`_ with *New Mail* filter of
   odoo standard. (**removed - fixed in upstream**).
+* Purchase Product Usage custom workflow:
+    * Usage is required if Product is Consumible or a Service
 
 Credits
 =======
