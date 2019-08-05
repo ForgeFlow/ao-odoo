@@ -11,16 +11,16 @@ class RmaLineMakeRepair(models.TransientModel):
     def _prepare_item(self, line):
         res = super(RmaLineMakeRepair, self)._prepare_item(line)
         res['type_id'] = line.operation_id.repair_type_id.id
-        res['team_id'] = line.assigned_to.mrp_repair_team_id.id
+        res['team_id'] = line.assigned_to.repair_team_id.id
         res['invoice_method'] = \
             line.operation_id.repair_type_id.invoice_method or 'none'
         res['to_refurbish'] = line.operation_id.repair_type_id.to_refurbish
         if not line.operation_id.repair_type_id.to_refurbish:
             res['refurbish_product_id'] = False
         if not line.operation_id.repair_type_id.force_repair_location:
-            res['location_id'] = line.assigned_to.mrp_repair_team_id. \
+            res['location_id'] = line.assigned_to.repair_team_id. \
                 default_repair_src_location_id.id
-            res['location_dest_id'] = line.assigned_to.mrp_repair_team_id. \
+            res['location_dest_id'] = line.assigned_to.repair_team_id. \
                 default_repair_dest_location_id.id
         else:
             res['location_id'] = line.operation_id.repair_type_id.\
@@ -33,8 +33,8 @@ class RmaLineMakeRepair(models.TransientModel):
 class RmaLineMakeRepairItem(models.TransientModel):
     _inherit = "rma.order.line.make.repair.item"
 
-    type_id = fields.Many2one('mrp.repair.type')
-    team_id = fields.Many2one('mrp.repair.team')
+    type_id = fields.Many2one('repair.type')
+    team_id = fields.Many2one('repair.team')
 
     @api.model
     def _prepare_repair_order(self, rma_line):

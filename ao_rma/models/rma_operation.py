@@ -7,4 +7,4 @@ from odoo import fields, models
 class RmaOperation(models.Model):
     _inherit = 'rma.operation'
 
-    repair_type_id = fields.Many2one('mrp.repair.type')
+    repair_type_id = fields.Many2one('repair.type')

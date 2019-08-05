@@ -11,21 +11,21 @@ class TestRma(common.SavepointCase):
     def setUpClass(cls):
         super(TestRma, cls).setUpClass()
         cls.rma_make_picking = cls.env['rma_make_picking.wizard']
-        cls.repair_line_obj = cls.env['mrp.repair.line']
+        cls.repair_line_obj = cls.env['repair.line']
         cls.rma = cls.env['rma.order']
         cls.rma_line = cls.env['rma.order.line']
         cls.rma_op = cls.env['rma.operation']
         cls.product_id = cls.env.ref('product.product_product_4')
-        cls.uom_unit = cls.env.ref('product.product_uom_unit')
+        cls.uom_unit = cls.env.ref('uom.product_uom_unit')
         cls.partner_id = cls.env.ref('base.res_partner_2')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.stock_location_repair_refurbish = cls.env.ref(
-            'mrp_repair_account.stock_location_repair_refurbish')
+            'repair_account.stock_location_repair_refurbish')
         cls.customer_location = cls.env.ref(
             'stock.stock_location_customers')
         cls.supplier_location = cls.env.ref(
             'stock.stock_location_suppliers')
-        cls.product_uom_id = cls.env.ref('product.product_uom_unit')
+        cls.product_uom_id = cls.env.ref('uom.product_uom_unit')
         cls.rma_external_location = cls.env.ref(
             'ao_rma.rma_external_location')
         cls.stock_location_customers = cls.env.ref(
@@ -38,12 +38,15 @@ class TestRma(common.SavepointCase):
         cls.operation_ref = cls.env.ref('ao_rma.rma_operation_repair_refurbish')
         cls.rma_make_repair_wiz = cls.env['rma.order.line.make.repair']
         cls.repair_team = cls.env.ref(
-            'mrp_repair_account.mrp_repair_team_dep1')
+            'repair_account.repair_team_dep1')
         cls.repair_type = cls.env.ref(
-            'mrp_repair_account.mrp_repair_type_no_warranty')
+            'repair_account.repair_type_no_warranty')
+        cls.repair_type.force_repair_location = cls.rma_external_location.id
         cls.aml_obj = cls.env['account.move.line']
         cls.acc_type_model = cls.env['account.account.type']
         cls.move_obj = cls.env['stock.move']
+
+        cls.env.user.repair_team_id = cls.repair_team.id
         cls.product_obj = cls.env['product.product']
         cls.refurbish_product = cls.product_obj.create({
             'name': 'Refurbished Awesome Screen',

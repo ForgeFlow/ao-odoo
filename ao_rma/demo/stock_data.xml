@@ -75,9 +75,9 @@
 
     <!--    PROCUREMENT RULES-->
 
-    <record id="rule_rma_customer_in_pull" model="procurement.rule">
+    <record id="rule_rma_customer_in_pull" model="stock.rule">
         <field name="name">Customer → RMA External</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="warehouse_id" ref="stock.warehouse0"/>
         <field name="location_src_id" ref="stock.stock_location_customers"/>
         <field name="location_id" ref="ao_rma.rma_external_location"/>
@@ -86,9 +86,9 @@
         <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_in"/>
     </record>
 
-    <record id="rule_rma_customer_out_pull" model="procurement.rule">
+    <record id="rule_rma_customer_out_pull" model="stock.rule">
         <field name="name">RMA External → Customer</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="warehouse_id" ref="stock.warehouse0"/>
         <field name="location_src_id" ref="ao_rma.rma_external_location"/>
         <field name="location_id" ref="stock.stock_location_customers"/>
@@ -97,9 +97,9 @@
         <field name="picking_type_id" ref="ao_rma.picking_type_rma_cust_out"/>
     </record>
 
-    <record id="rule_rma_customer_internal_pull" model="procurement.rule">
+    <record id="rule_rma_customer_internal_pull" model="stock.rule">
         <field name="name">Customer → RMA Internal</field>
-        <field name="action">move</field>
+        <field name="action">pull</field>
         <field name="warehouse_id" ref="stock.warehouse0"/>
         <field name="location_src_id" ref="stock.stock_location_customers"/>
         <field name="location_id" ref="stock.stock_location_stock"/>

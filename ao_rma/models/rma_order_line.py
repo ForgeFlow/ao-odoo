@@ -127,7 +127,7 @@ class RmaOrderLine(models.Model):
     @api.multi
     def _get_rma_move_qty(self, states, direction='in'):
         for rec in self:
-            product_obj = self.env['product.uom']
+            product_obj = self.env['uom.uom']
             qty = 0.0
             if direction == 'in':
                 op = ops['=']

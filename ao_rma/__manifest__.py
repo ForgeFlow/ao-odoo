@@ -4,12 +4,12 @@
 
 {
     "name": "RMA Customizations",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent",
     "website": "http://www.eficent.com",
     "category": "rma",
-    "depends": ["rma", "rma_account", "rma_repair", "mrp_repair_account",
-                "mrp_repair_refurbish",
+    "depends": ["rma", "account_move_line_rma_order_line", "rma_repair",
+                "repair_account", "repair_refurbish",
                 ],
     "data": ["views/rma_operation_view.xml",
              "views/rma_order_line_view.xml",
