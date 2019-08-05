@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem name="Configuration"
+              id="quality_control.menu_qc_config"
+              groups="quality_control.group_quality_control_manager"
+              parent="quality_control.qc_menu"
+              sequence="100"/>
+
+    <menuitem name="Quality Control Teams"
+              id="quality_control_team.qc_team_config_menu"
+              groups="quality_control.group_quality_control_manager"
+              parent="quality_control.menu_qc_config"
+              action="quality_control_team.qc_team_config_action"
+              sequence="10"/>
+
+    <menuitem name="Issue Stages"
+              id="quality_control_issue.qc_issue_stage_config_menu"
+              groups="quality_control.group_quality_control_manager"
+              parent="quality_control.menu_qc_config"
+              action="quality_control_issue.qc_issue_stage_config_action"
+              sequence="20"/>
+
+    <menuitem name="Problem Stages"
+              id="quality_control_issue.qc_stage_config_menu"
+              groups="quality_control.group_quality_control_manager"
+              parent="quality_control.menu_qc_config"
+              action="quality_control_issue.qc_problem_stage_config_action"
+              sequence="30"/>
+
+</odoo>
