@@ -11,5 +11,6 @@ class Lead2OpportunityPartner(models.TransientModel):
     def default_get(self, fields):
         result = super(Lead2OpportunityPartner, self).default_get(fields)
         # Force Convert Action to be Convert to opportunity as default always
-        result['name'] = 'convert'
+        if 'name' in result:
+            result['name'] = 'convert'
         return result
