@@ -14,14 +14,6 @@ class CrmHelpdesk(models.Model):
         default='support@lulzbot.com',
     )
 
-    @api.multi
-    def message_update(self, msg, update_vals=None):
-        for ticket in self:
-            if ticket.state == 'done':
-                self.sudo().write({'state': 'open'})
-        return super().message_update(
-            msg, update_vals=update_vals)
-
     @api.model
     def message_get_reply_to(self, res_ids, default=None):
         model_name = self.env.context.get('thread_model') or self._name

@@ -44,13 +44,10 @@ class CrmHelpdesk(models.Model):
     def _onchange_partner_id(self):
         self.priority = self._get_default_priority()
 
-    @api.model
-    def message_new(self, msg, custom_values=None):
-        """
-        When state Resolved and a message is catch, change state to In Progress
-        """
-        res = super(CrmHelpdesk, self).message_new(
-            msg, custom_values=custom_values)
-        if self.state == 'resolved':
-            self.write({'state': 'open'})
-        return res
+    @api.multi
+    def message_update(self, msg, update_vals=None):
+        for ticket in self:
+            if ticket.state in ('done', 'resolved'):
+                self.sudo().write({'state': 'open'})
+        return super().message_update(
+            msg, update_vals=update_vals)
