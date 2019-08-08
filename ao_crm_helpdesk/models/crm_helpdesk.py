@@ -43,3 +43,11 @@ class CrmHelpdesk(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         self.priority = self._get_default_priority()
+
+    @api.multi
+    def message_update(self, msg, update_vals=None):
+        for ticket in self:
+            if ticket.state in ('done', 'resolved'):
+                self.sudo().write({'state': 'open'})
+        return super().message_update(
+            msg, update_vals=update_vals)
