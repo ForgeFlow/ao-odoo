@@ -3,7 +3,7 @@
 
 {
     "name": "AO-specific customizations for Products",
-    "version": "11.0.1.1.0",
+    "version": "11.0.1.2.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "https://www.eficent.com",
     "category": "Product",
@@ -12,6 +12,7 @@
         "security/product_security.xml",
         "security/ir.model.access.csv",
         "views/ao_cluster_product.xml",
+        "views/ao_qc_product_template.xml",
         "views/product_product_view.xml",
         "views/product_template_view.xml",
     ],

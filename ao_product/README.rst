@@ -12,6 +12,7 @@ This module contains customizations specific to Aleph Objects.
 * Add *Product Maintainer* security group. This group is the only allowed
   to create products.
 * Add extra Tab for Cluster products
+* Add extra Notes for Inspection Criteria on Product Card
 
 Credits
 =======
