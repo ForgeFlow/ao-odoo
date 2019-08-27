@@ -5,7 +5,7 @@
 {
     "name": "United States - Localizations",
     "category": "Accounting & Finance",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "summary": "This module quickly configures OpenERP for the "
                "most common needs of the United States market.",
     "author": "Ursa Information Systems",

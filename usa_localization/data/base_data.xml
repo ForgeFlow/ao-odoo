@@ -11,7 +11,7 @@
         <field name="name">English</field>
         <field name="code">en_US</field>
         <field name="grouping">[3,3,3]</field>
-        <field name="time_format">%I:%M %p</field>
+        <field name="time_format">%I:%M:%S %p</field>
     </record>
         
     <record id="base.main_company" model="res.company">
