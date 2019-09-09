@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo noupdate="0">
+    <record id="rma_operation_repair_nw" model="rma.operation">
+        <field name="name">No Warranty Repair</field>
+        <field name="code">NW REPAIR</field>
+        <field name="receipt_policy">ordered</field>
+        <field name="delivery_policy">repair</field>
+        <field name="repair_type" ref="received"/>
+        <field name="repair_type_id" ref="rma_account.epair_type_no_warranty"/>
+        <field name="type">customer</field>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_w" model="rma.operation">
+        <field name="name">Warranty Repair</field>
+        <field name="code">W REPAIR</field>
+        <field name="receipt_policy">ordered</field>
+        <field name="delivery_policy">repair</field>
+        <field name="repair_type" ref="received"/>
+        <field name="repair_type_id" ref="rma_account.repair_type_warranty"/>
+        <field name="type">customer</field>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_internal" model="rma.operation">
+        <field name="name">Internal Repair</field>
+        <field name="code">IN REPAIR</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type" ref="ordered"/>
+        <field name="repair_type" ref="rma_account.repair_type_internal"/>
+        <field name="type">customer</field>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_refurbished" model="rma.operation">
+        <field name="name">Refurbished Repair</field>
+        <field name="code">REFURBISH</field>
+        <field name="receipt_policy">ordered</field>
+        <field name="delivery_policy">repair</field>
+        <field name="repair_type" ref="received"/>
+        <field name="repair_type_id" ref="rma_account.repair_type_refurbish"/>
+        <field name="type">customer</field>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+</odoo>
