@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--COPY FROM DEMO rma_account module-->
+<odoo noupdate="1">
+    <record id="demo_account_cogr" model="account.account">
+        <field name="name">Cost of Goods Repaired</field>
+        <field name="code">99991</field>
+        <field name="user_type_id" ref="account.data_account_type_current_assets" />
+    </record>
+
+    <record id="demo_account_uwr" model="account.account">
+        <field name="name">Under Warranty Repairs</field>
+        <field name="code">99994</field>
+        <field name="user_type_id" ref="account.data_account_type_current_assets" />
+    </record>
+
+    <record id="demo_account_ofs" model="account.account">
+        <field name="name">Office Supplies Repairs</field>
+        <field name="code">99997</field>
+        <field name="user_type_id" ref="account.data_account_type_current_assets" />
+    </record>
+
+    <record id="demo_account_refr" model="account.account">
+        <field name="name">Refurbished Repairs</field>
+        <field name="code">99998</field>
+        <field name="user_type_id" ref="account.data_account_type_current_assets" />
+    </record>
+
+    <record id="demo_account_labor_all" model="account.account">
+        <field name="name">Labor Allocation</field>
+        <field name="code">44441</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="demo_account_overhead_all" model="account.account">
+        <field name="name">Overhead Allocation</field>
+        <field name="code">44444</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="repair_journal" model="account.journal">
+        <field name="name">Repairs</field>
+        <field name="code">REPAIRS</field>
+        <field name="type">general</field>
+        <field name="show_on_dashboard" eval="False"/>
+    </record>
+
+</odoo>

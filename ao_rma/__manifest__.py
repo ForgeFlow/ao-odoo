@@ -16,8 +16,11 @@
              "wizards/rma_order_line_make_repair_view.xml",
              ],
     "demo": [
-        "demo/stock_data.xml",
-        "demo/rma_operation.xml",
+        "data/account_data.xml",
+        "data/repair_data.xml",
+        "data/stock_data.xml",
+        "data/rma_operation.xml",
+
     ],
     "license": "AGPL-3",
     'installable': True,

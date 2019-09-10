@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--COPY FROM DEMO rma_account module-->
+<odoo noupdate="1">
+    <!--        TEAM        -->
+    <record id="repair_team_dep1" model="repair.team">
+        <field name="name">Team 1</field>
+        <field name="default_raw_material_location_id"
+               ref="stock.stock_location_stock"/>
+        <field name="default_repair_src_location_id"
+               ref="stock.stock_location_stock"/>
+        <field name="default_repair_dest_location_id"
+               ref="stock.stock_location_stock"/>
+        <field name="labor_allocation_account_id" ref="ao_rma.demo_account_labor_all"/>
+        <field name="overhead_allocation_account_id" ref="ao_rma.demo_account_overhead_all"/>
+        <field name="labor_standard_cost" eval="10.0"/>
+        <field name="overhead_standard_cost" eval="10.0"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!--    LOCATIONS AND TYPES-->
+    <!--    WITHOUT WARRANTY-->
+    <record id="stock_location_repair" model="stock.location">
+        <field name="name">Raw Material Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="valuation_in_account_id" ref="ao_rma.demo_account_cogr"/>
+        <field name="valuation_out_account_id" ref="ao_rma.demo_account_cogr"/>
+        <field name="company_id"></field>
+
+    </record>
+
+    <record id="repair_type_no_warranty" model="repair.type">
+        <field name="name">No warranty repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair"/>
+        <field name="journal_id" ref="ao_rma.repair_journal"/>
+        <field name="invoice_method">after_repair</field>
+        <field name="wip_account_id" ref="ao_rma.demo_account_cogr"/>
+    </record>
+
+    <!--        WITH WARRANTY-->
+    <record id="stock_location_repair_warranty" model="stock.location">
+        <field name="name">Raw Material Warranty Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" ref="ao_rma.demo_account_uwr"/>
+        <field name="valuation_out_account_id" ref="ao_rma.demo_account_uwr"/>
+    </record>
+
+    <record id="repair_type_warranty" model="repair.type">
+        <field name="name">Warranty repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_warranty"/>
+        <field name="under_warranty" eval="True"/>
+        <field name="journal_id" ref="ao_rma.repair_journal"/>
+        <field name="wip_account_id" ref="ao_rma.demo_account_uwr"/>
+    </record>
+
+    <!--        INTERNAL-->
+    <record id="stock_location_repair_internal" model="stock.location">
+        <field name="name">Raw Material Internal Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" ref="ao_rma.demo_account_ofs"/>
+        <field name="valuation_out_account_id" ref="ao_rma.demo_account_ofs"/>
+    </record>
+
+    <record id="repair_type_internal" model="repair.type">
+        <field name="name">Internal repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal"/>
+        <field name="journal_id" ref="ao_rma.repair_journal"/>
+        <field name="wip_account_id" ref="ao_rma.demo_account_ofs"/>
+    </record>
+
+    <!--        REFURBISH-->
+    <record id="stock_location_repair_refurbish" model="stock.location">
+        <field name="name">Raw Material Refurbish Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_out_account_id" ref="ao_rma.demo_account_refr"/>
+    </record>
+
+    <record id="repair_type_refurbish" model="repair.type">
+        <field name="name">Refurbish repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_refurbish"/>
+        <field name="journal_id" ref="ao_rma.repair_journal"/>
+        <field name="refurbish_location_id" ref="ao_rma.stock_location_repair_refurbish"/>
+        <field name="wip_account_id" ref="ao_rma.demo_account_refr"/>
+        <field name="to_refurbish" eval="True"/>
+    </record>
+
+</odoo>
