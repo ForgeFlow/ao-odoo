@@ -20,7 +20,7 @@ class TestRma(common.SavepointCase):
         cls.partner_id = cls.env.ref('base.res_partner_2')
         cls.stock_location = cls.env.ref('stock.stock_location_stock')
         cls.stock_location_repair_refurbish = cls.env.ref(
-            'repair_account.stock_location_repair_refurbish')
+            'ao_rma.stock_location_repair_refurbish')
         cls.customer_location = cls.env.ref(
             'stock.stock_location_customers')
         cls.supplier_location = cls.env.ref(
@@ -38,9 +38,9 @@ class TestRma(common.SavepointCase):
         cls.operation_ref = cls.env.ref('ao_rma.rma_operation_repair_refurbish')
         cls.rma_make_repair_wiz = cls.env['rma.order.line.make.repair']
         cls.repair_team = cls.env.ref(
-            'repair_account.repair_team_dep1')
+            'ao_rma.repair_team_dep1')
         cls.repair_type = cls.env.ref(
-            'repair_account.repair_type_no_warranty')
+            'ao_rma.repair_type_no_warranty')
         cls.repair_type.force_repair_location = cls.rma_external_location.id
         cls.aml_obj = cls.env['account.move.line']
         cls.acc_type_model = cls.env['account.account.type']
@@ -78,6 +78,7 @@ class TestRma(common.SavepointCase):
         code = 'cogs'
         cls.account_cogs = cls._create_account(cls, acc_type, name, code,
                                                cls.company)
+        cls.material.property_stock_account_output = cls.account_cogs.id
         cls.product1.property_stock_account_output = cls.account_cogs.id
         cls.refurbish_product.property_stock_account_output = \
             cls.account_cogs.id
@@ -170,8 +171,14 @@ class TestRma(common.SavepointCase):
         repair = rma.repair_ids
         rma.repair_ids.action_repair_confirm()
 
-        cls.assertEqual(repair.location_id, cls.rma_external_location)
-        cls.assertEqual(repair.location_dest_id, cls.rma_external_location)
+        cls.assertEqual(repair.location_id, cls.rma_external_location,
+                        "wrong repair location %s instead of %s" %
+                        (repair.location_id.name,
+                         cls.rma_external_location.name))
+        cls.assertEqual(repair.location_dest_id, cls.rma_external_location,
+                        "wrong repair location %s instead of %s" %
+                        (repair.location_dest_id.name,
+                         cls.rma_external_location.name))
 
         # check stock moves
         moves = cls.move_obj.search([('reference', '=', rma.name)])
@@ -340,7 +347,7 @@ class TestRma(common.SavepointCase):
         rma = cls.create_customer_rma(cls.partner_id, cls.product1,
                                       cls.operation_ref)
         rma._onchange_operation_id()
-        cls.assertEqual(rma.repair_type, 'ordered')
+        cls.assertEqual(rma.repair_type, 'received')
         rma.action_rma_approve()
         wizard = cls.wiz_make_picking.with_context({
             'active_ids': rma.id,
@@ -389,7 +396,10 @@ class TestRma(common.SavepointCase):
         repair._onchange_to_refurbish()
         cls.assertEqual(repair.location_id, cls.stock_location)
         cls.assertEqual(
-            repair.location_dest_id, cls.stock_location_customers)
+            repair.location_id, cls.stock_location,
+            "wrong repair location %s instead of %s" %
+            (repair.location_id.name,
+             cls.stock_location.name))
         cls.assertTrue(repair.to_refurbish)
 
         rma.repair_ids.action_repair_confirm()
@@ -406,5 +416,11 @@ class TestRma(common.SavepointCase):
         # check cogs
         aml = cls.aml_obj.search([('name', '=', repair.name)])
         cls.assertEqual(len(aml), 10)
+        amli = aml.filtered(
+            lambda a: a.account_id.name == 'Stock Valuation Account')
+        cls.assertEqual(len(amli), 3)
+        amlrr = aml.filtered(
+            lambda a: a.account_id.name == 'Refurbished Repairs')
+        cls.assertEqual(len(amlrr), 3)
         amlr = aml.filtered(lambda a: a.account_id == cls.account_cogs)
-        cls.assertEqual(sum(amlr.mapped('debit')), 10)
+        cls.assertEqual(sum(amlr.mapped('debit')), 20)

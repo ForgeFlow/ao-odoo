@@ -10,8 +10,8 @@
         <field name="type">customer</field>
         <field name="repair_type_id" ref="ao_rma.repair_type_no_warranty"/>
         <field name="location_id" ref="ao_rma.rma_external_location"/>
-        <field name="in_route_id" ref="rma.route_rma_customer"/>
-        <field name="out_route_id" ref="rma.route_rma_customer"/>
+        <field name="in_route_id" ref="ao_rma.route_rma_customer_external"/>
+        <field name="out_route_id" ref="ao_rma.route_rma_customer_external"/>
     </record>
 
     <record id="rma_operation_repair_warranty" model="rma.operation">
@@ -23,8 +23,8 @@
         <field name="type">customer</field>
         <field name="repair_type_id" ref="ao_rma.repair_type_warranty"/>
         <field name="location_id" ref="ao_rma.rma_external_location"/>
-        <field name="in_route_id" ref="rma.route_rma_customer"/>
-        <field name="out_route_id" ref="rma.route_rma_customer"/>
+        <field name="in_route_id" ref="ao_rma.route_rma_customer_external"/>
+        <field name="out_route_id" ref="ao_rma.route_rma_customer_external"/>
     </record>
 
     <record id="rma_operation_repair_internal" model="rma.operation">
@@ -45,7 +45,7 @@
         <field name="code">REP-REF</field>
         <field name="receipt_policy">ordered</field>
         <field name="delivery_policy">no</field>
-        <field name="repair_type">ordered</field>
+        <field name="repair_type">received</field>
         <field name="type">customer</field>
         <field name="repair_type_id" ref="ao_rma.repair_type_refurbish"/>
         <field name="location_id" ref="stock.stock_location_stock"/>

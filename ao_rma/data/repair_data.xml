@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--COPY FROM DEMO rma_account module-->
-<odoo noupdate="1">
+<odoo noupdate="0">
     <!--        TEAM        -->
     <record id="repair_team_dep1" model="repair.team">
         <field name="name">Team 1</field>
@@ -15,6 +15,7 @@
         <field name="labor_standard_cost" eval="10.0"/>
         <field name="overhead_standard_cost" eval="10.0"/>
         <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="journal_id" ref="ao_rma.repair_journal"/>
     </record>
 
     <!--    LOCATIONS AND TYPES-->
@@ -34,8 +35,8 @@
         <field name="name">No warranty repair</field>
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair"/>
-        <field name="journal_id" ref="ao_rma.repair_journal"/>
         <field name="invoice_method">after_repair</field>
+        <field name="force_repair_location" ref="ao_rma.rma_external_location"/>
         <field name="wip_account_id" ref="ao_rma.demo_account_cogr"/>
     </record>
 
@@ -54,8 +55,8 @@
         <field name="name">Warranty repair</field>
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair_warranty"/>
+        <field name="force_repair_location" ref="ao_rma.rma_external_location"/>
         <field name="under_warranty" eval="True"/>
-        <field name="journal_id" ref="ao_rma.repair_journal"/>
         <field name="wip_account_id" ref="ao_rma.demo_account_uwr"/>
     </record>
 
@@ -74,7 +75,6 @@
         <field name="name">Internal repair</field>
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair_internal"/>
-        <field name="journal_id" ref="ao_rma.repair_journal"/>
         <field name="wip_account_id" ref="ao_rma.demo_account_ofs"/>
     </record>
 
@@ -92,7 +92,6 @@
         <field name="name">Refurbish repair</field>
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair_refurbish"/>
-        <field name="journal_id" ref="ao_rma.repair_journal"/>
         <field name="refurbish_location_id" ref="ao_rma.stock_location_repair_refurbish"/>
         <field name="wip_account_id" ref="ao_rma.demo_account_refr"/>
         <field name="to_refurbish" eval="True"/>

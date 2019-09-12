@@ -14,14 +14,11 @@
     "data": ["views/rma_operation_view.xml",
              "views/rma_order_line_view.xml",
              "wizards/rma_order_line_make_repair_view.xml",
+             "data/account_data.xml",
+             "data/stock_data.xml",
+             "data/repair_data.xml",
+             "data/rma_operation.xml",
              ],
-    "demo": [
-        "data/account_data.xml",
-        "data/repair_data.xml",
-        "data/stock_data.xml",
-        "data/rma_operation.xml",
-
-    ],
     "license": "AGPL-3",
     'installable': True,
 }
