@@ -5,7 +5,7 @@
     "name": "RMA CRM Helpdesk",
     "summary": "Allows to create RMAs from a Helpesk Ticket, and to track the "
                "relationship between Tickets and RMA Lines.",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent",
     "website": "https://www.eficent.com",
     "category": "RMA",
