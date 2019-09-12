@@ -3,7 +3,7 @@
 
 {
     "name": "AO-specific customizations for Products",
-    "version": "11.0.1.2.0",
+    "version": "12.0.1.0.0",
     "author": "Eficent Business and IT Consulting Services S.L.",
     "website": "https://www.eficent.com",
     "category": "Product",
