@@ -6,6 +6,11 @@
         <xpath expr="//label[@for='login']" position="replace">
             <label for="login" class="control-label">Username</label>
         </xpath>
+        <xpath expr="//input[@id='login']" position="replace">
+            <input type="text" placeholder="Username" name="login" t-att-value="login" id="login"
+                   t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                   required="required" autofocus="autofocus" autocapitalize="off"/>
+        </xpath>
     </template>
 
 </odoo>
