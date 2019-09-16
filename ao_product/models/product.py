@@ -1,7 +1,7 @@
 # Copyright 2018 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, SUPERUSER_ID, _
+from odoo import api, fields, models, SUPERUSER_ID, _
 from odoo.exceptions import ValidationError
 
 
@@ -51,3 +51,7 @@ class ProductTemplate(models.Model):
         action = self.env.ref('stock.stock_move_action').read()[0]
         action['domain'] = [('product_id.product_tmpl_id', 'in', self.ids)]
         return action
+
+    # Can Be Sold and Can Be Purchased default unchecked
+    sale_ok = fields.Boolean('Can be Sold', default=False)
+    purchase_ok = fields.Boolean('Can be Purchased', default=False)
