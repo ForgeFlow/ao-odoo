@@ -10,8 +10,8 @@
                ref="stock.stock_location_stock"/>
         <field name="default_repair_dest_location_id"
                ref="stock.stock_location_stock"/>
-        <field name="labor_allocation_account_id" ref="ao_rma.demo_account_labor_all"/>
-        <field name="overhead_allocation_account_id" ref="ao_rma.demo_account_overhead_all"/>
+        <field name="labor_allocation_account_id" search="[('code','=','56902-35')]" model="account.account"/>
+        <field name="overhead_allocation_account_id" search="[('code','=','52905-35')]" model="account.account"/>
         <field name="labor_standard_cost" eval="10.0"/>
         <field name="overhead_standard_cost" eval="10.0"/>
         <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
@@ -25,8 +25,8 @@
         <field name="location_id"
                ref="stock.stock_location_locations_virtual"/>
         <field name="usage">production</field>
-        <field name="valuation_in_account_id" ref="ao_rma.demo_account_cogr"/>
-        <field name="valuation_out_account_id" ref="ao_rma.demo_account_cogr"/>
+        <field name="valuation_in_account_id" search="[('code','=','14370')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','14370')]" model="account.account"/>
         <field name="company_id"></field>
 
     </record>
@@ -37,7 +37,7 @@
                ref="ao_rma.stock_location_repair"/>
         <field name="invoice_method">after_repair</field>
         <field name="force_repair_location" ref="ao_rma.rma_external_location"/>
-        <field name="wip_account_id" ref="ao_rma.demo_account_cogr"/>
+        <field name="wip_account_id" search="[('code','=','14370')]" model="account.account"/>
     </record>
 
     <!--        WITH WARRANTY-->
@@ -47,8 +47,8 @@
                ref="stock.stock_location_locations_virtual"/>
         <field name="usage">production</field>
         <field name="company_id"></field>
-        <field name="valuation_in_account_id" ref="ao_rma.demo_account_uwr"/>
-        <field name="valuation_out_account_id" ref="ao_rma.demo_account_uwr"/>
+        <field name="valuation_in_account_id" search="[('code','=','14370')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','14370')]" model="account.account"/>
     </record>
 
     <record id="repair_type_warranty" model="repair.type">
@@ -57,25 +57,7 @@
                ref="ao_rma.stock_location_repair_warranty"/>
         <field name="force_repair_location" ref="ao_rma.rma_external_location"/>
         <field name="under_warranty" eval="True"/>
-        <field name="wip_account_id" ref="ao_rma.demo_account_uwr"/>
-    </record>
-
-    <!--        INTERNAL-->
-    <record id="stock_location_repair_internal" model="stock.location">
-        <field name="name">Raw Material Internal Repair</field>
-        <field name="location_id"
-               ref="stock.stock_location_locations_virtual"/>
-        <field name="usage">production</field>
-        <field name="company_id"></field>
-        <field name="valuation_in_account_id" ref="ao_rma.demo_account_ofs"/>
-        <field name="valuation_out_account_id" ref="ao_rma.demo_account_ofs"/>
-    </record>
-
-    <record id="repair_type_internal" model="repair.type">
-        <field name="name">Internal repair</field>
-        <field name="default_raw_material_prod_location_id"
-               ref="ao_rma.stock_location_repair_internal"/>
-        <field name="wip_account_id" ref="ao_rma.demo_account_ofs"/>
+        <field name="wip_account_id" search="[('code','=','14370')]" model="account.account"/>
     </record>
 
     <!--        REFURBISH-->
@@ -85,7 +67,7 @@
                ref="stock.stock_location_locations_virtual"/>
         <field name="usage">production</field>
         <field name="company_id"></field>
-        <field name="valuation_out_account_id" ref="ao_rma.demo_account_refr"/>
+        <field name="valuation_out_account_id" search="[('code','=','14370')]" model="account.account"/>
     </record>
 
     <record id="repair_type_refurbish" model="repair.type">
@@ -93,8 +75,147 @@
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair_refurbish"/>
         <field name="refurbish_location_id" ref="ao_rma.stock_location_repair_refurbish"/>
-        <field name="wip_account_id" ref="ao_rma.demo_account_refr"/>
+        <field name="wip_account_id" search="[('code','=','14370')]" model="account.account"/>
         <field name="to_refurbish" eval="True"/>
+    </record>
+
+    <!--        INTERNALS-->
+    <record id="stock_location_repair_internal10" model="stock.location">
+        <field name="name">Administration Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-10')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-10')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal10" model="repair.type">
+        <field name="name">Administration Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal10"/>
+        <field name="wip_account_id" search="[('code','=','62015-10')]" model="account.account"/>
+    </record>
+
+    <record id="stock_location_repair_internal20" model="stock.location">
+        <field name="name">Facilities Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-20')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-20')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal20" model="repair.type">
+        <field name="name">Facilities Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal20"/>
+        <field name="wip_account_id" search="[('code','=','62015-20')]" model="account.account"/>
+    </record>
+
+    <record id="stock_location_repair_internal30" model="stock.location">
+        <field name="name">Research and Development Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-30')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-30')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal30" model="repair.type">
+        <field name="name">Research and Development Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal30"/>
+        <field name="wip_account_id" search="[('code','=','62015-30')]" model="account.account"/>
+    </record>
+
+    <record id="stock_location_repair_internal40" model="stock.location">
+        <field name="name">Production Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-40')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-40')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal40" model="repair.type">
+        <field name="name">Production Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal40"/>
+        <field name="wip_account_id" search="[('code','=','62015-40')]" model="account.account"/>
+    </record>
+
+
+    <record id="stock_location_repair_internal50" model="stock.location">
+        <field name="name">Supply Chain Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-50')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-50')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal50" model="repair.type">
+        <field name="name">Supply Chain Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal50"/>
+        <field name="wip_account_id" search="[('code','=','62015-50')]" model="account.account"/>
+    </record>
+
+
+    <record id="stock_location_repair_internal60" model="stock.location">
+        <field name="name">Marketing Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-60')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-60')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal60" model="repair.type">
+        <field name="name">Marketing Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal60"/>
+        <field name="wip_account_id" search="[('code','=','62015-60')]" model="account.account"/>
+    </record>
+
+    <record id="stock_location_repair_internal70" model="stock.location">
+        <field name="name">Sales Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-70')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-70')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal70" model="repair.type">
+        <field name="name">Sales Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal70"/>
+        <field name="wip_account_id" search="[('code','=','62015-70')]" model="account.account"/>
+    </record>
+
+    <record id="stock_location_repair_internal80" model="stock.location">
+        <field name="name">Tech Support Repair</field>
+        <field name="location_id"
+               ref="stock.stock_location_locations_virtual"/>
+        <field name="usage">production</field>
+        <field name="company_id"></field>
+        <field name="valuation_in_account_id" search="[('code','=','62015-80')]" model="account.account"/>
+        <field name="valuation_out_account_id" search="[('code','=','62015-80')]" model="account.account"/>
+    </record>
+
+    <record id="repair_type_internal80" model="repair.type">
+        <field name="name">Tech Support Repair</field>
+        <field name="default_raw_material_prod_location_id"
+               ref="ao_rma.stock_location_repair_internal80"/>
+        <field name="wip_account_id" search="[('code','=','62015-80')]" model="account.account"/>
     </record>
 
 </odoo>
