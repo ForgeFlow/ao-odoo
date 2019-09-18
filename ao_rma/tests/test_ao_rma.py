@@ -35,7 +35,8 @@ class TestRma(common.SavepointCase):
         cls.operation_warranty = cls.env.ref(
             'ao_rma.rma_operation_repair_warranty')
         cls.operation_int = cls.env.ref('ao_rma.rma_operation_repair_internal')
-        cls.operation_ref = cls.env.ref('ao_rma.rma_operation_repair_refurbish')
+        cls.operation_ref = cls.env.ref(
+            'ao_rma.rma_operation_repair_refurbish')
         cls.rma_make_repair_wiz = cls.env['rma.order.line.make.repair']
         cls.repair_team = cls.env.ref(
             'ao_rma.repair_team_dep1')
@@ -66,7 +67,6 @@ class TestRma(common.SavepointCase):
             'name': 'Materials',
             'type': 'product',
         })
-
 
         cls.material.product_tmpl_id.standard_price = 10
         cls.material.categ_id.property_valuation = 'real_time'
