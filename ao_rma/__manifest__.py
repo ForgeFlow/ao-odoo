@@ -19,6 +19,7 @@
              "data/stock_data.xml",
              "data/repair_data.xml",
              "data/rma_operation.xml",
+             "data/base_automation_data.xml",
              ],
     "license": "AGPL-3",
     'installable': True,

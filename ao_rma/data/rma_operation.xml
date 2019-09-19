@@ -5,6 +5,7 @@
         <field name="name">Repair no warranty</field>
         <field name="code">REP-NW</field>
         <field name="receipt_policy">ordered</field>
+        <field name="sale_policy">ordered</field>
         <field name="delivery_policy">repair</field>
         <field name="repair_type">received</field>
         <field name="type">customer</field>

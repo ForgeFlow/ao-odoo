@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--TODO: no update to 1-->
+<odoo noupdate="0">
+
+    <!--FROM NEW TO ANOTHER-->
+
+    <record id="new_awaiting_return" model="base.automation">
+        <field name="name">New > Awaiting Return</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">['|', ('state', '=', 'draft'), ('state', '=', 'to_approve')]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True)]</field>
+    </record>
+
+    <record id="new_awaiting_return_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.new_awaiting_return_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.awaiting_return') "/>
+    </record>
+
+    <!---->
+    <record id="new_awaiting_payment" model="base.automation">
+        <field name="name">New > Awaiting Payment</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">['|', ('state', '=', 'draft'), ('state', '=', 'to_approve')]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('sale_policy', '=', 'ordered')]</field>
+    </record>
+
+    <record id="new_awaiting_payment_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.new_awaiting_payment_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.awaiting_payment') "/>
+    </record>
+
+    <!--FROM AWAITING RETURN TO ANOTHER-->
+
+    <record id="awaiting_return_new" model="base.automation">
+        <field name="name">Awaiting Return > New</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved')]</field>
+        <field name="filter_domain">[('state', '=', 'draft')]</field>
+    </record>
+
+    <record id="awaiting_return_new_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_return_new_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.rma_new') "/>
+    </record>
+
+    <!---->
+    <record id="awaiting_return_awaiting_eval" model="base.automation">
+        <field name="name">Awaiting return > Awaiting Eval/Repair</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('qty_to_repair', '>', 0)]</field>
+        <field name="filter_domain">[('qty_to_repair', '=', '0'), ('qty_to_receive', '=', 0), ('qty_repaired', '=', '0')]</field>
+    </record>
+
+    <record id="awaiting_return_awaiting_eval_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_return_awaiting_eval_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.awaiting_eval') "/>
+    </record>
+
+    <!--FROM AWAITING EVAL/REPAIR TO ANOTHER-->
+    <record id="awaiting_eval_under_repair" model="base.automation">
+        <field name="name">Awaiting Eval/Repair > Under Repair/Being evaluated</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), ('repair_ids.state', '=', 'draft')]</field>
+        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), '|', ('repair_ids.state', '=', 'confirmed'), ('repair_ids.state', '=', 'under_repair')]</field>
+    </record>
+
+    <record id="awaiting_eval_under_repair_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_eval_under_repair_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.under_repair') "/>
+    </record>
+    <!---->
+    <record id="awaiting_eval_awaiting_payment" model="base.automation">
+        <field name="name">Awaiting Eval/Repair > Awaiting Payment</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('repair_ids.state', '=', 'draft')]</field>
+        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), '|', ('repair_ids.state', '=', 'confirmed'), ('repair_ids.state', '=', 'under_repair')]</field>
+    </record>
+
+    <record id="awaiting_eval_awaiting_payment_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_eval_awaiting_payment_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.awaiting_payment') "/>
+    </record>
+
+    <!--FROM Under Repair/Being Evaluated TO ANOTHER-->
+    <record id="under_repair_ready_to_ship" model="base.automation">
+        <field name="name">Under Repair/Being Evaluated > Ready To Be Shipped</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', False), ('qty_under_repair', '>', 0)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('qty_under_repair', '=', 0), ('qty_to_repair', '=', 0), ('qty_repaired', '>', 0)]</field>
+    </record>
+
+    <record id="under_repair_ready_to_ship_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.under_repair_ready_to_ship_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.rma_to_ship') "/>
+    </record>
+    <!---->
+    <record id="under_repair_ready_to_refurbed" model="base.automation">
+        <field name="name">Under Repair/Being Evaluated > To Be Refurbed</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', True), ('repair_ids.state', '=', 'under_repair')]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('repair_ids.state', '=', 'done')]</field>
+    </record>
+
+    <record id="under_repair_ready_to_refurbed_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.under_repair_ready_to_refurbed_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.to_refurbed') "/>
+    </record>
+
+    <!--FROM Awaiting Payment TO ANOTHER-->
+    <record id="awaiting_payment_to_awaiting_return" model="base.automation">
+        <field name="name">Awaiting Payment > Awaiting Return</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('sale_line_ids.invoice_status', '=', 'open'), ('repair_ids', '=', False)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('sale_line_ids.invoice_status', '=', 'paid')]</field>
+    </record>
+
+    <record id="awaiting_payment_to_awaiting_return_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_payment_to_awaiting_return_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.awaiting_return') "/>
+    </record>
+    <!---->
+    <record id="awaiting_payment_to_under_repair" model="base.automation">
+        <field name="name">Awaiting Payment > Under Repair/Being Evaluated</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('repair_ids.invoice_id.state', '=', 'open')]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('repair_ids.invoice_id.state', '=', 'paid')]</field>
+    </record>
+
+    <record id="awaiting_payment_to_under_repair_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.awaiting_payment_to_under_repair_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.under_repair') "/>
+    </record>
+    <!--FROM To Be Refurbed TO ANOTHER-->
+
+    <record id="to_refurb_to_close" model="base.automation">
+        <field name="name">To be Refurbed > Closed</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', True), ('qty_to_deliver', '>', 0)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', True), ('qty_to_deliver', '=', 0)]</field>
+    </record>
+
+    <record id="to_refurb_to_close_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.to_refurb_to_close_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.rma_closed') "/>
+    </record>
+    <!--FROM Ready to be shipped TO ANOTHER-->
+    <record id="ready_ship_to_csr_follow" model="base.automation">
+        <field name="name">Ready to be Shipped > CSR Followup</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('qty_to_deliver', '>', 0)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('qty_to_deliver', '=', 0)]</field>
+    </record>
+
+    <record id="ready_ship_to_csr_follow_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.ready_ship_to_csr_follow_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.csr_needed') "/>
+    </record>
+    <!---->
+    <record id="ready_ship_to_closed" model="base.automation">
+        <field name="name">Ready to be Shipped > Closed</field>
+        <field name="model_id" ref="rma.model_rma_order_line"/>
+        <field name="state">object_write</field>
+        <field name="trigger">on_write</field>
+        <field name="action">object_write</field>
+        <field name="active" eval="True"/>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), ('qty_to_deliver', '>', 0)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), ('qty_to_deliver', '=', 0)]</field>
+    </record>
+
+    <record id="ready_ship_to_closed_action" model="ir.server.object.lines">
+        <field name="server_id" ref="ao_rma.ready_ship_to_closed_ir_actions_server"/>
+        <field name="type">reference</field>
+        <field name="value">5</field>
+        <field name="col1" search="[('name','=','stage_id'), ('model_id', '=', ref('rma.model_rma_order_line'))]" model="ir.model.fields"/>
+        <field name="resource_ref" eval="'base.kanban.stage,%s' %ref('ao_rma.csr_needed') "/>
+    </record>
+</odoo>
