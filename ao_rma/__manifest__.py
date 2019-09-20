@@ -9,7 +9,7 @@
     "website": "http://www.eficent.com",
     "category": "rma",
     "depends": ["rma", "account_move_line_rma_order_line", "rma_repair",
-                "repair_account", "repair_refurbish",
+                "repair_account", "repair_refurbish", "rma_kanban_stage"
                 ],
     "data": ["views/rma_operation_view.xml",
              "views/rma_order_line_view.xml",
