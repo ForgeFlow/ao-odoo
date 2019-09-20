@@ -28,3 +28,13 @@ class RmaOrderLine(models.Model):
             rma_line.helpdesk_id.message_post(
                 body=body, subtype='mail.mt_note')
         return rma_line
+
+    @api.model
+    def default_get(self, fields):
+        res = super(RmaOrderLine, self).default_get(fields)
+        if 'description' not in res and self.env.context.get(
+                'default_helpdesk_id'):
+            helpdesk_id = self.env.context.get('default_helpdesk_id')
+            helpdesk = self.env['crm.helpdesk'].browse([helpdesk_id])
+            res['description'] = helpdesk.description
+        return res
