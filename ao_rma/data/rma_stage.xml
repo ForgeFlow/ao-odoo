@@ -4,91 +4,91 @@
     <record id="rma_new" model="base.kanban.stage">
         <field name="sequence">10</field>
         <field name="name">New</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="awaiting_return" model="base.kanban.stage">
         <field name="sequence">20</field>
         <field name="name">Awaiting Return</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="rwb_needed" model="base.kanban.stage">
         <field name="sequence">30</field>
         <field name="name">RWB Needed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="csr_needed" model="base.kanban.stage">
         <field name="sequence">40</field>
         <field name="name">CSR Followup Needed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="awaiting_eval" model="base.kanban.stage">
         <field name="sequence">50</field>
         <field name="name">Awaiting Eval/Repair</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="awaiting_payment" model="base.kanban.stage">
         <field name="sequence">60</field>
         <field name="name">Awaiting Payment</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="under_repair" model="base.kanban.stage">
         <field name="sequence">70</field>
         <field name="name">Under Repair/Being Evaluated</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="sales_followup_needed" model="base.kanban.stage">
         <field name="sequence">80</field>
         <field name="name">Sales Folloup Needed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="to_refurbed" model="base.kanban.stage">
         <field name="sequence">90</field>
         <field name="name">To Be Refurbed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="accounting_followup_needed" model="base.kanban.stage">
         <field name="sequence">100</field>
         <field name="name">Accounting Folloup Needed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="rma_to_ship" model="base.kanban.stage">
         <field name="sequence">110</field>
         <field name="name">Ready to be Shipped</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">False</field>
     </record>
 
     <record id="rma_closed" model="base.kanban.stage">
         <field name="sequence">120</field>
         <field name="name">Closed</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">True</field>
     </record>
 
     <record id="rma_cancel" model="base.kanban.stage">
         <field name="sequence">130</field>
         <field name="name">Cancelled</field>
-        <field name="res_model_id" ref="rma.module_rma_order_line" />
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">True</field>
     </record>
 
