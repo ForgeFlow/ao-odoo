@@ -26,5 +26,5 @@ stock-rma https://github.com/Eficent/stock-rma.git
 # module: ao_stock_account
 # stock-logistics-reporting https://github.com/Eficent/stock-logistics-reporting.git 11.0-stock_account_valuation_report
 # module: purchase_unreconciled
-purchase-workflow
+purchase-workflow https://github.com/Eficent/purchase-workflow.git 12.0-mig-purchase_request
 account-financial-tools
