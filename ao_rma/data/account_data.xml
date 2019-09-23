@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--COPY FROM DEMO rma_account module-->
-<odoo noupdate="1">
+<!--TODO put noupdate to 1-->
+<odoo noupdate="0">
 
     <record id="repair_journal" model="account.journal">
         <field name="name">Repairs</field>
@@ -9,4 +9,51 @@
         <field name="show_on_dashboard" eval="False"/>
     </record>
 
+    <record id="data_account_administration" model="account.account">
+        <field name="name">Internal repairs - Administration</field>
+        <field name="code">62015-10</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+    <record id="data_account_facilities" model="account.account">
+        <field name="name">Internal repairs - Facilities</field>
+        <field name="code">62015-20</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_r_and_d" model="account.account">
+        <field name="name">Internal repairs - Research and Development</field>
+        <field name="code">62015-30</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_production" model="account.account">
+        <field name="name">Internal repairs - Production</field>
+        <field name="code">62015-40</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_supply_chain" model="account.account">
+        <field name="name">Internal repairs - Supply Chain</field>
+        <field name="code">62015-50</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_marketing" model="account.account">
+        <field name="name">Internal repairs - Marketing</field>
+        <field name="code">62015-60</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_sales" model="account.account">
+        <field name="name">Internal repairs - Sales</field>
+        <field name="code">62015-70</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
+
+    <record id="data_account_tech_support" model="account.account">
+        <field name="name">Internal repairs - Tech Support</field>
+        <field name="code">62015-80</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses" />
+    </record>
 </odoo>

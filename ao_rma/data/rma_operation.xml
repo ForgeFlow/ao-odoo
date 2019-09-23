@@ -29,13 +29,117 @@
     </record>
 
     <record id="rma_operation_repair_internal" model="rma.operation">
-        <field name="name">Internal Repair</field>
-        <field name="code">REP-INT</field>
+        <field name="name">Internal Repair - Administration</field>
+        <field name="code">REP-INT-ADMIN</field>
         <field name="receipt_policy">no</field>
         <field name="delivery_policy">no</field>
         <field name="repair_type">ordered</field>
         <field name="type">customer</field>
-        <field name="repair_type_id" ref="ao_rma.repair_type_internal"/>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal10"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_financial" model="rma.operation">
+        <field name="name">Internal Repair - Financial</field>
+        <field name="code">REP-INT-FIN</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal20"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_facilities" model="rma.operation">
+        <field name="name">Internal Repair - Facilities</field>
+        <field name="code">REP-INT-FAC</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal20"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_r_and_d" model="rma.operation">
+        <field name="name">Internal Repair - Research and Development</field>
+        <field name="code">REP-INT-RD</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal30"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_production" model="rma.operation">
+        <field name="name">Internal Repair - Production</field>
+        <field name="code">REP-INT-PROD</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal40"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_supply_chain" model="rma.operation">
+        <field name="name">Internal Repair - Supply Chain</field>
+        <field name="code">REP-INT-SUP</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal50"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_marketing" model="rma.operation">
+        <field name="name">Internal Repair - Marketing</field>
+        <field name="code">REP-INT-MARK</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal60"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_sales" model="rma.operation">
+        <field name="name">Internal Repair - Sales</field>
+        <field name="code">REP-INT-SAL</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal70"/>
+        <field name="location_id" ref="stock.stock_location_stock"/>
+        <field name="in_route_id" ref="rma.route_rma_customer"/>
+        <field name="out_route_id" ref="rma.route_rma_customer"/>
+    </record>
+
+    <record id="rma_operation_repair_tech_support" model="rma.operation">
+        <field name="name">Internal Repair - Tech Support</field>
+        <field name="code">REP-INT-TECH</field>
+        <field name="receipt_policy">no</field>
+        <field name="delivery_policy">no</field>
+        <field name="repair_type">ordered</field>
+        <field name="type">customer</field>
+        <field name="repair_type_id" ref="ao_rma.repair_type_internal80"/>
         <field name="location_id" ref="stock.stock_location_stock"/>
         <field name="in_route_id" ref="rma.route_rma_customer"/>
         <field name="out_route_id" ref="rma.route_rma_customer"/>
