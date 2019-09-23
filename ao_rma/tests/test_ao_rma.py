@@ -34,7 +34,8 @@ class TestRma(common.SavepointCase):
         cls.operation_nw = cls.env.ref('ao_rma.rma_operation_repair_nw')
         cls.operation_warranty = cls.env.ref(
             'ao_rma.rma_operation_repair_warranty')
-        cls.operation_int = cls.env.ref('ao_rma.rma_operation_repair_internal')
+        cls.operation_int = cls.env.ref(
+            'ao_rma.rma_operation_repair_facilities')
         cls.operation_ref = cls.env.ref(
             'ao_rma.rma_operation_repair_refurbish')
         cls.rma_make_repair_wiz = cls.env['rma.order.line.make.repair']
@@ -42,6 +43,61 @@ class TestRma(common.SavepointCase):
             'ao_rma.repair_team_dep1')
         cls.repair_type = cls.env.ref(
             'ao_rma.repair_type_no_warranty')
+        cls.wip_account = cls.env['account.account'].create(
+            {'name': 'WIP',
+             'code': 'WIP',
+             'user_type_id': cls.env.ref(
+                 "account.data_account_type_expenses").id})
+        cls.ref_account = cls.env['account.account'].create(
+            {'name': 'Refurbish',
+             'code': 'Refurbish',
+             'user_type_id': cls.env.ref(
+                 "account.data_account_type_expenses").id})
+        cls.rep_account = cls.env['account.account'].create(
+            {'name': 'Repair',
+             'code': 'Repair',
+             'user_type_id': cls.env.ref(
+                 "account.data_account_type_expenses").id})
+        cls.lab_account = cls.env['account.account'].create(
+            {'name': 'Labor',
+             'code': 'Labor',
+             'user_type_id': cls.env.ref(
+                 "account.data_account_type_expenses").id})
+        cls.oh_account = cls.env['account.account'].create(
+            {'name': 'Overhead',
+             'code': 'Overhead',
+             'user_type_id': cls.env.ref(
+                 "account.data_account_type_expenses").id})
+        # cannot do in data because account exists in ao
+        if not cls.repair_team.labor_allocation_account_id:
+            cls.repair_team.labor_allocation_account_id = cls.lab_account.id
+        if not cls.repair_team.overhead_allocation_account_id:
+            cls.repair_team.overhead_allocation_account_id = cls.oh_account.id
+        if not cls.operation_nw.repair_type_id.wip_account_id:
+            cls.operation_nw.repair_type_id.wip_account_id = cls.wip_account
+            cls.operation_nw.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_in_account_id = cls.wip_account
+            cls.operation_nw.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_out_account_id = cls.wip_account
+        if not cls.operation_ref.repair_type_id.wip_account_id:
+            cls.operation_ref.repair_type_id.wip_account_id = cls.ref_account
+            cls.operation_ref.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_in_account_id = cls.ref_account
+            cls.operation_ref.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_out_account_id = cls.ref_account
+        if not cls.operation_warranty.repair_type_id.wip_account_id:
+            cls.operation_warranty.repair_type_id.wip_account_id = \
+                cls.wip_account
+            cls.operation_warranty.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_in_account_id = cls.wip_account
+            cls.operation_warranty.repair_type_id.\
+                default_raw_material_prod_location_id. \
+                valuation_out_account_id = cls.wip_account
         cls.repair_type.force_repair_location = cls.rma_external_location.id
         cls.aml_obj = cls.env['account.move.line']
         cls.acc_type_model = cls.env['account.account.type']
@@ -217,7 +273,7 @@ class TestRma(common.SavepointCase):
         aml = cls.aml_obj.search([('name', '=', rma.name)])
         cls.assertEqual(len(aml), 0)
 
-    def test_12_repair_no_warranty(cls):
+    def test_12_repair_under_warranty(cls):
         """Accounting entries for a reparation with warranty
            Very similar to previous test, considering remove
         """
@@ -410,8 +466,8 @@ class TestRma(common.SavepointCase):
         repair.action_repair_end()
 
         # check no extra JE are generated(handled by repair order)
-        aml = cls.aml_obj.search([('rma_line_id', '=', rma.id)])
-        cls.assertEqual(len(aml), 1)
+        amlrma = cls.aml_obj.search([('rma_line_id', '=', rma.id)])
+        cls.assertEqual(len(amlrma), 1)
 
         # check cogs
         aml = cls.aml_obj.search([('name', '=', repair.name)])
@@ -420,7 +476,7 @@ class TestRma(common.SavepointCase):
             lambda a: a.account_id.name == 'Stock Valuation Account')
         cls.assertEqual(len(amli), 3)
         amlrr = aml.filtered(
-            lambda a: a.account_id.name == 'Refurbished Repairs')
-        cls.assertEqual(len(amlrr), 3)
-        amlr = aml.filtered(lambda a: a.account_id == cls.account_cogs)
-        cls.assertEqual(sum(amlr.mapped('debit')), 20)
+            lambda a: a.account_id.name == 'Refurbish')
+        cls.assertEqual(len(amlrr), 5)
+        amlr = amlrma.filtered(lambda a: a.account_id == cls.account_cogs)
+        cls.assertEqual(sum(amlr.mapped('credit')), 10)
