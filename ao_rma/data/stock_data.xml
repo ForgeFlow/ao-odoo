@@ -14,6 +14,59 @@
         <field name="rma_selectable" eval="True"/>
     </record>
 
+    <record id="route_rma_supplier" model='stock.location.route'>
+        <field name="name">RMA Supplier</field>
+        <field name="company_id" eval="0"/>
+        <field name="sequence">10</field>
+        <field name="sale_selectable" eval="False"/>
+        <field name="product_selectable" eval="False"/>
+        <field name="product_categ_selectable" eval="False"/>
+        <field name="warehouse_selectable" eval="False"/>
+        <field name="rma_selectable" eval="True"/>
+    </record>
+
+    <record id="picking_type_rma_sup_out" model="stock.picking.type">
+        <field name="name">RMA -> Supplier</field>
+        <field name="sequence_id" ref="rma.seq_picking_type_rma_sup_out"/>
+        <field name="default_location_src_id" ref="__export__.stock_location_2483_8a8fa034"/>
+        <field name="default_location_dest_id"
+               ref="stock.stock_location_suppliers"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">outgoing</field>
+    </record>
+
+    <record id="picking_type_rma_sup_in" model="stock.picking.type">
+        <field name="name">Supplier -> RMA</field>
+        <field name="sequence_id" ref="rma.seq_picking_type_rma_sup_in"/>
+        <field name="default_location_src_id" ref="stock.stock_location_suppliers"/>
+        <field name="default_location_dest_id"
+               ref="__export__.stock_location_874"/>
+        <field name="warehouse_id" eval="False"/>
+        <field name="code">incoming</field>
+    </record>
+
+    <record id="rule_rma_supplier_out_pull" model="stock.rule">
+        <field name="name">RMA → Supplier</field>
+        <field name="action">pull</field>
+        <field name="warehouse_id" ref="stock.warehouse0"/>
+        <field name="location_id" ref="stock.stock_location_suppliers"/>
+        <field name="location_src_id" ref="__export__.stock_location_2483_8a8fa034"/>
+        <field name="procure_method">make_to_stock</field>
+        <field name="route_id" ref="route_rma_supplier"/>
+        <field name="picking_type_id" ref="ao_rma.picking_type_rma_sup_out"/>
+    </record>
+
+    <record id="rule_rma_supplier_in_pull" model="stock.rule">
+        <field name="name">Supplier → RMA</field>
+        <field name="action">pull</field>
+        <field name="warehouse_id" ref="stock.warehouse0"/>
+        <field name="location_id" ref="__export__.stock_location_874"/>
+        <field name="location_src_id" ref="stock.stock_location_suppliers"/>
+        <field name="procure_method">make_to_stock</field>
+        <field name="route_id" ref="route_rma_supplier"/>
+        <field name="picking_type_id" ref="ao_rma.picking_type_rma_sup_in"/>
+    </record>
+
     <!--    LOCATION-->
     <record id="rma_external_location" model="stock.location">
         <field name="name">RMA External Location</field>
