@@ -4,7 +4,7 @@
 
 {
     'name': 'Company Account Attribute',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': 'Maintain accounting-specific attributes of the company '
                'in the company settings',
     'author': 'Creu Blanca, Eficent',
