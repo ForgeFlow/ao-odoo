@@ -92,8 +92,8 @@
         <field name="trigger">on_write</field>
         <field name="action">object_write</field>
         <field name="active" eval="True"/>
-        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), ('repair_ids.state', '=', 'draft')]</field>
-        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), '|', ('repair_ids.state', '=', 'confirmed'), ('repair_ids.state', '=', 'under_repair')]</field>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), ('qty_under_repair', '=', 0)]</field>
+        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', True), '|', ('qty_under_repair', '>', 0)]</field>
     </record>
 
     <record id="awaiting_eval_under_repair_action" model="ir.server.object.lines">
@@ -111,8 +111,8 @@
         <field name="trigger">on_write</field>
         <field name="action">object_write</field>
         <field name="active" eval="True"/>
-        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('repair_ids.state', '=', 'draft')]</field>
-        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), '|', ('repair_ids.state', '=', 'confirmed'), ('repair_ids.state', '=', 'under_repair')]</field>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), ('qty_under_repair', '=', 0)]</field>
+        <field name="filter_domain">['&amp;','&amp;', ('state', '=', 'approved'), ('operation_id.repair_type_id.under_warranty', '=', False), '|', ('repair_ids.state', '=', 'confirmed'), ('qty_under_repair', '>', 0)]</field>
     </record>
 
     <record id="awaiting_eval_awaiting_payment_action" model="ir.server.object.lines">
@@ -150,8 +150,8 @@
         <field name="trigger">on_write</field>
         <field name="action">object_write</field>
         <field name="active" eval="True"/>
-        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', True), ('repair_ids.state', '=', 'under_repair')]</field>
-        <field name="filter_domain">[('state', '=', 'approved'), ('repair_ids.state', '=', 'done')]</field>
+        <field name="filter_pre_domain">[('state', '=', 'approved'), ('operation_id.repair_type_id.to_refurbish', '=', True), ('qty_under_repair', '>', 0)]</field>
+        <field name="filter_domain">[('state', '=', 'approved'), ('qty_repaired', '>', 0), ('qty_under_repair', '=', 0)]</field>
     </record>
 
     <record id="under_repair_ready_to_refurbed_action" model="ir.server.object.lines">
