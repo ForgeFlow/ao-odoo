@@ -3,6 +3,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.addons import decimal_precision as dp
 
 import operator
 ops = {'=': operator.eq,
@@ -19,6 +20,11 @@ class RmaOrderLine(models.Model):
     operation_id = fields.Many2one(
         comodel_name="rma.operation", string="Operation",
         readonly=False, states={'done': [('readonly', True)]},
+    )
+    product_qty = fields.Float(
+        string='Return Qty', copy=False, default=1.0,
+        digits=dp.get_precision('Product Unit of Measure'),
+        readonly=True, states={'draft': [('readonly', False)]},
     )
 
     @api.constrains('in_route_id', 'out_route_id', 'location_id',
