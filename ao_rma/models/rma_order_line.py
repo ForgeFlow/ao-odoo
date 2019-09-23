@@ -21,11 +21,6 @@ class RmaOrderLine(models.Model):
         comodel_name="rma.operation", string="Operation",
         readonly=False, states={'done': [('readonly', True)]},
     )
-    product_qty = fields.Float(
-        string='Return Qty', copy=False, default=1.0,
-        digits=dp.get_precision('Product Unit of Measure'),
-        readonly=True, states={'draft': [('readonly', False)]},
-    )
 
     @api.constrains('in_route_id', 'out_route_id', 'location_id',
                     'in_warehouse_id', 'out_warehouse_id', 'operation_id')
