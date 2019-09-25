@@ -22,6 +22,46 @@ class RmaOrderLine(models.Model):
         readonly=False, states={'done': [('readonly', True)]},
     )
 
+    sale_invoice_status = fields.Selection(
+        compute='compute_sale_invoice_status',
+        string="Customer Sale Invoice Status",
+        selection = [
+            ('unpaid', 'Pending to be paid'),
+            ('paid', 'Fully Paid')]
+    )
+
+    repair_invoice_status = fields.Selection(
+        compute='compute_repair_invoice_status',
+        string="Customer Repair Invoice Status",
+        selection = [
+            ('unpaid', 'Pending to be paid'),
+            ('paid', 'Fully Paid')]
+    )
+
+    @api.multi
+    def compute_sale_invoice_status(self):
+        for line in self:
+            if not line.sale_line_ids:
+                line.sale_invoice_status == 'paid'
+                continue
+            statuses = line.sale_line_ids.mapped('invoice_status')
+            if len(statuses == 1) and 'paid' in statuses:
+                line.sale_invoice_status == 'paid'
+            else:
+                line.sale_invoice_status == 'unpaid'
+
+    @api.multi
+    def compute_repair_invoice_status(self):
+        for line in self:
+            if not line.repair_ids:
+                line.repair_ids == 'paid'
+                continue
+            statuses = line.repair_ids.mapped('invoice_id.state')
+            if len(statuses == 1) and 'paid' in statuses:
+                line.repair_invoice_status == 'paid'
+            else:
+                line.repair_invoice_status == 'unpaid'
+
     @api.constrains('in_route_id', 'out_route_id', 'location_id',
                     'in_warehouse_id', 'out_warehouse_id', 'operation_id')
     def check_operation_consistency(self):

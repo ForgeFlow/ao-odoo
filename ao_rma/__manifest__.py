@@ -13,6 +13,7 @@
                 "base_automation",
                 ],
     "data": ["data/rma_stage.xml",
+             "data/base_automation_data.xml",
              "views/rma_operation_view.xml",
              "views/rma_order_line_view.xml",
              "wizards/rma_order_line_make_repair_view.xml",
