@@ -3,7 +3,6 @@
 
 from odoo import api, fields, models
 from odoo.addons import decimal_precision as dp
-from odoo.exceptions import UserError
 
 UNIT = dp.get_precision('Product Price')
 
@@ -21,16 +20,7 @@ class ProductTemplate(models.Model):
             for variant in template.product_variant_ids:
                 bom = bom_obj._bom_find(product=variant)
                 if bom:
-                    starting_factor = bom.product_uom_id._compute_quantity(
-                        bom.product_qty, bom.product_tmpl_id.uom_id,
-                        round=False)
-                    try:
-                        totals = bom._get_flattened_totals(
-                            factor=starting_factor)
-                        for product, total_qty in totals.items():
-                            price += total_qty * product.standard_price
-                    except UserError as e:
-                        pass
+                    price = bom.standard_cost_total
                 else:
                     price = template.standard_price
             template.bom_standard_cost = price

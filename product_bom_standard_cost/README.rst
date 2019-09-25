@@ -7,7 +7,7 @@ Product BOM Standard Cost
 =========================
 
 This module shows the standard cost of a product that has a BOM considering
-the BOM components and routing data.
+the BOM components, labor and overhead.
 
 Usage
 =====
