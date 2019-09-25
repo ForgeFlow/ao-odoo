@@ -19,3 +19,7 @@ class AccountInvoice(models.Model):
         return super(
             AccountInvoice, self.with_context(
                 mail_auto_subscribe_no_notify=True)).write(vals)
+
+    def _get_partner_bank_id(self, company_id):
+        super(AccountInvoice, self)._get_partner_bank_id(company_id)
+        return False
