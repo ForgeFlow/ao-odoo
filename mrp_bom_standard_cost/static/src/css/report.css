@@ -1,0 +1,9 @@
+.o_bom_standard_cost_reports_page {
+    background-color: @odoo-view-background-color;
+    color: @odoo-main-text-color;
+    padding-top: 10px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: Helvetica, Arial;
+}

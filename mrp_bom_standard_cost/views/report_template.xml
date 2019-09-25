@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="bom_standard_cost_report_assets_backend"
+              name="mrp_bom_standard_cost_report assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/mrp_bom_standard_cost/static/src/less/bom_cost.less" rel="stylesheet"/>
+            <link href="/mrp_bom_standard_cost/static/src/css/report.css" rel="stylesheet"/>
+            <script type="text/javascript"
+                    src="/mrp_bom_standard_cost/static/src/js/mrp_bom_standard_cost_report_widgets.js"/>
+        </xpath>
+    </template>
+
+</odoo>

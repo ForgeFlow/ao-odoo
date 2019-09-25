@@ -1,0 +1,47 @@
+// Specific style classes
+.o_group.o_inner_group.oe_subtotal_footer_left {
+
+    > tbody > tr:nth-child(n+2) > td {
+        text-align: end;
+    }
+
+    > tbody > tr > td {
+        padding: 0;
+
+        &.o_td_label {
+            text-align: left;
+        }
+
+        .o_form_label {
+            padding-right: 20px;
+
+            min-width: 0;
+            white-space: nowrap;
+            &:after {
+                content: ":";
+            }
+        }
+
+        .o_field_widget {
+            text-align: right;
+            .o-justify-content(flex-end);
+            width: 100%;
+        }
+    }
+
+    > tbody > tr:first-child > td {
+        padding-top: 4px;
+    }
+
+    .oe_subtotal_footer_separator_left {
+        width: 100%;
+        text-align: left;
+        border-top: 1px solid #cacaca;
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    .o_td_label {
+        border-right: none;
+    }
+}
