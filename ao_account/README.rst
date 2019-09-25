@@ -14,6 +14,7 @@ This module contains customizations specific to Aleph Objects.
 * Add the *Product Internal Reference* field to Invoice analysis to make
   possible to create custom filters using it.
 * Do not send messages to the salesperson from the invoice
+* Add Product searchable field in Account Invoices tree view
 
 
 Credits

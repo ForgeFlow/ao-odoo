@@ -11,6 +11,7 @@
     "category": "Accounting",
     "depends": ["account"],
     "data": [
+        "views/account_invoice_views.xml",
         "views/report_invoice.xml",
         "views/partner_view.xml",
         "views/invoice_analysis_report.xml"
