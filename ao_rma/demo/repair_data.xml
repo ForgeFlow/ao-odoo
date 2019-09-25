@@ -56,6 +56,7 @@
         <field name="default_raw_material_prod_location_id"
                ref="ao_rma.stock_location_repair_warranty"/>
         <field name="force_repair_location" ref="ao_rma.rma_external_location"/>
+        <field name="invoice_method">none</field>
         <field name="under_warranty" eval="True"/>
         <field name="wip_account_id" search="[('code','=','14370')]" model="account.account"/>
     </record>

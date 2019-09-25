@@ -15,6 +15,7 @@ class TestRma(common.SavepointCase):
         cls.rma = cls.env['rma.order']
         cls.rma_line = cls.env['rma.order.line']
         cls.rma_op = cls.env['rma.operation']
+        cls.RepairMakeInvoice = cls.env['repair.order.make_invoice']
         cls.product_id = cls.env.ref('product.product_product_4')
         cls.uom_unit = cls.env.ref('uom.product_uom_unit')
         cls.partner_id = cls.env.ref('base.res_partner_2')
@@ -255,6 +256,15 @@ class TestRma(common.SavepointCase):
         repair.action_repair_ready()
         repair.action_repair_start()
         repair.action_repair_end()
+        make_invoice = cls.RepairMakeInvoice.create({
+            'group': True})
+        # I click on "Create Invoice" button of this wizard to make invoice.
+        context = {
+            "active_model": 'repair_order',
+            "active_ids": [repair.id],
+            "active_id": repair.id
+        }
+        make_invoice.with_context(context).make_invoices()
         # deliver
         cls.assertEqual(rma.qty_to_deliver, 1.0)
         wizard = cls.rma_make_picking.with_context({
@@ -280,7 +290,7 @@ class TestRma(common.SavepointCase):
 
         # create rma and receive in external location
         rma = cls.create_customer_rma(cls.partner_id, cls.product_id,
-                                      cls.operation_nw)
+                                      cls.operation_warranty)
         rma._onchange_operation_id()
         cls.assertEqual(rma.repair_type, 'received')
         rma.action_rma_approve()
@@ -331,8 +341,8 @@ class TestRma(common.SavepointCase):
         repair.action_repair_ready()
         repair.action_repair_start()
         repair.action_repair_end()
-
         # deliver
+        cls.assertEqual(rma.qty_repaired, 1.0)
         cls.assertEqual(rma.qty_to_deliver, 1.0)
         wizard = cls.rma_make_picking.with_context({
             'active_ids': rma.id,
