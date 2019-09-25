@@ -87,3 +87,11 @@ class Lead(models.Model):
             kwargs['body'] = mail.html_sanitize(kwargs.get('body'))
         return super(Lead, self).message_post_with_template(
             template_id, **kwargs)
+
+    @api.constrains('user_id')
+    @api.multi
+    def _valid_team(self):
+        # Odoo will change the team to the default overwriting what the user
+        # puts (_valid_team method). That is not good. If the team is wrong
+        # a constraint will do the thing
+        return True
