@@ -3,7 +3,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.addons import decimal_precision as dp
 
 import operator
 ops = {'=': operator.eq,
