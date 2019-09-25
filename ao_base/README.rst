@@ -12,6 +12,7 @@ This module contains customizations specific to Aleph Objects.
   deactivated (#12077).
 * In contact, fill Country field when setting the state first.
 * Security group Global Filter Management allow to unlink Global Filters
+* Corrects the function amount_to_text removing unnecessary "and"s
 
 Credits
 =======
