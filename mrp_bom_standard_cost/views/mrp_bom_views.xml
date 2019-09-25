@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="mrp_bom_form_view">
+        <field name="name">mrp.bom.form</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet" position="before">
+                <header>
+                    <button name="run_recompute_costs" class="oe_highlight"
+                        string="Re-compute Costs" type="object"/>
+                </header>
+            </xpath>
+            <notebook position="inside">
+                <page string="Standard Cost Info" name="cost_page">
+                    <group class="oe_subtotal_footer_left oe_left" colspan="2" string="Unit Cost">
+                        <field name="standard_cost_material" string="Material"/>
+                        <field name="standard_cost_labor" string="Labor"/>
+                        <field name="standard_cost_overhead" string="Overhead"/>
+                        <div class="oe_subtotal_footer_separator_left oe_inline o_td_label">
+                            <label for="standard_cost_total" string="Total"/>
+                        </div>
+                        <field name="standard_cost_total" nolabel="1" class="oe_subtotal_footer_separator_left"/>
+                    </group>
+                    <field name="bom_cost_ids"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

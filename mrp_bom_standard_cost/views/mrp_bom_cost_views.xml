@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="mrp_bom_cost_tree_view">
+        <field name="name">mrp.bom.cost.tree</field>
+        <field name="model">mrp.bom.cost</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="cost_type"/>
+                <field name="product_id"/>
+                <field name="standard_price"/>
+                <field name="product_qty"/>
+                <field name="product_uom_id" groups="product.group_uom"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
