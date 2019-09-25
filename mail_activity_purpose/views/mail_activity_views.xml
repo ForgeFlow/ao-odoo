@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.view.form.popup</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+        <field name="arch" type="xml">
+            <field name="activity_type_id" position="after">
+                <field name="purpose_id" options="{'no_create': True, 'no_open': True}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_tree" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.tree</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="summary" position="after">
+                <field name="purpose_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_form_board" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.form</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_form_board"/>
+        <field name="arch" type="xml">
+            <field name="activity_type_id" position="after">
+                <field name="purpose_id"/>
+            </field>
+        </field>
+    </record>
+
+     <record id="mail_activity_view_kanban" model="ir.ui.view">
+         <field name="name">mail.activity.boards.view.kanban</field>
+         <field name="model">mail.activity</field>
+         <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban"/>
+         <field name="arch" type="xml">
+             <field name="date_deadline" position="after">
+                 <field name="purpose_id"/>
+             </field>
+             <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
+                 <br/>
+                 <div>
+                     Purpose: <field name="purpose_id"/>
+                 </div>
+             </xpath>
+         </field>
+    </record>
+
+</odoo>
