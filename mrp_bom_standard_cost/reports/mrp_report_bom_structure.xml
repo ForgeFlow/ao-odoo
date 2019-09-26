@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-    <template id="mrp_bom_standard_cost.report_mrp_bom" inherit_id="mrp_bom_structure_report.report_mrp_bom">
+    <template id="mrp_bom_standard_cost.report_mrp_bom" inherit_id="mrp.report_mrp_bom">
         <xpath expr="//thead//tr//th[4]" position="after">
             <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" title="This is the material cost of the BoM">BoM Material Costs</th>
             <th t-if="data['report_structure'] != 'bom_structure'" class="o_mrp_bom_cost text-right" title="This is the labor cost of the BoM">BoM Labor Costs</th>
@@ -31,7 +31,7 @@
         </xpath>
     </template>
 
-    <template id="mrp_bom_standard_cost.report_mrp_bom_line" inherit_id="mrp_bom_structure_report.report_mrp_bom_line">
+    <template id="mrp_bom_standard_cost.report_mrp_bom_line" inherit_id="mrp.report_mrp_bom_line">
         <xpath expr="//t[1]//tr//td[4]" position="after">
             <td class="o_mrp_bom_cost text-right">
                 <span t-esc="l['materials_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/>
@@ -56,7 +56,7 @@
         </xpath>
     </template>
 
-    <template id="mrp_bom_standard_cost.report_mrp_operation_line" inherit_id="mrp_bom_structure_report.report_mrp_operation_line">
+    <template id="mrp_bom_standard_cost.report_mrp_operation_line" inherit_id="mrp.report_mrp_operation_line">
         <xpath expr="//t//tr[hasclass('o_mrp_bom_report_line')]//td[5]" position="before">
             <td></td>
             <td></td>
@@ -64,7 +64,7 @@
         </xpath>
     </template>
 
-    <template id="mrp_bom_standard_cost.report_mrp_bom_pdf_line" inherit_id="mrp_bom_structure_report.report_mrp_bom_pdf_line">
+    <template id="mrp_bom_standard_cost.report_mrp_bom_pdf_line" inherit_id="mrp.report_mrp_bom_pdf_line">
         <xpath expr="//t//tr//td[4]" position="after">
             <td t-if="data['report_structure'] != 'bom_cost'" class="o_mrp_prod_cost text-right">
                 <span t-if="'materials_cost' in l" t-esc="l['materials_cost']" t-options='{"widget": "monetary", "display_currency": currency}'/>

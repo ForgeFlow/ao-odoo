@@ -1,7 +1,7 @@
 # 2018 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import odoo.tests.common as common
+from odoo.tests import common, Form
 
 
 class TestBomStandardCost(common.SavepointCase):
@@ -17,6 +17,7 @@ class TestBomStandardCost(common.SavepointCase):
         cls.bom_obj = cls.env['mrp.bom']
         cls.bom_line_obj = cls.env['mrp.bom.line']
         cls.location_production = cls.env.ref('stock.location_production')
+        cls.location_stock = cls.env.ref('stock.stock_location_stock')
         cls.production_obj = cls.env['mrp.production']
         cls.produce_wiz = cls.env['mrp.product.produce']
         cls.unbuild_obj = cls.env['mrp.unbuild']
@@ -40,25 +41,52 @@ class TestBomStandardCost(common.SavepointCase):
             'user_type_id': cls.env.ref(
                 'account.data_account_type_current_assets').id
         })
-
+        cls.account_goods_received = cls.env['account.account'].create({
+            'name': 'Goods Received',
+            'code': '143',
+            'user_type_id': cls.env.ref(
+                'account.data_account_type_current_assets').id
+        })
+        cls.account_cogs = cls.env['account.account'].create({
+            'name': 'COGS',
+            'code': '510',
+            'user_type_id': cls.env.ref(
+                'account.data_account_type_expenses').id
+        })
+        cls.stock_journal = cls.env['account.journal'].create({
+            'name': 'Stock Journal',
+            'code': 'STJTEST',
+            'type': 'general',
+        })
         # Create categories for labor and overhead
         cls.categ_labor = cls.product_categ_obj.create({
             'name': 'Test Labor Category 1',
             'property_labor_account_id': cls.account_labor.id,
+            'property_stock_journal': cls.stock_journal.id,
+            'property_stock_valuation_account_id': cls.account_wip.id,
         })
         cls.categ_overhead = cls.product_categ_obj.create({
             'name': 'Test Overhead Category 1',
             'property_overhead_account_id': cls.account_overhead.id,
+            'property_stock_journal': cls.stock_journal.id,
+            'property_stock_valuation_account_id': cls.account_wip.id,
         })
         cls.categ_physical = cls.env.ref('product.product_category_5')
         cls.categ_physical.write({
             'property_valuation': 'real_time',
+            'property_stock_journal': cls.stock_journal.id,
+            'property_stock_valuation_account_id': cls.account_wip.id,
         })
 
         # Assign WIP account to stock location production
         cls.location_production.write({
             'valuation_in_account_id': cls.account_wip.id,
             'valuation_out_account_id': cls.account_wip.id,
+        })
+
+        cls.location_stock.write({
+            'valuation_in_account_id': cls.account_goods_received.id,
+            'valuation_out_account_id': cls.account_cogs.id,
         })
 
         # Create products:
@@ -80,7 +108,7 @@ class TestBomStandardCost(common.SavepointCase):
             'categ_id': cls.categ_physical.id,
         })
         cls.component_2 = cls.product_obj.create({
-            'name': 'RM 01',
+            'name': 'RM 02',
             'type': 'product',
             'standard_price': 15.0,
             'categ_id': cls.categ_physical.id,
@@ -160,13 +188,13 @@ class TestBomStandardCost(common.SavepointCase):
         })
 
     def _produce(self, mo, qty=0.0):
-        wiz = self.produce_wiz.with_context({
+        wiz = Form(self.produce_wiz.with_context({
             'active_id': mo.id,
             'active_ids': [mo.id],
-        }).create({
-            'product_qty': qty or mo.product_qty,
-        })
-        wiz.do_produce()
+        }))
+        wiz.product_qty = qty or mo.product_qty
+        produce_wizard = wiz.save()
+        produce_wizard.do_produce()
         return True
 
     def test_01_non_material_costs_to_bom(self):

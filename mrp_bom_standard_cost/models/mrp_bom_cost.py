@@ -26,7 +26,7 @@ class MrpBomCost(models.Model):
         required=True,
     )
     product_uom_id = fields.Many2one(
-        comodel_name='product.uom',
+        comodel_name='uom.uom',
         string='Product Unit of Measure',
         required=True,
     )

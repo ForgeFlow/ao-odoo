@@ -7,7 +7,7 @@ from odoo.tools import float_round
 
 
 class ReportBomStructure(models.AbstractModel):
-    _inherit = 'report.mrp_bom_structure_report.report_bom_structure'
+    _inherit = 'report.mrp.report_bom_structure'
 
     def _get_bom(self, bom_id=False, product_id=False, line_qty=False,
                  line_id=False, level=False):
