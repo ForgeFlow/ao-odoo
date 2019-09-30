@@ -41,7 +41,7 @@ class TestAutoClosePo(common.SavepointCase):
     def _do_picking(self, picking, date):
         """Do picking with only one move on the given date."""
         picking.action_confirm()
-        picking.force_assign()
+        picking.action_assign()
         picking.move_lines.quantity_done = picking.move_lines.product_uom_qty
         picking.action_done()
         for move in picking.move_lines:
