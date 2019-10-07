@@ -78,20 +78,19 @@
         <field name="fold">False</field>
     </record>
 
-    <record id="rma_closed" model="base.kanban.stage">
-        <field name="sequence">120</field>
-        <field name="name">Closed</field>
-        <field name="res_model_id" ref="rma.model_rma_order_line" />
-        <field name="fold">True</field>
-    </record>
-
     <record id="rma_awaiting_response" model="base.kanban.stage">
-        <field name="sequence">130</field>
+        <field name="sequence">120</field>
         <field name="name">Awaiting Response</field>
         <field name="res_model_id" ref="rma.model_rma_order_line" />
-        <field name="fold">True</field>
+        <field name="fold">False</field>
     </record>
 
+    <record id="rma_resolved" model="base.kanban.stage">
+        <field name="sequence">130</field>
+        <field name="name">Resolved</field>
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
+        <field name="fold">True</field>
+    </record>
 
     <record id="rma_cancel" model="base.kanban.stage">
         <field name="sequence">140</field>
