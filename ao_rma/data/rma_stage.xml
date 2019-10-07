@@ -85,8 +85,16 @@
         <field name="fold">True</field>
     </record>
 
-    <record id="rma_cancel" model="base.kanban.stage">
+    <record id="rma_awaiting_response" model="base.kanban.stage">
         <field name="sequence">130</field>
+        <field name="name">Awaiting Response</field>
+        <field name="res_model_id" ref="rma.model_rma_order_line" />
+        <field name="fold">True</field>
+    </record>
+
+
+    <record id="rma_cancel" model="base.kanban.stage">
+        <field name="sequence">140</field>
         <field name="name">Cancelled</field>
         <field name="res_model_id" ref="rma.model_rma_order_line" />
         <field name="fold">True</field>
