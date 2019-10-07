@@ -149,3 +149,31 @@ class RmaOrderLine(models.Model):
                 qty += product_obj._compute_quantity(
                     move.product_uom_qty, rec.uom_id)
             return qty
+
+    @api.multi
+    def _prepare_rma_line_from_stock_move(self, sm, lot=False):
+        data = super(RmaOrderLine, self)._prepare_rma_line_from_stock_move(
+            sm, lot)
+        data['product_qty'] = 1.0
+        return data
+
+    @api.multi
+    def _prepare_rma_line_from_inv_line(self, line):
+        data = super(RmaOrderLine, self)._prepare_rma_line_from_inv_line(
+            line)
+        data['product_qty'] = 1.0
+        return data
+
+    @api.multi
+    def _prepare_rma_line_from_sale_order_line(self, line):
+        data = super(RmaOrderLine, self).\
+            _prepare_rma_line_from_sale_order_line(line)
+        data['product_qty'] = 1.0
+        return data
+
+    @api.multi
+    def _prepare_rma_line_from_po_line(self, line):
+        data = super(RmaOrderLine, self)._prepare_rma_line_from_po_line(
+            line)
+        data['product_qty'] = 1.0
+        return data
